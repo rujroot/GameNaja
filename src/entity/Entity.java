@@ -6,10 +6,18 @@ public abstract class Entity {
 	private int atk;
 	private int def;
 	private int spd;
+	private int poisonStatus;
 	
-	public Entity(String name,int hp,int atk,int def,int spd){
-		
+	public Entity(String name,int hp,int atk,int def,int spd,int poisonStatus){
+		this.setName(name);
+		this.setHp(hp);
+		this.setAtk(atk);
+		this.setDef(def);
+		this.setSpd(spd);
+		this.setPoisonStatus(poisonStatus);
 	}
+	
+	public abstract void attack(Entity Enemy);
 
 	public String getName() {
 		return name;
@@ -49,5 +57,15 @@ public abstract class Entity {
 
 	public void setSpd(int spd) {
 		this.spd = spd;
+	}
+
+	public int getPoisonStatus() {
+		return poisonStatus;
+	}
+
+	public void setPoisonStatus(int poisonStatus) {
+		this.poisonStatus = poisonStatus;
 	}	
+	
+	
 }
