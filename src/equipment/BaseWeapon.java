@@ -14,6 +14,4 @@ public abstract class BaseWeapon {
 	public void setAttack(int attack) {
 		this.attack = attack;
 	}
-	
-	
 }
