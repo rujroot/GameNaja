@@ -1,6 +1,8 @@
 package logic;
 
 import drawing.GameScreen;
+import entity.Player;
+import entity.Zombie;
 import input.InputUtility;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -12,7 +14,6 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		Application.launch(args);
-
 	}
 
 	@Override
@@ -31,6 +32,16 @@ public class Main extends Application {
 		
 		//Show windows
 		stage.show();
+		
+		Zombie zombie1 = new Zombie("Zombie Zomjai", 10, 1, 1, 0.5, 0, 0);
+		logic.addNewObject(zombie1);
+		Zombie zombie2 = new Zombie("Zombie Zomjai", 10, 1, 1, 0.7, 0, 0);
+		logic.addNewObject(zombie2);
+		Zombie zombie3 = new Zombie("Zombie Zomjai", 10, 1, 1, 0.6, 0, 0);
+		logic.addNewObject(zombie3);
+		
+		Player player = new Player("Player playjai", 10, 1, 1, 1, 0);
+		logic.addNewObject(player);
 		
 		//this function run every sec
 		AnimationTimer animation = new AnimationTimer() {

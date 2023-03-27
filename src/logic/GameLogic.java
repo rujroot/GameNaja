@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entity.Entity;
+import entity.Player;
+import entity.Zombie;
 
 public class GameLogic {
 	
@@ -12,8 +14,6 @@ public class GameLogic {
 	public GameLogic() {
 		// create new ObjectContainer
 		this.gameObjectContainer = new ArrayList<Entity>();
-		
-		
 	}
 	
 	// Add object to gameObject and Renderable
@@ -24,7 +24,12 @@ public class GameLogic {
 	
 	//This method should run every sec
 	public void logicUpdate() {
-		//Todo
+		Player.getPlayer().update();
+		for(Entity entity: gameObjectContainer) {
+			if(entity instanceof Zombie) {
+				((Zombie) entity).follow();
+			}
+		}
 	}
 	
 	

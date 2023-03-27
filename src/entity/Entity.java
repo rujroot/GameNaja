@@ -5,20 +5,22 @@ import logic.IRenderable;
 
 public abstract class Entity implements IRenderable {
 	private String name;
-	private int hp, atk, def, spd, poisonStatus;
+	private double hp, atk, def, spd, poisonStatus;
 	
-	private Point position;
+	private double x, y;
 	private int z;
 	private boolean visible, destroyed;
 	
 	
-	public Entity(String name,int hp,int atk,int def,int spd,int poisonStatus){
+	public Entity(String name,double hp,double atk,double def,double spd,double poisonStatus){
 		this.setName(name);
 		this.setHp(hp);
 		this.setAtk(atk);
 		this.setDef(def);
 		this.setSpd(spd);
 		this.setPoisonStatus(poisonStatus);
+		this.visible = true;
+		this.destroyed = false;
 	}
 	
 	public abstract void attack(Entity Enemy);
@@ -30,47 +32,51 @@ public abstract class Entity implements IRenderable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public int getHp() {
+	
+	public double getHp() {
 		return hp;
 	}
 
-	public void setHp(int hp) {
+	public void setHp(double hp) {
 		this.hp = hp;
 	}
 
-	public int getAtk() {
+	public double getAtk() {
 		return atk;
 	}
 
-	public void setAtk(int atk) {
+	public void setAtk(double atk) {
 		this.atk = atk;
 	}
 
-	public int getDef() {
+	public double getDef() {
 		return def;
 	}
-	
-	public void setDef(int def) {
+
+	public void setDef(double def) {
 		this.def = def;
 	}
 
-	public int getSpd() {
+	public double getSpd() {
 		return spd;
 	}
 
-	public void setSpd(int spd) {
+	public void setSpd(double spd) {
 		this.spd = spd;
 	}
 
-	public int getPoisonStatus() {
+	public double getPoisonStatus() {
 		return poisonStatus;
 	}
 
-	public void setPoisonStatus(int poisonStatus) {
+	public void setPoisonStatus(double poisonStatus) {
 		this.poisonStatus = poisonStatus;
-	}	
-	
+	}
+
+	public void setDestroyed(boolean destroyed) {
+		this.destroyed = destroyed;
+	}
+
 	@Override
 	public boolean isDestroyed(){
 		return destroyed;
@@ -86,12 +92,20 @@ public abstract class Entity implements IRenderable {
 		return z;
 	}
 
-	public Point getPosition() {
-		return position;
+	public double getX() {
+		return x;
 	}
 
-	public void setPosition(Point position) {
-		this.position = position;
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public void setY(double y) {
+		this.y = y;
 	}
 	
 	
