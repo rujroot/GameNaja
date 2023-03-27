@@ -1,12 +1,16 @@
 package entity;
 
-public abstract class Entity {
+import Math.Point;
+import logic.IRenderable;
+
+public abstract class Entity implements IRenderable {
 	private String name;
-	private int hp;
-	private int atk;
-	private int def;
-	private int spd;
-	private int poisonStatus;
+	private int hp, atk, def, spd, poisonStatus;
+	
+	private Point position;
+	private int z;
+	private boolean visible, destroyed;
+	
 	
 	public Entity(String name,int hp,int atk,int def,int spd,int poisonStatus){
 		this.setName(name);
@@ -66,6 +70,29 @@ public abstract class Entity {
 	public void setPoisonStatus(int poisonStatus) {
 		this.poisonStatus = poisonStatus;
 	}	
+	
+	@Override
+	public boolean isDestroyed(){
+		return destroyed;
+	}
+	
+	@Override
+	public boolean isVisible(){
+		return visible;
+	}
+	
+	@Override
+	public int getZ(){
+		return z;
+	}
+
+	public Point getPosition() {
+		return position;
+	}
+
+	public void setPosition(Point position) {
+		this.position = position;
+	}
 	
 	
 }

@@ -12,7 +12,7 @@ public class Hitbox {
 		this.setWidth(width);
 	}
 	
-	public Point getTopleft() {
+	public Point getTopleft() {	
 		double X = Center.getX() - (width / 2);
 		double Y = Center.getY() - (length / 2);
 		Point TL = new Point(X, Y);

@@ -8,8 +8,6 @@ public class Demon extends Entity {
 		// TODO Auto-generated constructor stub
 		this.setMagicAttack(magicAttack);
 	}
-
-
 	
 
 
