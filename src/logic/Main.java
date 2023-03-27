@@ -3,6 +3,8 @@ package logic;
 import drawing.GameScreen;
 import entity.Player;
 import entity.Zombie;
+import equipment.BaseWeapon;
+import equipment.Bow;
 import input.InputUtility;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;

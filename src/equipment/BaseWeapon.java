@@ -1,14 +1,30 @@
 package equipment;
 
-import entity.Entity;
+import Math.Point;
+import entity.Player;
+import javafx.scene.canvas.GraphicsContext;
 import logic.Hitbox;
 
 public abstract class BaseWeapon {
 	private double attackDamage;
+	private Point position;
 	private double attackSpeed;
+	
+	public Point getPostion() {
+		Player player = Player.getPlayer();
+		double px = player.getX(), py = player.getY();
+		
+		Point p = new Point(px + position.getX(), py + position.getY());
+		return p;
+	}
+	public void setPostion(Point position) {
+		this.position = position;
+	}
+
 	private Hitbox attackHitBox;
 	
-	public abstract void attack(Entity entity);
+	public abstract void attack();
+	public abstract void draw(GraphicsContext gc);
 	
 	public BaseWeapon(int attackDamage, int attackSpeed) {
 		this.setAttackDamage(attackDamage);
