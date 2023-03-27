@@ -13,6 +13,8 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+	
+	public static GameLogic logic;
 
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -27,7 +29,7 @@ public class Main extends Application {
 		stage.setTitle("Game Naja eiei");
 		
 		//Create Gamelogic Class
-		GameLogic logic = new GameLogic();
+		logic = new GameLogic();
 		GameScreen gameScreen = new GameScreen(640,480);
 		root.getChildren().add(gameScreen);
 		gameScreen.requestFocus();
@@ -35,14 +37,14 @@ public class Main extends Application {
 		//Show windows
 		stage.show();
 		
-		Zombie zombie1 = new Zombie("Zombie Zomjai", 10, 1, 1, 0.5, 0, 0);
+		Zombie zombie1 = new Zombie("Zombie", 10, 1, 1, 0.5, 0, 0);
 		logic.addNewObject(zombie1);
-		Zombie zombie2 = new Zombie("Zombie Zomjai", 10, 1, 1, 0.7, 0, 0);
+		Zombie zombie2 = new Zombie("Zombie", 10, 1, 1, 0.7, 0, 0);
 		logic.addNewObject(zombie2);
-		Zombie zombie3 = new Zombie("Zombie Zomjai", 10, 1, 1, 0.6, 0, 0);
+		Zombie zombie3 = new Zombie("Zombie", 10, 1, 1, 0.6, 0, 0);
 		logic.addNewObject(zombie3);
 		
-		Player player = new Player("Player playjai", 10, 1, 1, 1, 0);
+		Player player = new Player("Player", 10, 1, 1, 1, 0);
 		logic.addNewObject(player);
 		
 		//this function run every sec
@@ -54,11 +56,11 @@ public class Main extends Application {
 				InputUtility.updateInputState();
 			}
 		};
-		animation.start();
-		
-		
-		
-		
+		animation.start();	
+	}
+	
+	public static GameLogic getLogic() {
+		return logic;
 	}
 
 }

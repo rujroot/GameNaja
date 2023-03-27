@@ -3,32 +3,34 @@ package entity;
 import Math.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import logic.Cooldownable;
 
 public class Zombie extends Entity {
 	private double poisonDamage;
 
-	public Zombie(String name, double hp, double atk, double def, double spd,double poisonStatus,double poisonDamage) {
+	public Zombie(String name, double hp, double atk, double def, double spd,double poisonStatus, double poisonDamage) {
 		super(name, hp, atk, def, spd,poisonStatus);
 		this.setPoisonDamage(poisonDamage);
 	}
 
 	@Override
-	public void attack(Entity Enemy) {
-		Enemy.setHp(Enemy.getHp()-this.getAtk());
-		Enemy.setPoisonStatus(Enemy.getPoisonStatus()+this.getPoisonDamage());
+	public void attack() {
+		//Enemy.setHp(Enemy.getHp()-this.getAtk());
+		//Enemy.setPoisonStatus(Enemy.getPoisonStatus()+this.getPoisonDamage());
 	}
 	
 	public void follow() {
-		Player player = Player.getPlayer();
+		Point pp = Player.getPlayer().getPosition();
 		
-		double px = player.getX(), py = player.getY();
+		double px = pp.getX(), py = pp.getY();
 		
-		Point p = new Point(this.getX() - px, this.getY() - py);
+		Point p = new Point(this.getPosition().getX() - px, this.getPosition().getY() - py);
 		double distance = Math.sqrt(p.getX() * p.getX() + p.getY() * p.getY());
 		
 		if(distance > 0) {
-			this.setX( this.getX() - p.getX()/distance * this.getSpd());
-			this.setY( this.getY() - p.getY()/distance * this.getSpd() );
+			this.setPosition(new Point(
+					this.getPosition().getX() - p.getX()/distance * this.getSpd(),
+					this.getPosition().getY() - p.getY()/distance * this.getSpd()));
 		}
 		
 	}
@@ -44,7 +46,7 @@ public class Zombie extends Entity {
 	@Override
 	public void draw(GraphicsContext gc) {
 		gc.setFill(Color.GREEN);
-		gc.fillRect(this.getX(), this.getY(), 50.0, 50.0);
+		gc.fillRect(this.getPosition().getX(), this.getPosition().getY(), 50.0, 50.0);
 	}
 
 	

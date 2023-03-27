@@ -11,8 +11,10 @@ public abstract class BaseWeapon {
 	private double attackSpeed;
 	
 	public Point getPostion() {
-		Player player = Player.getPlayer();
-		double px = player.getX(), py = player.getY();
+		
+		//Point Player
+		Point pp = Player.getPlayer().getPosition();
+		double px = pp.getX(), py = pp.getY();
 		
 		Point p = new Point(px + position.getX(), py + position.getY());
 		return p;

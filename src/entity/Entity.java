@@ -7,7 +7,7 @@ public abstract class Entity implements IRenderable {
 	private String name;
 	private double hp, atk, def, spd, poisonStatus;
 	
-	private double x, y;
+	private Point position;
 	private int z;
 	private boolean visible, destroyed;
 	
@@ -19,11 +19,12 @@ public abstract class Entity implements IRenderable {
 		this.setDef(def);
 		this.setSpd(spd);
 		this.setPoisonStatus(poisonStatus);
+		this.setPosition(new Point(Math.random() * 640 , Math.random() * 480));
 		this.visible = true;
 		this.destroyed = false;
 	}
 	
-	public abstract void attack(Entity Enemy);
+	public abstract void attack();
 
 	public String getName() {
 		return name;
@@ -92,20 +93,12 @@ public abstract class Entity implements IRenderable {
 		return z;
 	}
 
-	public double getX() {
-		return x;
+	public Point getPosition() {
+		return position;
 	}
 
-	public void setX(double x) {
-		this.x = x;
-	}
-
-	public double getY() {
-		return y;
-	}
-
-	public void setY(double y) {
-		this.y = y;
+	public void setPosition(Point position) {
+		this.position = position;
 	}
 	
 	

@@ -3,13 +3,12 @@ package equipment;
 import java.util.ArrayList;
 
 import Math.Point;
-import entity.Entity;
-import entity.Player;
 import equipment.projectile.Arrow;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import logic.Cooldownable;
 
-public class Bow extends BaseWeapon {
+public class Bow extends BaseWeapon implements Cooldownable {
 	
 	private int amount;
 	private double cooldownTime = 500;
@@ -23,6 +22,7 @@ public class Bow extends BaseWeapon {
 		listArrow = new ArrayList<Arrow>();
 	}
 	
+	@Override
 	public boolean onCooldown() {
 		long currentTime = System.currentTimeMillis();
 		if(currentTime - lastClickTime > cooldownTime) {
