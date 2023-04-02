@@ -25,16 +25,20 @@ public class Player extends Entity implements Cooldownable{
 		this.setEquipment(new Bow(2));
 	}
 	
-	public void update() {
+	public void update(GraphicsContext gc) {
 		Point pos = this.getPosition();
 		if (InputUtility.getKeyPressed(KeyCode.W)) {
 			pos.setY(pos.getY() - 1);
+			gc.translate(0, -1);
 		} if (InputUtility.getKeyPressed(KeyCode.A)) {
 			pos.setX(pos.getX() - 1);
+			gc.translate(-1, 0);
 		} if (InputUtility.getKeyPressed(KeyCode.D)) {
 			pos.setX(pos.getX() + 1);
+			gc.translate(1, 0);
 		} if (InputUtility.getKeyPressed(KeyCode.S)) {
 			pos.setY(pos.getY() + 1);
+			gc.translate(0, 1);
 		} if(InputUtility.getKeyPressed(KeyCode.SPACE)) {
 			attack();
 			
@@ -49,8 +53,6 @@ public class Player extends Entity implements Cooldownable{
 	public void draw(GraphicsContext gc) {
 		gc.setFill(Color.TAN);
 		gc.fillRect(this.getPosition().getX(), this.getPosition().getY(), 50.0, 50.0);
-		gc.setFill(Color.YELLOW);
-		
 		if(equipment != null) {
 			equipment.draw(gc);
 		}

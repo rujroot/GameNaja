@@ -1,5 +1,10 @@
 package drawing;
 
+import java.util.ArrayList;
+
+import Dungeon.GenerateDungeon;
+import Dungeon.Room;
+import entity.Player;
 import input.InputUtility;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -61,17 +66,30 @@ public class GameScreen extends Canvas {
 		});
 	}
 	
+	public void updatePlayer() {
+		GraphicsContext gc = this.getGraphicsContext2D();
+		Player.getPlayer().update(gc);
+	}
+	
 	public void paintComponent() {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(Color.BLACK);
-		gc.clearRect(0, 0, 1000, 1000);
+		
 		for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
-			// System.out.println(entity.getZ());
 			if (entity.isVisible() && !entity.isDestroyed()) {
 				entity.draw(gc);
 			}
 		}
 
+	}
+	
+	public void paintLevel(ArrayList<Room> level) {
+		GraphicsContext gc = this.getGraphicsContext2D();
+		gc.clearRect(-1000, -1000, 2000, 2000);
+		for (IRenderable room : level) {
+			room.draw(gc);
+		}
+		
 	}
 
 }

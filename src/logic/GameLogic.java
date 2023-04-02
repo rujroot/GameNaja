@@ -24,7 +24,6 @@ public class GameLogic {
 	
 	//This method should run every sec
 	public void logicUpdate() {
-		Player.getPlayer().update();
 		for(Entity entity: gameObjectContainer) {
 			if(entity instanceof Zombie) {
 				((Zombie) entity).follow();
