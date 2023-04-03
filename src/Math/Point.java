@@ -18,5 +18,9 @@ public class Point {
 	public void setY(double y) {
 		Y = y;
 	}
+	public String toString() {
+		return "X = " + this.getX() + " " + "Y = " + this.getY() ;
+		
+	}
 
 }

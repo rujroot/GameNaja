@@ -28,17 +28,17 @@ public class Player extends Entity implements Cooldownable{
 	public void update(GraphicsContext gc) {
 		Point pos = this.getPosition();
 		if (InputUtility.getKeyPressed(KeyCode.W)) {
-			pos.setY(pos.getY() - 1);
-			gc.translate(0, -1);
+			pos.setY(pos.getY() - this.getSpd());
+			gc.translate(0, this.getSpd());
 		} if (InputUtility.getKeyPressed(KeyCode.A)) {
-			pos.setX(pos.getX() - 1);
-			gc.translate(-1, 0);
+			pos.setX(pos.getX() - this.getSpd());
+			gc.translate(this.getSpd(), 0);
 		} if (InputUtility.getKeyPressed(KeyCode.D)) {
-			pos.setX(pos.getX() + 1);
-			gc.translate(1, 0);
+			pos.setX(pos.getX() + this.getSpd());
+			gc.translate(-this.getSpd(), 0);
 		} if (InputUtility.getKeyPressed(KeyCode.S)) {
-			pos.setY(pos.getY() + 1);
-			gc.translate(0, 1);
+			pos.setY(pos.getY() + this.getSpd());
+			gc.translate(0, -this.getSpd());
 		} if(InputUtility.getKeyPressed(KeyCode.SPACE)) {
 			attack();
 			
@@ -51,6 +51,7 @@ public class Player extends Entity implements Cooldownable{
 
 	@Override
 	public void draw(GraphicsContext gc) {
+		Point pos = this.getPosition();
 		gc.setFill(Color.TAN);
 		gc.fillRect(this.getPosition().getX(), this.getPosition().getY(), 50.0, 50.0);
 		if(equipment != null) {

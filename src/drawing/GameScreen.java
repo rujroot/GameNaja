@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Dungeon.GenerateDungeon;
 import Dungeon.Room;
+import Math.Point;
 import entity.Player;
 import input.InputUtility;
 import javafx.scene.canvas.Canvas;
@@ -68,7 +69,11 @@ public class GameScreen extends Canvas {
 	
 	public void updatePlayer() {
 		GraphicsContext gc = this.getGraphicsContext2D();
-		Player.getPlayer().update(gc);
+		Player player = Player.getPlayer();
+		Point pos = player.getPosition();
+		gc.clearRect(pos.getX() - 700, pos.getY() - 400, 1400, 800);
+		player.update(gc);
+		
 	}
 	
 	public void paintComponent() {
@@ -85,7 +90,6 @@ public class GameScreen extends Canvas {
 	
 	public void paintLevel(ArrayList<Room> level) {
 		GraphicsContext gc = this.getGraphicsContext2D();
-		gc.clearRect(-1000, -1000, 2000, 2000);
 		for (IRenderable room : level) {
 			room.draw(gc);
 		}

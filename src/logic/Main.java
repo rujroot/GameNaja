@@ -1,6 +1,7 @@
 package logic;
 
 import Dungeon.GenerateDungeon;
+import Math.Point;
 import drawing.GameScreen;
 import entity.Player;
 import entity.Zombie;
@@ -31,7 +32,7 @@ public class Main extends Application {
 		
 		//Create Gamelogic Class
 		logic = new GameLogic();
-		GameScreen gameScreen = new GameScreen(1000,1000);
+		GameScreen gameScreen = new GameScreen(1400,800);
 		root.getChildren().add(gameScreen);
 		gameScreen.requestFocus();
 		
@@ -48,15 +49,16 @@ public class Main extends Application {
 //		Zombie zombie3 = new Zombie("Zombie", 10, 1, 1, 0.6, 0, 0);
 //		logic.addNewObject(zombie3);
 //		
-		Player player = new Player("Player", 10, 1, 1, 1, 0);
+		Player player = new Player("Player", 10, 1, 1, 10, 0);
+		player.setPosition(new Point(700, 400));
 		logic.addNewObject(player);
 		
 		//this function run every sec
 		AnimationTimer animation = new AnimationTimer() {
 			public void handle(long now) {
+				gameScreen.updatePlayer();
 				gameScreen.paintLevel(dungeon.getContainer().get(dungeon.getCurrLevel()));
 				gameScreen.paintComponent();
-				gameScreen.updatePlayer();
 				logic.logicUpdate();
 				RenderableHolder.getInstance().update();
 				InputUtility.updateInputState();

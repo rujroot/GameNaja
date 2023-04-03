@@ -2,6 +2,7 @@ package Dungeon;
 
 import java.util.ArrayList;
 
+import Math.Point;
 import javafx.util.Pair;
 
 public class GenerateDungeon {
@@ -15,7 +16,7 @@ public class GenerateDungeon {
 		for(int i = 0; i < level; ++i) {
 			ArrayList<Room> toPush = new ArrayList<Room>();
 			
-			int amountRoom = (int)(Math.random()*5 + 5 + level);
+			int amountRoom = 100;//(int)(Math.random()*5 + 5 + i);
 			
 			// create first room
 			Room rootRoom = new Room();
@@ -25,10 +26,10 @@ public class GenerateDungeon {
 				
 				//Generate Room
 				Pair<Room, Direction> toConnectRoom = findRoom(rootRoom);
-				
-				
 				Room room = new Room(toConnectRoom.getKey(), toConnectRoom.getValue());
+				
 				while(!isLegalCreate(room, toPush)) {
+					toConnectRoom = findRoom(rootRoom);
 					room = new Room(toConnectRoom.getKey(), toConnectRoom.getValue());
 				}
 				
@@ -43,7 +44,7 @@ public class GenerateDungeon {
 
 	public Pair<Room, Direction> findRoom(Room currRoom) {
 		Direction[] d = {Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT};
-		Direction togo = d[(int) (Math.random() * 3)];
+		Direction togo = d[(int) (Math.random() * 4)];
 		
 		if(currRoom.getConnectRoom().get(togo) == null) 
 			return new Pair<>(currRoom, togo);
@@ -52,6 +53,26 @@ public class GenerateDungeon {
 	}
 	
 	public boolean isLegalCreate(Room room, ArrayList<Room> level) {
+		for(Room anotherRoom : level) {
+			Point posR1 = room.getPosition();
+			Point posR2 = anotherRoom.getPosition();
+			
+			
+			double left1 = posR1.getX();
+			double right1 = posR1.getX() + room.getWidth();
+			double top1 = posR1.getY();
+			double bottom1 = posR1.getY() + room.getHeight();
+		    
+			double left2 = posR2.getX();
+			double right2 = posR2.getX() + anotherRoom.getWidth();
+		    double top2 = posR2.getY();
+		    double bottom2 = posR2.getY() + anotherRoom.getHeight();
+		    
+		    // Check for intersection
+		    if (left1 < right2 && right1 > left2 && top1 < bottom2 && bottom1 > top2) {
+		        return false;
+		    }
+		}
 		return true;
 	}
 

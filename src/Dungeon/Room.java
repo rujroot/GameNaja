@@ -11,34 +11,39 @@ public class Room implements IRenderable {
 	private double width, height;
 	private Point position;
 	private HashMap<Direction, Room> connectRoom;
+	private Color color;
 	
 	Size[] allSize = {Size.SMALL, Size.MEDUIM, Size.LARGE};
 	
 	public Room(Room parentRoom, Direction direction) {
-		Size sizeRoom = allSize[(int) (Math.random() * 2)];
+		Size sizeRoom = allSize[(int) (Math.random() * 3)];
 		if(sizeRoom.equals(Size.SMALL)) {
 			this.setWidth(320);
-			this.setWidth(240);
+			this.setHeight(240);
 		}else if(sizeRoom.equals(Size.MEDUIM)) {
 			this.setWidth(640);
-			this.setWidth(480);
+			this.setHeight(480);
 		}else {
 			this.setWidth(960);
-			this.setWidth(720);
+			this.setHeight(720);
 		}
 		
 		Point pos = parentRoom.getPosition();
 		if(direction.equals(Direction.UP)) {
-			this.setPosition(new Point(pos.getX() + (parentRoom.getWidth() - this.getWidth())   , pos.getY() - this.getHeight() ));
+			this.setPosition(new Point(pos.getX() + (parentRoom.getWidth() - this.getWidth()) / 2 , pos.getY() - this.getHeight() ));
 		}else if(direction.equals(Direction.DOWN)){
-			this.setPosition(new Point(pos.getX() + (parentRoom.getWidth() - this.getWidth())   , pos.getY() + this.getHeight() ));
+			this.setPosition(new Point(pos.getX() + (parentRoom.getWidth() - this.getWidth()) / 2 , pos.getY() + parentRoom.getHeight() ));
 		}else if(direction.equals(Direction.LEFT)) {
-			this.setPosition(new Point(pos.getX() - this.getWidth(), pos.getY() + (parentRoom.getHeight() - this.getHeight())));
+			this.setPosition(new Point(pos.getX() - this.getWidth(), pos.getY() + (parentRoom.getHeight() - this.getHeight()) / 2));
 		}else {
-			this.setPosition(new Point(pos.getX() + this.getWidth(), pos.getY() + (parentRoom.getHeight() - this.getHeight())));
+			this.setPosition(new Point(pos.getX() + parentRoom.getWidth(), pos.getY() + (parentRoom.getHeight() - this.getHeight()) / 2));
 		}
 		
+		
 		connectRoom = new HashMap<>();
+		Color[] allColor = {Color.BLACK, Color.BLUE, Color.CYAN, Color.GRAY, Color.GREEN, 
+				Color.MAGENTA, Color.ORANGE, Color.PINK, Color.RED, Color.YELLOW};
+		this.color = allColor[(int) (Math.random() * allColor.length)];
 	}
 
 	public Room() {
@@ -56,6 +61,10 @@ public class Room implements IRenderable {
 		
 		this.setPosition(new Point(0,0));
 		connectRoom = new HashMap<>();
+		
+		Color[] allColor = {Color.BLACK, Color.BLUE, Color.CYAN, Color.GRAY, Color.GREEN, 
+				Color.MAGENTA, Color.ORANGE, Color.PINK, Color.RED, Color.YELLOW};
+		this.color = allColor[(int) (Math.random() * allColor.length)];
 	}
 	
 	public Point getPosition() {
@@ -92,8 +101,7 @@ public class Room implements IRenderable {
 
 	@Override
 	public void draw(GraphicsContext gc) {
-		
-		gc.setFill(Color.YELLOW);
+		gc.setFill(color);
 		gc.fillRect(position.getX(), position.getY(), width, height);
 		//System.out.println(position.getX() + " " + position.getY() + " " + width + " " + height);
 	}
