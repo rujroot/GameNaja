@@ -22,6 +22,14 @@ public class GameScreen extends Canvas {
 		super(width, height);
 		this.setVisible(true);
 		addListerner();
+		
+		GraphicsContext gc = this.getGraphicsContext2D();
+		Player player = Player.getPlayer();
+		
+		System.out.print(player.getPosition().getX() + " " + player.getPosition().getY());
+		gc.translate(width / 2, height / 2);
+		
+		
 	}
 	
 	//insert event input
@@ -71,7 +79,7 @@ public class GameScreen extends Canvas {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		Player player = Player.getPlayer();
 		Point pos = player.getPosition();
-		gc.clearRect(pos.getX() - 700, pos.getY() - 400, 1400, 800);
+		gc.clearRect(pos.getX() - 800, pos.getY() - 500, this.getWidth() * 1.2, this.getHeight() * 1.2);
 		player.update(gc);
 		
 	}

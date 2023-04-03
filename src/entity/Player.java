@@ -66,27 +66,33 @@ public class Player extends Entity implements Cooldownable{
 		
 		Point posPlayer = this.getPosition();
 		
+		boolean TL = false, TR = false, BL = false, BR = false;
+		
 		for(Room room : level) {
 			
 			Point posRoom = room.getPosition();
 			
-			double rect2X1 = posRoom.getX();
-		    double rect2Y1 = posRoom.getY();
-		    double rect2X2 = posRoom.getX() + room.getWidth();
-		    double rect2Y2 = posRoom.getY() + room.getHeight();
+			double rect1X1 = posRoom.getX();
+		    double rect1Y1 = posRoom.getY();
+		    double rect1X2 = posRoom.getX() + room.getWidth();
+		    double rect1Y2 = posRoom.getY() + room.getHeight();
 		    
-		    double rect1X1 = posPlayer.getX() + moveX;
-		    double rect1Y1 = posPlayer.getY() + moveY;
-		    double rect1X2 = posPlayer.getX() + this.getWidth();
-		    double rect1Y2 = posPlayer.getY() + this.getHeight();
+		    double X1 = posPlayer.getX() + moveX;
+		    double Y1 = posPlayer.getY() + moveY;
+		    double X2 = posPlayer.getX() + this.getWidth() + moveX;
+		    double Y2 = posPlayer.getY() + this.getHeight() + moveY;
 	
-		    boolean isTopLeftInside = rect2X1 <= rect1X1 && rect2Y1 <= rect1Y1;
-		    boolean isBottomRightInside = rect2X2 >= rect1X2 && rect2Y2 >= rect1Y2;
+		    if( (X1 >= rect1X1 && X1 <= rect1X2) && (Y1 >= rect1Y1 && Y1 <= rect1Y2) ) TL = TL || true;
+		    if( (X2 >= rect1X1 && X2 <= rect1X2) && (Y1 >= rect1Y1 && Y1 <= rect1Y2) ) TR = TR || true;
+		    if( (X1 >= rect1X1 && X1 <= rect1X2) && (Y2 >= rect1Y1 && Y2 <= rect1Y2) ) BL = BL || true;
+		    if( (X2 >= rect1X1 && X2 <= rect1X2) && (Y2 >= rect1Y1 && Y2 <= rect1Y2) ) BR = BR || true;
 	
-		    if( isTopLeftInside && isBottomRightInside) return true;
 		}
-		System.out.println("Out of range");
-		return false;
+		//System.out.print(TL);
+		//System.out.print(TR);
+		//System.out.print(BL);
+		//System.out.print(BR);
+		return TL && TR && BL && BR;
 	    
 	}
 
