@@ -6,8 +6,9 @@ import Math.Point;
 import javafx.util.Pair;
 
 public class GenerateDungeon {
-	private int level, currLevel = 0;
-	private ArrayList<ArrayList<Room>> container = new ArrayList<ArrayList<Room>>();;
+	private int level;
+	private static int currLevel = 0;
+	private static ArrayList<ArrayList<Room>> container = new ArrayList<ArrayList<Room>>();;
 	
 	public GenerateDungeon(int level){
 		this.setLevel(level);
@@ -57,7 +58,6 @@ public class GenerateDungeon {
 			Point posR1 = room.getPosition();
 			Point posR2 = anotherRoom.getPosition();
 			
-			
 			double left1 = posR1.getX();
 			double right1 = posR1.getX() + room.getWidth();
 			double top1 = posR1.getY();
@@ -84,20 +84,20 @@ public class GenerateDungeon {
 		this.level = level;
 	}
 	
-	public int getCurrLevel() {
+	public static int getCurrLevel() {
 		return currLevel;
 	}
 
-	public void setCurrLevel(int currLevel) {
-		this.currLevel = currLevel;
+	public static void setCurrLevel(int currLevel) {
+		GenerateDungeon.currLevel = currLevel;
 	}
 	
-	public ArrayList<ArrayList<Room>> getContainer() {
+	public static ArrayList<ArrayList<Room>> getContainer() {
 		return container;
 	}
 
 	public void setContainer(ArrayList<ArrayList<Room>> container) {
-		this.container = container;
+		GenerateDungeon.container = container;
 	}
 
 

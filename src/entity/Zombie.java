@@ -1,15 +1,15 @@
 package entity;
 
+import Math.DataEntity;
 import Math.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import logic.Cooldownable;
 
 public class Zombie extends Entity {
 	private double poisonDamage;
 
-	public Zombie(String name, double hp, double atk, double def, double spd,double poisonStatus, double poisonDamage) {
-		super(name, hp, atk, def, spd,poisonStatus);
+	public Zombie(String name, double Height, double Width, DataEntity data) {
+		super(name, Height, Width, data);
 		this.setPoisonDamage(poisonDamage);
 	}
 
@@ -27,10 +27,12 @@ public class Zombie extends Entity {
 		Point p = new Point(this.getPosition().getX() - px, this.getPosition().getY() - py);
 		double distance = Math.sqrt(p.getX() * p.getX() + p.getY() * p.getY());
 		
+		DataEntity data = this.getData();
+		
 		if(distance > 0) {
 			this.setPosition(new Point(
-					this.getPosition().getX() - p.getX()/distance * this.getSpd(),
-					this.getPosition().getY() - p.getY()/distance * this.getSpd()));
+					this.getPosition().getX() - p.getX()/distance * data.getSpd(),
+					this.getPosition().getY() - p.getY()/distance * data.getSpd()));
 		}
 		
 	}
@@ -46,7 +48,7 @@ public class Zombie extends Entity {
 	@Override
 	public void draw(GraphicsContext gc) {
 		gc.setFill(Color.GREEN);
-		gc.fillRect(this.getPosition().getX(), this.getPosition().getY(), 50.0, 50.0);
+		gc.fillRect(this.getPosition().getX(), this.getPosition().getY(), this.getWidth(), this.getHeight());
 	}
 
 	

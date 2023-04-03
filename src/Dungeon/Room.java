@@ -18,14 +18,14 @@ public class Room implements IRenderable {
 	public Room(Room parentRoom, Direction direction) {
 		Size sizeRoom = allSize[(int) (Math.random() * 3)];
 		if(sizeRoom.equals(Size.SMALL)) {
-			this.setWidth(320);
-			this.setHeight(240);
+			this.setWidth(640 + Math.random() * 300);
+			this.setHeight(480 + Math.random() * 300);
 		}else if(sizeRoom.equals(Size.MEDUIM)) {
-			this.setWidth(640);
-			this.setHeight(480);
+			this.setWidth(960 + Math.random() * 300);
+			this.setHeight(720 + Math.random() * 300);
 		}else {
-			this.setWidth(960);
-			this.setHeight(720);
+			this.setWidth(1920 + Math.random() * 300);
+			this.setHeight(1440 + Math.random() * 300);
 		}
 		
 		Point pos = parentRoom.getPosition();

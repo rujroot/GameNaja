@@ -88,7 +88,9 @@ public class GameScreen extends Canvas {
 
 	}
 	
-	public void paintLevel(ArrayList<Room> level) {
+	public void paintLevel() {
+		int currLevel = GenerateDungeon.getCurrLevel();
+		ArrayList<Room> level = GenerateDungeon.getContainer().get(currLevel);
 		GraphicsContext gc = this.getGraphicsContext2D();
 		for (IRenderable room : level) {
 			room.draw(gc);

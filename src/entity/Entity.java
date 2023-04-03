@@ -1,24 +1,23 @@
 package entity;
 
+import Math.DataEntity;
 import Math.Point;
 import logic.IRenderable;
 
 public abstract class Entity implements IRenderable {
 	private String name;
-	private double hp, atk, def, spd, poisonStatus;
-	
+	private double  Height, Width;
+	private DataEntity data;
 	private Point position;
 	private int z;
 	private boolean visible, destroyed;
 	
 	
-	public Entity(String name,double hp,double atk,double def,double spd,double poisonStatus){
+	public Entity(String name, double Height, double Width, DataEntity data){
 		this.setName(name);
-		this.setHp(hp);
-		this.setAtk(atk);
-		this.setDef(def);
-		this.setSpd(spd);
-		this.setPoisonStatus(poisonStatus);
+		this.setData(data);
+		this.setWidth(Width);
+		this.setHeight(Height);
 		this.setPosition(new Point(Math.random() * 640 , Math.random() * 480));
 		this.visible = true;
 		this.destroyed = false;
@@ -34,48 +33,32 @@ public abstract class Entity implements IRenderable {
 		this.name = name;
 	}
 	
-	public double getHp() {
-		return hp;
+	public DataEntity getData() {
+		return data;
 	}
 
-	public void setHp(double hp) {
-		this.hp = hp;
-	}
-
-	public double getAtk() {
-		return atk;
-	}
-
-	public void setAtk(double atk) {
-		this.atk = atk;
-	}
-
-	public double getDef() {
-		return def;
-	}
-
-	public void setDef(double def) {
-		this.def = def;
-	}
-
-	public double getSpd() {
-		return spd;
-	}
-
-	public void setSpd(double spd) {
-		this.spd = spd;
-	}
-
-	public double getPoisonStatus() {
-		return poisonStatus;
-	}
-
-	public void setPoisonStatus(double poisonStatus) {
-		this.poisonStatus = poisonStatus;
+	public void setData(DataEntity data) {
+		this.data = data;
 	}
 
 	public void setDestroyed(boolean destroyed) {
 		this.destroyed = destroyed;
+	}
+
+	public double getHeight() {
+		return Height;
+	}
+
+	public void setHeight(double height) {
+		Height = height;
+	}
+
+	public double getWidth() {
+		return Width;
+	}
+
+	public void setWidth(double width) {
+		Width = width;
 	}
 
 	@Override

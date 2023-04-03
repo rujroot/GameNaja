@@ -1,6 +1,10 @@
 package logic;
 
+import java.util.ArrayList;
+
 import Dungeon.GenerateDungeon;
+import Dungeon.Room;
+import Math.DataEntity;
 import Math.Point;
 import drawing.GameScreen;
 import entity.Player;
@@ -49,7 +53,7 @@ public class Main extends Application {
 //		Zombie zombie3 = new Zombie("Zombie", 10, 1, 1, 0.6, 0, 0);
 //		logic.addNewObject(zombie3);
 //		
-		Player player = new Player("Player", 10, 1, 1, 10, 0);
+		Player player = new Player("Player", 50, 50, new DataEntity(1, 1, 1, 10));
 		player.setPosition(new Point(700, 400));
 		logic.addNewObject(player);
 		
@@ -57,7 +61,7 @@ public class Main extends Application {
 		AnimationTimer animation = new AnimationTimer() {
 			public void handle(long now) {
 				gameScreen.updatePlayer();
-				gameScreen.paintLevel(dungeon.getContainer().get(dungeon.getCurrLevel()));
+				gameScreen.paintLevel();
 				gameScreen.paintComponent();
 				logic.logicUpdate();
 				RenderableHolder.getInstance().update();
