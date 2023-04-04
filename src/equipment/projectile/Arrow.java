@@ -17,7 +17,7 @@ public class Arrow extends BaseProjectile {
 		Point newPos = new Point(pos.getX() + speed.getX(), pos.getY() + speed.getY());
 		
 		gc.setFill(Color.YELLOW);
-		gc.fillRect(newPos.getX(), newPos.getY(), 10.0, 5.0);
+		gc.fillRect(newPos.getX(), newPos.getY(), 10.0, 10.0);
 		
 		this.setPosition(newPos);
 		

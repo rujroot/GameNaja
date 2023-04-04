@@ -1,16 +1,11 @@
 package logic;
 
-import java.util.ArrayList;
-
 import Dungeon.GenerateDungeon;
 import Dungeon.Room;
 import Math.DataEntity;
 import Math.Point;
 import drawing.GameScreen;
 import entity.Player;
-import entity.Zombie;
-import equipment.BaseWeapon;
-import equipment.Bow;
 import input.InputUtility;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -60,7 +55,6 @@ public class Main extends Application {
 //		Zombie zombie3 = new Zombie("Zombie", 10, 1, 1, 0.6, 0, 0);
 //		logic.addNewObject(zombie3);
 
-		
 		//this function run every sec
 		AnimationTimer animation = new AnimationTimer() {
 			public void handle(long now) {

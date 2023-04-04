@@ -22,5 +22,14 @@ public class Point {
 		return "X = " + this.getX() + " " + "Y = " + this.getY() ;
 		
 	}
+	public void unit(){
+		double dis = Math.sqrt((this.X * this.X) + (this.Y * this.Y));
+		this.setX(X / dis);
+		this.setY(Y / dis);
+	}
+	public void multiply(double value){
+		this.setX(X * value);
+		this.setY(Y * value);
+	}
 
 }

@@ -21,8 +21,8 @@ public class Player extends Entity implements Cooldownable{
 	public static Player player;
 	
 	private BaseWeapon equipment;
-	private double lastClickTime = 0;
-	private double cooldownTime = 1000;
+	private double lastClickTime = 0, cooldownTime = 1000;
+	private Point resolutionPosition;
 
 	public Player(String name, double Height, double Width, DataEntity data) {
 		super(name, Height, Width, data);
@@ -123,6 +123,14 @@ public class Player extends Entity implements Cooldownable{
 
 	public void setEquipment(BaseWeapon equipment) {
 		this.equipment = equipment;
+	}
+
+	public Point getResolutionPosition() {
+		return resolutionPosition;
+	}
+
+	public void setResolutionPosition(Point resolutionPosition) {
+		this.resolutionPosition = resolutionPosition;
 	}
 
 	@Override

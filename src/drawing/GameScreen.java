@@ -26,10 +26,8 @@ public class GameScreen extends Canvas {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		Player player = Player.getPlayer();
 		
-		System.out.print(player.getPosition().getX() + " " + player.getPosition().getY());
+		player.setResolutionPosition(new Point(width / 2, height / 2));
 		gc.translate(width / 2, height / 2);
-		
-		
 	}
 	
 	//insert event input

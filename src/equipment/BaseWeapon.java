@@ -6,21 +6,24 @@ import javafx.scene.canvas.GraphicsContext;
 import logic.Hitbox;
 
 public abstract class BaseWeapon {
-	private double attackDamage;
-	private Point position;
-	private double attackSpeed;
+	private double attackDamage, attackSpeed;
+	private Point offsetPosition;
 	
 	public Point getPostion() {
-		
 		//Point Player
 		Point pp = Player.getPlayer().getPosition();
 		double px = pp.getX(), py = pp.getY();
 		
-		Point p = new Point(px + position.getX(), py + position.getY());
+		Point p = new Point(px + offsetPosition.getX(), py + offsetPosition.getY());
 		return p;
 	}
-	public void setPostion(Point position) {
-		this.position = position;
+
+	public Point getResolutionPostion(){
+		Point pp = Player.getPlayer().getResolutionPosition();
+		double px = pp.getX(), py = pp.getY();
+		
+		Point p = new Point(px + offsetPosition.getX(), py + offsetPosition.getY());
+		return p;
 	}
 
 	private Hitbox attackHitBox;
@@ -60,6 +63,12 @@ public abstract class BaseWeapon {
 
 	public void setAttackHitBox(Hitbox attackHitBox) {
 		this.attackHitBox = attackHitBox;
+	}
+	public Point getOffsetPosition() {
+		return offsetPosition;
+	}
+	public void setOffsetPosition(Point offsetPosition) {
+		this.offsetPosition = offsetPosition;
 	}
 
 	

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Math.Point;
 import equipment.projectile.Arrow;
+import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import logic.Cooldownable;
@@ -17,7 +18,7 @@ public class Bow extends BaseWeapon implements Cooldownable {
 
 	public Bow(int attackDamage) {
 		super(attackDamage);
-		this.setPostion(new Point(30, 20));
+		this.setOffsetPosition(new Point(30, 20));
 		
 		listArrow = new ArrayList<Arrow>();
 	}
@@ -36,8 +37,16 @@ public class Bow extends BaseWeapon implements Cooldownable {
 	@Override
 	public void attack() {
 		if(!onCooldown()) {
+
+			// find direction to shoot
+			Point pos = this.getResolutionPostion();
+			double mouseX = InputUtility.mouseX, mouseY = InputUtility.mouseY;
+			Point vector = new Point(mouseX - pos.getX(), mouseY - pos.getY());
+			vector.unit();
+			vector.multiply(10);
+
 			// damge, speed, pos
-			Arrow arrow = new Arrow(1, new Point(5, 0), this.getPostion());
+			Arrow arrow = new Arrow(1, vector, this.getPostion());
 			listArrow.add(arrow);
 		}
 	}
