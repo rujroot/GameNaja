@@ -55,7 +55,7 @@ public class Player extends Entity implements Cooldownable{
 			attack();
 		} if (InputUtility.getKeyPressed(KeyCode.J) && !onCooldown()) {
 			GameLogic logic = Main.getLogic();
-			Zombie zombie = new Zombie("Zombie", 50, 50, new DataEntity(1, 1, 1, 1));
+			Zombie zombie = new Zombie("Zombie", 50, 50, new DataEntity(1, 1, 1, 4.5));
 			logic.addNewObject(zombie);
 		}
 	}
@@ -66,7 +66,7 @@ public class Player extends Entity implements Cooldownable{
 		
 		Point posPlayer = this.getPosition();
 		
-		boolean TL = false, TR = false, BL = false, BR = false;
+		boolean TB = true, LR = true;
 		
 		for(Room room : level) {
 			
@@ -82,17 +82,14 @@ public class Player extends Entity implements Cooldownable{
 		    double X2 = posPlayer.getX() + this.getWidth() + moveX;
 		    double Y2 = posPlayer.getY() + this.getHeight() + moveY;
 	
-		    if( (X1 >= rect1X1 && X1 <= rect1X2) && (Y1 >= rect1Y1 && Y1 <= rect1Y2) ) TL = TL || true;
-		    if( (X2 >= rect1X1 && X2 <= rect1X2) && (Y1 >= rect1Y1 && Y1 <= rect1Y2) ) TR = TR || true;
-		    if( (X1 >= rect1X1 && X1 <= rect1X2) && (Y2 >= rect1Y1 && Y2 <= rect1Y2) ) BL = BL || true;
-		    if( (X2 >= rect1X1 && X2 <= rect1X2) && (Y2 >= rect1Y1 && Y2 <= rect1Y2) ) BR = BR || true;
-	
+		    if(Math.min(X1, rect1X1) >= rect1X1 && Math.max(X2, rect1X2) <= rect1X2) {
+		    	if(Math.min(Y1, rect1Y1) >= rect1Y1 && Math.max(Y2, rect1Y2) <= rect1Y2) {
+		    		return true;
+		    	}
+		    }
+		    
 		}
-		//System.out.print(TL);
-		//System.out.print(TR);
-		//System.out.print(BL);
-		//System.out.print(BR);
-		return TL && TR && BL && BR;
+		return false;
 	    
 	}
 
