@@ -2,12 +2,15 @@ package equipment.projectile;
 
 import Math.Point;
 import javafx.scene.canvas.GraphicsContext;
+import logic.IRenderable;
 
-public abstract class BaseProjectile {
+public abstract class BaseProjectile implements IRenderable {
 	
 	private double damage;
 	private Point speed;
 	private Point Position;
+	private int z;
+	private boolean visible = true, destroyed = false;
 	
 	public abstract void draw(GraphicsContext gc);
 	
@@ -39,6 +42,21 @@ public abstract class BaseProjectile {
 
 	public void setPosition(Point position) {
 		Position = position;
+	}
+
+	@Override
+	public int getZ() {
+		return z;
+	}
+
+	@Override
+	public boolean isDestroyed() {
+		return destroyed;
+	}
+
+	@Override
+	public boolean isVisible() {
+		return visible;
 	}
 	
 }

@@ -92,6 +92,12 @@ public class GameScreen extends Canvas {
 			}
 		}
 
+		for (IRenderable arrow : RenderableHolder.getInstance().getArrows()) {
+			if (arrow.isVisible() && !arrow.isDestroyed()) {
+				arrow.draw(gc);
+			}
+		}
+
 	}
 	
 	public void paintLevel() {
