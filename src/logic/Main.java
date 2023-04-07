@@ -31,7 +31,7 @@ public class Main extends Application {
 		// Create Player
 		Player player = new Player("Player", 50, 50, new DataEntity(1, 1, 1, 10));
 		Room firstRoom = GenerateDungeon.getContainer().get(0).get(0);
-		player.setPosition(new Point(firstRoom.getPosition().getX(), firstRoom.getPosition().getY() ));
+		player.setPosition(new Point(firstRoom.getPosition().getX() + 10, firstRoom.getPosition().getY() + 10 ));
 		logic.addNewObject(player);
 		
 		// Add root and scene + set Title game
