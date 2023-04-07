@@ -1,12 +1,14 @@
 package equipment.projectile;
 
 import Math.Point;
+import entity.Entity;
 import javafx.scene.canvas.GraphicsContext;
+import logic.Hitbox;
 import logic.IRenderable;
 
 public abstract class BaseProjectile implements IRenderable {
 	
-	private double damage;
+	private double damage, width, height;
 	private Point speed;
 	private Point Position;
 	private int z;
@@ -18,6 +20,19 @@ public abstract class BaseProjectile implements IRenderable {
 		this.setDamage(damage);
 		this.setSpeed(speed);
 		this.setPosition(Position);
+	}
+
+	public void update(){
+		Point speed = this.getSpeed();
+		Point pos = this.getPosition();
+		Point newPos = new Point(pos.getX() + speed.getX(), pos.getY() + speed.getY());
+		this.setPosition(newPos);
+	}
+
+	public boolean hit(Entity entity){
+		Hitbox A = new Hitbox(this.getPosition(), this.getWidth(), this.getHeight());
+		Hitbox B = new Hitbox(entity.getPosition(), entity.getWidth(), entity.getHeight());
+		return A.isIntersect(B);
 	}
 
 	public double getDamage() {
@@ -44,6 +59,22 @@ public abstract class BaseProjectile implements IRenderable {
 		Position = position;
 	}
 
+	public double getWidth() {
+		return width;
+	}
+
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	public double getHeight() {
+		return height;
+	}
+
+	public void setHeight(double height) {
+		this.height = height;
+	}
+
 	@Override
 	public int getZ() {
 		return z;
@@ -58,5 +89,19 @@ public abstract class BaseProjectile implements IRenderable {
 	public boolean isVisible() {
 		return visible;
 	}
+
+	public void setZ(int z) {
+		this.z = z;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+
+	public void setDestroyed(boolean destroyed) {
+		this.destroyed = destroyed;
+	}
+
+	
 	
 }

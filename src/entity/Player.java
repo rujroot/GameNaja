@@ -55,7 +55,7 @@ public class Player extends Entity implements Cooldownable{
 			attack();
 		} if (InputUtility.getKeyPressed(KeyCode.J) && !onCooldown()) {
 			GameLogic logic = Main.getLogic();
-			Zombie zombie = new Zombie("Zombie", 50, 50, new DataEntity(1, 1, 1, 4.5));
+			Zombie zombie = new Zombie("Zombie", 50, 50, new DataEntity(10, 1, 1, 4.5));
 			logic.addNewObject(zombie);
 		}
 	}

@@ -1,14 +1,11 @@
 package equipment;
 
-import java.util.ArrayList;
-
 import Math.Point;
 import equipment.projectile.Arrow;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import logic.Cooldownable;
-import logic.GameLogic;
 import logic.Main;
 
 public class Bow extends BaseWeapon implements Cooldownable {
@@ -56,9 +53,5 @@ public class Bow extends BaseWeapon implements Cooldownable {
 		
 		Point pos = this.getPostion();
 		gc.fillRect(pos.getX(), pos.getY(), 30.0, 10.0);
-		// for(Arrow arrow : listArrow) {
-		// 	arrow.draw(gc);
-		// }
-		
 	}
 }

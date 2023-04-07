@@ -2,6 +2,7 @@ package logic;
 
 import java.util.ArrayList;
 import entity.Entity;
+import entity.Player;
 import entity.Zombie;
 import equipment.projectile.Arrow;
 
@@ -29,11 +30,30 @@ public class GameLogic {
 	
 	//This method should run every sec
 	public void logicUpdate() {
-		for(Entity entity: gameObjectContainer) {
+		for (int i = gameObjectContainer.size() - 1; i >= 0; i--) {
+			Entity entity = gameObjectContainer.get(i);
+			if(entity.getData().getHp() <= 0) {
+				entity.setDestroyed(true);
+				gameObjectContainer.remove(entity);
+			}
+
 			if(entity instanceof Zombie) {
 				((Zombie) entity).follow();
 			}
 		}
+
+		for (int i = gameArrowContainer.size() - 1; i >= 0; i--) {
+			Arrow arrow = gameArrowContainer.get(i);
+			arrow.update();
+			for(Entity entity: gameObjectContainer) {
+				if(!(entity instanceof Player) && arrow.hit(entity)){
+					arrow.makeDamge(entity);
+					arrow.setDestroyed(true);
+					gameArrowContainer.remove(arrow);
+				}
+			}
+		}
+
 	}
 
 	public ArrayList<Entity> getGameObjectContainer() {

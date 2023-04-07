@@ -26,7 +26,12 @@ public class DataEntity {
 	}
 
 	public void setHp(double hp) {
-		this.hp = hp;
+		if(hp <= 0){
+			this.hp = 0;
+		}else{
+			this.hp = hp;
+		}
+		
 	}
 
 	public double getAtk() {
