@@ -1,10 +1,16 @@
 package logic;
 
 import java.util.ArrayList;
+
+import Dungeon.GenerateDungeon;
+import Dungeon.Room;
+import Math.Point;
+import drawing.GameScreen;
 import entity.Entity;
 import entity.Player;
 import entity.Zombie;
 import equipment.projectile.Arrow;
+import javafx.scene.canvas.GraphicsContext;
 
 public class GameLogic {
 	
@@ -54,6 +60,51 @@ public class GameLogic {
 			}
 		}
 
+	}
+
+	public void nextFloor(){
+		
+		//Get next dungeon
+		int Currlevel = GenerateDungeon.getCurrLevel();
+		if(Currlevel >= GenerateDungeon.getLevel() - 1) return;
+		GenerateDungeon.setCurrLevel(Currlevel + 1);
+
+		//Get first room
+		Room firstRoom = GenerateDungeon.getContainer().get(Currlevel + 1).get(0);
+		System.out.println("Go to " + (Currlevel + 1));
+		
+		// Get postion player
+		Player player = Player.getPlayer();
+		Point Oldpos = player.getPosition();
+
+		// Get postion to spawn
+		Point spawnPoint = new Point(firstRoom.getPosition().getX() + 10, firstRoom.getPosition().getY() + 10 );
+
+		// Translate camera
+		GameScreen gameScreen = Main.getGameScreen();
+		GraphicsContext gc = gameScreen.getGraphicsContext2D();
+		gc.translate(Oldpos.getX() - spawnPoint.getX(), Oldpos.getY() - spawnPoint.getY());
+
+		// Warp player
+		player.setPosition(spawnPoint);
+
+		this.clearObject();
+
+	}
+
+	public void clearObject(){
+		for (int i = gameObjectContainer.size() - 1; i >= 0; i--) {
+			Entity entity = gameObjectContainer.get(i);
+			if(entity instanceof Player) continue;
+			entity.setDestroyed(true);
+			gameObjectContainer.remove(entity);
+		}
+
+		for (int i = gameArrowContainer.size() - 1; i >= 0; i--) {
+			Arrow arrow = gameArrowContainer.get(i);
+			arrow.setDestroyed(true);
+			gameArrowContainer.remove(arrow);
+		}
 	}
 
 	public ArrayList<Entity> getGameObjectContainer() {

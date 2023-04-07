@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	
 	public static GameLogic logic;
+	public static GameScreen gameScreen;
 
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -32,6 +33,7 @@ public class Main extends Application {
 		Player player = new Player("Player", 50, 50, new DataEntity(1, 1, 1, 10));
 		Room firstRoom = GenerateDungeon.getContainer().get(0).get(0);
 		player.setPosition(new Point(firstRoom.getPosition().getX() + 10, firstRoom.getPosition().getY() + 10 ));
+		
 		logic.addNewObject(player);
 		
 		// Add root and scene + set Title game
@@ -41,19 +43,12 @@ public class Main extends Application {
 		stage.setTitle("Game Naja eiei");
 		
 		//Create Gamelogic Class
-		GameScreen gameScreen = new GameScreen(1400,800);
+		gameScreen = new GameScreen(1400,800);
 		root.getChildren().add(gameScreen);
 		gameScreen.requestFocus();
 		
 		//Show windows
 		stage.show();
-		
-//		Zombie zombie1 = new Zombie("Zombie", 10, 1, 1, 0.5, 0, 0);
-//		logic.addNewObject(zombie1);
-//		Zombie zombie2 = new Zombie("Zombie", 10, 1, 1, 0.7, 0, 0);
-//		logic.addNewObject(zombie2);
-//		Zombie zombie3 = new Zombie("Zombie", 10, 1, 1, 0.6, 0, 0);
-//		logic.addNewObject(zombie3);
 
 		//this function run every sec
 		AnimationTimer animation = new AnimationTimer() {
@@ -73,4 +68,7 @@ public class Main extends Application {
 		return logic;
 	}
 
+	public static GameScreen getGameScreen() {
+		return gameScreen;
+	}
 }

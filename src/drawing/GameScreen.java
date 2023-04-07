@@ -79,7 +79,6 @@ public class GameScreen extends Canvas {
 		Point pos = player.getPosition();
 		gc.clearRect(pos.getX() - 800, pos.getY() - 500, this.getWidth() * 1.2, this.getHeight() * 1.2);
 		player.update(gc);
-		
 	}
 	
 	public void paintComponent() {

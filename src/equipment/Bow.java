@@ -54,4 +54,13 @@ public class Bow extends BaseWeapon implements Cooldownable {
 		Point pos = this.getPostion();
 		gc.fillRect(pos.getX(), pos.getY(), 30.0, 10.0);
 	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+	
 }

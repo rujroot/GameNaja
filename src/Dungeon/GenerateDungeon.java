@@ -6,7 +6,7 @@ import Math.Point;
 import javafx.util.Pair;
 
 public class GenerateDungeon {
-	private int level;
+	private static int level;
 	private static int currLevel = 0;
 	private static ArrayList<ArrayList<Room>> container = new ArrayList<ArrayList<Room>>();;
 	
@@ -76,7 +76,7 @@ public class GenerateDungeon {
 		return true;
 	}
 
-	public int getLevel() {
+	public static int getLevel() {
 		return level;
 	}
 
@@ -99,6 +99,7 @@ public class GenerateDungeon {
 	public void setContainer(ArrayList<ArrayList<Room>> container) {
 		GenerateDungeon.container = container;
 	}
+
 
 
 }
