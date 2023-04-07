@@ -49,7 +49,9 @@ public class Zombie extends Entity {
 	public void draw(GraphicsContext gc) {
 		gc.setFill(Color.GREEN);
 		gc.fillRect(this.getPosition().getX(), this.getPosition().getY(), this.getWidth(), this.getHeight());
+		this.drawHP(gc);
 	}
+
 
 	
 

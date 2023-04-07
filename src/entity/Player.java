@@ -105,7 +105,7 @@ public class Player extends Entity implements Cooldownable{
 		Point pos = this.getPosition();
 		gc.setFill(Color.TAN);
 		gc.fillRect(pos.getX(), pos.getY(), this.getWidth(), this.getHeight());
-		
+		this.drawHP(gc);
 		if(equipment != null) {
 			equipment.draw(gc);
 		}

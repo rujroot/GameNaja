@@ -1,11 +1,12 @@
 package Math;
 
 public class DataEntity {
-	double hp, atk, def, spd, poisonStatus;
+	double hp, atk, def, spd, poisonStatus, maxHP;
 	
 	public DataEntity(double hp, double atk, double def, double spd, double poisonStatus) {
 		this.setAtk(atk);
 		this.setHp(hp);
+		this.setMaxHP(hp);
 		this.setDef(def);
 		this.setSpd(spd);
 		this.setPoisonStatus(poisonStatus);
@@ -14,6 +15,7 @@ public class DataEntity {
 	public DataEntity(double hp, double atk, double def, double spd) {
 		this.setAtk(atk);
 		this.setHp(hp);
+		this.setMaxHP(hp);
 		this.setDef(def);
 		this.setSpd(spd);
 		this.setPoisonStatus(0);
@@ -57,6 +59,14 @@ public class DataEntity {
 
 	public void setPoisonStatus(double poisonStatus) {
 		this.poisonStatus = poisonStatus;
+	}
+
+	public double getMaxHP() {
+		return maxHP;
+	}
+
+	public void setMaxHP(double maxHP) {
+		this.maxHP = maxHP;
 	}
 	
 }
