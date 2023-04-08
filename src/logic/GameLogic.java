@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import Dungeon.GenerateDungeon;
 import Dungeon.Room;
 import Math.Point;
-import drawing.GameScreen;
 import entity.Entity;
 import entity.Player;
 import entity.Zombie;
 import equipment.projectile.Arrow;
-import javafx.scene.canvas.GraphicsContext;
 
 public class GameLogic {
 	

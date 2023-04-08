@@ -64,7 +64,6 @@ public class Player extends Entity implements Cooldownable{
 
 	public void update() {
 		//Move Section
-		Point pos = this.getPosition();
 		DataEntity data = this.getData();
 		
 		if (InputUtility.getKeyPressed(KeyCode.W) && isLegalMove(0, -1) ) {
