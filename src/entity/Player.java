@@ -30,23 +30,51 @@ public class Player extends Entity implements Cooldownable{
 		this.setEquipment(new Bow(2));
 	}
 	
-	public void update(GraphicsContext gc) {
+	public void move(double moveX, double moveY){
+		Point pos = this.getPosition();
+
+		for(double x = moveX; x > 0; --x){
+			if(isLegalMove(x, 0)){
+				pos.setX(pos.getX() + x);
+				return;
+			}
+		}
+
+		for(double x = moveX; x < 0; ++x){
+			if(isLegalMove(x, 0)){
+				pos.setX(pos.getX() + x);
+				return;
+			}
+		}
+
+		for(double y = moveY; y > 0; --y){
+			if(isLegalMove(0, y)){
+				pos.setY(pos.getY() + y);
+				return;
+			}
+		}
+
+		for(double y = moveY; y < 0; ++y){
+			if(isLegalMove(0, y)){
+				pos.setY(pos.getY() + y);
+				return;
+			}
+		}
+	}
+
+	public void update() {
 		//Move Section
 		Point pos = this.getPosition();
 		DataEntity data = this.getData();
 		
-		if (InputUtility.getKeyPressed(KeyCode.W) && isLegalMove(0, -data.getSpd()) ) {
-			pos.setY(pos.getY() - data.getSpd());
-			gc.translate(0, data.getSpd());
-		} if (InputUtility.getKeyPressed(KeyCode.A) && isLegalMove(-data.getSpd(), 0) ) {
-			pos.setX(pos.getX() - data.getSpd());
-			gc.translate(data.getSpd(), 0);
-		} if (InputUtility.getKeyPressed(KeyCode.D) && isLegalMove(data.getSpd(), 0) ) {
-			pos.setX(pos.getX() + data.getSpd());
-			gc.translate(-data.getSpd(), 0);
-		} if (InputUtility.getKeyPressed(KeyCode.S) && isLegalMove(0, data.getSpd()) ) {
-			pos.setY(pos.getY() + data.getSpd());
-			gc.translate(0, -data.getSpd());
+		if (InputUtility.getKeyPressed(KeyCode.W) && isLegalMove(0, -1) ) {
+			this.move(0, -data.getSpd());
+		} if (InputUtility.getKeyPressed(KeyCode.A) && isLegalMove(-1, 0) ) {
+			this.move(-data.getSpd(), 0);
+		} if (InputUtility.getKeyPressed(KeyCode.D) && isLegalMove(1, 0) ) {
+			this.move(data.getSpd(), 0);
+		} if (InputUtility.getKeyPressed(KeyCode.S) && isLegalMove(0, 1) ) {
+			this.move(0, data.getSpd());
 		} 
 		
 		

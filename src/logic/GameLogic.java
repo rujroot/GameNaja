@@ -73,17 +73,9 @@ public class GameLogic {
 		Room firstRoom = GenerateDungeon.getContainer().get(Currlevel + 1).get(0);
 		System.out.println("Go to " + (Currlevel + 1));
 		
-		// Get postion player
 		Player player = Player.getPlayer();
-		Point Oldpos = player.getPosition();
-
 		// Get postion to spawn
 		Point spawnPoint = new Point(firstRoom.getPosition().getX() + 10, firstRoom.getPosition().getY() + 10 );
-
-		// Translate camera
-		GameScreen gameScreen = Main.getGameScreen();
-		GraphicsContext gc = gameScreen.getGraphicsContext2D();
-		gc.translate(Oldpos.getX() - spawnPoint.getX(), Oldpos.getY() - spawnPoint.getY());
 
 		// Warp player
 		player.setPosition(spawnPoint);

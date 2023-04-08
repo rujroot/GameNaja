@@ -12,11 +12,14 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Track;
 import javafx.scene.paint.Color;
 import logic.IRenderable;
 import logic.RenderableHolder;
 
 public class GameScreen extends Canvas {
+
+	private Point posCamera;
 
 	public GameScreen(double width, double height) {
 		super(width, height);
@@ -26,8 +29,10 @@ public class GameScreen extends Canvas {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		Player player = Player.getPlayer();
 		
+		// first to set camera
 		player.setResolutionPosition(new Point(width / 2, height / 2));
 		gc.translate(width / 2, height / 2);
+		posCamera = new Point(-width / 2, -height / 2);
 	}
 	
 	//insert event input
@@ -77,8 +82,30 @@ public class GameScreen extends Canvas {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		Player player = Player.getPlayer();
 		Point pos = player.getPosition();
-		gc.clearRect(pos.getX() - 800, pos.getY() - 500, this.getWidth() * 1.2, this.getHeight() * 1.2);
-		player.update(gc);
+
+		// Prepar for new draw
+		gc.clearRect(pos.getX() - this.getWidth() / 2, 
+					pos.getY() - this.getHeight() / 2, 
+					this.getWidth() * 1.2, 
+					this.getHeight() * 1.2);
+		// update player input
+		player.update();
+		// Track Camera follow player
+		this.trackCamera();
+	}
+
+	// TrackCamera follow Player with offset
+	public void trackCamera(){
+		GraphicsContext gc = this.getGraphicsContext2D();
+		Point pos = Player.getPlayer().getPosition();
+
+		Point posToTrack = new Point(pos.getX() - this.getWidth() / 2, pos.getY() - this.getHeight() / 2);
+		double posCameraX = posCamera.getX(), posCameraY = posCamera.getY();
+
+		// Track
+		gc.translate(posCameraX - posToTrack.getX(), posCameraY - posToTrack.getY());
+		posCamera.setX(posCameraX - (posCameraX - posToTrack.getX()));
+		posCamera.setY(posCameraY - (posCameraY - posToTrack.getY()));
 	}
 	
 	public void paintComponent() {
