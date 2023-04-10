@@ -2,6 +2,7 @@ package entity;
 
 import java.util.ArrayList;
 
+import Data.BaseObject;
 import Data.DataEntity;
 import Data.Point;
 import Dungeon.GenerateDungeon;
@@ -14,7 +15,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import logic.Cooldownable;
 import logic.GameLogic;
+import logic.Hitbox;
 import logic.Main;
+import ore.BaseOre;
 
 public class Player extends Entity implements Cooldownable{
 	
@@ -94,6 +97,7 @@ public class Player extends Entity implements Cooldownable{
 		ArrayList<Room> level = GenerateDungeon.getContainer().get(currLevel);
 		
 		Point posPlayer = this.getPosition();
+		Point newPosPlayer = new Point(posPlayer.getX() + moveX, posPlayer.getY() + moveY);
 		
 		double sum = 0;
 		
@@ -106,10 +110,10 @@ public class Player extends Entity implements Cooldownable{
 		    double rect1X2 = posRoom.getX() + room.getWidth();
 		    double rect1Y2 = posRoom.getY() + room.getHeight();
 		    
-		    double X1 = posPlayer.getX() + moveX;
-		    double Y1 = posPlayer.getY() + moveY;
-		    double X2 = posPlayer.getX() + this.getWidth() + moveX;
-		    double Y2 = posPlayer.getY() + this.getHeight() + moveY;
+		    double X1 = newPosPlayer.getX();
+		    double Y1 = newPosPlayer.getY();
+		    double X2 = newPosPlayer.getX() + this.getWidth();
+		    double Y2 = newPosPlayer.getY() + this.getHeight();
 
 			// calculate the coordinates of the intersection rectangle
 			double xLeft = Math.max(rect1X1, X1);
@@ -124,6 +128,15 @@ public class Player extends Entity implements Cooldownable{
 			}
 			
 			sum += intersectionArea;
+		}
+
+		ArrayList<BaseObject> allObject = Main.getLogic().getGameObjectContainer();
+		for(BaseObject object : allObject){
+			if(object instanceof BaseOre){
+				Hitbox A = new Hitbox(newPosPlayer, this.getWidth(), this.getHeight());
+				Hitbox B = new Hitbox(object.getPosition(), object.getWidth(), object.getHeight());
+				if(A.isIntersect(B)) return false;
+			}
 		}
 
 		return Math.round(sum) == Math.round(this.getWidth() * this.getHeight());   

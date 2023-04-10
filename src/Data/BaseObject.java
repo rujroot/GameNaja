@@ -6,7 +6,7 @@ public abstract class BaseObject implements IRenderable{
     private double width, height;
     private Point position;
     private int z;
-	private boolean visible = true, destroyed = false;
+	private boolean visible = true, destroyed = false, canCollide = false;
 
     public BaseObject(Point position, double width, double height){
         this.setWidth(width);
@@ -50,6 +50,7 @@ public abstract class BaseObject implements IRenderable{
     public void setDestroyed(boolean destroyed) {
         this.destroyed = destroyed;
     }
+
     @Override
 	public boolean isDestroyed(){
 		return destroyed;
@@ -64,6 +65,14 @@ public abstract class BaseObject implements IRenderable{
 	public int getZ(){
 		return z;
 	}
+
+    public boolean isCanCollide() {
+        return canCollide;
+    }
+
+    public void setCanCollide(boolean canCollide) {
+        this.canCollide = canCollide;
+    }
 
     
 }

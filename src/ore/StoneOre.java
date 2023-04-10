@@ -13,7 +13,7 @@ public class StoneOre extends BaseOre {
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.setFill(Color.GREEN);
+        gc.setFill(Color.GRAY);
 		gc.fillRect(this.getPosition().getX(), this.getPosition().getY(), this.getWidth(), this.getHeight());
     }
     
