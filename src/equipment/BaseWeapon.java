@@ -1,15 +1,17 @@
 package equipment;
 
-import Math.Point;
+import Data.BaseObject;
+import Data.Point;
 import entity.Player;
 import javafx.scene.canvas.GraphicsContext;
 import logic.Hitbox;
 
-public abstract class BaseWeapon {
+public abstract class BaseWeapon extends BaseObject {
 	private double attackDamage, attackSpeed;
 	private Point offsetPosition;
 	
-	public Point getPostion() {
+	@Override
+	public Point getPosition() {
 		//Point Player
 		Point pp = Player.getPlayer().getPosition();
 		double px = pp.getX(), py = pp.getY();
@@ -70,7 +72,5 @@ public abstract class BaseWeapon {
 	public void setOffsetPosition(Point offsetPosition) {
 		this.offsetPosition = offsetPosition;
 	}
-
-	
 
 }

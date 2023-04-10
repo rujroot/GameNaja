@@ -1,9 +1,9 @@
 package logic;
 
+import Data.DataEntity;
+import Data.Point;
 import Dungeon.GenerateDungeon;
 import Dungeon.Room;
-import Math.DataEntity;
-import Math.Point;
 import drawing.GameScreen;
 import entity.Player;
 import input.InputUtility;
@@ -34,7 +34,7 @@ public class Main extends Application {
 		Room firstRoom = GenerateDungeon.getContainer().get(0).get(0);
 		player.setPosition(new Point(firstRoom.getPosition().getX() + 10, firstRoom.getPosition().getY() + 10 ));
 		
-		logic.addNewObject(player);
+		logic.addObject(player);
 		
 		// Add root and scene + set Title game
 		StackPane root = new StackPane();

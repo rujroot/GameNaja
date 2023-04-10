@@ -2,9 +2,10 @@ package logic;
 
 import java.util.ArrayList;
 
+import Data.BaseObject;
+import Data.Point;
 import Dungeon.GenerateDungeon;
 import Dungeon.Room;
-import Math.Point;
 import entity.Entity;
 import entity.Player;
 import entity.Zombie;
@@ -12,52 +13,52 @@ import equipment.projectile.Arrow;
 
 public class GameLogic {
 	
-	private ArrayList<Entity> gameObjectContainer;
-	private ArrayList<Arrow> gameArrowContainer;
+	private ArrayList<BaseObject> gameObjectContainer;
 	
 	public GameLogic() {
 		// create new ObjectContainer
-		this.gameObjectContainer = new ArrayList<Entity>();
-		this.gameArrowContainer = new ArrayList<Arrow>();
+		this.gameObjectContainer = new ArrayList<BaseObject>();
 	}
 	
 	// Add object to gameObject and Renderable
-	public void addNewObject(Entity entity) {
-		gameObjectContainer.add(entity);
-		RenderableHolder.getInstance().add(entity);
-	}
-
-	public void addNewArrow(Arrow arrow) {
-		gameArrowContainer.add(arrow);
-		RenderableHolder.getInstance().add(arrow, "Arrow");
+	public void addObject(BaseObject object) {
+		gameObjectContainer.add(object);
+		RenderableHolder.getInstance().add(object);
 	}
 	
 	//This method should run every sec
 	public void logicUpdate() {
 		for (int i = gameObjectContainer.size() - 1; i >= 0; i--) {
-			Entity entity = gameObjectContainer.get(i);
-			if(entity.getData().getHp() <= 0) {
-				entity.setDestroyed(true);
-				gameObjectContainer.remove(entity);
-			}
+			BaseObject object = gameObjectContainer.get(i);
+			if(object instanceof Entity){
+					Entity entity = (Entity) object;
+					if(entity.getData().getHp() <= 0) {
+						entity.setDestroyed(true);
+						gameObjectContainer.remove(entity);
+					}
 
-			if(entity instanceof Zombie) {
-				((Zombie) entity).follow();
-			}
-		}
-
-		for (int i = gameArrowContainer.size() - 1; i >= 0; i--) {
-			Arrow arrow = gameArrowContainer.get(i);
-			arrow.update();
-			for(Entity entity: gameObjectContainer) {
-				if(!(entity instanceof Player) && arrow.hit(entity)){
-					arrow.makeDamge(entity);
-					arrow.setDestroyed(true);
-					gameArrowContainer.remove(arrow);
+					if(entity instanceof Zombie) {
+						((Zombie) entity).follow();
+					}
 				}
+			
+			else if(object instanceof Arrow){
+				Arrow arrow = (Arrow) object;
+				arrow.update();
+				for (int j = gameObjectContainer.size() - 1; j >= 0; j--) {
+					BaseObject thatObject = gameObjectContainer.get(j);
+					if(!(thatObject instanceof Player) && (thatObject instanceof Entity) && arrow.hit((Entity)thatObject)){
+						arrow.makeDamge((Entity)thatObject);
+						arrow.setDestroyed(true);
+						gameObjectContainer.remove(arrow);
+					}
+				}
+					
+				
 			}
-		}
 
+
+		}
 	}
 
 	public void nextFloor(){
@@ -84,35 +85,16 @@ public class GameLogic {
 
 	public void clearObject(){
 		for (int i = gameObjectContainer.size() - 1; i >= 0; i--) {
-			Entity entity = gameObjectContainer.get(i);
-			if(entity instanceof Player) continue;
-			entity.setDestroyed(true);
-			gameObjectContainer.remove(entity);
+			BaseObject object = gameObjectContainer.get(i);
+			if(object instanceof Player) continue;
+			object.setDestroyed(true);
+			gameObjectContainer.remove(object);
 		}
 
-		for (int i = gameArrowContainer.size() - 1; i >= 0; i--) {
-			Arrow arrow = gameArrowContainer.get(i);
-			arrow.setDestroyed(true);
-			gameArrowContainer.remove(arrow);
-		}
 	}
 
-	public ArrayList<Entity> getGameObjectContainer() {
+	public ArrayList<BaseObject> getGameObjectContainer() {
 		return gameObjectContainer;
 	}
-
-	public void setGameObjectContainer(ArrayList<Entity> gameObjectContainer) {
-		this.gameObjectContainer = gameObjectContainer;
-	}
-
-	public ArrayList<Arrow> getGameArrowContainer() {
-		return gameArrowContainer;
-	}
-
-	public void setGameArrowContainer(ArrayList<Arrow> gameArrowContainer) {
-		this.gameArrowContainer = gameArrowContainer;
-	}
-	
-	
 
 }

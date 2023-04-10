@@ -1,4 +1,4 @@
-package Math;
+package Data;
 
 public class Point {
 	private double X, Y;

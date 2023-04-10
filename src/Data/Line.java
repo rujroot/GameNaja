@@ -1,4 +1,4 @@
-package Math;
+package Data;
 
 public class Line {
 	private Point P1, P2;

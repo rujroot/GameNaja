@@ -1,27 +1,21 @@
 package entity;
 
-import Math.DataEntity;
-import Math.Point;
+import Data.BaseObject;
+import Data.DataEntity;
+import Data.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import logic.IRenderable;
 
-public abstract class Entity implements IRenderable {
+public abstract class Entity extends BaseObject {
 	private String name;
-	private double  Height, Width;
 	private DataEntity data;
-	private Point position;
-	private int z;
-	private boolean visible, destroyed;
 	
-	public Entity(String name, double Height, double Width, DataEntity data){
+	public Entity(String name, double height, double width, DataEntity data){
 		this.setName(name);
 		this.setData(data);
-		this.setWidth(Width);
-		this.setHeight(Height);
+		this.setWidth(width);
+		this.setHeight(height);
 		this.setPosition(new Point(Math.random() * 640 , Math.random() * 480));
-		this.visible = true;
-		this.destroyed = false;
 	}
 	
 	public abstract void attack();
@@ -52,48 +46,5 @@ public abstract class Entity implements IRenderable {
 		this.data = data;
 	}
 
-	public void setDestroyed(boolean destroyed) {
-		this.destroyed = destroyed;
-	}
-
-	public double getHeight() {
-		return Height;
-	}
-
-	public void setHeight(double height) {
-		Height = height;
-	}
-
-	public double getWidth() {
-		return Width;
-	}
-
-	public void setWidth(double width) {
-		Width = width;
-	}
-
-	@Override
-	public boolean isDestroyed(){
-		return destroyed;
-	}
-	
-	@Override
-	public boolean isVisible(){
-		return visible;
-	}
-	
-	@Override
-	public int getZ(){
-		return z;
-	}
-
-	public Point getPosition() {
-		return position;
-	}
-
-	public void setPosition(Point position) {
-		this.position = position;
-	}
-	
 	
 }

@@ -5,15 +5,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import equipment.projectile.Arrow;
-
 public class RenderableHolder {
 	private static final RenderableHolder instance = new RenderableHolder();
 	
-	private List<IRenderable> entities;
-	private List<IRenderable> arrows;
+	private List<IRenderable> objects;
 	private Comparator<IRenderable> comparator;
-	
+
 	static {
 		//Load Resource first time
 		loadResource();
@@ -21,8 +18,7 @@ public class RenderableHolder {
 
 	//set compare follow by Z
 	public RenderableHolder() {
-		entities = new ArrayList<IRenderable>();
-		arrows = new ArrayList<IRenderable>();
+		objects = new ArrayList<IRenderable>();
 		
 		comparator = (IRenderable o1, IRenderable o2) -> {
 			if (o1.getZ() > o2.getZ())
@@ -31,20 +27,11 @@ public class RenderableHolder {
 		};
 	}
 	
-	//add entity to game
-	public void add(IRenderable entity) {
-		System.out.println("add");
-		entities.add(entity);
-		Collections.sort(entities, comparator);
-	}
-
-	//add not-entity to game
-	public void add(IRenderable entity, String type) {
-		System.out.println("add " + type);
-		if(type == "Arrow"){
-			arrows.add(entity);
-			Collections.sort(entities, comparator);
-		}
+	//add object to game
+	public void add(IRenderable object) {
+		System.out.println("add ");
+		objects.add(object);
+		Collections.sort(objects, comparator);
 	}
 	
 	public static void loadResource() {
@@ -53,13 +40,9 @@ public class RenderableHolder {
 	
 	// Update when entity remove
 	public void update() {
-		for (int i = entities.size() - 1; i >= 0; i--) {
-			if (entities.get(i).isDestroyed())
-				entities.remove(i);
-		}
-		for (int i = arrows.size() - 1; i >= 0; i--) {
-			if (arrows.get(i).isDestroyed())
-				arrows.remove(i);
+		for (int i = objects.size() - 1; i >= 0; i--) {
+			if (objects.get(i).isDestroyed())
+				objects.remove(i);
 		}
 	}
 	
@@ -68,14 +51,8 @@ public class RenderableHolder {
 		return instance;
 	}
 
-	public List<IRenderable> getEntities() {
-		return entities;
+	public List<IRenderable> getObjects() {
+		return objects;
 	}
-
-	public List<IRenderable> getArrows() {
-		return arrows;
-	}
-	
-
 
 }

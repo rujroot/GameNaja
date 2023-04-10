@@ -2,7 +2,7 @@ package Dungeon;
 
 import java.util.HashMap;
 
-import Math.Point;
+import Data.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import logic.IRenderable;

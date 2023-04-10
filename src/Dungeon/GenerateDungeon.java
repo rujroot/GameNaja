@@ -2,7 +2,7 @@ package Dungeon;
 
 import java.util.ArrayList;
 
-import Math.Point;
+import Data.Point;
 import javafx.util.Pair;
 
 public class GenerateDungeon {

@@ -1,18 +1,15 @@
 package equipment.projectile;
 
-import Math.Point;
+import Data.BaseObject;
+import Data.Point;
 import entity.Entity;
 import javafx.scene.canvas.GraphicsContext;
 import logic.Hitbox;
-import logic.IRenderable;
 
-public abstract class BaseProjectile implements IRenderable {
+public abstract class BaseProjectile extends BaseObject {
 	
-	private double damage, width, height;
+	private double damage;
 	private Point speed;
-	private Point Position;
-	private int z;
-	private boolean visible = true, destroyed = false;
 	
 	public abstract void draw(GraphicsContext gc);
 	
@@ -50,58 +47,5 @@ public abstract class BaseProjectile implements IRenderable {
 	public void setSpeed(Point speed) {
 		this.speed = speed;
 	}
-
-	public Point getPosition() {
-		return Position;
-	}
-
-	public void setPosition(Point position) {
-		Position = position;
-	}
-
-	public double getWidth() {
-		return width;
-	}
-
-	public void setWidth(double width) {
-		this.width = width;
-	}
-
-	public double getHeight() {
-		return height;
-	}
-
-	public void setHeight(double height) {
-		this.height = height;
-	}
-
-	@Override
-	public int getZ() {
-		return z;
-	}
-
-	@Override
-	public boolean isDestroyed() {
-		return destroyed;
-	}
-
-	@Override
-	public boolean isVisible() {
-		return visible;
-	}
-
-	public void setZ(int z) {
-		this.z = z;
-	}
-
-	public void setVisible(boolean visible) {
-		this.visible = visible;
-	}
-
-	public void setDestroyed(boolean destroyed) {
-		this.destroyed = destroyed;
-	}
-
-	
 	
 }

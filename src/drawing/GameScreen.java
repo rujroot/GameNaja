@@ -2,9 +2,9 @@ package drawing;
 
 import java.util.ArrayList;
 
+import Data.Point;
 import Dungeon.GenerateDungeon;
 import Dungeon.Room;
-import Math.Point;
 import entity.Player;
 import input.InputUtility;
 import javafx.scene.canvas.Canvas;
@@ -111,15 +111,9 @@ public class GameScreen extends Canvas {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(Color.BLACK);
 		
-		for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
-			if (entity.isVisible() && !entity.isDestroyed()) {
-				entity.draw(gc);
-			}
-		}
-
-		for (IRenderable arrow : RenderableHolder.getInstance().getArrows()) {
-			if (arrow.isVisible() && !arrow.isDestroyed()) {
-				arrow.draw(gc);
+		for (IRenderable object : RenderableHolder.getInstance().getObjects()) {
+			if (object.isVisible() && !object.isDestroyed()) {
+				object.draw(gc);
 			}
 		}
 

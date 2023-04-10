@@ -1,6 +1,6 @@
 package equipment;
 
-import Math.Point;
+import Data.Point;
 import equipment.projectile.Arrow;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
@@ -42,8 +42,8 @@ public class Bow extends BaseWeapon implements Cooldownable {
 			vector.multiply(10);
 
 			// damge, speed, pos
-			Arrow arrow = new Arrow(1, vector, this.getPostion());
-			Main.getLogic().addNewArrow(arrow);
+			Arrow arrow = new Arrow(1, vector, this.getPosition());
+			Main.getLogic().addObject(arrow);
 		}
 	}
 
@@ -51,7 +51,7 @@ public class Bow extends BaseWeapon implements Cooldownable {
 	public void draw(GraphicsContext gc) {
 		gc.setFill(Color.BROWN);
 		
-		Point pos = this.getPostion();
+		Point pos = this.getPosition();
 		gc.fillRect(pos.getX(), pos.getY(), 30.0, 10.0);
 	}
 

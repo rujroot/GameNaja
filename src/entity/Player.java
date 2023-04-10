@@ -2,10 +2,10 @@ package entity;
 
 import java.util.ArrayList;
 
+import Data.DataEntity;
+import Data.Point;
 import Dungeon.GenerateDungeon;
 import Dungeon.Room;
-import Math.DataEntity;
-import Math.Point;
 import equipment.BaseWeapon;
 import equipment.Bow;
 import input.InputUtility;
@@ -83,7 +83,7 @@ public class Player extends Entity implements Cooldownable{
 		} if (InputUtility.getKeyPressed(KeyCode.J) && !onCooldown()) {
 			GameLogic logic = Main.getLogic();
 			Zombie zombie = new Zombie("Zombie", 50, 50, new DataEntity(10, 1, 1, 4.5));
-			logic.addNewObject(zombie);
+			logic.addObject(zombie);
 		} if (InputUtility.getKeyPressed(KeyCode.Z)){
 			Main.getLogic().nextFloor();
 		}
