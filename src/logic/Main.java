@@ -1,17 +1,20 @@
 package logic;
 
 import Data.DataEntity;
+import Data.DataOre;
 import Data.Point;
 import Dungeon.GenerateDungeon;
 import Dungeon.Room;
 import drawing.GameScreen;
 import entity.Player;
 import input.InputUtility;
+import item.Stone;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import ore.StoneOre;
 
 public class Main extends Application {
 	
@@ -35,6 +38,14 @@ public class Main extends Application {
 		player.setPosition(new Point(firstRoom.getPosition().getX() + 10, firstRoom.getPosition().getY() + 10 ));
 		
 		logic.addObject(player);
+		System.out.println("Player at " + player.getPosition().getX() + " " + player.getPosition().getY());
+		StoneOre stone = new StoneOre(new Point(10, 10), 
+									20, 
+									20, 
+									new DataOre(1, 1));
+		stone.setZ(0);
+		logic.addObject(stone);
+		System.out.println(stone.isDestroyed() + " " + stone.isVisible() + " " + stone.getZ());
 		
 		// Add root and scene + set Title game
 		StackPane root = new StackPane();

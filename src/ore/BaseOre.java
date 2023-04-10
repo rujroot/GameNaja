@@ -8,6 +8,7 @@ public abstract class BaseOre extends BaseObject  {
     private DataOre dataOre;
 
     public BaseOre(Point position, double width, double height, DataOre dataOre){
+        super(position, width, height);
         this.setPosition(position);
         this.setDataOre(dataOre); 
     }

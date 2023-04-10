@@ -13,7 +13,8 @@ public abstract class BaseProjectile extends BaseObject {
 	
 	public abstract void draw(GraphicsContext gc);
 	
-	public BaseProjectile(double damage, Point speed, Point Position) {
+	public BaseProjectile(double width, double height, double damage, Point speed, Point Position) {
+		super(Position, width, height);
 		this.setDamage(damage);
 		this.setSpeed(speed);
 		this.setPosition(Position);

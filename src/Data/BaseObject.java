@@ -8,6 +8,20 @@ public abstract class BaseObject implements IRenderable{
     private int z;
 	private boolean visible = true, destroyed = false;
 
+    public BaseObject(Point position, double width, double height){
+        this.setWidth(width);
+        this.setHeight(height);
+        this.setPosition(position);
+        this.setZ(1);
+    }
+
+    public BaseObject(Point position, double width, double height, int z){
+        this.setWidth(width);
+        this.setHeight(height);
+        this.setPosition(position);
+        this.setZ(z);
+    }
+
     public double getWidth() {
         return width;
     }

@@ -33,12 +33,14 @@ public abstract class BaseWeapon extends BaseObject {
 	public abstract void attack();
 	public abstract void draw(GraphicsContext gc);
 	
-	public BaseWeapon(int attackDamage, int attackSpeed) {
+	public BaseWeapon(double width, double height, double attackDamage, double attackSpeed) {
+		super(new Point(0, 0), width, height);
 		this.setAttackDamage(attackDamage);
 		this.setAttackSpeed(attackSpeed);
 	}
 	
-	public BaseWeapon(int attackDamage) {
+	public BaseWeapon(double width, double height, double attackDamage) {
+		super(new Point(0, 0), width, height);
 		this.setAttackDamage(attackDamage);
 		this.setAttackSpeed(1);
 	}

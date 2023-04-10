@@ -14,8 +14,8 @@ public class Bow extends BaseWeapon implements Cooldownable {
 	private double cooldownTime = 500;
 	private double lastClickTime = 0;
 
-	public Bow(int attackDamage) {
-		super(attackDamage);
+	public Bow(double width, double height, int attackDamage) {
+		super(width, height, attackDamage);
 		this.setOffsetPosition(new Point(30, 20));
 	}
 	
@@ -42,7 +42,7 @@ public class Bow extends BaseWeapon implements Cooldownable {
 			vector.multiply(10);
 
 			// damge, speed, pos
-			Arrow arrow = new Arrow(1, vector, this.getPosition());
+			Arrow arrow = new Arrow(10.0 , 10.0 ,1, vector, this.getPosition());
 			Main.getLogic().addObject(arrow);
 		}
 	}
@@ -52,7 +52,7 @@ public class Bow extends BaseWeapon implements Cooldownable {
 		gc.setFill(Color.BROWN);
 		
 		Point pos = this.getPosition();
-		gc.fillRect(pos.getX(), pos.getY(), 30.0, 10.0);
+		gc.fillRect(pos.getX(), pos.getY(), this.getWidth(), this.getHeight());
 	}
 
 	public int getAmount() {

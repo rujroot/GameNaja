@@ -27,7 +27,7 @@ public class Player extends Entity implements Cooldownable{
 	public Player(String name, double Height, double Width, DataEntity data) {
 		super(name, Height, Width, data);
 		player = this;
-		this.setEquipment(new Bow(2));
+		this.setEquipment(new Bow(30.0, 10.0, 2));
 	}
 	
 	public void move(double moveX, double moveY){

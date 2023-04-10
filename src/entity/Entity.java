@@ -10,12 +10,10 @@ public abstract class Entity extends BaseObject {
 	private String name;
 	private DataEntity data;
 	
-	public Entity(String name, double height, double width, DataEntity data){
+	public Entity(String name, double width, double height, DataEntity data){
+		super(new Point(Math.random() * 640 , Math.random() * 480), width, height);
 		this.setName(name);
 		this.setData(data);
-		this.setWidth(width);
-		this.setHeight(height);
-		this.setPosition(new Point(Math.random() * 640 , Math.random() * 480));
 	}
 	
 	public abstract void attack();
