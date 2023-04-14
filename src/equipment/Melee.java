@@ -47,32 +47,6 @@ public abstract class Melee extends BaseWeapon{
         intersect = intersect || distant(rectX2, rectY2, centerX , centerY) <= this.getAttackRange();
 
         return intersect;
-        // // Step 1: Find the center of the circle.
-        // double centerX = getPosition().getX();
-        // double centerY = getPosition().getY();
-
-        // Point rect = object.getPosition();
-        
-        // // Step 2: Check if the rectangle contains the center of the circle.
-        // if (pointIntersectsRectangle(centerX, centerY, rect.getX(), rect.getY(), object.getWidth(), object.getHeight())) {
-        //     return true;
-        // }
-        
-        // // Step 3: Find the points on the circle that intersect with the edges of the rectangle.
-        // double start = Math.toRadians(startAngle);
-        // double end = Math.toRadians(endAngle);
-        // double step = Math.toRadians(1);
-        // for (double a = start; a <= end; a += step) {
-        //     double x = centerX + radius * Math.cos(a);
-        //     double y = centerY + radius * Math.sin(a);
-        //     if (pointIntersectsRectangle(x, y, rect.getX(), rect.getY(), object.getWidth(), object.getHeight())) {
-        //         // Step 4: Check if any of the points are inside the rectangle.
-        //         return true;
-        //     }
-        // }
-        
-        // // No intersection found.
-        // return false;
     }
 
     public double getAttackRange() {

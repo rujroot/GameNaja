@@ -8,7 +8,6 @@ import Data.Point;
 import Dungeon.GenerateDungeon;
 import Dungeon.Room;
 import equipment.BaseWeapon;
-import equipment.Bow;
 import equipment.Pickaxe;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
