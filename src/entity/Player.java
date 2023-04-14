@@ -132,7 +132,7 @@ public class Player extends Entity implements Cooldownable{
 
 		ArrayList<BaseObject> allObject = Main.getLogic().getGameObjectContainer();
 		for(BaseObject object : allObject){
-			if(object instanceof BaseOre){
+			if(object instanceof BaseOre && object.isVisible()){
 				Hitbox A = new Hitbox(newPosPlayer, this.getWidth(), this.getHeight());
 				Hitbox B = new Hitbox(object.getPosition(), object.getWidth(), object.getHeight());
 				if(A.isIntersect(B)) return false;

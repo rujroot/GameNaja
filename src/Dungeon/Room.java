@@ -1,19 +1,31 @@
 package Dungeon;
 
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.text.Position;
+
+import Data.DataOre;
 import Data.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import logic.Hitbox;
 import logic.IRenderable;
+import logic.Main;
+import ore.BaseOre;
+import ore.OreType;
+import ore.StoneOre;
 
 public class Room implements IRenderable {
 	private double width, height;
 	private Point position;
 	private HashMap<Direction, Room> connectRoom;
 	private Color color;
+	private ArrayList<BaseOre> ores;
 	
 	Size[] allSize = {Size.SMALL, Size.MEDUIM, Size.LARGE};
+	OreType[] allType = {OreType.STONE, OreType.COAL, OreType.DIAMOND, OreType.GOLD, OreType.IRON};
 	
 	public Room(Room parentRoom, Direction direction) {
 		Size sizeRoom = allSize[(int) (Math.random() * 3)];
@@ -41,6 +53,7 @@ public class Room implements IRenderable {
 		
 		
 		connectRoom = new HashMap<>();
+		ores = new ArrayList<BaseOre>();
 		Color[] allColor = {Color.BLACK, Color.BLUE, Color.CYAN, Color.GRAY, Color.GREEN, 
 				Color.MAGENTA, Color.ORANGE, Color.PINK, Color.RED, Color.YELLOW};
 		this.color = allColor[(int) (Math.random() * allColor.length)];
@@ -61,12 +74,54 @@ public class Room implements IRenderable {
 		
 		this.setPosition(new Point(0,0));
 		connectRoom = new HashMap<>();
-		
+		ores = new ArrayList<BaseOre>();
+
 		Color[] allColor = {Color.BLACK, Color.BLUE, Color.CYAN, Color.GRAY, Color.GREEN, 
 				Color.MAGENTA, Color.ORANGE, Color.PINK, Color.RED, Color.YELLOW};
 		this.color = allColor[(int) (Math.random() * allColor.length)];
 	}
 	
+	public void generateOre(int amountOre){
+
+		for(int i = 0; i < amountOre; ++i){
+			int chooseType = 0;//(int)(Math.random() * allType.length);
+			OreType type = allType[chooseType];
+
+			//Position toSpawnPosition = new Point(width);
+
+			if(type.equals(OreType.STONE)){
+				StoneOre stoneOre = new StoneOre(position, new DataOre(10, 10));
+				Point newPos = new Point(position.getX() + (Math.random() * (width - stoneOre.getWidth()) ), 
+										position.getY() + (Math.random() * (height - stoneOre.getHeight()) ) );
+				stoneOre.setPosition(newPos);
+				createOre(stoneOre);
+			}
+			/// TODO
+		}
+		
+	}
+
+	public void createOre(BaseOre ore){
+		// can't spawn ore due to intersection with other ore
+		for(BaseOre thatOre : ores){
+			if(!isLegal(thatOre, ore)) {
+				return;
+			}
+		}
+		// Can create ore
+		ore.setVisible(false);
+		ores.add(ore);
+		Main.getLogic().addObject(ore);
+
+	}
+
+	private boolean isLegal(BaseOre oreA, BaseOre oreB){
+		Hitbox A = new Hitbox(oreA.getPosition(), oreA.getWidth(), oreA.getHeight());
+		Hitbox B = new Hitbox(oreB.getPosition(), oreB.getWidth(), oreB.getHeight());
+
+		return !A.isIntersect(B);
+	}
+
 	public Point getPosition() {
 		return position;
 	}
@@ -97,6 +152,10 @@ public class Room implements IRenderable {
 
 	public void setHeight(double height) {
 		this.height = height;
+	}
+
+	public ArrayList<BaseOre> getOres() {
+		return ores;
 	}
 
 	@Override

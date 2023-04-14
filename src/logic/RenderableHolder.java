@@ -29,7 +29,7 @@ public class RenderableHolder {
 	
 	//add object to game
 	public void add(IRenderable object) {
-		System.out.println("add ");
+		//System.out.println("add ");
 		objects.add(object);
 		Collections.sort(objects, comparator);
 	}

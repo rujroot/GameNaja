@@ -11,6 +11,10 @@ public class StoneOre extends BaseOre {
         super(position, width, height, dataOre);
     }
 
+    public StoneOre(Point position, DataOre dataOre) {
+        super(position, 20, 20, dataOre);
+    }
+
     @Override
     public void draw(GraphicsContext gc) {
         gc.setFill(Color.GRAY);

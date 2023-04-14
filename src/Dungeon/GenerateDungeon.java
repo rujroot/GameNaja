@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 import Data.Point;
 import javafx.util.Pair;
+import ore.BaseOre;
 
 public class GenerateDungeon {
 	private static int level;
 	private static int currLevel = 0;
-	private static ArrayList<ArrayList<Room>> container = new ArrayList<ArrayList<Room>>();;
+	private static ArrayList<ArrayList<Room>> container = new ArrayList<ArrayList<Room>>();
 	
 	public GenerateDungeon(int level){
 		this.setLevel(level);
@@ -34,6 +35,7 @@ public class GenerateDungeon {
 					room = new Room(toConnectRoom.getKey(), toConnectRoom.getValue());
 				}
 				
+				room.generateOre(10);
 				toConnectRoom.getKey().getConnectRoom().put(toConnectRoom.getValue(), room);
 				toPush.add(room);
 			}
@@ -41,7 +43,15 @@ public class GenerateDungeon {
 			// Push the generate level to container
 			container.add(toPush);
 		}
+		
+		// generate ore first level
+		for(Room room : container.get(0)){
+			for(BaseOre ore : room.getOres()){
+				ore.setVisible(true);
+			}
+		}
 	}
+
 
 	public Pair<Room, Direction> findRoom(Room currRoom) {
 		Direction[] d = {Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT};
@@ -99,8 +109,6 @@ public class GenerateDungeon {
 	public void setContainer(ArrayList<ArrayList<Room>> container) {
 		GenerateDungeon.container = container;
 	}
-
-
 
 }
 

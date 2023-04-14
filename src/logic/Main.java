@@ -29,8 +29,9 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 		
 		// Generate Dungeon first time
-		GenerateDungeon dungeon = new GenerateDungeon(10);
 		logic = new GameLogic();
+		GenerateDungeon dungeon = new GenerateDungeon(10);
+		
 		
 		// Create Player
 		Player player = new Player("Player", 50, 50, new DataEntity(1, 1, 1, 10));
@@ -38,13 +39,6 @@ public class Main extends Application {
 		player.setPosition(new Point(firstRoom.getPosition().getX() + 10, firstRoom.getPosition().getY() + 10 ));
 		
 		logic.addObject(player);
-
-		StoneOre stone = new StoneOre(new Point(70, 70), 
-									40, 
-									40, 
-									new DataOre(1, 1));
-		logic.addObject(stone);
-		
 		// Add root and scene + set Title game
 		StackPane root = new StackPane();
 		Scene scene = new Scene(root);

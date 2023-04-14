@@ -10,6 +10,7 @@ import entity.Entity;
 import entity.Player;
 import entity.Zombie;
 import equipment.projectile.Arrow;
+import ore.BaseOre;
 
 public class GameLogic {
 	
@@ -56,8 +57,6 @@ public class GameLogic {
 					
 				
 			}
-
-
 		}
 	}
 
@@ -67,10 +66,19 @@ public class GameLogic {
 		int Currlevel = GenerateDungeon.getCurrLevel();
 		if(Currlevel >= GenerateDungeon.getLevel() - 1) return;
 		GenerateDungeon.setCurrLevel(Currlevel + 1);
+		this.clearObject();
 
 		//Get first room
-		Room firstRoom = GenerateDungeon.getContainer().get(Currlevel + 1).get(0);
+		ArrayList<Room> currLevel = GenerateDungeon.getContainer().get(Currlevel);
+		ArrayList<Room> nextLevel = GenerateDungeon.getContainer().get(Currlevel + 1);
+		Room firstRoom = nextLevel.get(0);
 		System.out.println("Go to " + (Currlevel + 1));
+
+		for(int i = 1; i < nextLevel.size(); ++i){
+			for(BaseOre ore : nextLevel.get(i).getOres()){
+				ore.setVisible(true);
+			}
+		}
 		
 		Player player = Player.getPlayer();
 		// Get postion to spawn
@@ -79,14 +87,14 @@ public class GameLogic {
 		// Warp player
 		player.setPosition(spawnPoint);
 
-		this.clearObject();
-
 	}
 
 	public void clearObject(){
 		for (int i = gameObjectContainer.size() - 1; i >= 0; i--) {
 			BaseObject object = gameObjectContainer.get(i);
 			if(object instanceof Player) continue;
+			if(object instanceof BaseOre && !object.isVisible()) continue;
+
 			object.setDestroyed(true);
 			gameObjectContainer.remove(object);
 		}

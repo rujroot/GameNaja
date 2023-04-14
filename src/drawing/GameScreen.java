@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import logic.IRenderable;
 import logic.RenderableHolder;
+import ore.BaseOre;
 
 public class GameScreen extends Canvas {
 
@@ -113,6 +114,8 @@ public class GameScreen extends Canvas {
 		
 		for (IRenderable object : RenderableHolder.getInstance().getObjects()) {
 			if (object.isVisible() && !object.isDestroyed()) {
+				// if(object instanceof BaseOre)
+				// 	System.out.println("drawing");
 				object.draw(gc);
 			}
 		}
