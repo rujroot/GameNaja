@@ -8,7 +8,7 @@ import logic.Hitbox;
 
 public abstract class BaseWeapon extends BaseObject {
 	private double attackDamage, attackSpeed;
-	private Point offsetPosition;
+	private Point offsetPosition = new Point(30.0, 20.0);
 	
 	@Override
 	public Point getPosition() {

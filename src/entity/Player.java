@@ -9,6 +9,7 @@ import Dungeon.GenerateDungeon;
 import Dungeon.Room;
 import equipment.BaseWeapon;
 import equipment.Bow;
+import equipment.Pickaxe;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
@@ -30,7 +31,8 @@ public class Player extends Entity implements Cooldownable{
 	public Player(String name, double Height, double Width, DataEntity data) {
 		super(name, Height, Width, data);
 		player = this;
-		this.setEquipment(new Bow(30.0, 10.0, 2));
+		this.setEquipment(new Pickaxe(30.0, 10.0));
+		// this.setEquipment(new Bow(30.0, 10.0, 2));
 	}
 	
 	public void move(double moveX, double moveY){
@@ -81,7 +83,7 @@ public class Player extends Entity implements Cooldownable{
 		
 		
 		//Action Section
-		if(InputUtility.getKeyPressed(KeyCode.SPACE)) {
+		if(InputUtility.getKeyPressed(KeyCode.SPACE) && !onCooldown()) {
 			attack();
 		} if (InputUtility.getKeyPressed(KeyCode.J) && !onCooldown()) {
 			GameLogic logic = Main.getLogic();

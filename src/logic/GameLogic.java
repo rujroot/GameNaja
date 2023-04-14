@@ -54,9 +54,8 @@ public class GameLogic {
 						gameObjectContainer.remove(arrow);
 					}
 				}
-					
-				
 			}
+
 		}
 	}
 
@@ -69,7 +68,6 @@ public class GameLogic {
 		this.clearObject();
 
 		//Get first room
-		ArrayList<Room> currLevel = GenerateDungeon.getContainer().get(Currlevel);
 		ArrayList<Room> nextLevel = GenerateDungeon.getContainer().get(Currlevel + 1);
 		Room firstRoom = nextLevel.get(0);
 		System.out.println("Go to " + (Currlevel + 1));

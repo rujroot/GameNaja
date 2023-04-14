@@ -32,7 +32,6 @@ public class Main extends Application {
 		logic = new GameLogic();
 		GenerateDungeon dungeon = new GenerateDungeon(10);
 		
-		
 		// Create Player
 		Player player = new Player("Player", 50, 50, new DataEntity(1, 1, 1, 10));
 		Room firstRoom = GenerateDungeon.getContainer().get(0).get(0);
