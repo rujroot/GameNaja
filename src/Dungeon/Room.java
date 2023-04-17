@@ -1,10 +1,7 @@
 package Dungeon;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import javax.swing.text.Position;
 
 import Data.DataOre;
 import Data.Point;
@@ -14,6 +11,10 @@ import logic.Hitbox;
 import logic.IRenderable;
 import logic.Main;
 import ore.BaseOre;
+import ore.CoalOre;
+import ore.DiamondOre;
+import ore.GoldOre;
+import ore.IronOre;
 import ore.OreType;
 import ore.StoneOre;
 
@@ -84,19 +85,26 @@ public class Room implements IRenderable {
 	public void generateOre(int amountOre){
 
 		for(int i = 0; i < amountOre; ++i){
-			int chooseType = 0;//(int)(Math.random() * allType.length);
+			int chooseType = (int)(Math.random() * allType.length);
 			OreType type = allType[chooseType];
 
-			//Position toSpawnPosition = new Point(width);
-
+			BaseOre baseOre;
 			if(type.equals(OreType.STONE)){
-				StoneOre stoneOre = new StoneOre(position, new DataOre(10, 10));
-				Point newPos = new Point(position.getX() + (Math.random() * (width - stoneOre.getWidth()) ), 
-										position.getY() + (Math.random() * (height - stoneOre.getHeight()) ) );
-				stoneOre.setPosition(newPos);
-				createOre(stoneOre);
+				baseOre = new StoneOre(position, new DataOre(10, 10));
+			}else if(type.equals(OreType.COAL)){
+				baseOre = new CoalOre(position, new DataOre(10, 10));
+			}else if(type.equals(OreType.IRON)){
+				baseOre = new IronOre(position, new DataOre(10, 10));
+			}else if(type.equals(OreType.GOLD)){
+				baseOre = new GoldOre(position, new DataOre(10, 10));
+			}else{
+				baseOre = new DiamondOre(position, new DataOre(10, 10));
 			}
-			/// TODO
+
+			Point newPos = new Point(position.getX() + (Math.random() * (width - baseOre.getWidth()) ), 
+									position.getY() + (Math.random() * (height - baseOre.getHeight()) ) );
+			baseOre.setPosition(newPos);
+			createOre(baseOre);
 		}
 		
 	}

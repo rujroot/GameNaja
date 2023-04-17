@@ -5,20 +5,20 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class IronIngot extends Item {
-    public IronIngot(Point position, double width, double height) {
+public class Diamond extends Item{
+    public Diamond(Point position, double width, double height) {
         super(position, width, height);
-        this.setName("Iron Ingot");
+        this.setName("Diamond");
     }
 
-    public IronIngot(Point position, double width, double height, int z) {
+    public Diamond(Point position, double width, double height, int z) {
         super(position, width, height, z);
-        this.setName("Iron Ingot");
+        this.setName("Diamond");
     }
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.setFill(Color.WHITE);
+        gc.setFill(Color.BLUE);
 		Point pos = this.getPosition();
 		gc.fillRect(pos.getX(), pos.getY(), this.getWidth(), this.getHeight());
 
@@ -26,5 +26,4 @@ public class IronIngot extends Item {
         gc.setFill(Color.BLACK);
         gc.fillText(Integer.toString(getAmount()), pos.getX() + this.getWidth(), pos.getY() + this.getHeight(), 100);
     }
-    
 }
