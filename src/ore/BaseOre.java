@@ -3,9 +3,14 @@ package ore;
 import Data.BaseObject;
 import Data.DataOre;
 import Data.Point;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.WritableImage;
 
 public abstract class BaseOre extends BaseObject  {
+    
     private DataOre dataOre;
+    private WritableImage image;
+    private double mutliply = 2.5;
 
     public BaseOre(Point position, double width, double height, DataOre dataOre){
         super(position, width, height);
@@ -15,6 +20,11 @@ public abstract class BaseOre extends BaseObject  {
 
     public abstract void onBreak();
 
+    @Override
+    public void draw(GraphicsContext gc) {
+        gc.drawImage(image, this.getPosition().getX(), this.getPosition().getY(), image.getWidth() * mutliply, image.getHeight() * mutliply);
+    }
+
     public DataOre getDataOre() {
         return dataOre;
     }
@@ -22,5 +32,23 @@ public abstract class BaseOre extends BaseObject  {
     public void setDataOre(DataOre dataOre) {
         this.dataOre = dataOre;
     }
+
+    public double getMutliply() {
+        return mutliply;
+    }
+
+    public void setMutliply(double mutliply) {
+        this.mutliply = mutliply;
+    }
+
+    public WritableImage getImage() {
+        return image;
+    }
+
+    public void setImage(WritableImage image) {
+        this.image = image;
+    }
+
+    
 
 }

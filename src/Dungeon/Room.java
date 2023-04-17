@@ -6,10 +6,12 @@ import java.util.HashMap;
 import Data.DataOre;
 import Data.Point;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import logic.Hitbox;
 import logic.IRenderable;
 import logic.Main;
+import logic.RenderableHolder;
 import ore.BaseOre;
 import ore.CoalOre;
 import ore.DiamondOre;
@@ -168,9 +170,41 @@ public class Room implements IRenderable {
 
 	@Override
 	public void draw(GraphicsContext gc) {
-		gc.setFill(color);
-		gc.fillRect(position.getX(), position.getY(), width, height);
-		//System.out.println(position.getX() + " " + position.getY() + " " + width + " " + height);
+		Image image = RenderableHolder.baseFloor;
+		
+
+		for(int i = 0; i < this.getWidth() / image.getWidth(); ++i){
+			for(int j = 0; j < this.getHeight() / image.getHeight(); ++j){
+				if(image.getWidth() * (i + 1) > this.getWidth() && image.getHeight() * (j + 1) > this.getHeight() ){
+					gc.drawImage(
+						image, position.getX() + image.getWidth() * i,
+						position.getY() + image.getHeight() * j, 
+						this.getWidth() - image.getWidth() * i, 
+						this.getHeight() - image.getHeight() * j);	
+				}else if(image.getWidth() * (i + 1) > this.getWidth()){
+					gc.drawImage(
+						image, position.getX() + image.getWidth() * i,
+						position.getY() + image.getHeight() * j, 
+						this.getWidth() - image.getWidth() * i, 
+						image.getHeight());
+				}else if(image.getHeight() * (j + 1) > this.getHeight()){
+					gc.drawImage(
+						image, position.getX() + image.getWidth() * i,
+						position.getY() + image.getHeight() * j, 
+						image.getWidth(), 
+						this.getHeight() - image.getHeight() * j);
+				}else{
+					gc.drawImage(
+						image, position.getX() + image.getWidth() * i,
+						position.getY() + image.getHeight() * j, 
+						image.getWidth(), 
+						image.getHeight());	
+				}
+
+				
+			}
+		}
+
 	}
 	
 	@Override

@@ -3,24 +3,17 @@ package ore;
 import Data.DataOre;
 import Data.Point;
 import item.GoldIngot;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+import javafx.scene.image.WritableImage;
 import logic.Main;
+import logic.RenderableHolder;
 
 public class GoldOre extends BaseOre{
-    public GoldOre(Point position, double width, double height, DataOre dataOre) {
-        super(position, width, height, dataOre);
-    }
 
     public GoldOre(Point position, DataOre dataOre) {
-        super(position, 20, 20, dataOre);
-    }
-
-    @Override
-    public void draw(GraphicsContext gc) {
-        gc.setFill(Color.GOLD);
-		gc.fillRect(this.getPosition().getX(), this.getPosition().getY(), this.getWidth(), this.getHeight());
-    
+        super(position, 0, 0, dataOre);
+        this.setImage(new WritableImage(RenderableHolder.ores.getPixelReader(), 16 * 6, 16 * 4, 16, 16));
+        this.setWidth(this.getImage().getWidth() * this.getMutliply());
+        this.setHeight(this.getImage().getHeight() * this.getMutliply());
     }
 
     @Override

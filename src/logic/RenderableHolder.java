@@ -5,11 +5,16 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javafx.scene.image.Image;
+
 public class RenderableHolder {
 	private static final RenderableHolder instance = new RenderableHolder();
 	
 	private List<IRenderable> objects;
 	private Comparator<IRenderable> comparator;
+
+	public static Image Tileset, baseFloor, ores;
+
 
 	static {
 		//Load Resource first time
@@ -35,7 +40,9 @@ public class RenderableHolder {
 	}
 	
 	public static void loadResource() {
-		///TODO
+		Tileset = new Image(ClassLoader.getSystemResource("res/image/Dungeon_Tileset.png").toString());
+		baseFloor = new Image(ClassLoader.getSystemResource("res/image/baseFloor.png").toString());
+		ores = new Image(ClassLoader.getSystemResource("res/image/ores.png").toString());
 	}
 	
 	// Update when entity remove

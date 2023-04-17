@@ -3,25 +3,17 @@ package ore;
 import Data.DataOre;
 import Data.Point;
 import item.Stone;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+import javafx.scene.image.WritableImage;
 import logic.Main;
+import logic.RenderableHolder;
 
 public class StoneOre extends BaseOre {
 
-    public StoneOre(Point position, double width, double height, DataOre dataOre) {
-        super(position, width, height, dataOre);
-    }
-
     public StoneOre(Point position, DataOre dataOre) {
         super(position, 20, 20, dataOre);
-    }
-
-    @Override
-    public void draw(GraphicsContext gc) {
-        gc.setFill(Color.GRAY);
-		gc.fillRect(this.getPosition().getX(), this.getPosition().getY(), this.getWidth(), this.getHeight());
-    
+        this.setImage(new WritableImage(RenderableHolder.ores.getPixelReader(), 0, 64, 16, 16));
+        this.setWidth(this.getImage().getWidth() * this.getMutliply());
+        this.setHeight(this.getImage().getHeight() * this.getMutliply());
     }
 
     @Override
