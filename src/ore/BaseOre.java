@@ -13,6 +13,8 @@ public abstract class BaseOre extends BaseObject  {
         this.setDataOre(dataOre); 
     }
 
+    public abstract void onBreak();
+
     public DataOre getDataOre() {
         return dataOre;
     }

@@ -1,25 +1,24 @@
 package logic;
 
 import Data.DataEntity;
-import Data.DataOre;
 import Data.Point;
 import Dungeon.GenerateDungeon;
 import Dungeon.Room;
 import drawing.GameScreen;
 import entity.Player;
 import input.InputUtility;
-import item.Stone;
+import inventory.Inventory;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import ore.StoneOre;
 
 public class Main extends Application {
 	
 	public static GameLogic logic;
 	public static GameScreen gameScreen;
+	public static Inventory inventory;
 
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -38,6 +37,10 @@ public class Main extends Application {
 		player.setPosition(new Point(firstRoom.getPosition().getX() + 10, firstRoom.getPosition().getY() + 10 ));
 		
 		logic.addObject(player);
+
+		inventory = new Inventory();
+		logic.addObject(inventory);
+
 		// Add root and scene + set Title game
 		StackPane root = new StackPane();
 		Scene scene = new Scene(root);

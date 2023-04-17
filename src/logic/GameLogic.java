@@ -3,6 +3,7 @@ package logic;
 import java.util.ArrayList;
 
 import Data.BaseObject;
+import Data.DataOre;
 import Data.Point;
 import Dungeon.GenerateDungeon;
 import Dungeon.Room;
@@ -56,6 +57,16 @@ public class GameLogic {
 				}
 			}
 
+			else if(object instanceof BaseOre){
+				BaseOre ore = (BaseOre) object;
+				DataOre data = ore.getDataOre();
+				if(data.getDurability() <= 0){
+					ore.onBreak();
+					ore.setDestroyed(true);
+					gameObjectContainer.remove(ore);
+				}
+			}
+			
 		}
 	}
 

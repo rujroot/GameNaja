@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Data.BaseObject;
 import Data.DataEntity;
+import Data.DataOre;
 import Data.Point;
 import entity.Zombie;
 import javafx.scene.canvas.GraphicsContext;
@@ -33,8 +34,9 @@ public class Pickaxe extends Melee{
 
         for(BaseObject object : instersectObject){
             if(object instanceof BaseOre){
-                object.setVisible(false);
-                object.setDestroyed(true);
+                BaseOre ore = (BaseOre) object;
+                DataOre data = ore.getDataOre();
+                data.setDurability(0);
             }else if(object instanceof Zombie){
                 Zombie zombie = (Zombie) object;
                 DataEntity data = zombie.getData();

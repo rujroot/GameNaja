@@ -15,16 +15,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import logic.IRenderable;
 import logic.RenderableHolder;
-import ore.BaseOre;
-
 public class GameScreen extends Canvas {
 
 	private Point posCamera;
+	public static Point resolution;
 
 	public GameScreen(double width, double height) {
 		super(width, height);
 		this.setVisible(true);
 		addListerner();
+		resolution = new Point(width, height);
 		
 		GraphicsContext gc = this.getGraphicsContext2D();
 		Player player = Player.getPlayer();
@@ -131,5 +131,11 @@ public class GameScreen extends Canvas {
 		}
 		
 	}
+
+	public static Point getResolution() {
+		return resolution;
+	}
+
+	
 
 }
