@@ -114,8 +114,6 @@ public class GameScreen extends Canvas {
 		
 		for (IRenderable object : RenderableHolder.getInstance().getObjects()) {
 			if (object.isVisible() && !object.isDestroyed()) {
-				// if(object instanceof BaseOre)
-				// 	System.out.println("drawing");
 				object.draw(gc);
 			}
 		}

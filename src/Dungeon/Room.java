@@ -5,8 +5,10 @@ import java.util.HashMap;
 
 import Data.DataOre;
 import Data.Point;
+import javafx.beans.property.ReadOnlyFloatWrapper;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import logic.Hitbox;
 import logic.IRenderable;
@@ -24,23 +26,26 @@ public class Room implements IRenderable {
 	private double width, height;
 	private Point position;
 	private HashMap<Direction, Room> connectRoom;
-	private Color color;
 	private ArrayList<BaseOre> ores;
-	
+
+	private Image image = RenderableHolder.baseFloor;
+	private Image sideWall = RenderableHolder.sideWall;
+	private Image mainWall = RenderableHolder.mainWall;
+
 	Size[] allSize = {Size.SMALL, Size.MEDUIM, Size.LARGE};
 	OreType[] allType = {OreType.STONE, OreType.COAL, OreType.DIAMOND, OreType.GOLD, OreType.IRON};
 	
 	public Room(Room parentRoom, Direction direction) {
 		Size sizeRoom = allSize[(int) (Math.random() * 3)];
 		if(sizeRoom.equals(Size.SMALL)) {
-			this.setWidth(640 + Math.random() * 300);
-			this.setHeight(480 + Math.random() * 300);
+			this.setWidth(640 + Math.random() * 0);
+			this.setHeight(480 + Math.random() * 0);
 		}else if(sizeRoom.equals(Size.MEDUIM)) {
-			this.setWidth(960 + Math.random() * 300);
-			this.setHeight(720 + Math.random() * 300);
+			this.setWidth(960 + Math.random() * 0);
+			this.setHeight(720 + Math.random() * 0);
 		}else {
-			this.setWidth(1920 + Math.random() * 300);
-			this.setHeight(1440 + Math.random() * 300);
+			this.setWidth(1440 + Math.random() * 0);
+			this.setHeight(1080 + Math.random() * 0);
 		}
 		
 		Point pos = parentRoom.getPosition();
@@ -54,12 +59,8 @@ public class Room implements IRenderable {
 			this.setPosition(new Point(pos.getX() + parentRoom.getWidth(), pos.getY() + (parentRoom.getHeight() - this.getHeight()) / 2));
 		}
 		
-		
 		connectRoom = new HashMap<>();
 		ores = new ArrayList<BaseOre>();
-		Color[] allColor = {Color.BLACK, Color.BLUE, Color.CYAN, Color.GRAY, Color.GREEN, 
-				Color.MAGENTA, Color.ORANGE, Color.PINK, Color.RED, Color.YELLOW};
-		this.color = allColor[(int) (Math.random() * allColor.length)];
 	}
 
 	public Room() {
@@ -78,10 +79,6 @@ public class Room implements IRenderable {
 		this.setPosition(new Point(0,0));
 		connectRoom = new HashMap<>();
 		ores = new ArrayList<BaseOre>();
-
-		Color[] allColor = {Color.BLACK, Color.BLUE, Color.CYAN, Color.GRAY, Color.GREEN, 
-				Color.MAGENTA, Color.ORANGE, Color.PINK, Color.RED, Color.YELLOW};
-		this.color = allColor[(int) (Math.random() * allColor.length)];
 	}
 	
 	public void generateOre(int amountOre){
@@ -122,7 +119,6 @@ public class Room implements IRenderable {
 		ore.setVisible(false);
 		ores.add(ore);
 		Main.getLogic().addObject(ore);
-
 	}
 
 	private boolean isLegal(BaseOre oreA, BaseOre oreB){
@@ -170,43 +166,71 @@ public class Room implements IRenderable {
 
 	@Override
 	public void draw(GraphicsContext gc) {
-		Image image = RenderableHolder.baseFloor;
+		// Floor
+		gc.drawImage(
+			image, position.getX(),
+			position.getY(), 
+			this.getWidth(), 
+			this.getHeight());
 		
-
-		for(int i = 0; i < this.getWidth() / image.getWidth(); ++i){
-			for(int j = 0; j < this.getHeight() / image.getHeight(); ++j){
-				if(image.getWidth() * (i + 1) > this.getWidth() && image.getHeight() * (j + 1) > this.getHeight() ){
-					gc.drawImage(
-						image, position.getX() + image.getWidth() * i,
-						position.getY() + image.getHeight() * j, 
-						this.getWidth() - image.getWidth() * i, 
-						this.getHeight() - image.getHeight() * j);	
-				}else if(image.getWidth() * (i + 1) > this.getWidth()){
-					gc.drawImage(
-						image, position.getX() + image.getWidth() * i,
-						position.getY() + image.getHeight() * j, 
-						this.getWidth() - image.getWidth() * i, 
-						image.getHeight());
-				}else if(image.getHeight() * (j + 1) > this.getHeight()){
-					gc.drawImage(
-						image, position.getX() + image.getWidth() * i,
-						position.getY() + image.getHeight() * j, 
-						image.getWidth(), 
-						this.getHeight() - image.getHeight() * j);
-				}else{
-					gc.drawImage(
-						image, position.getX() + image.getWidth() * i,
-						position.getY() + image.getHeight() * j, 
-						image.getWidth(), 
-						image.getHeight());	
-				}
-
-				
-			}
-		}
-
+		// Left wall
+		this.drawUpWall(gc);
+		this.drawDownWall(gc);
+		this.drawLeftWall(gc);
+		this.drawRightWall(gc);
 	}
 	
+	public void drawLeftWall(GraphicsContext gc){
+		Room leftRoom = connectRoom.get(Direction.LEFT);
+		if(leftRoom != null) return;
+		for(int i = 0; i < this.getHeight() / sideWall.getHeight(); ++i){
+			gc.drawImage(
+				sideWall, 
+				position.getX(),
+				position.getY() + sideWall.getHeight() * i, 
+				sideWall.getWidth(), 
+				sideWall.getHeight());
+		}
+	}
+
+	public void drawRightWall(GraphicsContext gc){
+		Room rightRoom = connectRoom.get(Direction.RIGHT);
+		if(rightRoom != null) return;
+		for(int i = 0; i < this.getHeight() / sideWall.getHeight(); ++i){
+			gc.drawImage(
+				sideWall, 
+				position.getX() + this.getWidth() - sideWall.getWidth(),
+				position.getY() + sideWall.getHeight() * i, 
+				sideWall.getWidth(), 
+				sideWall.getHeight());
+		}
+	}
+
+	public void drawUpWall(GraphicsContext gc){
+		Room upRoom = connectRoom.get(Direction.UP);
+		if(upRoom != null) return;
+		for(int i = 0; i < this.getWidth() / mainWall.getWidth(); ++i){
+			gc.drawImage(
+				mainWall, 
+				position.getX() + mainWall.getWidth() * i,
+				position.getY(), 
+				mainWall.getWidth(), 
+				mainWall.getHeight());
+		}
+	}
+
+	public void drawDownWall(GraphicsContext gc){
+		Room downRoom = connectRoom.get(Direction.DOWN);
+		if(downRoom != null) return;
+		for(int i = 0; i < this.getWidth() / mainWall.getWidth(); ++i){
+			gc.drawImage(
+				mainWall, 
+				position.getX() + mainWall.getWidth() * i,
+				position.getY() + this.getHeight() - mainWall.getWidth(), 
+				mainWall.getWidth(), 
+				mainWall.getHeight());
+		}
+	}
 	@Override
 	public int getZ() {
 		return 10;

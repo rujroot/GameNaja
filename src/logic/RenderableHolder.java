@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 
 public class RenderableHolder {
 	private static final RenderableHolder instance = new RenderableHolder();
@@ -13,7 +14,7 @@ public class RenderableHolder {
 	private List<IRenderable> objects;
 	private Comparator<IRenderable> comparator;
 
-	public static Image Tileset, baseFloor, ores;
+	public static Image Tileset, baseFloor, ores, character, atlas, sideWall, mainWall;
 
 
 	static {
@@ -40,9 +41,15 @@ public class RenderableHolder {
 	}
 	
 	public static void loadResource() {
-		Tileset = new Image(ClassLoader.getSystemResource("res/image/Dungeon_Tileset.png").toString());
-		baseFloor = new Image(ClassLoader.getSystemResource("res/image/baseFloor.png").toString());
+		Tileset = new Image(ClassLoader.getSystemResource("res/image/DungeonTileset2.png").toString());
+		baseFloor = new Image(ClassLoader.getSystemResource("res/image/floor_light.png").toString());
+		//baseFloor = new Image(ClassLoader.getSystemResource("res/image/baseFloor.png").toString());
 		ores = new Image(ClassLoader.getSystemResource("res/image/ores.png").toString());
+		character = new Image(ClassLoader.getSystemResource("res/image/character2.png").toString());
+		atlas = new Image(ClassLoader.getSystemResource("res/image/atlas2.png").toString());
+
+		sideWall = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 304 * 4, 12 * 4, 4 * 4, 32 * 4);
+		mainWall = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 1236, 176, 87, 79);
 	}
 	
 	// Update when entity remove

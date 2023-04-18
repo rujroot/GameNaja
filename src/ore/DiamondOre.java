@@ -11,7 +11,7 @@ public class DiamondOre extends BaseOre {
     
     public DiamondOre(Point position, DataOre dataOre) {
         super(position, 0, 0, dataOre);
-        this.setImage(new WritableImage(RenderableHolder.ores.getPixelReader(), 16 * 12, 16 * 3, 16, 16));
+        this.setImage(new WritableImage(RenderableHolder.ores.getPixelReader(), 32 * 12, 32 * 3, 32, 32));
         this.setWidth(this.getImage().getWidth() * this.getMutliply());
         this.setHeight(this.getImage().getHeight() * this.getMutliply());
     }

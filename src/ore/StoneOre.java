@@ -11,7 +11,7 @@ public class StoneOre extends BaseOre {
 
     public StoneOre(Point position, DataOre dataOre) {
         super(position, 20, 20, dataOre);
-        this.setImage(new WritableImage(RenderableHolder.ores.getPixelReader(), 0, 64, 16, 16));
+        this.setImage(new WritableImage(RenderableHolder.ores.getPixelReader(), 0, 128, 32, 32));
         this.setWidth(this.getImage().getWidth() * this.getMutliply());
         this.setHeight(this.getImage().getHeight() * this.getMutliply());
     }

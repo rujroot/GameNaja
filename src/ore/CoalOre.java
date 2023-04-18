@@ -11,7 +11,7 @@ public class CoalOre extends BaseOre {
 
     public CoalOre(Point position, DataOre dataOre) {
         super(position, 0, 0, dataOre);
-        this.setImage(new WritableImage(RenderableHolder.ores.getPixelReader(), 16 * 12, 16 * 5, 16, 16));
+        this.setImage(new WritableImage(RenderableHolder.ores.getPixelReader(), 32 * 12, 32 * 5, 32, 32));
         this.setWidth(this.getImage().getWidth() * this.getMutliply());
         this.setHeight(this.getImage().getHeight() * this.getMutliply());
     }

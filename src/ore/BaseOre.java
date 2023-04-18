@@ -10,7 +10,7 @@ public abstract class BaseOre extends BaseObject  {
     
     private DataOre dataOre;
     private WritableImage image;
-    private double mutliply = 2.5;
+    private double mutliply = 1.5;
 
     public BaseOre(Point position, double width, double height, DataOre dataOre){
         super(position, width, height);

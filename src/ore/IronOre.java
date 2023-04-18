@@ -11,7 +11,7 @@ public class IronOre extends BaseOre {
 
     public IronOre(Point position, DataOre dataOre) {
         super(position, 0, 0, dataOre);
-        this.setImage(new WritableImage(RenderableHolder.ores.getPixelReader(), 16 * 6, 16 * 5, 16, 16));
+        this.setImage(new WritableImage(RenderableHolder.ores.getPixelReader(), 32 * 6, 32 * 5, 32, 32));
         this.setWidth(this.getImage().getWidth() * this.getMutliply());
         this.setHeight(this.getImage().getHeight() * this.getMutliply());
     }

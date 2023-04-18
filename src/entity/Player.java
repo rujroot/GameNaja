@@ -11,12 +11,15 @@ import equipment.BaseWeapon;
 import equipment.Pickaxe;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import logic.Cooldownable;
 import logic.GameLogic;
 import logic.Hitbox;
 import logic.Main;
+import logic.RenderableHolder;
 import ore.BaseOre;
 
 public class Player extends Entity implements Cooldownable{
@@ -26,9 +29,13 @@ public class Player extends Entity implements Cooldownable{
 	private BaseWeapon equipment;
 	private double lastClickTime = 0, cooldownTime = 1000;
 	private Point resolutionPosition;
+	private WritableImage image = new WritableImage(RenderableHolder.character.getPixelReader(), 32 * 1, 16 * 1, 64, 64);
+	private int mutliply = 1;
 
 	public Player(String name, double Height, double Width, DataEntity data) {
 		super(name, Height, Width, data);
+		this.setWidth(image.getWidth() * mutliply);
+		this.setHeight(image.getHeight() * mutliply);
 		player = this;
 		this.setEquipment(new Pickaxe(30.0, 10.0));
 		// this.setEquipment(new Bow(30.0, 10.0, 2));
@@ -146,8 +153,7 @@ public class Player extends Entity implements Cooldownable{
 	@Override
 	public void draw(GraphicsContext gc) {
 		Point pos = this.getPosition();
-		gc.setFill(Color.TAN);
-		gc.fillRect(pos.getX(), pos.getY(), this.getWidth(), this.getHeight());
+		gc.drawImage(image, pos.getX(), pos.getY(), image.getWidth() * mutliply, image.getHeight() * mutliply);
 		this.drawHP(gc);
 		if(equipment != null) {
 			equipment.draw(gc);
