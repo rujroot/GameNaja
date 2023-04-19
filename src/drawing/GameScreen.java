@@ -9,6 +9,9 @@ import entity.Player;
 import input.InputUtility;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -19,6 +22,7 @@ public class GameScreen extends Canvas {
 
 	private Point posCamera;
 	public static Point resolution;
+	public static GraphicsContext gc;
 
 	public GameScreen(double width, double height) {
 		super(width, height);
@@ -26,7 +30,7 @@ public class GameScreen extends Canvas {
 		addListerner();
 		resolution = new Point(width, height);
 		
-		GraphicsContext gc = this.getGraphicsContext2D();
+		gc = this.getGraphicsContext2D();
 		Player player = Player.getPlayer();
 		
 		// first to set camera
@@ -79,12 +83,12 @@ public class GameScreen extends Canvas {
 	}
 	
 	public void updatePlayer() {
-		GraphicsContext gc = this.getGraphicsContext2D();
 		Player player = Player.getPlayer();
 		Point pos = player.getPosition();
 
 		// Prepar for new draw
-		gc.clearRect(pos.getX() - this.getWidth() / 2, 
+		gc.setFill(Color.rgb(120,80,100));
+		gc.fillRect(pos.getX() - this.getWidth() / 2, 
 					pos.getY() - this.getHeight() / 2, 
 					this.getWidth() * 1.2, 
 					this.getHeight() * 1.2);
@@ -96,7 +100,6 @@ public class GameScreen extends Canvas {
 
 	// TrackCamera follow Player with offset
 	public void trackCamera(){
-		GraphicsContext gc = this.getGraphicsContext2D();
 		Point pos = Player.getPlayer().getPosition();
 
 		Point posToTrack = new Point(pos.getX() - this.getWidth() / 2, pos.getY() - this.getHeight() / 2);
@@ -109,7 +112,6 @@ public class GameScreen extends Canvas {
 	}
 	
 	public void paintComponent() {
-		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(Color.BLACK);
 		
 		for (IRenderable object : RenderableHolder.getInstance().getObjects()) {
@@ -123,10 +125,23 @@ public class GameScreen extends Canvas {
 	public void paintLevel() {
 		int currLevel = GenerateDungeon.getCurrLevel();
 		ArrayList<Room> level = GenerateDungeon.getContainer().get(currLevel);
-		GraphicsContext gc = this.getGraphicsContext2D();
 		for (IRenderable room : level) {
 			room.draw(gc);
 		}
+		for (Room room : level) {
+			room.drawUpWall(gc);
+		}
+		for (Room room : level) {
+			room.drawDownWall(gc);
+		}
+		for (Room room : level) {
+			room.drawLeftWall(gc);
+		}
+		for (Room room : level) {
+			room.drawRightWall(gc);
+		}
+		
+		
 		
 	}
 
@@ -134,6 +149,38 @@ public class GameScreen extends Canvas {
 		return resolution;
 	}
 
+	public static void drawImage(Image image, Point pos, double width, double height){
+		for(int i = 0; i < width / image.getWidth(); ++i){
+			for(int j = 0; j < height / image.getHeight(); ++j){
+				if(image.getWidth() * (i+1) > width && image.getHeight() * (j+1) > height){
+					gc.drawImage(image,
+						pos.getX() + image.getWidth() * i,
+						pos.getY() + image.getHeight() * j,
+						width - image.getWidth() * (i),
+						height - image.getHeight() * (j) );
+				}else if(image.getWidth() * (i+1) > width){
+					gc.drawImage(image,
+						pos.getX() + image.getWidth() * i,
+						pos.getY() + image.getHeight() * j,
+						width - image.getWidth() * (i),
+						image.getHeight() );
+				}else if(image.getHeight() * (j+1) > height){
+					gc.drawImage(image,
+						pos.getX() + image.getWidth() * i,
+						pos.getY() + image.getHeight() * j,
+						image.getWidth(),
+						height - image.getHeight() * (j) );
+				}else{
+					gc.drawImage(image,
+						pos.getX() + image.getWidth() * i,
+						pos.getY() + image.getHeight() * j,
+						image.getWidth(),
+						image.getHeight() );
+				}
+				
+			}
+		}
+	}
 	
 
 }

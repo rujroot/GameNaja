@@ -29,7 +29,7 @@ public class Player extends Entity implements Cooldownable{
 	private BaseWeapon equipment;
 	private double lastClickTime = 0, cooldownTime = 1000;
 	private Point resolutionPosition;
-	private WritableImage image = new WritableImage(RenderableHolder.character.getPixelReader(), 32 * 1, 16 * 1, 64, 64);
+	private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 960, 944, 59, 79);
 	private int mutliply = 1;
 
 	public Player(String name, double Height, double Width, DataEntity data) {

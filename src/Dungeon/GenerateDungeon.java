@@ -35,8 +35,17 @@ public class GenerateDungeon {
 					room = new Room(toConnectRoom.getKey(), toConnectRoom.getValue());
 				}
 				
+				Direction direction = toConnectRoom.getValue();
+				Room connectRoom = toConnectRoom.getKey();
 				room.generateOre(10);
-				toConnectRoom.getKey().getConnectRoom().put(toConnectRoom.getValue(), room);
+
+				room.getConnectRoom().put(direction.getOpposite(), connectRoom);
+				connectRoom.getConnectRoom().put(direction, room);
+
+				// set wall
+				room.getWall().add(direction.getOpposite(), connectRoom.getWidth(), connectRoom.getHeight());
+				connectRoom.getWall().add(direction, room.getWidth(), room.getHeight());
+
 				toPush.add(room);
 			}
 			
@@ -51,7 +60,6 @@ public class GenerateDungeon {
 			}
 		}
 	}
-
 
 	public Pair<Room, Direction> findRoom(Room currRoom) {
 		Direction[] d = {Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT};
@@ -109,7 +117,6 @@ public class GenerateDungeon {
 	public void setContainer(ArrayList<ArrayList<Room>> container) {
 		GenerateDungeon.container = container;
 	}
-
 }
 
 

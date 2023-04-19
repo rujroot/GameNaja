@@ -11,6 +11,8 @@ import entity.Entity;
 import entity.Player;
 import entity.Zombie;
 import equipment.projectile.Arrow;
+import inventory.Inventory;
+import item.Item;
 import ore.BaseOre;
 
 public class GameLogic {
@@ -103,6 +105,8 @@ public class GameLogic {
 			BaseObject object = gameObjectContainer.get(i);
 			if(object instanceof Player) continue;
 			if(object instanceof BaseOre && !object.isVisible()) continue;
+			if(object instanceof Inventory) continue;
+			if(object instanceof Item) continue;
 
 			object.setDestroyed(true);
 			gameObjectContainer.remove(object);

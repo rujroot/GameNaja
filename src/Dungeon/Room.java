@@ -5,11 +5,9 @@ import java.util.HashMap;
 
 import Data.DataOre;
 import Data.Point;
-import javafx.beans.property.ReadOnlyFloatWrapper;
+import drawing.GameScreen;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.WritableImage;
-import javafx.scene.paint.Color;
 import logic.Hitbox;
 import logic.IRenderable;
 import logic.Main;
@@ -27,6 +25,7 @@ public class Room implements IRenderable {
 	private Point position;
 	private HashMap<Direction, Room> connectRoom;
 	private ArrayList<BaseOre> ores;
+	private Wall wall;
 
 	private Image image = RenderableHolder.baseFloor;
 	private Image sideWall = RenderableHolder.sideWall;
@@ -61,24 +60,16 @@ public class Room implements IRenderable {
 		
 		connectRoom = new HashMap<>();
 		ores = new ArrayList<BaseOre>();
+		wall = new Wall();
 	}
 
 	public Room() {
-		Size sizeRoom = allSize[(int) (Math.random() * 2)];
-		if(sizeRoom.equals(Size.SMALL)) {
-			this.setWidth(320);
-			this.setHeight(240);
-		}else if(sizeRoom.equals(Size.MEDUIM)) {
-			this.setWidth(640);
-			this.setHeight(480);
-		}else {
-			this.setWidth(960);
-			this.setHeight(720);
-		}
-		
+		this.setWidth(640);
+		this.setHeight(480);
 		this.setPosition(new Point(0,0));
 		connectRoom = new HashMap<>();
 		ores = new ArrayList<BaseOre>();
+		wall = new Wall();
 	}
 	
 	public void generateOre(int amountOre){
@@ -173,64 +164,85 @@ public class Room implements IRenderable {
 			this.getWidth(), 
 			this.getHeight());
 		
-		// Left wall
-		this.drawUpWall(gc);
-		this.drawDownWall(gc);
-		this.drawLeftWall(gc);
-		this.drawRightWall(gc);
+		// anathor wall
+		// this.drawUpWall(gc);
+		// this.drawLeftWall(gc);
+		// this.drawRightWall(gc);
+		// this.drawDownWall(gc);
 	}
 	
 	public void drawLeftWall(GraphicsContext gc){
-		Room leftRoom = connectRoom.get(Direction.LEFT);
-		if(leftRoom != null) return;
-		for(int i = 0; i < this.getHeight() / sideWall.getHeight(); ++i){
-			gc.drawImage(
-				sideWall, 
-				position.getX(),
-				position.getY() + sideWall.getHeight() * i, 
-				sideWall.getWidth(), 
-				sideWall.getHeight());
-		}
+		GameScreen.drawImage(sideWall, new Point(position.getX() - sideWall.getWidth() / 2, position.getY() - mainWall.getHeight() / 2), sideWall.getWidth() , height + mainWall.getHeight());
+
+		// if(leftRoom == null){
+		// 	GameScreen.drawImage(sideWall, new Point(position.getX(), position.getY()), sideWall.getWidth(), height);
+		// }else if(leftRoom.getHeight() < height){
+		// 	double length = height - leftRoom.getHeight();
+
+		// 	Point start = new Point(position.getX() - sideWall.getWidth(), position.getY());
+		// 	Point newpos = new Point(position.getX() - sideWall.getWidth(), position.getY() + height - length / 2);
+
+		// 	GameScreen.drawImage(sideWall, start, sideWall.getWidth(), length / 2);
+		// 	GameScreen.drawImage(sideWall, newpos, sideWall.getWidth(), length / 2);
+		// }
 	}
 
 	public void drawRightWall(GraphicsContext gc){
-		Room rightRoom = connectRoom.get(Direction.RIGHT);
-		if(rightRoom != null) return;
-		for(int i = 0; i < this.getHeight() / sideWall.getHeight(); ++i){
-			gc.drawImage(
-				sideWall, 
-				position.getX() + this.getWidth() - sideWall.getWidth(),
-				position.getY() + sideWall.getHeight() * i, 
-				sideWall.getWidth(), 
-				sideWall.getHeight());
-		}
+
+		GameScreen.drawImage(sideWall, new Point(position.getX() + getWidth() - sideWall.getWidth() / 2, position.getY() - mainWall.getHeight() / 2), sideWall.getWidth(), height + mainWall.getHeight());
+		// if(rightRoom == null){
+		// 	GameScreen.drawImage(sideWall, new Point(position.getX()  + this.getWidth() , position.getY()), sideWall.getWidth(), height);
+		// }else if(rightRoom.getHeight() < height){
+		// 	double length = height - rightRoom.getHeight();
+
+		// 	Point start = new Point(position.getX()  + this.getWidth() - sideWall.getWidth() , position.getY());
+		// 	Point newpos = new Point(position.getX()  + this.getWidth() - sideWall.getWidth() , position.getY() + height - length / 2);
+
+		// 	GameScreen.drawImage(sideWall, start, sideWall.getWidth(), length / 2);
+		// 	GameScreen.drawImage(sideWall, newpos, sideWall.getWidth(), length / 2);
+		// }
+
 	}
 
 	public void drawUpWall(GraphicsContext gc){
-		Room upRoom = connectRoom.get(Direction.UP);
-		if(upRoom != null) return;
-		for(int i = 0; i < this.getWidth() / mainWall.getWidth(); ++i){
-			gc.drawImage(
-				mainWall, 
-				position.getX() + mainWall.getWidth() * i,
-				position.getY(), 
-				mainWall.getWidth(), 
-				mainWall.getHeight());
-		}
+		GameScreen.drawImage(mainWall, new Point(position.getX(), position.getY() - mainWall.getHeight() / 2), width, mainWall.getHeight());
+		// if(upRoom == null){
+		// 	GameScreen.drawImage(mainWall, new Point(position.getX(), position.getY()), width, mainWall.getHeight());
+		// }else if(upRoom.getWidth() < width){
+		// 	double length = width - upRoom.getHeight();
+
+		// 	Point start = new Point(position.getX(), position.getY());
+		// 	Point newpos = new Point(position.getX() + width - length / 2, position.getY());
+
+		// 	GameScreen.drawImage(mainWall, start, length / 2, mainWall.getHeight());
+		// 	GameScreen.drawImage(mainWall, newpos, length / 2, mainWall.getHeight());
+		// }
 	}
 
 	public void drawDownWall(GraphicsContext gc){
 		Room downRoom = connectRoom.get(Direction.DOWN);
-		if(downRoom != null) return;
-		for(int i = 0; i < this.getWidth() / mainWall.getWidth(); ++i){
-			gc.drawImage(
-				mainWall, 
-				position.getX() + mainWall.getWidth() * i,
-				position.getY() + this.getHeight() - mainWall.getWidth(), 
-				mainWall.getWidth(), 
-				mainWall.getHeight());
-		}
+		GameScreen.drawImage(mainWall, new Point(position.getX(), position.getY() + height - mainWall.getHeight() / 2), width, mainWall.getHeight());
+		// if(downRoom == null){
+		// 	GameScreen.drawImage(mainWall, new Point(position.getX(), position.getY() + height - mainWall.getHeight()), width, mainWall.getHeight());
+		// }else if(downRoom.getWidth() < width){
+		// 	double length = width - downRoom.getHeight();
+
+		// 	Point start = new Point(position.getX(), position.getY() + height - mainWall.getHeight());
+		// 	Point newpos = new Point(position.getX() + width - length / 2 , position.getY() + height - mainWall.getHeight());
+
+		// 	GameScreen.drawImage(mainWall, start, length / 2, mainWall.getHeight());
+		// 	GameScreen.drawImage(mainWall, newpos, length / 2, mainWall.getHeight());
+		// }
 	}
+
+	public Wall getWall() {
+		return wall;
+	}
+
+	public void setWall(Wall wall) {
+		this.wall = wall;
+	}
+
 	@Override
 	public int getZ() {
 		return 10;
