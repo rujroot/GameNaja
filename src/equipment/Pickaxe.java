@@ -6,6 +6,7 @@ import Data.BaseObject;
 import Data.DataEntity;
 import Data.DataOre;
 import Data.Point;
+import entity.Player;
 import entity.Zombie;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -23,6 +24,16 @@ public class Pickaxe extends Melee{
         
         ArrayList<BaseObject> gameObjectContainer = Main.getLogic().getGameObjectContainer();
         ArrayList<BaseObject> instersectObject = new ArrayList<BaseObject>();
+
+        // Attack Object section
+        Player player = Player.getPlayer();
+        double startAt = player.getMouseAngle();
+
+        Point playerPosition = this.getPlayerPosition();
+        Point attackPosition = new Point(playerPosition.getX() - (getAttackRange() / 2) + (player.getWidth() / 2), playerPosition.getY() - (getAttackRange() / 2) + (player.getHeight() / 2));
+
+        AttackObject attackObject = new AttackObject(attackPosition, getAttackRange(), getAttackRange(), startAt - getAttackDegree() / 2, getAttackDegree());
+        Main.logic.addObject(attackObject);
 
         for(BaseObject object : gameObjectContainer){
             if(object.isVisible() && this.intersectsCirclePart(object)){
@@ -44,15 +55,13 @@ public class Pickaxe extends Melee{
             }
         }
 
-
-
     }
 
     @Override
     public void draw(GraphicsContext gc) {
+
+        Point pos = this.getPosition();
         gc.setFill(Color.BROWN);
-		
-		Point pos = this.getPosition();
 		gc.fillRect(pos.getX(), pos.getY(), this.getWidth(), this.getHeight());
     }
     

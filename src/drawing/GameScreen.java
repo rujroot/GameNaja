@@ -13,8 +13,6 @@ import input.InputUtility;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.PixelReader;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -132,14 +130,11 @@ public class GameScreen extends Canvas {
 			room.draw(gc);
 		}
 		
-
 		for (Room room : level) {
-			HashMap<Direction, Path> connectPath = room.getConnectPath();
 			room.drawUpWall(gc);
 			room.drawLeftWall(gc);
 			room.drawRightWall(gc);
 			room.drawDownWall(gc);
-			
 		}		
 		for (Room room : level) {
 			HashMap<Direction, Path> connectPath = room.getConnectPath();

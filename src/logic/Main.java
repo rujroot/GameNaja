@@ -4,6 +4,7 @@ import Data.DataEntity;
 import Data.Point;
 import Dungeon.GenerateDungeon;
 import Dungeon.Room;
+import animation.AnimationController;
 import drawing.GameScreen;
 import entity.Player;
 import input.InputUtility;
@@ -54,6 +55,9 @@ public class Main extends Application {
 		
 		//Show windows
 		stage.show();
+
+		AnimationController animationController = new AnimationController();
+		animationController.start();
 
 		//this function run every sec
 		AnimationTimer animation = new AnimationTimer() {

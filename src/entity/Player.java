@@ -10,6 +10,7 @@ import Dungeon.Direction;
 import Dungeon.GenerateDungeon;
 import Dungeon.Path;
 import Dungeon.Room;
+import drawing.GameScreen;
 import equipment.BaseWeapon;
 import equipment.Pickaxe;
 import input.InputUtility;
@@ -39,7 +40,23 @@ public class Player extends Entity implements Cooldownable{
 		this.setHeight(image.getHeight() * mutliply);
 		player = this;
 		this.setEquipment(new Pickaxe(30.0, 10.0));
-		// this.setEquipment(new Bow(30.0, 10.0, 2));
+		//this.setEquipment(new Bow(30.0, 10.0, 2));
+	}
+
+	public double getMouseAngle(){
+		// Attack Object section
+        Point pos = this.getPosition();
+        Point res = GameScreen.resolution;
+		double mouseX = InputUtility.mouseX, mouseY = InputUtility.mouseY;
+
+        double posMouseX = pos.getX() + mouseX - res.getX() / 2;
+        double posMouseY = pos.getY() + mouseY - res.getY() / 2;
+
+        double startAt = Math.atan2(posMouseY - (pos.getY() + this.getHeight() / 2), posMouseX - (pos.getX() + this.getWidth() / 2));
+        if (startAt < 0) {
+            startAt += 2 * Math.PI;
+        }
+        return 360 - Math.toDegrees(startAt);
 	}
 	
 	public void move(double moveX, double moveY){

@@ -37,6 +37,7 @@ public abstract class BaseObject implements IRenderable{
     public Point getPosition() {
         return position;
     }
+
     public void setPosition(Point position) {
         this.position = position;
     }
@@ -73,6 +74,5 @@ public abstract class BaseObject implements IRenderable{
     public void setCanCollide(boolean canCollide) {
         this.canCollide = canCollide;
     }
-
     
 }

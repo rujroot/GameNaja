@@ -2,8 +2,7 @@ package equipment;
 
 import Data.BaseObject;
 import Data.Point;
-import input.InputUtility;
-
+import entity.Player;
 public abstract class Melee extends BaseWeapon{
 
     private double attackRange, attackDegree;
@@ -15,8 +14,8 @@ public abstract class Melee extends BaseWeapon{
 
     public Melee(double width, double height) {
         super(width, height, 1);
-        this.setAttackRange(100);
-        this.setAttackDegree(30);
+        this.setAttackRange(150);
+        this.setAttackDegree(60);
     }
 
     public boolean pointIntersectsRectangle(double x, double y, double rectX, double rectY, double rectWidth, double rectHeight) {
@@ -41,31 +40,24 @@ public abstract class Melee extends BaseWeapon{
         double rectX2 = pos.getX() + object.getWidth();
         double rectY2 = pos.getY() + object.getHeight();
 
-        double centerX = getPosition().getX();
-        double centerY = getPosition().getY();
+        double centerX = getPlayerPosition().getX() + Player.getPlayer().getWidth() / 2;
+        double centerY = getPlayerPosition().getY() + Player.getPlayer().getHeight() / 2;
 
-        intersectDistant = intersectDistant || distant(rectX1, rectY1, centerX , centerY) <= this.getAttackRange();
-        intersectDistant = intersectDistant || distant(rectX2, rectY1, centerX , centerY) <= this.getAttackRange();
-        intersectDistant = intersectDistant || distant(rectX1, rectY2, centerX , centerY) <= this.getAttackRange();
-        intersectDistant = intersectDistant || distant(rectX2, rectY2, centerX , centerY) <= this.getAttackRange();
+        intersectDistant = intersectDistant || distant(rectX1, rectY1, centerX , centerY) <= this.getAttackRange() / 2;
+        intersectDistant = intersectDistant || distant(rectX2, rectY1, centerX , centerY) <= this.getAttackRange() / 2;
+        intersectDistant = intersectDistant || distant(rectX1, rectY2, centerX , centerY) <= this.getAttackRange() / 2;
+        intersectDistant = intersectDistant || distant(rectX2, rectY2, centerX , centerY) <= this.getAttackRange() / 2;
 
         // Check angle <= attackDegree
-        Point posResPlayer = this.getResolutionPostion();
-		double mouseX = InputUtility.mouseX, mouseY = InputUtility.mouseY;
+        Point posPlayer = this.getPlayerPosition();
 
-        double angle = Math.atan2(mouseY - posResPlayer.getY(), mouseX - posResPlayer.getX());
-
-        if (angle < 0) {
-            angle += 2 * Math.PI;
-        }
-        angle = Math.toDegrees(angle);
-
-        Point posPlayer = this.getPosition();
+        double angle = Player.getPlayer().getMouseAngle();
         double angleObject = Math.atan2(pos.getY() - posPlayer.getY(), pos.getX() - posPlayer.getX());
+
         if (angleObject < 0) {
             angleObject += 2 * Math.PI;
         }
-        angleObject = Math.toDegrees(angleObject);
+        angleObject = 360 - Math.toDegrees(angleObject);
 
         if(Math.max(angle, angleObject) >= 270 && Math.min(angle, angleObject) <= 90){
             intersectDegree = Math.abs(Math.max(angle, angleObject) - (Math.min(angle, angleObject) + 360)) <= this.getAttackDegree();
@@ -75,6 +67,7 @@ public abstract class Melee extends BaseWeapon{
 
         return intersectDistant && intersectDegree;
     }
+
 
     public double getAttackRange() {
         return attackRange;

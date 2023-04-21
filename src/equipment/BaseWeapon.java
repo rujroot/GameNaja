@@ -20,6 +20,10 @@ public abstract class BaseWeapon extends BaseObject {
 		return p;
 	}
 
+	public Point getPlayerPosition() {
+		return Player.getPlayer().getPosition();
+	}
+
 	public Point getResolutionPostion(){
 		Point pp = Player.getPlayer().getResolutionPosition();
 		double px = pp.getX(), py = pp.getY();
