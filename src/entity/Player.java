@@ -1,20 +1,21 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import Data.BaseObject;
 import Data.DataEntity;
 import Data.Point;
+import Dungeon.Direction;
 import Dungeon.GenerateDungeon;
+import Dungeon.Path;
 import Dungeon.Room;
 import equipment.BaseWeapon;
 import equipment.Pickaxe;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
-import javafx.scene.paint.Color;
 import logic.Cooldownable;
 import logic.GameLogic;
 import logic.Hitbox;
@@ -107,6 +108,15 @@ public class Player extends Entity implements Cooldownable{
 		Point posPlayer = this.getPosition();
 		Point newPosPlayer = new Point(posPlayer.getX() + moveX, posPlayer.getY() + moveY);
 		
+		ArrayList<BaseObject> allObject = Main.getLogic().getGameObjectContainer();
+		for(BaseObject object : allObject){
+			if(object instanceof BaseOre && object.isVisible()){
+				Hitbox A = new Hitbox(newPosPlayer, this.getWidth(), this.getHeight());
+				Hitbox B = new Hitbox(object.getPosition(), object.getWidth(), object.getHeight());
+				if(A.isIntersect(B)) return false;
+			}
+		}
+
 		double sum = 0;
 		
 		for(Room room : level) {
@@ -134,20 +144,45 @@ public class Player extends Entity implements Cooldownable{
 			if (xRight > xLeft && yBottom > yTop) {
 				intersectionArea = (xRight - xLeft) * (yBottom - yTop);
 			}
-			
+
+			HashMap<Direction, Path> connectPath = room.getConnectPath();
+			sum +=  getSumPath(connectPath.get(Direction.UP), newPosPlayer);
+			sum +=  getSumPath(connectPath.get(Direction.DOWN), newPosPlayer);
+			sum +=  getSumPath(connectPath.get(Direction.LEFT), newPosPlayer);
+			sum +=  getSumPath(connectPath.get(Direction.RIGHT), newPosPlayer);
 			sum += intersectionArea;
 		}
 
-		ArrayList<BaseObject> allObject = Main.getLogic().getGameObjectContainer();
-		for(BaseObject object : allObject){
-			if(object instanceof BaseOre && object.isVisible()){
-				Hitbox A = new Hitbox(newPosPlayer, this.getWidth(), this.getHeight());
-				Hitbox B = new Hitbox(object.getPosition(), object.getWidth(), object.getHeight());
-				if(A.isIntersect(B)) return false;
-			}
-		}
-
 		return Math.round(sum) == Math.round(this.getWidth() * this.getHeight());   
+	}
+
+	public double getSumPath(Path path, Point newPosPlayer){
+		if(!path.isVisible()) return 0;
+		
+		Point posPath = path.getPosition();
+		
+		double rect1X1 = posPath.getX();
+		double rect1Y1 = posPath.getY();
+		double rect1X2 = posPath.getX() + path.getWidth();
+		double rect1Y2 = posPath.getY() + path.getHeight();
+		
+		double X1 = newPosPlayer.getX();
+		double Y1 = newPosPlayer.getY();
+		double X2 = newPosPlayer.getX() + this.getWidth();
+		double Y2 = newPosPlayer.getY() + this.getHeight();
+
+		// calculate the coordinates of the intersection rectangle
+		double xLeft = Math.max(rect1X1, X1);
+		double yTop = Math.max(rect1Y1, Y1);
+		double xRight = Math.min(rect1X2, X2);
+		double yBottom = Math.min(rect1Y2, Y2);
+		
+		// calculate the area of the intersection rectangle
+		double intersectionArea = 0.0;
+		if (xRight > xLeft && yBottom > yTop) {
+			intersectionArea = (xRight - xLeft) * (yBottom - yTop);
+		}
+		return intersectionArea;
 	}
 
 	@Override

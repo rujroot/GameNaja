@@ -1,9 +1,12 @@
 package drawing;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import Data.Point;
+import Dungeon.Direction;
 import Dungeon.GenerateDungeon;
+import Dungeon.Path;
 import Dungeon.Room;
 import entity.Player;
 import input.InputUtility;
@@ -128,20 +131,31 @@ public class GameScreen extends Canvas {
 		for (IRenderable room : level) {
 			room.draw(gc);
 		}
+		
+
 		for (Room room : level) {
+			HashMap<Direction, Path> connectPath = room.getConnectPath();
 			room.drawUpWall(gc);
-		}
-		for (Room room : level) {
-			room.drawDownWall(gc);
-		}
-		for (Room room : level) {
 			room.drawLeftWall(gc);
+			room.drawRightWall(gc);
+			room.drawDownWall(gc);
+			
+		}		
+		for (Room room : level) {
+			HashMap<Direction, Path> connectPath = room.getConnectPath();
+			connectPath.get(Direction.DOWN).drawWall(gc);
+			connectPath.get(Direction.UP).drawWall(gc);
+			connectPath.get(Direction.LEFT).drawWall(gc);
+			connectPath.get(Direction.RIGHT).drawWall(gc);
 		}
 		for (Room room : level) {
-			room.drawRightWall(gc);
+			HashMap<Direction, Path> connectPath = room.getConnectPath();
+			connectPath.get(Direction.UP).draw(gc);
+			connectPath.get(Direction.DOWN).draw(gc);
+			connectPath.get(Direction.LEFT).draw(gc);
+			connectPath.get(Direction.RIGHT).draw(gc);
 		}
-		
-		
+
 		
 	}
 
