@@ -4,8 +4,6 @@ import Data.DataEntity;
 import Data.Point;
 import drawing.GameScreen;
 import equipment.BaseWeapon;
-import equipment.Knife;
-import equipment.Pickaxe;
 import equipment.Sword;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
