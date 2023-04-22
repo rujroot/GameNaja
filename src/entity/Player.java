@@ -12,7 +12,9 @@ import Dungeon.Path;
 import Dungeon.Room;
 import drawing.GameScreen;
 import equipment.BaseWeapon;
+import equipment.Knife;
 import equipment.Pickaxe;
+import equipment.Sword;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
@@ -39,8 +41,10 @@ public class Player extends Entity implements Cooldownable{
 		this.setWidth(image.getWidth() * mutliply);
 		this.setHeight(image.getHeight() * mutliply);
 		player = this;
-		this.setEquipment(new Pickaxe(30.0, 10.0));
+		//this.setEquipment(new Pickaxe(30.0, 10.0));
 		//this.setEquipment(new Bow(30.0, 10.0, 2));
+		
+		this.setEquipment(new Sword(30.0, 10.0,10.0,500,60));
 	}
 
 	public double getMouseAngle(){

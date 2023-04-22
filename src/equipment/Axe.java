@@ -1,5 +1,5 @@
 package equipment;
 
-public class Axe {
+public class Axe extends Melee{
 
 }

@@ -7,9 +7,10 @@ public abstract class Melee extends BaseWeapon{
 
     private double attackRange, attackDegree;
 
-    public Melee(double width, double height, double attackDamage, double attackRange) {
+    public Melee(double width, double height, double attackDamage, double attackRange, double attackDegree) {
         super(width, height, attackDamage);
         this.setAttackRange(attackRange);
+        this.setAttackDegree(attackDegree);
     }
 
     public Melee(double width, double height) {
@@ -64,6 +65,8 @@ public abstract class Melee extends BaseWeapon{
         }else{
             intersectDegree = Math.abs(angleObject - angle) <= this.getAttackDegree();
         }
+        
+        //System.out.println(intersectDistant+" "+intersectDegree);
 
         return intersectDistant && intersectDegree;
     }
