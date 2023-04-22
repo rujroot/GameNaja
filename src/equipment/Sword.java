@@ -12,8 +12,13 @@ import entity.Zombie;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import logic.Main;
+import javafx.scene.image.WritableImage;
+import logic.RenderableHolder;
 
 public class Sword extends Melee {
+
+	private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 392, 960, 51, 63);
+
 
 	public Sword(double width, double height, double attackDamage, double attackRange, double attackDegree) {
 		super(width, height, attackDamage, attackRange, attackDegree);
@@ -65,8 +70,9 @@ public class Sword extends Melee {
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 		Point pos = this.getPosition();
-        gc.setFill(Color.CRIMSON);
-		gc.fillRect(pos.getX(), pos.getY(), this.getWidth(), this.getHeight());
+		gc.drawImage(image, pos.getX(), pos.getY(), image.getWidth() , image.getHeight());
+        // gc.setFill(Color.CRIMSON);
+		// gc.fillRect(pos.getX(), pos.getY(), this.getWidth(), this.getHeight());
 	}
 
 	
