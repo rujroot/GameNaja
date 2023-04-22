@@ -2,12 +2,10 @@ package animation;
 
 import Data.BaseObject;
 import Data.Point;
-import javafx.scene.canvas.GraphicsContext;
 
 public abstract class AnimationObject extends BaseObject {
     
-    double startTime, currTime, endTime;
-    public abstract void play(GraphicsContext gc);
+    double startTime, currTime, endTime, speedAnim;
 
     public AnimationObject(Point position, double width, double height) {
         super(position, width, height);
@@ -31,10 +29,14 @@ public abstract class AnimationObject extends BaseObject {
         this.endTime = endTime;
     }
     public void nextAnim(){
-        this.currTime = this.currTime + 1;
+        this.currTime = this.currTime + speedAnim;
     }
-    
-
+    public double getSpeedAnim() {
+        return speedAnim;
+    }
+    public void setSpeedAnim(double speedAnim) {
+        this.speedAnim = speedAnim;
+    }
 
     
 }

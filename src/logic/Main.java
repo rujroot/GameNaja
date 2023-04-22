@@ -57,14 +57,15 @@ public class Main extends Application {
 		stage.show();
 
 		AnimationController animationController = new AnimationController();
-		animationController.start();
 
 		//this function run every sec
 		AnimationTimer animation = new AnimationTimer() {
 			public void handle(long now) {
+				
 				gameScreen.updatePlayer();
 				gameScreen.paintLevel();
 				gameScreen.paintComponent();
+				animationController.run();
 				logic.logicUpdate();
 				RenderableHolder.getInstance().update();
 				InputUtility.updateInputState();

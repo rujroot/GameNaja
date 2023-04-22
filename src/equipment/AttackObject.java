@@ -1,11 +1,7 @@
 package equipment;
 
-import Data.BaseObject;
 import Data.Point;
-import animation.AnimationController;
 import animation.AnimationObject;
-import javafx.animation.AnimationTimer;
-import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
@@ -24,55 +20,16 @@ public class AttackObject extends AnimationObject{
         super(position, width, height);
         this.setStartAngle(startAngle);
         this.setEndAngle(endAngle);
-    }
 
-    @Override
-    public void play(GraphicsContext gc) {
-
-        Point pos = this.getPosition();
-        
-        gc.setFill(Color.WHITE);
-        gc.fillArc(pos.getX(), pos.getY(), 100, 100, this.getStartAngle(), this.getCurrTime() + 1, ArcType.ROUND);
-
+        this.setStartTime(0);
+        this.setEndTime(endAngle);
+        this.setSpeedAnim(12);
     }
 
     @Override
     public void draw(GraphicsContext gc) {
-
-        this.setStartTime(startAngle);
-        this.setEndTime(endAngle);
-
-        AnimationController.animations.add(this);
-
-        // Point pos = this.getPosition();
-        // double w = this.getWidth(), h = this.getHeight();
-
-        // gc.setFill(Color.WHITE);
-        // gc.fillArc(pos.getX(), pos.getY(), 100, 100, startAngle, i + 1, ArcType.ROUND);
-
-        // Thread thread = new Thread(()->{
-                    
-        //     for (int i = (int)startAngle; i<= (int) endAngle; i++) {
-        //         int angle = i;
-
-        //         Platform.runLater(new Runnable() {
-        //             @Override
-        //             public void run() {
-        //                 gc.setFill(Color.WHITE);
-        //                 gc.fillArc(pos.getX(), pos.getY(), 100, 100, startAngle, angle + 1, ArcType.ROUND);
-
-        //             }
-        //         });
-                
-        //         try {
-        //             Thread.sleep(100);
-        //         } catch (InterruptedException e) {
-        //             e.printStackTrace();
-        //         }
-                
-        //     }
-        // });
-        // thread.start();
+        gc.setFill(Color.WHITE);
+        gc.fillArc(this.getPosition().getX(), this.getPosition().getY(), this.getWidth(), this.getHeight(), this.getStartAngle(), this.getCurrTime(), ArcType.ROUND);
 			
     }
 

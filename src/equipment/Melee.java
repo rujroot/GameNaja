@@ -68,7 +68,6 @@ public abstract class Melee extends BaseWeapon{
         return intersectDistant && intersectDegree;
     }
 
-
     public double getAttackRange() {
         return attackRange;
     }

@@ -6,6 +6,7 @@ import Data.BaseObject;
 import Data.DataEntity;
 import Data.DataOre;
 import Data.Point;
+import animation.AnimationController;
 import entity.Player;
 import entity.Zombie;
 import javafx.scene.canvas.GraphicsContext;
@@ -34,11 +35,10 @@ public class Pickaxe extends Melee{
 
         AttackObject attackObject = new AttackObject(attackPosition, getAttackRange(), getAttackRange(), startAt - getAttackDegree() / 2, getAttackDegree());
         Main.logic.addObject(attackObject);
+        AnimationController.animations.add(attackObject);
 
         for(BaseObject object : gameObjectContainer){
             if(object.isVisible() && this.intersectsCirclePart(object)){
-                //object.setVisible(false);
-                //object.setDestroyed(true);
                 instersectObject.add(object);
             }
         }
@@ -54,6 +54,8 @@ public class Pickaxe extends Melee{
                 data.setHp(data.getHp() - this.getAttackDamage());
             }
         }
+
+        
 
     }
 

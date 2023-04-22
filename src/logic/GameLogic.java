@@ -17,7 +17,7 @@ import ore.BaseOre;
 
 public class GameLogic {
 	
-	private ArrayList<BaseObject> gameObjectContainer;
+	private static ArrayList<BaseObject> gameObjectContainer;
 	
 	public GameLogic() {
 		// create new ObjectContainer
@@ -116,6 +116,10 @@ public class GameLogic {
 
 	public ArrayList<BaseObject> getGameObjectContainer() {
 		return gameObjectContainer;
+	}
+
+	public static void removeObj(BaseObject object){
+		gameObjectContainer.remove(object);
 	}
 
 }
