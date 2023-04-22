@@ -49,7 +49,7 @@ public class Bow extends BaseWeapon implements Cooldownable {
 
 	@Override
 	public void draw(GraphicsContext gc) {
-		gc.setFill(Color.BROWN);
+		gc.setFill(Color.NAVY);
 		
 		Point pos = this.getPosition();
 		gc.fillRect(pos.getX(), pos.getY(), this.getWidth(), this.getHeight());

@@ -3,9 +3,14 @@ package entity;
 import Data.DataEntity;
 import Data.Point;
 import drawing.GameScreen;
+import equipment.Axe;
 import equipment.BaseWeapon;
+import equipment.Bow;
 import equipment.Knife;
 import equipment.Pickaxe;
+import equipment.Punch;
+import equipment.Shield;
+import equipment.Spear;
 import equipment.Sword;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
@@ -32,9 +37,9 @@ public class Player extends Entity implements Cooldownable{
 		this.setHeight(image.getHeight() * mutliply);
 		player = this;
 		//this.setEquipment(new Pickaxe(30.0, 10.0));
-		//this.setEquipment(new Bow(30.0, 10.0, 2));
+		this.setEquipment(new Bow(30.0, 10.0, 2));
 		
-		this.setEquipment(new Sword(30.0, 10.0,10.0,500,60));
+		//this.setEquipment(new Spear(30.0, 10.0,10.0,500,60));
 	}
 
 	public double getMouseAngle(){
@@ -69,7 +74,7 @@ public class Player extends Entity implements Cooldownable{
 		
 		
 		//Action Section
-		if(InputUtility.getKeyPressed(KeyCode.SPACE) && !onCooldown()) {
+		if((InputUtility.getKeyPressed(KeyCode.SPACE)||InputUtility.isLeftClickTriggered()) && !onCooldown()) {
 			attack();
 		} if (InputUtility.getKeyPressed(KeyCode.J) && !onCooldown()) {
 			GameLogic logic = Main.getLogic();
