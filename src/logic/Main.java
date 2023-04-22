@@ -7,6 +7,7 @@ import Dungeon.Room;
 import animation.AnimationController;
 import drawing.GameScreen;
 import entity.Player;
+import entity.Shopkeeper;
 import input.InputUtility;
 import inventory.Inventory;
 import javafx.animation.AnimationTimer;
@@ -39,6 +40,11 @@ public class Main extends Application {
 		
 		logic.addObject(player);
 
+		// Shopkeeper for test
+		Shopkeeper shopkeeper = new Shopkeeper("Shopkeeper", 50, 50, new DataEntity(999999, 1, 1, 0));
+		shopkeeper.setPosition(new Point(firstRoom.getPosition().getX() + 20, firstRoom.getPosition().getY() + 20 ));
+		logic.addObject(shopkeeper);
+
 		inventory = new Inventory();
 		logic.addObject(inventory);
 
@@ -61,7 +67,6 @@ public class Main extends Application {
 		//this function run every sec
 		AnimationTimer animation = new AnimationTimer() {
 			public void handle(long now) {
-				
 				gameScreen.updatePlayer();
 				gameScreen.paintLevel();
 				gameScreen.paintComponent();

@@ -10,7 +10,7 @@ import equipment.Knife;
 import equipment.Pickaxe;
 import equipment.Punch;
 import equipment.Shield;
-import equipment.Spear;
+import equipment.Spear; 
 import equipment.Sword;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
