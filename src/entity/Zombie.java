@@ -30,9 +30,8 @@ public class Zombie extends Entity {
 		DataEntity data = this.getData();
 		
 		if(distance > 0) {
-			this.setPosition(new Point(
-					this.getPosition().getX() - p.getX()/distance * data.getSpd(),
-					this.getPosition().getY() - p.getY()/distance * data.getSpd()));
+			this.move(-p.getX()/distance * data.getSpd(), 0);
+			this.move(0, -p.getY()/distance * data.getSpd());
 		}
 		
 	}
