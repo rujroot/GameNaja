@@ -23,7 +23,7 @@ import logic.RenderableHolder;
 
 public class Player extends Entity implements Cooldownable{
 	
-	public static Player player;
+	public static Player player; 
 	
 	private BaseWeapon equipment;
 	private double lastClickTime = 0, cooldownTime = 1000;
@@ -37,9 +37,9 @@ public class Player extends Entity implements Cooldownable{
 		this.setHeight(image.getHeight() * mutliply);
 		player = this;
 		//this.setEquipment(new Pickaxe(30.0, 10.0));
-		this.setEquipment(new Bow(30.0, 10.0, 2));
+		//this.setEquipment(new Bow(30.0, 10.0, 2));
 		
-		//this.setEquipment(new Spear(30.0, 10.0,10.0,500,60));
+		this.setEquipment(new Knife(30.0, 10.0,10.0,500,60));
 	}
 
 	public double getMouseAngle(){
@@ -70,7 +70,13 @@ public class Player extends Entity implements Cooldownable{
 			this.move(data.getSpd(), 0);
 		} if (InputUtility.getKeyPressed(KeyCode.S) && isLegalMove(0, 1) ) {
 			this.move(0, data.getSpd());
-		} 
+		} if (InputUtility.getKeyPressed(KeyCode.DIGIT1)) {
+			this.setEquipment(new Bow(30.0, 10.0, 2));
+		} if (InputUtility.getKeyPressed(KeyCode.DIGIT2)) {
+			this.setEquipment(new Knife(30.0, 10.0,10.0,500,60));
+		} if (InputUtility.getKeyPressed(KeyCode.DIGIT3)) {
+			this.setEquipment(new Sword(30.0, 10.0,10.0,500,60));
+		}
 		
 		
 		//Action Section

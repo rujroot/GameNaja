@@ -17,7 +17,7 @@ import logic.RenderableHolder;
 
 public class Sword extends Melee {
 
-	private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 392, 960, 51, 63);
+	private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 462, 164, 497-462, 252-164);
 
 
 	public Sword(double width, double height, double attackDamage, double attackRange, double attackDegree) {
@@ -70,9 +70,9 @@ public class Sword extends Melee {
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 		Point pos = this.getPosition();
-		gc.drawImage(image, pos.getX(), pos.getY(), image.getWidth() , image.getHeight());
-        // gc.setFill(Color.CRIMSON);
-		// gc.fillRect(pos.getX(), pos.getY(), this.getWidth(), this.getHeight());
+		gc.drawImage(image, pos.getX()+15, pos.getY()-8, (int)(image.getWidth()*0.75) , (int)((image.getHeight()*0.75)));
+//        gc.setFill(Color.CRIMSON);
+//		gc.fillRect(pos.getX(), pos.getY(), this.getWidth(), this.getHeight());
 	}
 
 	

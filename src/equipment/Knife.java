@@ -10,12 +10,14 @@ import animation.AnimationController;
 import entity.Player;
 import entity.Zombie;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import logic.Main;
+import logic.RenderableHolder;
 import ore.BaseOre;
 
 public class Knife extends Melee{
-	
+	private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 607, 390, 637-607, 444-390);
 	
 
 	public Knife(double width, double height, double attackDamage, double attackRange,double attackDegree) {
@@ -67,8 +69,9 @@ public class Knife extends Melee{
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 		Point pos = this.getPosition();
-        gc.setFill(Color.GRAY);
-		gc.fillRect(pos.getX(), pos.getY(), this.getWidth(), this.getHeight());
+		gc.drawImage(image, pos.getX()+15, pos.getY()+8, (int)(image.getWidth()*0.75) , (int)((image.getHeight()*0.75)));
+//        gc.setFill(Color.GRAY);
+//		gc.fillRect(pos.getX(), pos.getY(), this.getWidth(), this.getHeight());
 	}
 
 }
