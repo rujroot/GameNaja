@@ -12,6 +12,7 @@ import equipment.Punch;
 import equipment.Shield;
 import equipment.Spear; 
 import equipment.Sword;
+import equipment.Wand;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
@@ -76,6 +77,10 @@ public class Player extends Entity implements Cooldownable{
 			this.setEquipment(new Knife(30.0, 10.0,10.0,500,60));
 		} if (InputUtility.getKeyPressed(KeyCode.DIGIT3)) {
 			this.setEquipment(new Sword(30.0, 10.0,10.0,500,60));
+		} if (InputUtility.getKeyPressed(KeyCode.DIGIT4)) {
+			this.setEquipment(new Wand(30.0, 10.0, 2,10));
+		} if (InputUtility.getKeyPressed(KeyCode.DIGIT5)) {
+			this.setEquipment(new Pickaxe(30.0, 10.0));
 		}
 		
 		

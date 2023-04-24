@@ -8,7 +8,7 @@ import logic.Main;
 import logic.RenderableHolder;
 
 public class DiamondOre extends BaseOre {
-    
+	private WritableImage image = new WritableImage(RenderableHolder.ores.getPixelReader(), 32 * 12, 32 * 3, 32, 32);
     public DiamondOre(Point position, DataOre dataOre) {
         super(position, 0, 0, dataOre);
         this.setImage(new WritableImage(RenderableHolder.ores.getPixelReader(), 32 * 12, 32 * 3, 32, 32));
