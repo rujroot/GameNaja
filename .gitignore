@@ -66,3 +66,7 @@ configurations:
 *.doc
 .DS_Store
 
+.classpath
+.classpath
+.classpath
+.project

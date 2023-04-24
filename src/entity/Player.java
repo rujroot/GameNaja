@@ -88,6 +88,8 @@ public class Player extends Entity implements Cooldownable{
 			logic.addObject(zombie);
 		} if (InputUtility.getKeyPressed(KeyCode.Z)){
 			Main.getLogic().nextFloor();
+		} if (InputUtility.getKeyPressed(KeyCode.E)){
+			Main.getLogic().playerinteraction();
 		}
 	}
 	

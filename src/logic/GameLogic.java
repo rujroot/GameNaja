@@ -9,6 +9,7 @@ import Dungeon.GenerateDungeon;
 import Dungeon.Room;
 import entity.Entity;
 import entity.Player;
+import entity.Shopkeeper;
 import entity.Zombie;
 import equipment.projectile.Arrow;
 import inventory.Inventory;
@@ -69,6 +70,21 @@ public class GameLogic {
 				}
 			}
 			
+		}
+	}
+
+	public void playerinteraction(){
+		Player player = Player.player;
+		for (int i = gameObjectContainer.size() - 1; i >= 0; i--) {
+			BaseObject object = gameObjectContainer.get(i);
+			if(object instanceof Shopkeeper){
+				Shopkeeper shopkeeper = (Shopkeeper) object;
+				
+				shopkeeper.setOffer( !shopkeeper.isOffer() );
+
+			}
+			
+
 		}
 	}
 
