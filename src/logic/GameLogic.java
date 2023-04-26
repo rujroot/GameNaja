@@ -8,6 +8,7 @@ import Data.Point;
 import Dungeon.GenerateDungeon;
 import Dungeon.Room;
 import entity.Entity;
+import entity.Monster;
 import entity.Player;
 import entity.Shopkeeper;
 import entity.Zombie;
@@ -42,8 +43,8 @@ public class GameLogic {
 						gameObjectContainer.remove(entity);
 					}
 
-					if(entity instanceof Zombie) {
-						((Zombie) entity).follow();
+					if(entity instanceof Monster) {
+						((Monster) entity).follow();
 					}
 				}
 			

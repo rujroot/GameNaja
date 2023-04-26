@@ -5,7 +5,7 @@ import Data.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class Zombie extends Entity {
+public class Zombie extends Monster {
 	private double poisonDamage;
 
 	public Zombie(String name, double Height, double Width, DataEntity data) {
@@ -19,6 +19,23 @@ public class Zombie extends Entity {
 		//Enemy.setPoisonStatus(Enemy.getPoisonStatus()+this.getPoisonDamage());
 	}
 	
+	
+	public double getPoisonDamage() {
+		return poisonDamage;
+	}
+
+	public void setPoisonDamage(double poisonDamage) {
+		this.poisonDamage = poisonDamage;
+	}
+
+	@Override
+	public void draw(GraphicsContext gc) {
+		gc.setFill(Color.GREEN);
+		gc.fillRect(this.getPosition().getX(), this.getPosition().getY(), this.getWidth(), this.getHeight());
+		this.drawHP(gc);
+	}
+
+	@Override
 	public void follow() {
 		Point pp = Player.getPlayer().getPosition();
 		
@@ -34,21 +51,6 @@ public class Zombie extends Entity {
 			this.move(0, -p.getY()/distance * data.getSpd());
 		}
 		
-	}
-
-	public double getPoisonDamage() {
-		return poisonDamage;
-	}
-
-	public void setPoisonDamage(double poisonDamage) {
-		this.poisonDamage = poisonDamage;
-	}
-
-	@Override
-	public void draw(GraphicsContext gc) {
-		gc.setFill(Color.GREEN);
-		gc.fillRect(this.getPosition().getX(), this.getPosition().getY(), this.getWidth(), this.getHeight());
-		this.drawHP(gc);
 	}
 
 

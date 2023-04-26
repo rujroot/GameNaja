@@ -7,6 +7,7 @@ import Data.DataEntity;
 import Data.DataOre;
 import Data.Point;
 import animation.AnimationController;
+import entity.Monster;
 import entity.Player;
 import entity.Zombie;
 import javafx.scene.canvas.GraphicsContext;
@@ -48,9 +49,9 @@ public class Pickaxe extends Melee{
                 BaseOre ore = (BaseOre) object;
                 DataOre data = ore.getDataOre();
                 data.setDurability(0);
-            }else if(object instanceof Zombie){
-                Zombie zombie = (Zombie) object;
-                DataEntity data = zombie.getData();
+            }else if(object instanceof Monster){
+            	Monster monster = (Monster) object;
+                DataEntity data = monster.getData();
                 data.setHp(data.getHp() - this.getAttackDamage());
             }
         }
