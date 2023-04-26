@@ -8,18 +8,29 @@ import drawing.GameScreen;
 import entity.Player;
 import item.Item;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 import logic.Main;
+import logic.RenderableHolder;
 
 public class Inventory extends BaseObject{
-    private Item[] allItem;
+    
     private int maxIndex, currIndex;
+    private BaseUI UI;
 
+    private Image backUI = RenderableHolder.backUI, upUI = RenderableHolder.upUI, select = RenderableHolder.selectUI;
+    private WritableImage backBtwUI = new WritableImage(backUI.getPixelReader(), 19, 0, 60, 96);
+    
     public Inventory(){
         super(new Point(0, 0) , 700, 60, 10);
         this.setMaxIndex(9);
         this.setCurrIndex(0);
         allItem = new Item[maxIndex];
+
+        Point pos = this.getPosition();
+        Point resolution = GameScreen.getResolution();
+        Point basePoint = new Point(pos.getX() - resolution.getX() / 4 + 100, pos.getY() + resolution.getY() / 3);
+        UI = new BaseUI(basePoint, 0, 0, 9, 0);
     }
 
     public void addItem(ArrayList<Item> items){
@@ -69,42 +80,51 @@ public class Inventory extends BaseObject{
 
     @Override
     public void draw(GraphicsContext gc) {
-        Player player = Player.getPlayer();
-        Point pos = player.getPosition();
-        Point resolution = GameScreen.getResolution();
+        UI.draw(gc);
+        // Player player = Player.getPlayer();
+        // Point pos = player.getPosition();
+        // Point resolution = GameScreen.getResolution();
 
-        // create base Inventory ui
-        gc.setFill(Color.WHITE);
-		gc.fillRect(pos.getX() - resolution.getX() / 4, pos.getY() + resolution.getY() / 3, this.getWidth(), this.getHeight());
+        // Point basePoint = new Point(pos.getX() - resolution.getX() / 4 + 100, pos.getY() + resolution.getY() / 3);
 
-        // create child ui
-        for(int i = 0; i < maxIndex; ++i){
-            gc.setFill(Color.AQUAMARINE);
+        // // create base ui
+        // for(int i = 0; i < maxIndex - 1; ++i){
 
-            Point posUI = new Point(
-             pos.getX() - (resolution.getX() / 4) + (this.getWidth() / maxIndex) * i + 5,
-             pos.getY() + (resolution.getY() / 3) + 5);
+        //     if(i == 0){
+        //         gc.drawImage(backUI, basePoint.getX() + (backBtwUI.getWidth() * i) - 18, 
+        //                 basePoint.getY(), 
+        //                 backUI.getWidth(), 
+        //                 backUI.getHeight());
+        //         gc.drawImage(backUI, basePoint.getX() + (backBtwUI.getWidth() * (maxIndex - 1)) - 18, 
+        //                 basePoint.getY(), 
+        //                 backUI.getWidth(), 
+        //                 backUI.getHeight());
 
-            Point sizeUI = new Point(
-             (this.getWidth() / maxIndex) - 15, 
-             this.getHeight() - 10);
+        //     }else{
+        //        gc.drawImage(backBtwUI, basePoint.getX() + (backBtwUI.getWidth() * i), 
+        //                 basePoint.getY(), 
+        //                 backBtwUI.getWidth(), 
+        //                 backBtwUI.getHeight()); 
+        //     }
 
-            gc.fillRect(
-             posUI.getX(),
-             posUI.getY(), 
-             sizeUI.getX(), 
-             sizeUI.getY()
-            );
+        // }
 
-            if(allItem[i] != null){
-                Item item = allItem[i];
-                item.setPosition(posUI);
-                item.setWidth(sizeUI.getX());
-                item.setHeight(sizeUI.getY());
-            }
+        // // create child ui
+        // for(int i = 0; i < maxIndex; ++i){
+        //     gc.drawImage(upUI, basePoint.getX() + (upUI.getWidth() * i), 
+        //                 basePoint.getY() + 18, 
+        //                 upUI.getWidth(), 
+        //                 upUI.getHeight());
+            
+        //     Point posUI = new Point(basePoint.getX() + (upUI.getWidth() * i), basePoint.getY() + 20);
 
-        }
-
+        //     if(allItem[i] != null){
+        //         Item item = allItem[i];
+        //         item.setPosition(posUI);
+        //         // item.setWidth(upUI.getWidth());
+        //         // item.setHeight(upUI.getHeight());
+        //     }
+        // }
 
     }
 }

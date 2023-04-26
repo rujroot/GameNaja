@@ -2,10 +2,16 @@ package item;
 
 import Data.BaseObject;
 import Data.Point;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 public abstract class Item extends BaseObject {
 
     private int amount = 0, index;
     private String Name;
+    private WritableImage image;
 
     public Item(Point position, double width, double height) {
         super(position, width, height);
@@ -13,6 +19,22 @@ public abstract class Item extends BaseObject {
 
     public Item(Point position, double width, double height, int z) {
         super(position, width, height, z);
+    }
+
+    @Override
+    public void draw(GraphicsContext gc) {
+    	Point pos = this.getPosition();
+		gc.drawImage(image, pos.getX()+5, pos.getY(), (int)(image.getWidth()*1.65) , (int)((image.getHeight()*1.65)));
+
+        gc.setFont(new Font("Arial", 24));
+        gc.setFill(Color.BLACK);
+        gc.setStroke(Color.WHITE);
+        gc.setLineWidth(5);
+
+        String itemAmount = Integer.toString(getAmount());
+
+        gc.strokeText(itemAmount, pos.getX() + this.getWidth() - itemAmount.length() * 10 , pos.getY() + this.getHeight(), 100);
+        gc.fillText(itemAmount, pos.getX() + this.getWidth() - itemAmount.length() * 10, pos.getY() + this.getHeight(), 100);
     }
 
     public boolean equals(Item item){
@@ -47,6 +69,11 @@ public abstract class Item extends BaseObject {
         Name = name;
     }
 
-    
-    
+    public WritableImage getImage() {
+        return image;
+    }
+
+    public void setImage(WritableImage image) {
+        this.image = image;
+    }    
 }

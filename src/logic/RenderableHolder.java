@@ -15,6 +15,7 @@ public class RenderableHolder {
 	private Comparator<IRenderable> comparator;
 
 	public static Image Tileset, baseFloor, ores, character, atlas, sideWall, mainWall;
+	public static Image backUI, upUI, selectUI;
 
 
 	static {
@@ -47,6 +48,9 @@ public class RenderableHolder {
 		ores = new Image(ClassLoader.getSystemResource("res/image/ores.png").toString());
 		character = new Image(ClassLoader.getSystemResource("res/image/character2.png").toString());
 		atlas = new Image(ClassLoader.getSystemResource("res/image/atlas2.png").toString());
+		backUI = new Image(ClassLoader.getSystemResource("res/image/backui1.png").toString());
+		upUI = new Image(ClassLoader.getSystemResource("res/image/upui1.png").toString());
+		selectUI = new Image(ClassLoader.getSystemResource("res/image/selectui1.png").toString());
 
 		sideWall = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 304 * 4, 12 * 4, 4 * 4, 32 * 4);
 		mainWall = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 1236, 176, 87, 79);

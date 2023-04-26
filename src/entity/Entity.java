@@ -79,7 +79,7 @@ public abstract class Entity extends BaseObject {
 		
 		ArrayList<BaseObject> allObject = Main.getLogic().getGameObjectContainer();
 		for(BaseObject object : allObject){
-			if(object instanceof BaseOre && object.isVisible()){
+			if((object instanceof BaseOre && object.isVisible()) || (!object.equals(this) && object instanceof Entity)){
 				Hitbox A = new Hitbox(newPosPlayer, this.getWidth(), this.getHeight());
 				Hitbox B = new Hitbox(object.getPosition(), object.getWidth(), object.getHeight());
 				if(A.isIntersect(B)) return false;

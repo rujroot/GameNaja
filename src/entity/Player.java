@@ -22,15 +22,15 @@ import logic.GameLogic;
 import logic.Main;
 import logic.RenderableHolder;
 
-public class Player extends Entity implements Cooldownable{
+public class Player extends Entity{
 	
 	public static Player player; 
 	
 	private BaseWeapon equipment;
-	private double lastClickTime = 0, cooldownTime = 1000;
 	private Point resolutionPosition;
 	private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 960, 944, 59, 79);
 	private int mutliply = 1;
+	private boolean interaction = false;
 
 	public Player(String name, double Height, double Width, DataEntity data) {
 		super(name, Height, Width, data);
@@ -82,19 +82,16 @@ public class Player extends Entity implements Cooldownable{
 		} if (InputUtility.getKeyPressed(KeyCode.DIGIT5)) {
 			this.setEquipment(new Pickaxe(30.0, 10.0));
 		}
-		
-		
+			
 		//Action Section
-		if((InputUtility.getKeyPressed(KeyCode.SPACE)||InputUtility.isLeftClickTriggered()) && !onCooldown()) {
+		if((InputUtility.getKeyPressed(KeyCode.SPACE)||InputUtility.isLeftClickTriggered())) {
 			attack();
-		} if (InputUtility.getKeyPressed(KeyCode.J) && !onCooldown()) {
+		} if (InputUtility.getKeyPressed(KeyCode.J)) {
 			GameLogic logic = Main.getLogic();
 			Zombie zombie = new Zombie("Zombie", 50, 50, new DataEntity(10, 1, 1, 4.5));
 			logic.addObject(zombie);
 		} if (InputUtility.getKeyPressed(KeyCode.Z)){
 			Main.getLogic().nextFloor();
-		} if (InputUtility.getKeyPressed(KeyCode.E)){
-			Main.getLogic().playerinteraction();
 		}
 	}
 	
@@ -133,16 +130,4 @@ public class Player extends Entity implements Cooldownable{
 	public void setResolutionPosition(Point resolutionPosition) {
 		this.resolutionPosition = resolutionPosition;
 	}
-
-	@Override
-	public boolean onCooldown() {
-		long currentTime = System.currentTimeMillis();
-		if(currentTime - lastClickTime > cooldownTime) {
-			lastClickTime = currentTime;
-			return false;
-		}else {
-			return true;
-		}
-	}
-
 }

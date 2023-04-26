@@ -36,7 +36,7 @@ public class Main extends Application {
 		// Create Player
 		Player player = new Player("Player", 50, 50, new DataEntity(1, 1, 1, 10));
 		Room firstRoom = GenerateDungeon.getContainer().get(0).get(0);
-		player.setPosition(new Point(firstRoom.getPosition().getX() + 20, firstRoom.getPosition().getY() + 20 ));
+		player.setPosition(new Point(firstRoom.getPosition().getX() + 100, firstRoom.getPosition().getY() + 100 ));
 		
 		logic.addObject(player);
 
@@ -44,9 +44,6 @@ public class Main extends Application {
 		Shopkeeper shopkeeper = new Shopkeeper("Shopkeeper", 50, 50, new DataEntity(999999, 1, 1, 0));
 		shopkeeper.setPosition(new Point(firstRoom.getPosition().getX() + 20, firstRoom.getPosition().getY() + 20 ));
 		logic.addObject(shopkeeper);
-
-		inventory = new Inventory();
-		logic.addObject(inventory);
 
 		// Add root and scene + set Title game
 		StackPane root = new StackPane();
@@ -63,6 +60,9 @@ public class Main extends Application {
 		stage.show();
 
 		AnimationController animationController = new AnimationController();
+
+		inventory = new Inventory();
+		logic.addObject(inventory);
 
 		//this function run every sec
 		AnimationTimer animation = new AnimationTimer() {
