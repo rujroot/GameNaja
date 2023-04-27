@@ -88,8 +88,17 @@ public class Player extends Entity{
 			attack();
 		} if (InputUtility.getKeyPressed(KeyCode.J)) {
 			GameLogic logic = Main.getLogic();
-			Zombie zombie = new Zombie("Zombie", 50, 50, new DataEntity(10, 1, 1, 4.5));
+			//Data : hp atk def spd
+			Zombie zombie = new Zombie("Zombie", 50, 50, new DataEntity(100, 1, 1, 4.5));
+			Skeleton skeleton = new Skeleton("Skeleton",50,50, new DataEntity(100, 1, 1, 4.5));
+			Goblin goblin = new Goblin("Goblin",40,40, new DataEntity(100, 10, 10, 6.5));
+			Demon demon = new Demon("Demon",70,70, new DataEntity(100, 10, 10, 6.5));
+			Slime slime = new Slime("Slime",30,30, new DataEntity(100, 10, 10, 6.5));
 			logic.addObject(zombie);
+			logic.addObject(skeleton);
+			logic.addObject(goblin);
+			logic.addObject(demon);
+			logic.addObject(slime);
 		} if (InputUtility.getKeyPressed(KeyCode.Z)){
 			Main.getLogic().nextFloor();
 		}

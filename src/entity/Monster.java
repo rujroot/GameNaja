@@ -3,40 +3,26 @@ package entity;
 import Data.DataEntity;
 import Data.Point;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 
-public class Skeleton extends Monster {
-	private int protection;
+public class Monster extends Entity{
 
-	public Skeleton(String name, double Height, double Width, DataEntity data) {
-		super(name, Height, Width, data);
-		this.setProtection(protection);
-	}
-
-	public int getProtection() {
-		return protection;
-	}
-
-	public void setProtection(int protection) {
-		this.protection = protection;
+	public Monster(String name, double width, double height, DataEntity data) {
+		super(name, width, height, data);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		gc.setFill(Color.WHITESMOKE);
-		gc.fillRect(this.getPosition().getX(), this.getPosition().getY(), this.getWidth(), this.getHeight());
-		this.drawHP(gc);
-
+		
 	}
 
 	@Override
 	public void attack() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
-	@Override
 	public void follow() {
 		// TODO Auto-generated method stub
 		Point pp = Player.getPlayer().getPosition();

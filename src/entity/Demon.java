@@ -1,20 +1,48 @@
 package entity;
 
-public class Demon extends Entity {
+import Data.DataEntity;
+import Data.Point;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+
+public class Demon extends Monster {
 	private int magicAttack;
 	
-	public Demon(String name, int hp, int atk, int def, int spd, int poisonStatus,int magicAttack) {
-		super(name, hp, atk, def, spd, poisonStatus);
-		// TODO Auto-generated constructor stub
+	public Demon(String name, double width, double height, DataEntity data) {
+		super(name, width, height, data);
 		this.setMagicAttack(magicAttack);
+		// TODO Auto-generated constructor stub
 	}
-	
 
 
 	@Override
-	public void attack(Entity Enemy) {
-		// TODO Auto-generated method stub
-		Enemy.setHp(Enemy.getHp()-this.getAtk()-this.getMagicAttack());
+	public void attack() {
+		//Enemy.setHp(Enemy.getHp()-this.getAtk());
+		//Enemy.setPoisonStatus(Enemy.getPoisonStatus()+this.getPoisonDamage());
+	}
+	
+	@Override
+	public void draw(GraphicsContext gc) {
+		gc.setFill(Color.FIREBRICK);
+		gc.fillRect(this.getPosition().getX(), this.getPosition().getY(), this.getWidth(), this.getHeight());
+		this.drawHP(gc);
+	}
+
+	@Override
+	public void follow() {
+		Point pp = Player.getPlayer().getPosition();
+		
+		double px = pp.getX(), py = pp.getY();
+		
+		Point p = new Point(this.getPosition().getX() - px, this.getPosition().getY() - py);
+		double distance = Math.sqrt(p.getX() * p.getX() + p.getY() * p.getY());
+		
+		DataEntity data = this.getData();
+		
+		if(distance > 0) {
+			this.move(-p.getX()/distance * data.getSpd(), 0);
+			this.move(0, -p.getY()/distance * data.getSpd());
+		}
 		
 	}
 
