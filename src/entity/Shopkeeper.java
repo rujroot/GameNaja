@@ -19,32 +19,34 @@ public class Shopkeeper extends Entity implements Cooldownable{
     // image entity
     private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 392, 960, 51, 63);
 
-    private BaseUI chooseUI;
+    private BaseUI currentUI, chooseUI, sellUI, buyUI;
 
     private boolean isOffer = false;
-    private double lastClickTime = 0, cooldownTime = 1000;
-    private String Choose = "None";
+    private String choose = "None";
+    private double lastClickTime = 0, cooldownTime = 200;
+    private int select = 0;
 
     public Shopkeeper(String name, double width, double height, DataEntity data) {
         super(name, width, height, data);
         this.setWidth(image.getWidth());
 		this.setHeight(image.getHeight());
 
-        Point pos = this.getPosition();
-        chooseUI = new BaseUI(pos, 0, 0, 2, 20);
-        //chooseUI.setVisible(false);
+        chooseUI = new BaseUI(new Point(-100, -100), 0, 0, 2, 20, this);
+        chooseUI.setSelectIndex(0);
+
+        buyUI = new BaseUI(new Point(-200, -100), 0, 0, 4, 10, this);
+        buyUI.setSelectIndex(0);
+
+        sellUI = new BaseUI(new Point(-200, -100), 0, 0, 5, 10, this);
+        sellUI.setSelectIndex(0);
     }
 
-    public void openShopBuy(GraphicsContext gc){
+    public void shopBuy(int Index){
         
     }
 
-    public void openShopSell(GraphicsContext gc){
+    public void shopSell(int Index){
 
-    }
-
-    public void openChooseShop(GraphicsContext gc){
-        chooseUI.setVisible(true);
     }
 
     @Override
@@ -55,7 +57,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
 		gc.drawImage(image, pos.getX(), pos.getY(), image.getWidth() , image.getHeight());
 
         updateInput();
-        if(inDistant() && !isOffer){
+        if(inDistant() && currentUI == null){
             gc.setFont(new Font("Arial", 24));
             gc.setFill(Color.BLACK);
             gc.setStroke(Color.WHITE);
@@ -67,13 +69,13 @@ public class Shopkeeper extends Entity implements Cooldownable{
         }
 
         if(!inDistant()){
-            isOffer = false;
-            Choose = "None";
+            currentUI = null;
+            choose = "None";
         }
 
         // Draw Shop
-        if(isOffer){
-            if(Choose.equals("None")) openChooseShop(gc);
+        if(currentUI != null){
+            currentUI.draw(gc);
         }
     }
 
@@ -87,9 +89,50 @@ public class Shopkeeper extends Entity implements Cooldownable{
     public void updateInput(){
         // Player interact with this entity
         if (InputUtility.getKeyPressed(KeyCode.E) && inDistant() && !onCooldown()){
-			isOffer = !isOffer;
-            Choose = "None";
+            if(choose.equals("None")){
+                currentUI = chooseUI;
+                choose = "Choose";
+            }
+            else if(choose.equals("Choose")){
+                int currSelect = currentUI.getSelectIndex();
+                if(currSelect == 0){
+                    currentUI = buyUI;
+                    choose = "Buy";
+                }else{
+                    currentUI = sellUI;
+                    choose = "Sell";
+                }
+            }
+            else if(choose.equals("Buy")){
+                int currSelect = currentUI.getSelectIndex();
+                shopBuy(currSelect);
+            }
+            else if(choose.equals("Sell")){
+                int currSelect = currentUI.getSelectIndex();
+                shopSell(currSelect);
+            }
 		}
+
+        if (InputUtility.getKeyPressed(KeyCode.Q) && inDistant() && !onCooldown()){
+            if(choose.equals("Choose")){
+                currentUI = null;
+                choose = "None";
+            }
+            else if(choose.equals("Buy") || choose.equals("Sell")){
+                currentUI = chooseUI;
+                choose = "Choose";
+            }
+		}
+
+        if (InputUtility.getKeyPressed(KeyCode.LEFT) && currentUI != null && !onCooldown()){
+			currentUI.setSelectIndex(currentUI.getSelectIndex() - 1);
+
+		}
+        if (InputUtility.getKeyPressed(KeyCode.RIGHT) && currentUI != null && !onCooldown()){
+            currentUI.setSelectIndex(currentUI.getSelectIndex() + 1);
+
+		}
+
     }
     
     @Override
@@ -105,6 +148,14 @@ public class Shopkeeper extends Entity implements Cooldownable{
         this.isOffer = isOffer;
     }
 
+    public int getSelect() {
+        return select;
+    }
+
+    public void setSelect(int select) {
+        this.select = select;
+    }
+
     @Override
     public boolean onCooldown() {
         long currentTime = System.currentTimeMillis();
@@ -115,7 +166,4 @@ public class Shopkeeper extends Entity implements Cooldownable{
 			return true;
 		}
     }
-
-    
-    
 }

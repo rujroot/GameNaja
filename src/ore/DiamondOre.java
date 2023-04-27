@@ -2,6 +2,7 @@ package ore;
 
 import data.DataOre;
 import data.Point;
+import entity.Player;
 import item.Diamond;
 import javafx.scene.image.WritableImage;
 import logic.Main;
@@ -20,6 +21,6 @@ public class DiamondOre extends BaseOre {
     public void onBreak() {
         Diamond diamond = new Diamond(getPosition(), getWidth(), getHeight(), 11);
         diamond.setAmount(1);
-        Main.inventory.addItem(diamond);
+        Player.inventory.addItem(diamond);
     }
 }

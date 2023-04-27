@@ -2,6 +2,7 @@ package ore;
 
 import data.DataOre;
 import data.Point;
+import entity.Player;
 import item.GoldIngot;
 import javafx.scene.image.WritableImage;
 import logic.Main;
@@ -20,6 +21,6 @@ public class GoldOre extends BaseOre{
     public void onBreak() {
         GoldIngot gold = new GoldIngot(getPosition(), getWidth(), getHeight(), 11);
         gold.setAmount(1);
-        Main.inventory.addItem(gold);
+        Player.inventory.addItem(gold);
     }
 }

@@ -2,6 +2,7 @@ package ore;
 
 import data.DataOre;
 import data.Point;
+import entity.Player;
 import item.Coal;
 import javafx.scene.image.WritableImage;
 import logic.Main;
@@ -20,6 +21,6 @@ public class CoalOre extends BaseOre {
     public void onBreak() {
         Coal coal = new Coal(getPosition(), getWidth(), getHeight(), 11);
         coal.setAmount(1);
-        Main.inventory.addItem(coal);
+        Player.inventory.addItem(coal);
     }
 }

@@ -2,6 +2,7 @@ package ore;
 
 import data.DataOre;
 import data.Point;
+import entity.Player;
 import item.IronIngot;
 import javafx.scene.image.WritableImage;
 import logic.Main;
@@ -20,6 +21,6 @@ public class IronOre extends BaseOre {
     public void onBreak() {
         IronIngot iron = new IronIngot(getPosition(), getWidth(), getHeight(), 11);
         iron.setAmount(1);
-        Main.inventory.addItem(iron);
+        Player.inventory.addItem(iron);
     }
 }
