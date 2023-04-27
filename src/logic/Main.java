@@ -35,7 +35,8 @@ public class Main extends Application {
 		// TODO Auto-generated method stub
 		try {
 			System.out.println("S");
-			Parent root = (Parent) FXMLLoader.load(getClass().getResource("./scene/GameOver.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/scene/GameOver.fxml"));
+
 			System.out.println("S");
 			Scene startGame = new Scene(root);
 			stage.setScene(startGame);
