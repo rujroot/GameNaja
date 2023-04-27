@@ -4,6 +4,7 @@ import Data.DataEntity;
 import Data.Point;
 import drawing.GameScreen;
 import input.InputUtility;
+import inventory.BaseUI;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
@@ -18,9 +19,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
     // image entity
     private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 392, 960, 51, 63);
 
-    // imgae ui
-    private Image backUI = RenderableHolder.backUI, upUI = RenderableHolder.upUI, select = RenderableHolder.selectUI;
-    private WritableImage backBtwUI = new WritableImage(backUI.getPixelReader(), 19, 0, 60, 96);
+    private BaseUI chooseUI;
 
     private boolean isOffer = false;
     private double lastClickTime = 0, cooldownTime = 1000;
@@ -30,6 +29,10 @@ public class Shopkeeper extends Entity implements Cooldownable{
         super(name, width, height, data);
         this.setWidth(image.getWidth());
 		this.setHeight(image.getHeight());
+
+        Point pos = this.getPosition();
+        chooseUI = new BaseUI(pos, 0, 0, 2, 20);
+        //chooseUI.setVisible(false);
     }
 
     public void openShopBuy(GraphicsContext gc){
@@ -41,18 +44,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
     }
 
     public void openChooseShop(GraphicsContext gc){
-        //UI shop buy
-        Point pos = this.getPosition();
-        gc.drawImage(backUI, pos.getX() - backUI.getWidth() + 10, 
-                        pos.getY() - backUI.getHeight() - 20, 
-                        backUI.getWidth(), 
-                        backUI.getHeight());
-
-        // UI shop sell
-        gc.drawImage(backUI, pos.getX() + 20, 
-                        pos.getY() - backUI.getHeight() - 20, 
-                        backUI.getWidth() , 
-                        backUI.getHeight());
+        chooseUI.setVisible(true);
     }
 
     @Override

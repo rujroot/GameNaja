@@ -2,9 +2,11 @@ package inventory;
 
 import Data.BaseObject;
 import Data.Point;
+import item.Item;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
+import logic.Main;
 import logic.RenderableHolder;
 
 public class BaseUI extends BaseObject{
@@ -12,6 +14,7 @@ public class BaseUI extends BaseObject{
     private int maxIndex, currIndex = 0;
     private double offset;
     private SlotUI[] posIndex;
+    private boolean visible = true, followPlayer = false;
 
     private Image backUI = RenderableHolder.backUI, upUI = RenderableHolder.upUI, select = RenderableHolder.selectUI;
     private WritableImage backBtwUI = new WritableImage(backUI.getPixelReader(), 19, 0, 60, 96);
@@ -31,32 +34,70 @@ public class BaseUI extends BaseObject{
                                             backUI.getWidth(), 
                                             backUI.getHeight(), 
                                             backUI);
+                    posIndex[i].getOffset().setX(18);
+                    posIndex[i].getOffset().setY(18);
 
                     posIndex[maxIndex - 1] = new SlotUI(new Point(stPos.getX() + (backBtwUI.getWidth() * (maxIndex - 1)) - 18 , 
                                             stPos.getY()) , 
                                             backUI.getWidth(), 
                                             backUI.getHeight(), backUI);
+                    posIndex[maxIndex - 1].getOffset().setX(18);
+                    posIndex[maxIndex - 1].getOffset().setY(18);
+
                 }else{
                     posIndex[i] = new SlotUI(new Point(stPos.getX() + (backBtwUI.getWidth() * i) , stPos.getY()) , backBtwUI.getWidth(), backBtwUI.getHeight(), backBtwUI);
+                    posIndex[i].getOffset().setX(0);
+                    posIndex[i].getOffset().setY(18);
                 }
 
             }
         }else{
+            for(int i = 0; i < maxIndex - 1; ++i){
 
+                posIndex[i] = new SlotUI(new Point(stPos.getX() + (backUI.getWidth() * i) , stPos.getY()) , backUI.getWidth(), backUI.getHeight(), backUI);
+                posIndex[i].getOffset().setX(0);
+                posIndex[i].getOffset().setY(18);
+                
+            }
         }
+
+    }
+
+    public void addItem(Item item){
+        for(int i = 0; i < maxIndex; ++i){
+            if(posIndex[i].getItem() != null && posIndex[i].equals(item)){
+                posIndex[i].getItem().addAmount(item.getAmount());
+                return;
+            }
+        }
+
+        for(int i = 0; i < maxIndex; ++i){
+            if(posIndex[i].getItem() == null){
+                posIndex[i].setItem(item);
+                Main.logic.addObject(item);
+                return;
+            }
+        }
+    }
+
+    public void addItem(Item item, int index){
 
     }
 
     @Override
     public void draw(GraphicsContext gc) {
+        if(!visible) return;
+
         if(offset == 0){
             posIndex[maxIndex - 1].draw(gc);
             for(int i = 0; i < maxIndex - 1; ++i){
                 posIndex[i].draw(gc);
+                posIndex[i].setFollowPlayer(followPlayer);
               } 
         }else{
             for(int i = 0; i < maxIndex; ++i){
                 posIndex[i].draw(gc);
+                posIndex[i].setFollowPlayer(followPlayer);
             }  
         }
         
@@ -84,6 +125,22 @@ public class BaseUI extends BaseObject{
 
     public void setOffset(double offset) {
         this.offset = offset;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
+    public boolean isFollowPlayer() {
+        return followPlayer;
+    }
+
+    public void setFollowPlayer(boolean followPlayer) {
+        this.followPlayer = followPlayer;
     }
 
     

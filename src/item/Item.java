@@ -3,7 +3,6 @@ package item;
 import Data.BaseObject;
 import Data.Point;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -24,7 +23,7 @@ public abstract class Item extends BaseObject {
     @Override
     public void draw(GraphicsContext gc) {
     	Point pos = this.getPosition();
-		gc.drawImage(image, pos.getX()+5, pos.getY(), (int)(image.getWidth()*1.65) , (int)((image.getHeight()*1.65)));
+		gc.drawImage(image, pos.getX() + 5, pos.getY() + 5, image.getWidth()*1.5 , image.getHeight()*1.5);
 
         gc.setFont(new Font("Arial", 24));
         gc.setFill(Color.BLACK);

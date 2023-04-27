@@ -3,13 +3,16 @@ package inventory;
 import Data.BaseObject;
 import Data.Point;
 import entity.Player;
+import item.Item;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class SlotUI extends BaseObject {
 
     private Image image;
-    private BaseObject obj;
+    private Item item;
+    private Point offset = new Point(0, 0);
+    private boolean followPlayer;
 
     public SlotUI(Point position, double width, double height, Image image) {
         super(position, width, height);
@@ -18,10 +21,23 @@ public class SlotUI extends BaseObject {
 
     @Override
     public void draw(GraphicsContext gc) {
-        Player player = Player.player;
-        Point posPlayer = player.getPosition();
+        
         Point pos = this.getPosition();
-        gc.drawImage(image, posPlayer.getX() + pos.getX(), posPlayer.getY() + pos.getY(), image.getWidth(), image.getHeight());
+
+        if(followPlayer){
+            Point posPlayer = Player.player.getPosition();
+            pos.setX(posPlayer.getX() + pos.getX());
+            pos.setY(posPlayer.getY() + pos.getY());
+        }
+        
+        gc.drawImage(image, pos.getX(), pos.getY(), image.getWidth(), image.getHeight());
+
+        if(item != null){
+            Point posItem = item.getPosition();
+            posItem.setX(pos.getX() + offset.getX());
+            posItem.setY(pos.getY() + offset.getY());
+            item.draw(gc);
+        }
     }
 
     public Image getImage() {
@@ -32,12 +48,34 @@ public class SlotUI extends BaseObject {
         this.image = image;
     }
 
-    public BaseObject getObj() {
-        return obj;
+    public Item getItem() {
+        return item;
     }
 
-    public void setObj(BaseObject obj) {
-        this.obj = obj;
+    public void setItem(Item item) {
+        this.item = item;
     }
+
+    public boolean equals(Item item){
+        return this.item.equals(item);
+    }
+
+    public Point getOffset() {
+        return offset;
+    }
+
+    public void setOffset(Point offset) {
+        this.offset = offset;
+    }
+
+    public boolean isFollowPlayer() {
+        return followPlayer;
+    }
+
+    public void setFollowPlayer(boolean followPlayer) {
+        this.followPlayer = followPlayer;
+    }
+
+    
     
 }
