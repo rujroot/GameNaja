@@ -2,6 +2,7 @@ package inventory;
 
 import Data.BaseObject;
 import Data.Point;
+import entity.Entity;
 import item.Item;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -14,16 +15,19 @@ public class BaseUI extends BaseObject{
     private int maxIndex, currIndex = 0;
     private double offset;
     private SlotUI[] posIndex;
-    private boolean visible = true, followPlayer = false;
+    private boolean visible = true;
+    private Entity entity;
+    private Point basePoint;
 
     private Image backUI = RenderableHolder.backUI, upUI = RenderableHolder.upUI, select = RenderableHolder.selectUI;
     private WritableImage backBtwUI = new WritableImage(backUI.getPixelReader(), 19, 0, 60, 96);
 
-    public BaseUI(Point stPos, double width, double height, int amount, double offset){
+    public BaseUI(Point stPos, double width, double height, int amount, double offset, Entity entity){
         super(stPos, width, height);
 
         this.setMaxIndex(amount);
         this.setOffset(offset);
+        this.setEntity(entity);
         posIndex = new SlotUI[amount];
 
         if(offset == 0){
@@ -90,14 +94,13 @@ public class BaseUI extends BaseObject{
 
         if(offset == 0){
             posIndex[maxIndex - 1].draw(gc);
+        
             for(int i = 0; i < maxIndex - 1; ++i){
                 posIndex[i].draw(gc);
-                posIndex[i].setFollowPlayer(followPlayer);
-              } 
+            } 
         }else{
             for(int i = 0; i < maxIndex; ++i){
                 posIndex[i].draw(gc);
-                posIndex[i].setFollowPlayer(followPlayer);
             }  
         }
         
@@ -135,15 +138,23 @@ public class BaseUI extends BaseObject{
         this.visible = visible;
     }
 
-    public boolean isFollowPlayer() {
-        return followPlayer;
+    public Entity getEntity() {
+        return entity;
     }
 
-    public void setFollowPlayer(boolean followPlayer) {
-        this.followPlayer = followPlayer;
+    public void setEntity(Entity entity) {
+        this.entity = entity;
+    }
+
+    public Point getBasePoint() {
+        return basePoint;
+    }
+
+    public void setBasePoint(Point basePoint) {
+        this.basePoint = basePoint;
     }
 
     
-    
+
 
 }
