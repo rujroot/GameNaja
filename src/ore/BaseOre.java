@@ -1,8 +1,8 @@
 package ore;
 
-import Data.BaseObject;
-import Data.DataOre;
-import Data.Point;
+import data.BaseObject;
+import data.DataOre;
+import data.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
 

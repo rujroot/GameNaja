@@ -1,7 +1,7 @@
 package entity;
 
-import Data.DataEntity;
-import Data.Point;
+import data.DataEntity;
+import data.Point;
 import drawing.GameScreen;
 import equipment.Axe;
 import equipment.BaseWeapon;

@@ -1,9 +1,9 @@
-package Dungeon;
+package dungeon;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import Data.Point;
+import data.Point;
 import javafx.util.Pair;
 import ore.BaseOre;
 

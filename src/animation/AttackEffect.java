@@ -1,6 +1,6 @@
 package animation;
 
-import Data.Point;
+import data.Point;
 import drawing.GameScreen;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

@@ -1,7 +1,7 @@
 package equipment.projectile;
 
-import Data.BaseObject;
-import Data.Point;
+import data.BaseObject;
+import data.Point;
 import entity.Entity;
 import javafx.scene.canvas.GraphicsContext;
 import logic.Hitbox;

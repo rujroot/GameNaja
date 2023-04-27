@@ -3,11 +3,11 @@ package drawing;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import Data.Point;
-import Dungeon.Direction;
-import Dungeon.GenerateDungeon;
-import Dungeon.Path;
-import Dungeon.Room;
+import data.Point;
+import dungeon.Direction;
+import dungeon.GenerateDungeon;
+import dungeon.Path;
+import dungeon.Room;
 import entity.Player;
 import input.InputUtility;
 import javafx.scene.canvas.Canvas;

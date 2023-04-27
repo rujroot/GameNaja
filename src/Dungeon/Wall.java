@@ -1,4 +1,4 @@
-package Dungeon;
+package dungeon;
 
 public class Wall {
     private double Up, Down, Left, Right;

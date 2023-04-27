@@ -1,6 +1,6 @@
 package logic;
 
-import Data.Point;
+import data.Point;
 
 public class Hitbox {
 	private Point Position;

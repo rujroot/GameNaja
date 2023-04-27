@@ -2,11 +2,11 @@ package logic;
 
 import java.util.ArrayList;
 
-import Data.BaseObject;
-import Data.DataOre;
-import Data.Point;
-import Dungeon.GenerateDungeon;
-import Dungeon.Room;
+import data.BaseObject;
+import data.DataOre;
+import data.Point;
+import dungeon.GenerateDungeon;
+import dungeon.Room;
 import entity.Entity;
 import entity.Monster;
 import entity.Player;

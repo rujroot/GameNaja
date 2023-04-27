@@ -1,7 +1,7 @@
 package entity;
 
-import Data.DataEntity;
-import Data.Point;
+import data.DataEntity;
+import data.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 

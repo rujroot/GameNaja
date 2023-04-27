@@ -1,6 +1,6 @@
 package item;
 
-import Data.Point;
+import data.Point;
 import javafx.scene.image.WritableImage;
 import logic.RenderableHolder;
 

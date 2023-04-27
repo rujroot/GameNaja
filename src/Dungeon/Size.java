@@ -1,4 +1,4 @@
-package Dungeon;
+package dungeon;
 
 public enum Size {
 	SMALL, 

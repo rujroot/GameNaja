@@ -1,11 +1,11 @@
 package logic;
 
-import Data.DataEntity;
-import Data.Point;
-import Dungeon.GenerateDungeon;
-import Dungeon.Room;
 import animation.AnimationController;
+import data.DataEntity;
+import data.Point;
 import drawing.GameScreen;
+import dungeon.GenerateDungeon;
+import dungeon.Room;
 import entity.Player;
 import entity.Shopkeeper;
 import input.InputUtility;

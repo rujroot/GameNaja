@@ -1,7 +1,7 @@
 package animation;
 
-import Data.BaseObject;
-import Data.Point;
+import data.BaseObject;
+import data.Point;
 
 public abstract class AnimationObject extends BaseObject {
     

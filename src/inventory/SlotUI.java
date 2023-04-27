@@ -1,7 +1,7 @@
 package inventory;
 
-import Data.BaseObject;
-import Data.Point;
+import data.BaseObject;
+import data.Point;
 import entity.Player;
 import item.Item;
 import javafx.scene.canvas.GraphicsContext;

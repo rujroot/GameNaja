@@ -1,10 +1,10 @@
-package Dungeon;
+package dungeon;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import Data.DataOre;
-import Data.Point;
+import data.DataOre;
+import data.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import logic.Hitbox;

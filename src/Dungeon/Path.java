@@ -1,6 +1,6 @@
-package Dungeon;
+package dungeon;
 
-import Data.Point;
+import data.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import logic.IRenderable;
