@@ -32,6 +32,10 @@ public class Inventory extends BaseObject{
         UI.addItem(items);
     }
 
+    public void selectIndex(int index){
+        UI.setSelectIndex(index);
+    }
+
     @Override
     public void draw(GraphicsContext gc) {
         UI.draw(gc);

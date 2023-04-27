@@ -20,7 +20,6 @@ public class Main extends Application {
 	
 	public static GameLogic logic;
 	public static GameScreen gameScreen;
-	public static Inventory inventory;
 
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -32,18 +31,9 @@ public class Main extends Application {
 		// Generate Dungeon first time
 		logic = new GameLogic();
 		GenerateDungeon dungeon = new GenerateDungeon(10);
-		
+
 		// Create Player
 		Player player = new Player("Player", 50, 50, new DataEntity(1, 1, 1, 10));
-		Room firstRoom = GenerateDungeon.getContainer().get(0).get(0);
-		player.setPosition(new Point(firstRoom.getPosition().getX() + 100, firstRoom.getPosition().getY() + 100 ));
-		
-		logic.addObject(player);
-
-		// Shopkeeper for test
-		Shopkeeper shopkeeper = new Shopkeeper("Shopkeeper", 50, 50, new DataEntity(999999, 1, 1, 0));
-		shopkeeper.setPosition(new Point(firstRoom.getPosition().getX() + 20, firstRoom.getPosition().getY() + 20 ));
-		logic.addObject(shopkeeper);
 
 		// Add root and scene + set Title game
 		StackPane root = new StackPane();
@@ -55,14 +45,24 @@ public class Main extends Application {
 		gameScreen = new GameScreen(1400,800);
 		root.getChildren().add(gameScreen);
 		gameScreen.requestFocus();
+
 		
+		Room firstRoom = GenerateDungeon.getContainer().get(0).get(0);
+		// Shopkeeper for test
+		Shopkeeper shopkeeper = new Shopkeeper("Shopkeeper", 50, 50, new DataEntity(999999, 1, 1, 0));
+		shopkeeper.setPosition(new Point(firstRoom.getPosition().getX() + 20, firstRoom.getPosition().getY() + 20 ));
+		logic.addObject(shopkeeper);
+
+		// player initing
+		player.setPosition(new Point(firstRoom.getPosition().getX() + 100, firstRoom.getPosition().getY() + 100 ));
+		player.initInventory();
+
+		logic.addObject(player);
+
 		//Show windows
 		stage.show();
 
 		AnimationController animationController = new AnimationController();
-
-		inventory = new Inventory();
-		logic.addObject(inventory);
 
 		//this function run every sec
 		AnimationTimer animation = new AnimationTimer() {

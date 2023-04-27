@@ -2,6 +2,7 @@ package ore;
 
 import data.DataOre;
 import data.Point;
+import entity.Player;
 import item.Stone;
 import javafx.scene.image.WritableImage;
 import logic.Main;
@@ -20,7 +21,7 @@ public class StoneOre extends BaseOre {
     public void onBreak() {
         Stone stone = new Stone(getPosition(), getWidth(), getHeight(), 11);
         stone.setAmount(1);
-        Main.inventory.addItem(stone);
+        Player.inventory.addItem(stone);
     }
     
     

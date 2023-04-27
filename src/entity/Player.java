@@ -14,6 +14,7 @@ import equipment.Spear;
 import equipment.Sword;
 import equipment.Wand;
 import input.InputUtility;
+import inventory.Inventory;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
@@ -24,7 +25,8 @@ import logic.RenderableHolder;
 
 public class Player extends Entity{
 	
-	public static Player player; 
+	public static Player player;
+	public static Inventory inventory;
 	
 	private BaseWeapon equipment;
 	private Point resolutionPosition;
@@ -73,14 +75,27 @@ public class Player extends Entity{
 			this.move(0, data.getSpd());
 		} if (InputUtility.getKeyPressed(KeyCode.DIGIT1)) {
 			this.setEquipment(new Bow(30.0, 10.0, 2));
+			inventory.selectIndex(0);
 		} if (InputUtility.getKeyPressed(KeyCode.DIGIT2)) {
 			this.setEquipment(new Knife(30.0, 10.0,10.0,500,60));
+			inventory.selectIndex(1);
 		} if (InputUtility.getKeyPressed(KeyCode.DIGIT3)) {
 			this.setEquipment(new Sword(30.0, 10.0,10.0,500,60));
+			inventory.selectIndex(2);
 		} if (InputUtility.getKeyPressed(KeyCode.DIGIT4)) {
 			this.setEquipment(new Wand(30.0, 10.0, 2,10));
+			inventory.selectIndex(3);
 		} if (InputUtility.getKeyPressed(KeyCode.DIGIT5)) {
 			this.setEquipment(new Pickaxe(30.0, 10.0));
+			inventory.selectIndex(4);
+		}if (InputUtility.getKeyPressed(KeyCode.DIGIT6)) {
+			inventory.selectIndex(5);
+		}if (InputUtility.getKeyPressed(KeyCode.DIGIT7)) {
+			inventory.selectIndex(6);
+		}if (InputUtility.getKeyPressed(KeyCode.DIGIT8)) {
+			inventory.selectIndex(7);
+		}if (InputUtility.getKeyPressed(KeyCode.DIGIT9)) {
+			inventory.selectIndex(8);
 		}
 			
 		//Action Section
@@ -104,6 +119,13 @@ public class Player extends Entity{
 		}
 	}
 	
+	public void initInventory(){
+		inventory = new Inventory();
+		Main.getLogic().addObject(inventory);
+
+		inventory.selectIndex(0);
+	}
+
 	@Override
 	public void draw(GraphicsContext gc) {
 		Point pos = this.getPosition();
