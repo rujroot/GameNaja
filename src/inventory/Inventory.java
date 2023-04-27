@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Data.BaseObject;
 import Data.Point;
 import drawing.GameScreen;
+import entity.Player;
 import item.Item;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -18,8 +19,7 @@ public class Inventory extends BaseObject{
         Point pos = this.getPosition();
         Point resolution = GameScreen.getResolution();
         Point basePoint = new Point(pos.getX() - resolution.getX() / 4 + 100, pos.getY() + resolution.getY() / 3);
-        UI = new BaseUI(basePoint, 0, 0, 9, 0);
-        UI.setFollowPlayer(false);
+        UI = new BaseUI(basePoint, 0, 0, 9, 0, Player.player);
     }
 
     public void addItem(ArrayList<Item> items){

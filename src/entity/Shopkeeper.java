@@ -31,7 +31,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
 		this.setHeight(image.getHeight());
 
         Point pos = this.getPosition();
-        chooseUI = new BaseUI(pos, 0, 0, 2, 20);
+        chooseUI = new BaseUI(pos, 0, 0, 2, 20, this);
         //chooseUI.setVisible(false);
     }
 

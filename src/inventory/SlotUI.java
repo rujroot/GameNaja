@@ -2,7 +2,7 @@ package inventory;
 
 import Data.BaseObject;
 import Data.Point;
-import entity.Player;
+import entity.Entity;
 import item.Item;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -12,7 +12,7 @@ public class SlotUI extends BaseObject {
     private Image image;
     private Item item;
     private Point offset = new Point(0, 0);
-    private boolean followPlayer;
+    private Entity entity;
 
     public SlotUI(Point position, double width, double height, Image image) {
         super(position, width, height);
@@ -22,14 +22,7 @@ public class SlotUI extends BaseObject {
     @Override
     public void draw(GraphicsContext gc) {
         
-        Point pos = this.getPosition();
-
-        if(followPlayer){
-            Point posPlayer = Player.player.getPosition();
-            pos.setX(posPlayer.getX() + pos.getX());
-            pos.setY(posPlayer.getY() + pos.getY());
-        }
-        
+        Point pos = this.getPosition(); 
         gc.drawImage(image, pos.getX(), pos.getY(), image.getWidth(), image.getHeight());
 
         if(item != null){
@@ -68,13 +61,15 @@ public class SlotUI extends BaseObject {
         this.offset = offset;
     }
 
-    public boolean isFollowPlayer() {
-        return followPlayer;
+    public Entity getEntity() {
+        return entity;
     }
 
-    public void setFollowPlayer(boolean followPlayer) {
-        this.followPlayer = followPlayer;
+    public void setEntity(Entity entity) {
+        this.entity = entity;
     }
+
+    
 
     
     
