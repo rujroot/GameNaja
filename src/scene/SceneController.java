@@ -15,7 +15,7 @@ public class SceneController {
 	private Parent root;
 	
 	public void switchToStartGameScene(ActionEvent event) throws IOException {
-		root = (Parent) FXMLLoader.load(getClass().getResource("Start.fxml"));
+		root = (Parent) FXMLLoader.load(getClass().getResource("./scene/Start.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -23,7 +23,7 @@ public class SceneController {
 	}
 	
 	public void switchToGameOverScene(ActionEvent event) throws IOException {
-		root = (Parent) FXMLLoader.load(getClass().getResource("GameOver.fxml"));
+		root = (Parent) FXMLLoader.load(getClass().getResource("./scene/GameOver.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
