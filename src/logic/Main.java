@@ -21,9 +21,12 @@ public class Main extends Application {
 	public static GameLogic logic;
 	public static GameScreen gameScreen;
 	public static Inventory inventory;
+	public static StackPane root = new StackPane();
+	public static Scene scene = new Scene(root);
+	
 
 	public static void main(String[] args) {
-		Application.launch(args);
+		launch(args);
 	}
 
 	@Override
@@ -46,8 +49,8 @@ public class Main extends Application {
 		logic.addObject(shopkeeper);
 
 		// Add root and scene + set Title game
-		StackPane root = new StackPane();
-		Scene scene = new Scene(root);
+		//StackPane root = new StackPane();
+		//Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setTitle("Game Naja eiei");
 		
@@ -85,5 +88,14 @@ public class Main extends Application {
 
 	public static GameScreen getGameScreen() {
 		return gameScreen;
+	}
+
+
+	public static Scene getScene() {
+		return scene;
+	}
+
+	public static void setScene(Scene scene) {
+		Main.scene = scene;
 	}
 }

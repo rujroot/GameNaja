@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import data.BaseObject;
 import data.DataOre;
 import data.Point;
+import drawing.GameScreen;
 import dungeon.GenerateDungeon;
 import dungeon.Room;
 import entity.Entity;
@@ -15,10 +16,14 @@ import entity.Zombie;
 import equipment.projectile.Arrow;
 import inventory.Inventory;
 import item.Item;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import ore.BaseOre;
 
 public class GameLogic {
-	
+	public static GameScreen gameScreen;
 	private static ArrayList<BaseObject> gameObjectContainer;
 	
 	public GameLogic() {
@@ -137,6 +142,17 @@ public class GameLogic {
 
 	public static void removeObj(BaseObject object){
 		gameObjectContainer.remove(object);
+	}
+	
+	public static void startScene() {
+		StackPane root = new StackPane();
+		Scene newScene = new Scene(root);
+//		gameScreen = new GameScreen(1400,800);
+//		root.getChildren().add(gameScreen);
+		Text text = new Text("GameNaja");
+		root.getChildren().add(text);
+		Main.setScene(newScene);
+		System.out.println("G");
 	}
 
 }
