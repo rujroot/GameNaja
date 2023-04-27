@@ -1,7 +1,7 @@
 package equipment;
 
-import Data.Point;
 import animation.AnimationObject;
+import data.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;

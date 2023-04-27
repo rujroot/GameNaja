@@ -1,7 +1,7 @@
 package ore;
 
-import Data.DataOre;
-import Data.Point;
+import data.DataOre;
+import data.Point;
 import item.Diamond;
 import javafx.scene.image.WritableImage;
 import logic.Main;

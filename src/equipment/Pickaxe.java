@@ -2,11 +2,11 @@ package equipment;
 
 import java.util.ArrayList;
 
-import Data.BaseObject;
-import Data.DataEntity;
-import Data.DataOre;
-import Data.Point;
 import animation.AnimationController;
+import data.BaseObject;
+import data.DataEntity;
+import data.DataOre;
+import data.Point;
 import entity.Monster;
 import entity.Player;
 import entity.Zombie;

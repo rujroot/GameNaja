@@ -1,7 +1,7 @@
 package item;
 
-import Data.BaseObject;
-import Data.Point;
+import data.BaseObject;
+import data.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;

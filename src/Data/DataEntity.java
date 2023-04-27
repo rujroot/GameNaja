@@ -1,4 +1,4 @@
-package Data;
+package data;
 
 public class DataEntity {
 	double hp, atk, def, spd, poisonStatus, maxHP;

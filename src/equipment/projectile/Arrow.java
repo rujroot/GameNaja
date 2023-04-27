@@ -1,7 +1,7 @@
 package equipment.projectile;
 
-import Data.DataEntity;
-import Data.Point;
+import data.DataEntity;
+import data.Point;
 import entity.Entity;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

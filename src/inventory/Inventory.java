@@ -2,8 +2,8 @@ package inventory;
 
 import java.util.ArrayList;
 
-import Data.BaseObject;
-import Data.Point;
+import data.BaseObject;
+import data.Point;
 import drawing.GameScreen;
 import entity.Player;
 import item.Item;

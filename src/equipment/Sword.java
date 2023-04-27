@@ -2,10 +2,10 @@ package equipment;
 
 import java.util.ArrayList;
 
-import Data.BaseObject;
-import Data.DataEntity;
-import Data.Point;
 import animation.AnimationController;
+import data.BaseObject;
+import data.DataEntity;
+import data.Point;
 import entity.Entity;
 import entity.Monster;
 import entity.Player;

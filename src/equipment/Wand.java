@@ -1,6 +1,6 @@
 package equipment;
 
-import Data.Point;
+import data.Point;
 import equipment.projectile.Arrow;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
