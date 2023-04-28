@@ -21,10 +21,6 @@ import scene.SceneController;
 
 public class Main extends Application {
 	
-	public static GameLogic logic;
-	public static GameScreen gameScreen;
-	public static StackPane root = new StackPane();
-	public static Scene scene = new Scene(root);
 	
 
 	public static void main(String[] args) {
@@ -73,11 +69,4 @@ public class Main extends Application {
 	}
 
 
-	public static Scene getScene() {
-		return scene;
-	}
-
-	public static void setScene(Scene scene) {
-		Main.scene = scene;
-	}
 }

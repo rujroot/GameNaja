@@ -141,15 +141,5 @@ public class GameLogic {
 		gameObjectContainer.remove(object);
 	}
 	
-	public static void startScene() {
-		StackPane root = new StackPane();
-		Scene newScene = new Scene(root);
-//		gameScreen = new GameScreen(1400,800);
-//		root.getChildren().add(gameScreen);
-		Text text = new Text("GameNaja");
-		root.getChildren().add(text);
-		Main.setScene(newScene);
-		System.out.println("G");
-	}
 
 }
