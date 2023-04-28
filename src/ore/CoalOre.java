@@ -19,8 +19,9 @@ public class CoalOre extends BaseOre {
 
     @Override
     public void onBreak() {
-        Coal coal = new Coal(getPosition(), getWidth(), getHeight(), 11);
-        coal.setAmount(1);
+        DataOre data = this.getDataOre();
+
+        Coal coal = new Coal(data.getAmount(), data.getValue());
         Player.inventory.addItem(coal);
     }
 }

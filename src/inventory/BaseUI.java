@@ -84,9 +84,25 @@ public class BaseUI extends BaseObject{
         }
     }
 
+    public void removeItem(Item item){
+        for(int i = 0; i < maxIndex; ++i){
+            Item itemInv = posIndex[i].getItem();
+            if(itemInv != null && itemInv.equals(item)){
+                posIndex[i].setItem(null);
+                return;
+            }
+        }
+    }
+
+    public void reemoveItem(int index){
+
+    }
+
     public void addItem(Item item, int index){
 
     }
+
+
 
     @Override
     public void draw(GraphicsContext gc) {

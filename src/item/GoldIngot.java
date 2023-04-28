@@ -6,8 +6,8 @@ import logic.RenderableHolder;
 
 public class GoldIngot extends Item {
 
-    public GoldIngot(int amount) {
-        super(amount);
+    public GoldIngot(int amount, double value) {
+        super(amount, value);
         this.setName("Gold Ingot");
         this.setImage(new WritableImage(RenderableHolder.ores.getPixelReader(), 32 * 6, 32 * 4, 32, 32));
     }

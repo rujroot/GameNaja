@@ -19,8 +19,8 @@ public class StoneOre extends BaseOre {
 
     @Override
     public void onBreak() {
-        Stone stone = new Stone(getPosition(), getWidth(), getHeight(), 11);
-        stone.setAmount(1);
+        DataOre data = this.getDataOre();
+        Stone stone = new Stone(data.getAmount(), data.getValue());
         Player.inventory.addItem(stone);
     }
     
