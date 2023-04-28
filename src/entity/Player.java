@@ -97,7 +97,7 @@ public class Player extends Entity implements Cooldownable{
 			inventory.selectIndex(4);
 
 		} if (InputUtility.getKeyPressed(KeyCode.DIGIT6)&&!onCooldown()) {
-			GameLogic.startScene();
+			
 			inventory.selectIndex(5);
 		}if (InputUtility.getKeyPressed(KeyCode.DIGIT7)) {
 			inventory.selectIndex(6);

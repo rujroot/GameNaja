@@ -21,6 +21,13 @@ import scene.SceneController;
 
 public class Main extends Application {
 	
+
+	public static GameLogic logic;
+	public static GameScreen gameScreen;
+	public static StackPane root = new StackPane();
+	public static Scene scene = new Scene(root);
+	public static Stage stage;
+
 	
 
 	public static void main(String[] args) {
@@ -55,6 +62,7 @@ public class Main extends Application {
 			stage.setScene(startGame);
 			stage.setTitle("Game Naja eiei");
 			stage.show();
+			Main.stage = stage;
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
