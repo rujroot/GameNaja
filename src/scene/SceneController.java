@@ -5,6 +5,7 @@ import java.io.IOException;
 import drawing.GameScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -66,6 +67,14 @@ public class SceneController {
 	    player.setPosition(new Point(firstRoom.getPosition().getX() + 100, firstRoom.getPosition().getY() + 100 ));
 	    player.initInventory();
 	    logic.addObject(player);
+	    
+	    if (stage == null) {
+	        stage = new Stage();
+	    }
+	    if (stage.getScene() == null) {
+	        Scene scene = new Scene(new Group(), 1400, 800);
+	        stage.setScene(scene);
+	    }
 	    
 	    // modify the existing scene instead of creating a new one
 	    Scene currentScene = stage.getScene();
