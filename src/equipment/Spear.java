@@ -37,7 +37,7 @@ public class Spear extends Melee {
 
 		AttackObject attackObject = new AttackObject(attackPosition, getAttackRange(), getAttackRange(),
 				startAt - getAttackDegree() / 2, getAttackDegree());
-		Main.logic.addObject(attackObject);
+		Main.getLogic().addObject(attackObject);
 		AnimationController.animations.add(attackObject);
 
 		for (BaseObject object : gameObjectContainer) {

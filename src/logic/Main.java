@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import scene.SceneController;
 
 public class Main extends Application {
 	
@@ -35,11 +36,12 @@ public class Main extends Application {
 		// TODO Auto-generated method stub
 		try {
 			System.out.println("S");
-			Parent root = FXMLLoader.load(getClass().getResource("/scene/GameOver.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/scene/Start.fxml"));
 
 			System.out.println("S");
 			Scene startGame = new Scene(root);
 			stage.setScene(startGame);
+			stage.setTitle("Game Naja eiei");
 			stage.show();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -101,11 +103,11 @@ public class Main extends Application {
 //	}
 	
 	public static GameLogic getLogic() {
-		return logic;
+		return SceneController.getLogic();
 	}
 
 	public static GameScreen getGameScreen() {
-		return gameScreen;
+		return SceneController.getGameScreen();
 	}
 
 

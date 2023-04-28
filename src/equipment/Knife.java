@@ -40,7 +40,7 @@ public class Knife extends Melee{
         Point attackPosition = new Point(playerPosition.getX() - (getAttackRange() / 2) + (player.getWidth() / 2), playerPosition.getY() - (getAttackRange() / 2) + (player.getHeight() / 2));
 
         AttackObject attackObject = new AttackObject(attackPosition, getAttackRange(), getAttackRange(), startAt - getAttackDegree() / 2, getAttackDegree());
-        Main.logic.addObject(attackObject);
+        Main.getLogic().addObject(attackObject);
         AnimationController.animations.add(attackObject);
 
         for(BaseObject object : gameObjectContainer){
