@@ -19,7 +19,7 @@ public class BaseUI extends BaseObject{
     private Entity entity;
     private Point basePoint;
 
-    private Image backUI = RenderableHolder.backUI, selectUI = RenderableHolder.selectUI;
+    private Image backUI = RenderableHolder.backUI;
     private WritableImage backBtwUI = new WritableImage(backUI.getPixelReader(), 19, 0, 60, 96);
 
     public BaseUI(Point stPos, double width, double height, int amount, double offset, Entity entity){
@@ -71,6 +71,7 @@ public class BaseUI extends BaseObject{
         for(int i = 0; i < maxIndex; ++i){
             if(posIndex[i].getItem() != null && posIndex[i].equals(item)){
                 posIndex[i].getItem().addAmount(item.getAmount());
+                posIndex[i].getItem().addValue(item.getValue());
                 return;
             }
         }

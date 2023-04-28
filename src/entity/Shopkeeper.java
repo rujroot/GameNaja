@@ -7,6 +7,7 @@ import data.Point;
 import drawing.GameScreen;
 import input.InputUtility;
 import inventory.BaseUI;
+import inventory.Inventory;
 import inventory.SlotUI;
 import item.Coal;
 import item.Diamond;
@@ -65,12 +66,11 @@ public class Shopkeeper extends Entity implements Cooldownable{
             sellUI.addItem(sellItem[i]);
         }
         SlotUI[] slot = sellUI.getPosIndex();
-        slot[0].setDescription("1$");
-        slot[1].setDescription("2$");
-        slot[2].setDescription("3$");
-        slot[3].setDescription("4$");
-        slot[4].setDescription("5$");
-
+        slot[0].setDescription("0$");
+        slot[1].setDescription("0$");
+        slot[2].setDescription("0$");
+        slot[3].setDescription("0$");
+        slot[4].setDescription("0$");
     }
 
     public void shopBuy(int Index){
@@ -78,7 +78,28 @@ public class Shopkeeper extends Entity implements Cooldownable{
     }
 
     public void shopSell(int Index){
+        Item itemToSell = sellItem[Index];
+        if(itemToSell.getAmount() <= 0) return;
 
+    }
+
+    public void updateShopSell(){
+        Inventory inventory = Player.inventory;
+        SlotUI[] slotInventory = inventory.getUI().getPosIndex();
+        SlotUI[] slotSell = sellUI.getPosIndex();
+
+        for(int i = 0; i < slotInventory.length; ++i){
+            Item itemInv = slotInventory[i].getItem();
+
+            for(int j = 0; j < slotSell.length; ++j){  
+                
+                Item itemSell = slotSell[j].getItem();
+                if(slotInventory[i].getItem() != null && slotInventory[i].getItem().equals(sellItem[j])){
+                    
+                }
+            }
+
+        }
     }
 
     @Override
@@ -132,6 +153,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
                     this.setCurrentUI(buyUI);
                     choose = "Buy";
                 }else{
+                    updateShopSell();
                     this.setCurrentUI(sellUI);
                     choose = "Sell";
                 }
