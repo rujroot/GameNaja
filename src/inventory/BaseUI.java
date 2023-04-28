@@ -15,7 +15,7 @@ public class BaseUI extends BaseObject{
     private int maxIndex, currIndex = 0, selectIndex = 0;
     private double offset;
     private SlotUI[] posIndex;
-    private boolean visible = true;
+    private boolean visible = false;
     private Entity entity;
     private Point basePoint;
 
@@ -78,7 +78,7 @@ public class BaseUI extends BaseObject{
         for(int i = 0; i < maxIndex; ++i){
             if(posIndex[i].getItem() == null){
                 posIndex[i].setItem(item);
-                Main.logic.addObject(item);
+                //Main.logic.addObject(item);
                 return;
             }
         }

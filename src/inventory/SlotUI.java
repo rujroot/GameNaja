@@ -31,6 +31,7 @@ public class SlotUI extends BaseObject {
         gc.drawImage(image, pos.getX() + posEntity.getX(), pos.getY() + posEntity.getY(), image.getWidth(), image.getHeight());
 
         if(item != null){
+            
             Point posItem = item.getPosition();
             posItem.setX(pos.getX() + posEntity.getX() + offset.getX());
             posItem.setY(pos.getY() + posEntity.getY() + offset.getY());
