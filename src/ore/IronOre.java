@@ -19,8 +19,8 @@ public class IronOre extends BaseOre {
 
     @Override
     public void onBreak() {
-        IronIngot iron = new IronIngot(getPosition(), getWidth(), getHeight(), 11);
-        iron.setAmount(1);
+        DataOre data = this.getDataOre();
+        IronIngot iron = new IronIngot(data.getAmount(), data.getValue());
         Player.inventory.addItem(iron);
     }
 }

@@ -19,8 +19,8 @@ public class DiamondOre extends BaseOre {
 
     @Override
     public void onBreak() {
-        Diamond diamond = new Diamond(getPosition(), getWidth(), getHeight(), 11);
-        diamond.setAmount(1);
+        DataOre data = this.getDataOre();
+        Diamond diamond = new Diamond(data.getAmount(), data.getValue());
         Player.inventory.addItem(diamond);
     }
 }

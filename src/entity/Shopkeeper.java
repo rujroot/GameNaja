@@ -56,11 +56,11 @@ public class Shopkeeper extends Entity implements Cooldownable{
         sellUI = new BaseUI(new Point(-250, -150), 0, 0, 5, 10, this);
         sellUI.setSelectIndex(0);
 
-        sellItem[0] = new Stone(0);
-        sellItem[1] = new Coal(0);
-        sellItem[2] = new IronIngot(0);
-        sellItem[3] = new GoldIngot(0);
-        sellItem[4] = new Diamond(0);
+        sellItem[0] = new Stone(0, 0);
+        sellItem[1] = new Coal(0, 0);
+        sellItem[2] = new IronIngot(0, 0);
+        sellItem[3] = new GoldIngot(0, 0);
+        sellItem[4] = new Diamond(0, 0);
 
         for(int i = 0; i < sellItem.length; ++i){
             sellUI.addItem(sellItem[i]);
@@ -81,6 +81,21 @@ public class Shopkeeper extends Entity implements Cooldownable{
         Item itemToSell = sellItem[Index];
         if(itemToSell.getAmount() <= 0) return;
 
+        Player player = Player.player;
+        Inventory inventory = Player.inventory;
+        SlotUI[] slotInventory = inventory.getUI().getPosIndex();
+
+        for(int i = 0; i < slotInventory.length; ++i){
+            Item itemInv = slotInventory[i].getItem();
+            if(itemInv != null && itemInv.equals(itemToSell)){ 
+                player.addMoney(itemInv.getValue());
+                itemInv.setAmount(0);
+                itemInv.setValue(0);
+                inventory.removeItem(itemInv);
+                updateShopSell();
+                return;
+            }  
+        }
     }
 
     public void updateShopSell(){
@@ -88,18 +103,27 @@ public class Shopkeeper extends Entity implements Cooldownable{
         SlotUI[] slotInventory = inventory.getUI().getPosIndex();
         SlotUI[] slotSell = sellUI.getPosIndex();
 
-        for(int i = 0; i < slotInventory.length; ++i){
-            Item itemInv = slotInventory[i].getItem();
+        for(int i = 0; i < slotSell.length; ++i){
+            Item itemSell = slotSell[i].getItem();
+            boolean found = false;
 
-            for(int j = 0; j < slotSell.length; ++j){  
-                
-                Item itemSell = slotSell[j].getItem();
-                if(slotInventory[i].getItem() != null && slotInventory[i].getItem().equals(sellItem[j])){
-                    
+            for(int j = 0; j < slotInventory.length; ++j){
+                Item itemInv = slotInventory[j].getItem();
+
+                if(itemInv != null && itemSell.equals(itemInv)){
+                    itemSell.setAmount(itemInv.getAmount());
+                    slotSell[i].setDescription(Double.toString(itemInv.getValue()) + "$");
+                    found = true;
+                    break;
                 }
             }
 
+            if(!found){
+                itemSell.setAmount(0);
+                slotSell[i].setDescription("0$");
+            }
         }
+
     }
 
     @Override

@@ -5,8 +5,8 @@ import javafx.scene.image.WritableImage;
 import logic.RenderableHolder;
 
 public class Coal extends Item {
-    public Coal(int amount) {
-        super(amount);
+    public Coal(int amount, double value) {
+        super(amount, value);
         this.setName("Coal");
         this.setImage(new WritableImage(RenderableHolder.ores.getPixelReader(), 32 * 12, 32 * 5, 32, 32));
     }

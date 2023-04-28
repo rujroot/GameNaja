@@ -30,13 +30,14 @@ public class Player extends Entity implements Cooldownable{
 	public static Player player; 
 	private double cooldownTime = 2000;
 	private double lastClickTime = 0;
+	private double money = 0;
 
 	public static Inventory inventory;
 
 	private BaseWeapon equipment;
 	private Point resolutionPosition;
 	private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 960, 944, 59, 79);
-	private int mutliply = 1, money = 0;
+	private int mutliply = 1;
 	private boolean interaction = false;
 	private Description description, descriptionMoney;
 
@@ -162,7 +163,7 @@ public class Player extends Entity implements Cooldownable{
 	}
 
 	public void displayMoney(GraphicsContext gc){
-		descriptionMoney.setText( Integer.toString(money) + "$" );
+		descriptionMoney.setText( Double.toString(money) + "$" );
 		descriptionMoney.draw(gc);
 	}
 	
@@ -194,12 +195,16 @@ public class Player extends Entity implements Cooldownable{
 		this.description.setText(text);
 	}
 
-	public int getMoney() {
+	public double getMoney() {
 		return money;
 	}
 
-	public void setMoney(int money) {
+	public void setMoney(double money) {
 		this.money = money;
+	}
+
+	public void addMoney(double money){
+		this.money += money;
 	}
 
 	@Override

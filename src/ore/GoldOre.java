@@ -19,8 +19,8 @@ public class GoldOre extends BaseOre{
 
     @Override
     public void onBreak() {
-        GoldIngot gold = new GoldIngot(getPosition(), getWidth(), getHeight(), 11);
-        gold.setAmount(1);
+        DataOre data = this.getDataOre();
+        GoldIngot gold = new GoldIngot(data.getAmount(), data.getValue());
         Player.inventory.addItem(gold);
     }
 }
