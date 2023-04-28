@@ -5,8 +5,8 @@ import javafx.scene.image.WritableImage;
 import logic.RenderableHolder;
 
 public class Diamond extends Item{
-    public Diamond(Point position, double width, double height) {
-        super(position, width, height);
+    public Diamond(int amount) {
+        super(amount);
         this.setName("Diamond");
         this.setImage(new WritableImage(RenderableHolder.ores.getPixelReader(), 32 * 12, 32 * 3, 32, 32));
     }

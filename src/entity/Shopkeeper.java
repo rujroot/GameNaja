@@ -1,10 +1,18 @@
 package entity;
 
+import java.lang.reflect.Array;
+
 import data.DataEntity;
 import data.Point;
 import drawing.GameScreen;
 import input.InputUtility;
 import inventory.BaseUI;
+import item.Coal;
+import item.Diamond;
+import item.GoldIngot;
+import item.IronIngot;
+import item.Item;
+import item.Stone;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
@@ -21,24 +29,40 @@ public class Shopkeeper extends Entity implements Cooldownable{
 
     private BaseUI currentUI, chooseUI, sellUI, buyUI;
 
-    private boolean isOffer = false;
     private String choose = "None";
     private double lastClickTime = 0, cooldownTime = 200;
     private int select = 0;
+
+    private Item[] sellItem = new Item[5];
 
     public Shopkeeper(String name, double width, double height, DataEntity data) {
         super(name, width, height, data);
         this.setWidth(image.getWidth());
 		this.setHeight(image.getHeight());
 
-        chooseUI = new BaseUI(new Point(-100, -100), 0, 0, 2, 20, this);
+        chooseUI = new BaseUI(new Point(-100, -150), 0, 0, 2, 20, this);
         chooseUI.setSelectIndex(0);
 
         buyUI = new BaseUI(new Point(-200, -100), 0, 0, 4, 10, this);
         buyUI.setSelectIndex(0);
 
-        sellUI = new BaseUI(new Point(-200, -100), 0, 0, 5, 10, this);
+        initShopSell();
+    }
+
+    public void initShopSell(){
+        sellUI = new BaseUI(new Point(-250, -150), 0, 0, 5, 10, this);
         sellUI.setSelectIndex(0);
+
+        sellItem[0] = new Stone(0);
+        sellItem[1] = new Coal(0);
+        sellItem[2] = new IronIngot(0);
+        sellItem[3] = new GoldIngot(0);
+        sellItem[4] = new Diamond(0);
+
+        for(int i = 0; i < sellItem.length; ++i){
+            sellUI.addItem(sellItem[i]);
+        }
+
     }
 
     public void shopBuy(int Index){
@@ -90,16 +114,16 @@ public class Shopkeeper extends Entity implements Cooldownable{
         // Player interact with this entity
         if (InputUtility.getKeyPressed(KeyCode.E) && inDistant() && !onCooldown()){
             if(choose.equals("None")){
-                currentUI = chooseUI;
                 choose = "Choose";
+                this.setCurrentUI(chooseUI);
             }
             else if(choose.equals("Choose")){
                 int currSelect = currentUI.getSelectIndex();
                 if(currSelect == 0){
-                    currentUI = buyUI;
+                    this.setCurrentUI(buyUI);
                     choose = "Buy";
                 }else{
-                    currentUI = sellUI;
+                    this.setCurrentUI(sellUI);
                     choose = "Sell";
                 }
             }
@@ -119,7 +143,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
                 choose = "None";
             }
             else if(choose.equals("Buy") || choose.equals("Sell")){
-                currentUI = chooseUI;
+                this.setCurrentUI(chooseUI);
                 choose = "Choose";
             }
 		}
@@ -140,20 +164,22 @@ public class Shopkeeper extends Entity implements Cooldownable{
        // This entity not attack 
     }
 
-    public boolean isOffer() {
-        return isOffer;
-    }
-
-    public void setOffer(boolean isOffer) {
-        this.isOffer = isOffer;
-    }
-
     public int getSelect() {
         return select;
     }
 
     public void setSelect(int select) {
         this.select = select;
+    }
+
+    public BaseUI getCurrentUI() {
+        return currentUI;
+    }
+
+    public void setCurrentUI(BaseUI currentUI) {
+        if(this.currentUI != null) this.currentUI.setVisible(false);
+        currentUI.setVisible(true);
+        this.currentUI = currentUI;
     }
 
     @Override

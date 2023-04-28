@@ -80,9 +80,6 @@ public class GameLogic {
 			BaseObject object = gameObjectContainer.get(i);
 			if(object instanceof Shopkeeper){
 				Shopkeeper shopkeeper = (Shopkeeper) object;
-				
-				shopkeeper.setOffer( !shopkeeper.isOffer() );
-
 			}
 			
 

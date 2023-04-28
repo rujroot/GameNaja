@@ -6,8 +6,8 @@ import logic.RenderableHolder;
 
 public class Stone extends Item{
 
-    public Stone(Point position, double width, double height) {
-        super(position, width, height);
+    public Stone(int amount) {
+        super(amount);
         this.setName("Stone");
         this.setImage(new WritableImage(RenderableHolder.ores.getPixelReader(), 0, 128, 32, 32));
     }

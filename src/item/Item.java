@@ -12,8 +12,9 @@ public abstract class Item extends BaseObject {
     private String Name;
     private WritableImage image;
 
-    public Item(Point position, double width, double height) {
-        super(position, width, height);
+    public Item(int amount) {
+        super(new Point(0, 0), 0, 0);
+        this.setAmount(amount);
     }
 
     public Item(Point position, double width, double height, int z) {

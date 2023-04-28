@@ -6,8 +6,8 @@ import logic.RenderableHolder;
 
 public class IronIngot extends Item {
 
-    public IronIngot(Point position, double width, double height) {
-        super(position, width, height);
+    public IronIngot(int amount) {
+        super(amount);
         this.setName("Iron Ingot");
         this.setImage(new WritableImage(RenderableHolder.ores.getPixelReader(), 32 * 6, 32 * 5, 32, 32));
     }
