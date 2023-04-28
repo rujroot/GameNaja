@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import logic.GameLogic;
+import logic.Main;
 import logic.RenderableHolder;
 import animation.AnimationController;
 import data.DataEntity;
@@ -27,7 +28,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.StackPane;
 
 public class SceneController {
-	private Stage stage = new Stage();
+	private Stage stage;
 	private Scene scene;
 	private Parent root;
 	public static GameLogic logic;
@@ -35,7 +36,7 @@ public class SceneController {
 	
 	public void switchToStartGameScene(ActionEvent event) throws IOException {
 		root = (Parent) FXMLLoader.load(getClass().getResource("/scene/Start.fxml"));
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		stage = Main.stage;
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setTitle("Game Naja eiei");
@@ -44,7 +45,7 @@ public class SceneController {
 	
 	public void switchToGameOverScene(ActionEvent event) throws IOException {
 		root = (Parent) FXMLLoader.load(getClass().getResource("/scene/GameOver.fxml"));
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		stage = Main.stage;
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setTitle("Game Naja eiei");
@@ -53,18 +54,18 @@ public class SceneController {
 	
 	public void switchToBodyGameScene() {
 		Player player = new Player("Player", 50, 50, new DataEntity(1, 1, 1, 10));
-		gameScreen = new GameScreen(1400,800);
-		Stage stage = (Stage) SceneController.getGameScreen().getScene().getWindow();
 		logic = new GameLogic();
 		GenerateDungeon dungeon = new GenerateDungeon(10);
 		
+		stage = Main.stage;
+		gameScreen = new GameScreen(1400,800);
 		StackPane root = new StackPane();
+		root.getChildren().add(gameScreen);
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setTitle("Game Naja eiei");
-		
-		root.getChildren().add(gameScreen);
 		gameScreen.requestFocus();
+
 		Room firstRoom = GenerateDungeon.getContainer().get(0).get(0);
 		Shopkeeper shopkeeper = new Shopkeeper("Shopkeeper", 50, 50, new DataEntity(999999, 1, 1, 0));
 		shopkeeper.setPosition(new Point(firstRoom.getPosition().getX() + 20, firstRoom.getPosition().getY() + 20 ));
@@ -74,8 +75,7 @@ public class SceneController {
 		
 		logic.addObject(player);
 		
-		stage.show();
-		
+		//stage.show();
 		AnimationController animationController = new AnimationController();
 		
 		AnimationTimer animation = new AnimationTimer() {
