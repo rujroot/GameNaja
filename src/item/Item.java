@@ -9,6 +9,7 @@ import javafx.scene.text.Font;
 public abstract class Item extends BaseObject {
 
     private int amount = 0, index;
+    private double value = 0;
     private String Name;
     private WritableImage image;
 
@@ -78,5 +79,17 @@ public abstract class Item extends BaseObject {
 
     public void setImage(WritableImage image) {
         this.image = image;
-    }    
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    } 
+
+    public void addValue(double value){
+        this.value += value;
+    }
 }

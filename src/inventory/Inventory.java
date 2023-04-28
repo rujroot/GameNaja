@@ -17,7 +17,7 @@ public class Inventory extends BaseObject{
         super(new Point(0, 0) , 700, 60, 10);
 
         Point resolution = GameScreen.getResolution();
-        Point basePoint = new Point(- resolution.getX() / 4 + 100, resolution.getY() / 3);
+        Point basePoint = new Point(-resolution.getX() / 4 + 100, resolution.getY() / 3);
         UI = new BaseUI(basePoint, 0, 0, 9, 0, Player.player);
         UI.setVisible(true);
     }
@@ -40,5 +40,13 @@ public class Inventory extends BaseObject{
     public void draw(GraphicsContext gc) {
         UI.draw(gc);
 
+    }
+
+    public BaseUI getUI() {
+        return UI;
+    }
+
+    public void setUI(BaseUI uI) {
+        UI = uI;
     }
 }
