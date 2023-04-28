@@ -2,6 +2,7 @@ package inventory;
 
 import data.BaseObject;
 import data.Point;
+import drawing.Description;
 import entity.Entity;
 import item.Item;
 import javafx.scene.canvas.GraphicsContext;
@@ -15,11 +16,14 @@ public class SlotUI extends BaseObject {
     private Point offset = new Point(0, 0);
     private Entity entity;
     private boolean select = false;
+    private Description description;
 
     public SlotUI(Point position, double width, double height, Image image, Entity entity) {
         super(position, width, height);
         this.setImage(image);
         this.setEntity(entity);
+        this.setWidth(image.getWidth());
+        this.setHeight(image.getHeight());
     }
 
     @Override
@@ -45,6 +49,14 @@ public class SlotUI extends BaseObject {
                         selectUI.getWidth(), 
                         selectUI.getHeight());
         }
+
+        if(description != null) description.draw(gc);
+    }
+
+    public Point getRealPosition(){
+        Point pos = this.getPosition(); 
+        Point posEntity = entity.getPosition();
+        return new Point(pos.getX() + posEntity.getX(), pos.getY() + posEntity.getY());
     }
 
     public Image getImage() {
@@ -89,6 +101,19 @@ public class SlotUI extends BaseObject {
 
     public void setSelect(boolean select) {
         this.select = select;
+    }
+
+    public Description getDescription() {
+        return description;
+    }
+
+    public void setDescription(String text) {
+        if(this.description == null) {
+            
+            this.description = new Description(new Point(0, this.getHeight() + 25), 100, 50, this);
+        }
+
+        this.description.setText(text);
     }
 
 }

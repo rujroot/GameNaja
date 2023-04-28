@@ -2,6 +2,7 @@ package entity;
 
 import data.DataEntity;
 import data.Point;
+import drawing.Description;
 import drawing.GameScreen;
 import equipment.Axe;
 import equipment.BaseWeapon;
@@ -31,13 +32,13 @@ public class Player extends Entity implements Cooldownable{
 	private double lastClickTime = 0;
 
 	public static Inventory inventory;
-	
 
 	private BaseWeapon equipment;
 	private Point resolutionPosition;
 	private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 960, 944, 59, 79);
-	private int mutliply = 1;
+	private int mutliply = 1, money = 0;
 	private boolean interaction = false;
+	private Description description, descriptionMoney;
 
 	public Player(String name, double Height, double Width, DataEntity data) {
 		super(name, Height, Width, data);
@@ -127,10 +128,18 @@ public class Player extends Entity implements Cooldownable{
 	}
 	
 	public void initInventory(){
+		// create inventory
 		inventory = new Inventory();
 		Main.getLogic().addObject(inventory);
 
 		inventory.selectIndex(0);
+
+		// create description above inventory
+		Point resolution = GameScreen.getResolution();
+        Point basePoint = new Point(- resolution.getX() / 4 + 100, resolution.getY() / 3 - 25);
+		description = new Description(basePoint, 400, 100, this);
+
+		descriptionMoney = new Description(new Point(-resolution.getX() / 4 + 600, resolution.getY() / 3 - 25), 100.0, 100.0, this);
 	}
 
 	@Override
@@ -138,6 +147,9 @@ public class Player extends Entity implements Cooldownable{
 		Point pos = this.getPosition();
 		gc.drawImage(image, pos.getX(), pos.getY(), image.getWidth() * mutliply, image.getHeight() * mutliply);
 		this.drawHP(gc);
+		description.draw(gc);
+		displayMoney(gc);
+
 		if(equipment != null) {
 			equipment.draw(gc);
 		}
@@ -147,6 +159,11 @@ public class Player extends Entity implements Cooldownable{
 	@Override
 	public void attack() {
 		if(equipment != null) equipment.attack();
+	}
+
+	public void displayMoney(GraphicsContext gc){
+		descriptionMoney.setText( Integer.toString(money) + "$" );
+		descriptionMoney.draw(gc);
 	}
 	
 	public static Player getPlayer() {
@@ -167,6 +184,22 @@ public class Player extends Entity implements Cooldownable{
 
 	public void setResolutionPosition(Point resolutionPosition) {
 		this.resolutionPosition = resolutionPosition;
+	}
+
+	public Description getDescription() {
+		return description;
+	}
+
+	public void setDescription(String text) {
+		this.description.setText(text);
+	}
+
+	public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
 	}
 
 	@Override

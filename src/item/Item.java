@@ -26,6 +26,9 @@ public abstract class Item extends BaseObject {
     	Point pos = this.getPosition();
 		gc.drawImage(image, pos.getX() + 5, pos.getY() + 5, image.getWidth()*1.5 , image.getHeight()*1.5);
 
+        this.setWidth(image.getWidth() * 1.5);
+        this.setHeight(image.getHeight() * 1.5);
+
         gc.setFont(new Font("Arial", 24));
         gc.setFill(Color.BLACK);
         gc.setStroke(Color.WHITE);

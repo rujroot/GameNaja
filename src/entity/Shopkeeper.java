@@ -7,6 +7,7 @@ import data.Point;
 import drawing.GameScreen;
 import input.InputUtility;
 import inventory.BaseUI;
+import inventory.SlotUI;
 import item.Coal;
 import item.Diamond;
 import item.GoldIngot;
@@ -42,8 +43,9 @@ public class Shopkeeper extends Entity implements Cooldownable{
 
         chooseUI = new BaseUI(new Point(-100, -150), 0, 0, 2, 20, this);
         chooseUI.setSelectIndex(0);
+        
 
-        buyUI = new BaseUI(new Point(-200, -100), 0, 0, 4, 10, this);
+        buyUI = new BaseUI(new Point(-150, -150), 0, 0, 4, 10, this);
         buyUI.setSelectIndex(0);
 
         initShopSell();
@@ -62,6 +64,12 @@ public class Shopkeeper extends Entity implements Cooldownable{
         for(int i = 0; i < sellItem.length; ++i){
             sellUI.addItem(sellItem[i]);
         }
+        SlotUI[] slot = sellUI.getPosIndex();
+        slot[0].setDescription("1$");
+        slot[1].setDescription("2$");
+        slot[2].setDescription("3$");
+        slot[3].setDescription("4$");
+        slot[4].setDescription("5$");
 
     }
 
@@ -87,7 +95,6 @@ public class Shopkeeper extends Entity implements Cooldownable{
             gc.setStroke(Color.WHITE);
             gc.setLineWidth(5);
 
-
             gc.strokeText("E", pos.getX() + 20, pos.getY() - 20, 24);
             gc.fillText("E", pos.getX() + 20, pos.getY() - 20, 24);
         }
@@ -95,6 +102,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
         if(!inDistant()){
             currentUI = null;
             choose = "None";
+            Player.player.setDescription("");
         }
 
         // Draw Shop
@@ -116,6 +124,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
             if(choose.equals("None")){
                 choose = "Choose";
                 this.setCurrentUI(chooseUI);
+                Player.player.setDescription("< : Left | > : Right | E : Select | Q : Back");
             }
             else if(choose.equals("Choose")){
                 int currSelect = currentUI.getSelectIndex();
@@ -141,6 +150,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
             if(choose.equals("Choose")){
                 currentUI = null;
                 choose = "None";
+                Player.player.setDescription("");
             }
             else if(choose.equals("Buy") || choose.equals("Sell")){
                 this.setCurrentUI(chooseUI);

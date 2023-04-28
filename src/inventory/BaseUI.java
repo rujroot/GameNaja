@@ -78,7 +78,6 @@ public class BaseUI extends BaseObject{
         for(int i = 0; i < maxIndex; ++i){
             if(posIndex[i].getItem() == null){
                 posIndex[i].setItem(item);
-                //Main.logic.addObject(item);
                 return;
             }
         }
@@ -151,6 +150,9 @@ public class BaseUI extends BaseObject{
 
     public void setBasePoint(Point basePoint) {
         this.basePoint = basePoint;
+    }
+    public SlotUI[] getPosIndex() {
+        return posIndex;
     }
 
     public int getSelectIndex() {
