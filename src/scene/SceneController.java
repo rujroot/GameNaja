@@ -38,6 +38,7 @@ public class SceneController {
 	public static GameScreen gameScreen;
 	public ImageView myImageView;
 	public Image dungeon = new Image(getClass().getResourceAsStream("Dungeon.jpg"));
+	public Image gameOver = new Image(getClass().getResourceAsStream("GameOverImage.jpg"));
 	
 	public void switchToStartGameScene(ActionEvent event) throws IOException {
 		
@@ -65,6 +66,7 @@ public class SceneController {
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setTitle("Game Naja eiei");
+		myImageView.setImage(gameOver);
 		stage.show();
 	}
 	

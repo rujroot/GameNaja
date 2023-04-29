@@ -5,6 +5,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scene.SceneController">
@@ -14,15 +17,47 @@
             <Image url="@Dungeon.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="536.0" layoutY="148.0" text="GameNaja">
+      <Label layoutX="468.0" layoutY="188.0" text="GameNaja">
          <font>
-            <Font size="71.0" />
+            <Font size="89.0" />
          </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.18000000715255737" green="0.2507614195346832" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
       </Label>
-      <Button layoutX="651.0" layoutY="370.0" mnemonicParsing="false" onAction="#switchToBodyGameScene" text="Start">
+      <Button layoutX="608.0" layoutY="449.0" mnemonicParsing="false" onAction="#switchToBodyGameScene" text="Start">
          <font>
-            <Font size="28.0" />
+            <Font name="Baskerville Old Face" size="41.0" />
          </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.9684210419654846" green="0.0645614042878151" blue="0.0645614042878151" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
       </Button>
    </children>
 </AnchorPane>
