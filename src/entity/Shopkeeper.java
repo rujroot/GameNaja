@@ -1,10 +1,12 @@
 package entity;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import data.DataEntity;
 import data.Point;
 import drawing.GameScreen;
+import equipment.BaseWeapon;
 import input.InputUtility;
 import inventory.BaseUI;
 import inventory.Inventory;
@@ -26,6 +28,8 @@ import logic.RenderableHolder;
 
 public class Shopkeeper extends Entity implements Cooldownable{
 
+    public static ArrayList<BaseWeapon> allBuyItem = new ArrayList<BaseWeapon>();
+
     // image entity
     private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 392, 960, 51, 63);
 
@@ -36,8 +40,10 @@ public class Shopkeeper extends Entity implements Cooldownable{
     private int select = 0;
 
     private Item[] sellItem = new Item[5];
+    private BaseWeapon[] buyWeapon = new BaseWeapon[4];
+    
 
-    public Shopkeeper(String name, double width, double height, DataEntity data) {
+    public Shopkeeper(String name, double width, double height, DataEntity data) throws CloneNotSupportedException {
         super(name, width, height, data);
         this.setWidth(image.getWidth());
 		this.setHeight(image.getHeight());
@@ -50,6 +56,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
         buyUI.setSelectIndex(0);
 
         initShopSell();
+        initShopBuy();
     }
 
     public void initShopSell(){
@@ -73,10 +80,6 @@ public class Shopkeeper extends Entity implements Cooldownable{
         slot[4].setDescription("0$");
     }
 
-    public void shopBuy(int Index){
-        
-    }
-
     public void shopSell(int Index){
         Item itemToSell = sellItem[Index];
         if(itemToSell.getAmount() <= 0) return;
@@ -86,7 +89,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
         SlotUI[] slotInventory = inventory.getUI().getPosIndex();
 
         for(int i = 0; i < slotInventory.length; ++i){
-            Item itemInv = slotInventory[i].getItem();
+            Item itemInv = (Item) slotInventory[i].getObject();
             if(itemInv != null && itemInv.equals(itemToSell)){ 
                 player.addMoney(itemInv.getValue());
                 itemInv.setAmount(0);
@@ -104,11 +107,11 @@ public class Shopkeeper extends Entity implements Cooldownable{
         SlotUI[] slotSell = sellUI.getPosIndex();
 
         for(int i = 0; i < slotSell.length; ++i){
-            Item itemSell = slotSell[i].getItem();
+            Item itemSell = (Item) slotSell[i].getObject();
             boolean found = false;
 
             for(int j = 0; j < slotInventory.length; ++j){
-                Item itemInv = slotInventory[j].getItem();
+                Item itemInv = (Item) slotInventory[j].getObject();
 
                 if(itemInv != null && itemSell.equals(itemInv)){
                     itemSell.setAmount(itemInv.getAmount());
@@ -124,6 +127,31 @@ public class Shopkeeper extends Entity implements Cooldownable{
             }
         }
 
+    }
+
+    public void initShopBuy() throws CloneNotSupportedException{
+        int maxIndex = allBuyItem.size() - 1;
+        
+        for(int i = 0; i < 4; ++i){
+            int randNum = (int)(Math.random() * maxIndex);
+            while(choose.indexOf(randNum) != -1){
+                randNum = (int)(Math.random() * maxIndex);
+            }
+
+            BaseWeapon weapon = allBuyItem.get(randNum);
+            buyWeapon[i] = weapon;
+            // buyUI.addItem();
+        }
+
+
+    }
+
+    public void shopBuy(int Index){
+        
+    }
+
+    public static void addCanBuy(BaseWeapon weapon){
+        allBuyItem.add(weapon);
     }
 
     @Override

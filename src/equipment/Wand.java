@@ -1,6 +1,7 @@
 package equipment;
 
 import data.Point;
+import entity.Shopkeeper;
 import equipment.projectile.Arrow;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
@@ -16,7 +17,8 @@ public class Wand extends BaseWeapon implements Cooldownable{
 
 	public Wand(double width, double height, double attackDamage, double attackSpeed) {
 		super(width, height, attackDamage, attackSpeed);
-		// TODO Auto-generated constructor stub
+		
+		Shopkeeper.addCanBuy(this);
 	}
 
 	@Override
@@ -57,5 +59,11 @@ public class Wand extends BaseWeapon implements Cooldownable{
 			return true;
 		}
 	}
+
+	@Override
+    public Object clone() throws CloneNotSupportedException {
+        Wand clone = (Wand) super.clone();
+        return clone;
+    }
 
 }

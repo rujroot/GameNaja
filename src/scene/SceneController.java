@@ -63,7 +63,7 @@ public class SceneController {
 	}
 	
 	
-	public void switchToBodyGameScene() {
+	public void switchToBodyGameScene() throws CloneNotSupportedException {
 
 		Player player = new Player("Player", 50, 50, new DataEntity(100, 10000, 10000, 10));
 		logic = new GameLogic();
@@ -92,7 +92,12 @@ public class SceneController {
 		
 		AnimationTimer animation = new AnimationTimer() {
 			public void handle(long now) {
-				gameScreen.updatePlayer();
+				try {
+					gameScreen.updatePlayer();
+				} catch (CloneNotSupportedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				gameScreen.paintLevel();
 				gameScreen.paintComponent();
 				animationController.run();

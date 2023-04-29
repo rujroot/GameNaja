@@ -12,7 +12,7 @@ import logic.RenderableHolder;
 public class SlotUI extends BaseObject {
 
     private Image image, selectUI = RenderableHolder.selectUI;
-    private Item item;
+    private BaseObject object;
     private Point offset = new Point(0, 0);
     private Entity entity;
     private boolean select = false;
@@ -34,12 +34,12 @@ public class SlotUI extends BaseObject {
 
         gc.drawImage(image, pos.getX() + posEntity.getX(), pos.getY() + posEntity.getY(), image.getWidth(), image.getHeight());
 
-        if(item != null){
+        if(object != null){
             
-            Point posItem = item.getPosition();
+            Point posItem = object.getPosition();
             posItem.setX(pos.getX() + posEntity.getX() + offset.getX());
             posItem.setY(pos.getY() + posEntity.getY() + offset.getY());
-            item.draw(gc);
+            object.draw(gc);
         }
 
         if(isSelect()){
@@ -67,16 +67,16 @@ public class SlotUI extends BaseObject {
         this.image = image;
     }
 
-    public Item getItem() {
-        return item;
+    public BaseObject getObject() {
+        return object;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setObject(BaseObject object) {
+        this.object = object;
     }
 
     public boolean equals(Item item){
-        return this.item.equals(item);
+        return this.object.equals(item);
     }
 
     public Point getOffset() {

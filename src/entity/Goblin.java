@@ -12,7 +12,6 @@ public class Goblin extends Monster {
 	public Goblin(String name, double width, double height, DataEntity data) {
 		super(name, width, height, data);
 		this.setSwiftness(swiftness);
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override

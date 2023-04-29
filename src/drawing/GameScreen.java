@@ -83,7 +83,7 @@ public class GameScreen extends Canvas {
 		});
 	}
 	
-	public void updatePlayer() {
+	public void updatePlayer() throws CloneNotSupportedException {
 		Player player = Player.getPlayer();
 		Point pos = player.getPosition();
 

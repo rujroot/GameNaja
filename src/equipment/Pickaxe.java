@@ -28,5 +28,11 @@ public class Pickaxe extends Melee{
             }
         }
     }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Pickaxe clone = (Pickaxe) super.clone();
+        return clone;
+    }
     
 }

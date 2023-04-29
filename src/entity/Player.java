@@ -68,7 +68,7 @@ public class Player extends Entity implements Cooldownable{
         return 360 - Math.toDegrees(startAt);
 	}
 
-	public void update() {
+	public void update() throws CloneNotSupportedException {
 		//Move Section
 		DataEntity data = this.getData();
 		
@@ -93,7 +93,11 @@ public class Player extends Entity implements Cooldownable{
 			this.setEquipment(new Wand(30.0, 10.0, 2,10));
 			inventory.selectIndex(3);
 		} if (InputUtility.getKeyPressed(KeyCode.DIGIT5)) {
-			this.setEquipment(new Pickaxe(30.0, 10.0));
+
+			Pickaxe pickaxe = new Pickaxe(30.0, 10.0);
+			BaseWeapon pickaxe2 = (BaseWeapon) pickaxe.clone();
+
+			this.setEquipment(pickaxe2);
 			inventory.selectIndex(4);
 
 		} if (InputUtility.getKeyPressed(KeyCode.DIGIT6)&&!onCooldown()) {

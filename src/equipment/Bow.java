@@ -1,6 +1,7 @@
 package equipment;
 
 import data.Point;
+import entity.Shopkeeper;
 import equipment.projectile.Arrow;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
@@ -16,6 +17,8 @@ public class Bow extends BaseWeapon implements Cooldownable {
 
 	public Bow(double width, double height, int attackDamage) {
 		super(width, height, attackDamage);
+
+		Shopkeeper.addCanBuy(this);
 	}
 	
 	@Override
@@ -61,5 +64,11 @@ public class Bow extends BaseWeapon implements Cooldownable {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
+
+	@Override
+    public Object clone() throws CloneNotSupportedException {
+        Bow clone = (Bow) super.clone();
+        return clone;
+    }
 	
 }

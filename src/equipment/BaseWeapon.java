@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import logic.Hitbox;
 
-public abstract class BaseWeapon extends BaseObject {
+public abstract class BaseWeapon extends BaseObject implements Cloneable{
 	private double attackDamage, attackSpeed;
 	private Point offsetPosition = new Point(30.0, 20.0);
 
@@ -99,5 +99,11 @@ public abstract class BaseWeapon extends BaseObject {
 	public void setImage(Image image) {
 		this.image = image;
 	}
+
+	@Override
+    public Object clone() throws CloneNotSupportedException {
+        BaseWeapon clone = (BaseWeapon) super.clone();
+        return clone;
+    }
 
 }

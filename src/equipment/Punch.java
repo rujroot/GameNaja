@@ -9,7 +9,11 @@ import entity.Monster;
 public class Punch extends Melee {
 
 	public Punch(double width, double height, double attackDamage, double attackRange, double attackDegree) {
-		super(width, height, attackDamage, attackRange, attackDegree);
+		super(width, height);
+
+		this.setAttackDamage(attackDamage);
+		this.setAttackRange(attackRange);
+		this.setAttackDegree(attackDegree);
 	}
 
 	@Override
@@ -23,5 +27,11 @@ public class Punch extends Melee {
 			}
 		}
 	}
+
+	@Override
+    public Object clone() throws CloneNotSupportedException {
+        Punch clone = (Punch) super.clone();
+        return clone;
+    }
 
 }
