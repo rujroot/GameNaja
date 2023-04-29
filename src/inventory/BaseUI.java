@@ -3,6 +3,7 @@ package inventory;
 import data.BaseObject;
 import data.Point;
 import entity.Entity;
+import equipment.BaseWeapon;
 import item.Item;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -67,42 +68,42 @@ public class BaseUI extends BaseObject{
 
     }
 
-    public void addItem(Item item){
+    public void addItem(BaseObject object){
         for(int i = 0; i < maxIndex; ++i){
-            if(posIndex[i].getItem() != null && posIndex[i].equals(item)){
-                posIndex[i].getItem().addAmount(item.getAmount());
-                posIndex[i].getItem().addValue(item.getValue());
+
+            BaseObject obj = posIndex[i].getObject();
+            if(obj != null && obj instanceof Item && object instanceof Item && ((Item) obj).equals(((Item) object))){
+                ((Item) obj).addAmount(((Item) object).getAmount());
+                ((Item) obj).addValue(((Item) object).getValue());
                 return;
             }
         }
 
         for(int i = 0; i < maxIndex; ++i){
-            if(posIndex[i].getItem() == null){
-                posIndex[i].setItem(item);
-                return;
-            }
-        }
-    }
-
-    public void removeItem(Item item){
-        for(int i = 0; i < maxIndex; ++i){
-            Item itemInv = posIndex[i].getItem();
-            if(itemInv != null && itemInv.equals(item)){
-                posIndex[i].setItem(null);
+            if(posIndex[i].getObject() == null){
+                posIndex[i].setObject(object);
                 return;
             }
         }
     }
 
-    public void reemoveItem(int index){
+    public void removeItem(BaseObject object){
+        for(int i = 0; i < maxIndex; ++i){
+            BaseObject obj = posIndex[i].getObject();
+            if(obj != null && obj instanceof Item && object instanceof Item){
+                posIndex[i].setObject(null);
+                return;
+            }
+        }
+    }
+
+    public void removeItem(int index){
 
     }
 
     public void addItem(Item item, int index){
 
     }
-
-
 
     @Override
     public void draw(GraphicsContext gc) {
