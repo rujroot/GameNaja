@@ -54,7 +54,7 @@ public class GameLogic {
 
 					if(entity instanceof Monster) {
 						((Monster) entity).follow();
-						if(true) {
+						if(((Monster) entity).isIntersectPlayer()) {
 							((Monster) entity).attack();
 						}
 					}
