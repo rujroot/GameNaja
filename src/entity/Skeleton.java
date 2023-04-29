@@ -33,7 +33,7 @@ public class Skeleton extends Monster {
 	@Override
 	public void attack() {
 		// TODO Auto-generated method stub
-
+		super.attack();
 	}
 
 	@Override

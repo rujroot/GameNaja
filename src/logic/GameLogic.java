@@ -1,5 +1,6 @@
 package logic;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import data.BaseObject;
@@ -21,6 +22,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ore.BaseOre;
+import scene.SceneController;
 
 public class GameLogic {
 	public static GameScreen gameScreen;
@@ -38,11 +40,13 @@ public class GameLogic {
 	}
 	
 	//This method should run every sec
-	public void logicUpdate() {
+	public void logicUpdate(){
 		for (int i = gameObjectContainer.size() - 1; i >= 0; i--) {
 			BaseObject object = gameObjectContainer.get(i);
 			if(object instanceof Entity){
 					Entity entity = (Entity) object;
+					
+					
 					if(entity.getData().getHp() <= 0) {
 						entity.setDestroyed(true);
 						gameObjectContainer.remove(entity);
@@ -50,6 +54,21 @@ public class GameLogic {
 
 					if(entity instanceof Monster) {
 						((Monster) entity).follow();
+						if(true) {
+							((Monster) entity).attack();
+						}
+					}
+					
+					if(entity instanceof Player) {
+						if(entity.getData().getHp()<=0) {
+							SceneController sceneController = new SceneController();
+							try {
+								sceneController.switchToGameOverScene2();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
 					}
 				}
 			

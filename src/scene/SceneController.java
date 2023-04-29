@@ -53,9 +53,19 @@ public class SceneController {
 		stage.show();
 	}
 	
+	public void switchToGameOverScene2() throws IOException {
+		root = (Parent) FXMLLoader.load(getClass().getResource("/scene/GameOver.fxml"));
+		stage = Main.stage;
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.setTitle("Game Naja eiei");
+		stage.show();
+	}
+	
+	
 	public void switchToBodyGameScene() {
 
-		Player player = new Player("Player", 50, 50, new DataEntity(1, 1, 1, 10));
+		Player player = new Player("Player", 50, 50, new DataEntity(100, 10000, 10000, 10));
 		logic = new GameLogic();
 		GenerateDungeon dungeon = new GenerateDungeon(10);
 		
