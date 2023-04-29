@@ -9,6 +9,8 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import logic.GameLogic;
 import logic.Main;
@@ -34,13 +36,18 @@ public class SceneController {
 	private Parent root;
 	public static GameLogic logic;
 	public static GameScreen gameScreen;
+	public ImageView myImageView;
+	public Image dungeon = new Image(getClass().getResourceAsStream("Dungeon.jpg"));
+	public Image gameOver = new Image(getClass().getResourceAsStream("GameOverImage.jpg"));
 	
 	public void switchToStartGameScene(ActionEvent event) throws IOException {
+		
 		root = (Parent) FXMLLoader.load(getClass().getResource("/scene/Start.fxml"));
 		stage = Main.stage;
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setTitle("Game Naja eiei");
+		myImageView.setImage(dungeon);
 		stage.show();
 	}
 	
@@ -59,6 +66,7 @@ public class SceneController {
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setTitle("Game Naja eiei");
+		myImageView.setImage(gameOver);
 		stage.show();
 	}
 	
