@@ -4,11 +4,15 @@ import data.BaseObject;
 import data.Point;
 import entity.Player;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import logic.Hitbox;
 
 public abstract class BaseWeapon extends BaseObject {
 	private double attackDamage, attackSpeed;
 	private Point offsetPosition = new Point(30.0, 20.0);
+
+	private Image image;
 	
 	@Override
 	public Point getPosition() {
@@ -35,7 +39,16 @@ public abstract class BaseWeapon extends BaseObject {
 	private Hitbox attackHitBox;
 	
 	public abstract void attack();
-	public abstract void draw(GraphicsContext gc);
+
+	public void draw(GraphicsContext gc){
+		Point pos = this.getPosition();
+		if(image != null){
+			gc.drawImage(image, pos.getX(), pos.getY(), image.getWidth(), image.getHeight());
+		}else{
+        	gc.setFill(Color.LIMEGREEN);
+			gc.fillRect(pos.getX(), pos.getY(), this.getWidth(), this.getHeight());
+		}
+	}
 	
 	public BaseWeapon(double width, double height, double attackDamage, double attackSpeed) {
 		super(new Point(0, 0), width, height);
@@ -77,6 +90,14 @@ public abstract class BaseWeapon extends BaseObject {
 	}
 	public void setOffsetPosition(Point offsetPosition) {
 		this.offsetPosition = offsetPosition;
+	}
+
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
 	}
 
 }

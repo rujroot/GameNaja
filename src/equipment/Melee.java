@@ -1,11 +1,17 @@
 package equipment;
 
+import java.util.ArrayList;
+
+import animation.AnimationController;
 import data.BaseObject;
 import data.Point;
 import entity.Player;
+import logic.Main;
 public abstract class Melee extends BaseWeapon{
 
     private double attackRange, attackDegree;
+
+    public abstract void attackAbility(ArrayList<BaseObject> intersectObjects);
 
     public Melee(double width, double height, double attackDamage, double attackRange, double attackDegree) {
         super(width, height, attackDamage);
@@ -71,6 +77,36 @@ public abstract class Melee extends BaseWeapon{
         return intersectDistant && intersectDegree;
     }
 
+    @Override
+    public void attack(){
+
+        Player player = Player.getPlayer();
+        double startAt = player.getMouseAngle();
+
+        Point playerPosition = this.getPlayerPosition();
+        Point attackPosition = new Point(playerPosition.getX() - (getAttackRange() / 2) + (player.getWidth() / 2), playerPosition.getY() - (getAttackRange() / 2) + (player.getHeight() / 2));
+
+        AttackObject attackObject = new AttackObject(attackPosition, getAttackRange(), getAttackRange(), startAt - getAttackDegree() / 2, getAttackDegree());
+        Main.getLogic().addObject(attackObject);
+        AnimationController.animations.add(attackObject);
+
+        this.attackAbility(this.getIntersectObject());
+    }
+
+    public ArrayList<BaseObject> getIntersectObject(){
+
+        ArrayList<BaseObject> gameObjectContainer = Main.getLogic().getGameObjectContainer();
+        ArrayList<BaseObject> instersectObject = new ArrayList<BaseObject>();
+
+        for(BaseObject object : gameObjectContainer){
+            if(object.isVisible() && this.intersectsCirclePart(object)){
+                instersectObject.add(object);
+            }
+        }
+
+        return instersectObject;
+    }
+    
     public double getAttackRange() {
         return attackRange;
     }
