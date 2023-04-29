@@ -6,7 +6,6 @@ import animation.AnimationController;
 import data.BaseObject;
 import data.Point;
 import entity.Player;
-import entity.Shopkeeper;
 import logic.Main;
 public abstract class Melee extends BaseWeapon{
 
@@ -20,7 +19,6 @@ public abstract class Melee extends BaseWeapon{
         this.setAttackRange(150);
         this.setAttackDegree(60);
 
-        Shopkeeper.addCanBuy(this);
     }
 
     public boolean pointIntersectsRectangle(double x, double y, double rectX, double rectY, double rectWidth, double rectHeight) {

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import data.BaseObject;
 import data.DataEntity;
 import entity.Monster;
-import entity.Shopkeeper;
 
 public class Spear extends Melee {
 
@@ -15,8 +14,6 @@ public class Spear extends Melee {
 		this.setAttackDamage(attackDamage);
 		this.setAttackRange(attackRange);
 		this.setAttackDegree(attackDegree);
-
-		Shopkeeper.addCanBuy(this);
 	}
 
 	@Override

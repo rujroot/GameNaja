@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import data.BaseObject;
 import data.DataEntity;
 import entity.Monster;
-import entity.Shopkeeper;
 public class Shield extends Melee {
 
 	public Shield(double width, double height, double attackDamage, double attackRange, double attackDegree) {
@@ -14,8 +13,6 @@ public class Shield extends Melee {
 		this.setAttackDamage(attackDamage);
 		this.setAttackRange(attackRange);
 		this.setAttackDegree(attackDegree);
-
-		Shopkeeper.addCanBuy(this);
 	}
 
 	@Override

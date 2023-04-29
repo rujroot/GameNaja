@@ -69,12 +69,19 @@ public class BaseUI extends BaseObject{
     }
 
     public void addItem(BaseObject object){
+
         for(int i = 0; i < maxIndex; ++i){
+            if(object instanceof BaseWeapon) break;
 
             BaseObject obj = posIndex[i].getObject();
-            if(obj != null && obj instanceof Item && object instanceof Item && ((Item) obj).equals(((Item) object))){
-                ((Item) obj).addAmount(((Item) object).getAmount());
-                ((Item) obj).addValue(((Item) object).getValue());
+            if(obj == null || !(obj instanceof Item) ) continue;
+            
+            Item itemA = (Item) obj;
+            Item itemB = (Item) object;
+
+            if(itemA.equals(itemB)){
+                itemA.addAmount(itemB.getAmount());
+                itemA.addValue(itemB.getValue());
                 return;
             }
         }
@@ -88,13 +95,23 @@ public class BaseUI extends BaseObject{
     }
 
     public void removeItem(BaseObject object){
+
         for(int i = 0; i < maxIndex; ++i){
+
             BaseObject obj = posIndex[i].getObject();
-            if(obj != null && obj instanceof Item && object instanceof Item){
+            if(obj == null) continue;
+
+            if(obj instanceof Item && object instanceof Item){
+
+                Item itemA = (Item) obj;
+                Item itemB = (Item) object;
+                if(!itemA.equals(itemB)) continue;
+
                 posIndex[i].setObject(null);
                 return;
             }
         }
+
     }
 
     public void removeItem(int index){

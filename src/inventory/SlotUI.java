@@ -4,6 +4,7 @@ import data.BaseObject;
 import data.Point;
 import drawing.Description;
 import entity.Entity;
+import equipment.BaseWeapon;
 import item.Item;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -35,11 +36,18 @@ public class SlotUI extends BaseObject {
         gc.drawImage(image, pos.getX() + posEntity.getX(), pos.getY() + posEntity.getY(), image.getWidth(), image.getHeight());
 
         if(object != null){
-            
             Point posItem = object.getPosition();
             posItem.setX(pos.getX() + posEntity.getX() + offset.getX());
             posItem.setY(pos.getY() + posEntity.getY() + offset.getY());
-            object.draw(gc);
+
+            if(object instanceof Item){
+                object.draw(gc);
+            }
+            else if(object instanceof BaseWeapon){ 
+                Image image = ((BaseWeapon) object).getImage();
+                if(image != null) gc.drawImage(image, posItem.getX(), posItem.getY(), image.getWidth(), image.getHeight());
+            }
+            
         }
 
         if(isSelect()){

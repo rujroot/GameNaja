@@ -7,6 +7,7 @@ import data.DataEntity;
 import data.Point;
 import drawing.GameScreen;
 import equipment.BaseWeapon;
+import equipment.Knife;
 import input.InputUtility;
 import inventory.BaseUI;
 import inventory.Inventory;
@@ -28,7 +29,7 @@ import logic.RenderableHolder;
 
 public class Shopkeeper extends Entity implements Cooldownable{
 
-    public static ArrayList<BaseWeapon> allBuyItem = new ArrayList<BaseWeapon>();
+    private ArrayList<BaseWeapon> allBuyItem = new ArrayList<BaseWeapon>();
 
     // image entity
     private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 392, 960, 51, 63);
@@ -89,6 +90,9 @@ public class Shopkeeper extends Entity implements Cooldownable{
         SlotUI[] slotInventory = inventory.getUI().getPosIndex();
 
         for(int i = 0; i < slotInventory.length; ++i){
+
+            if(!(slotInventory[i].getObject() instanceof Item)) continue;
+
             Item itemInv = (Item) slotInventory[i].getObject();
             if(itemInv != null && itemInv.equals(itemToSell)){ 
                 player.addMoney(itemInv.getValue());
@@ -130,17 +134,21 @@ public class Shopkeeper extends Entity implements Cooldownable{
     }
 
     public void initShopBuy() throws CloneNotSupportedException{
+
+        allBuyItem.add(new Knife(100, 100, 1, 100, 100));
+        
         int maxIndex = allBuyItem.size() - 1;
         
         for(int i = 0; i < 4; ++i){
-            int randNum = (int)(Math.random() * maxIndex);
-            while(choose.indexOf(randNum) != -1){
-                randNum = (int)(Math.random() * maxIndex);
-            }
+            int randNum = 0;//(int)(Math.random() * maxIndex);
+            // while(choose.indexOf(randNum) != -1){
+            //     randNum = (int)(Math.random() * maxIndex);
+            // }
 
             BaseWeapon weapon = allBuyItem.get(randNum);
             buyWeapon[i] = weapon;
-            // buyUI.addItem();
+            buyUI.addItem(weapon);
+            //System.out.println("added");
         }
 
 
@@ -148,10 +156,6 @@ public class Shopkeeper extends Entity implements Cooldownable{
 
     public void shopBuy(int Index){
         
-    }
-
-    public static void addCanBuy(BaseWeapon weapon){
-        allBuyItem.add(weapon);
     }
 
     @Override

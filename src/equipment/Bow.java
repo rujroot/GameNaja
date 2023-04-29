@@ -1,7 +1,6 @@
 package equipment;
 
 import data.Point;
-import entity.Shopkeeper;
 import equipment.projectile.Arrow;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
@@ -18,7 +17,6 @@ public class Bow extends BaseWeapon implements Cooldownable {
 	public Bow(double width, double height, int attackDamage) {
 		super(width, height, attackDamage);
 
-		Shopkeeper.addCanBuy(this);
 	}
 	
 	@Override

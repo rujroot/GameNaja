@@ -49,7 +49,7 @@ public class Player extends Entity implements Cooldownable{
 		//this.setEquipment(new Pickaxe(30.0, 10.0));
 		//this.setEquipment(new Bow(30.0, 10.0, 2));
 		
-		this.setEquipment(new Knife(30.0, 10.0,10.0,500,60));
+		//this.setEquipment(new Knife(30.0, 10.0,10.0,500,60));
 	}
 
 	public double getMouseAngle(){
@@ -81,23 +81,23 @@ public class Player extends Entity implements Cooldownable{
 		} if (InputUtility.getKeyPressed(KeyCode.S) && isLegalMove(0, 1) ) {
 			this.move(0, data.getSpd());
 		} if (InputUtility.getKeyPressed(KeyCode.DIGIT1)) {
-			this.setEquipment(new Bow(30.0, 10.0, 2));
+			//this.setEquipment(new Bow(30.0, 10.0, 2));
 			inventory.selectIndex(0);
 		} if (InputUtility.getKeyPressed(KeyCode.DIGIT2)) {
-			this.setEquipment(new Knife(30.0, 10.0,10.0,500,60));
+			//this.setEquipment(new Knife(30.0, 10.0,10.0,500,60));
 			inventory.selectIndex(1);
 		} if (InputUtility.getKeyPressed(KeyCode.DIGIT3)) {
-			this.setEquipment(new Sword(30.0, 10.0,10.0,500,60));
+			//this.setEquipment(new Sword(30.0, 10.0,10.0,500,60));
 			inventory.selectIndex(2);
 		} if (InputUtility.getKeyPressed(KeyCode.DIGIT4)) {
-			this.setEquipment(new Wand(30.0, 10.0, 2,10));
+			//this.setEquipment(new Wand(30.0, 10.0, 2,10));
 			inventory.selectIndex(3);
 		} if (InputUtility.getKeyPressed(KeyCode.DIGIT5)) {
 
-			Pickaxe pickaxe = new Pickaxe(30.0, 10.0);
-			BaseWeapon pickaxe2 = (BaseWeapon) pickaxe.clone();
+			//Pickaxe pickaxe = new Pickaxe(30.0, 10.0);
+			//BaseWeapon pickaxe2 = (BaseWeapon) pickaxe.clone();
 
-			this.setEquipment(pickaxe2);
+			//this.setEquipment(pickaxe2);
 			inventory.selectIndex(4);
 
 		} if (InputUtility.getKeyPressed(KeyCode.DIGIT6)&&!onCooldown()) {

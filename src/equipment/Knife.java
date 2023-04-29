@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import data.BaseObject;
 import data.DataEntity;
 import entity.Monster;
-import entity.Shopkeeper;
 import javafx.scene.image.WritableImage;
 import logic.RenderableHolder;
 
@@ -21,7 +20,6 @@ public class Knife extends Melee{
 		this.setAttackRange(attackRange);
 		this.setAttackDegree(attackDegree);
 
-        Shopkeeper.addCanBuy(this);
 	}
 
     @Override

@@ -1,7 +1,6 @@
 package equipment;
 
 import data.Point;
-import entity.Shopkeeper;
 import equipment.projectile.Arrow;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
@@ -18,7 +17,6 @@ public class Wand extends BaseWeapon implements Cooldownable{
 	public Wand(double width, double height, double attackDamage, double attackSpeed) {
 		super(width, height, attackDamage, attackSpeed);
 		
-		Shopkeeper.addCanBuy(this);
 	}
 
 	@Override
