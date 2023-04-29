@@ -54,10 +54,8 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 		// TODO Auto-generated method stub
 		try {
-			System.out.println("S");
 			Parent root = FXMLLoader.load(getClass().getResource("/scene/Start.fxml"));
 
-			System.out.println("S");
 			Scene startGame = new Scene(root);
 			stage.setScene(startGame);
 			stage.setTitle("Game Naja eiei");

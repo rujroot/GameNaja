@@ -23,8 +23,10 @@ public class Monster extends Entity implements Cooldownable {
 
 	public boolean isIntersectPlayer() {
 		// check 2 rectangle
-
-		return true;
+		Point MonBox = new Point(this.getPosition().getX()-10,this.getPosition().getY()-10);
+		Hitbox A = new Hitbox(MonBox, this.getWidth()+20, this.getHeight()+20);
+		Hitbox B = new Hitbox(Player.getPlayer().getPosition(), Player.getPlayer().getWidth(), Player.getPlayer().getHeight());
+ 		return A.isIntersect(B);
 	}
 
 	@Override

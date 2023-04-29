@@ -105,6 +105,8 @@ public class Player extends Entity implements Cooldownable{
 			inventory.selectIndex(7);
 		}if (InputUtility.getKeyPressed(KeyCode.DIGIT9)) {
 			inventory.selectIndex(8);
+		}if (InputUtility.getKeyPressed(KeyCode.F)) {
+			this.getData().setHp(this.getData().getHp()+10);
 		}
 			
 		//Action Section

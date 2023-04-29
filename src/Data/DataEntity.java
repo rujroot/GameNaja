@@ -5,8 +5,8 @@ public class DataEntity {
 	
 	public DataEntity(double hp, double atk, double def, double spd, double poisonStatus) {
 		this.setAtk(atk);
-		this.setHp(hp);
 		this.setMaxHP(hp);
+		this.setHp(hp);
 		this.setDef(def);
 		this.setSpd(spd);
 		this.setPoisonStatus(poisonStatus);
@@ -14,8 +14,8 @@ public class DataEntity {
 	
 	public DataEntity(double hp, double atk, double def, double spd) {
 		this.setAtk(atk);
-		this.setHp(hp);
 		this.setMaxHP(hp);
+		this.setHp(hp);
 		this.setDef(def);
 		this.setSpd(spd);
 		this.setPoisonStatus(0);
@@ -28,7 +28,9 @@ public class DataEntity {
 	public void setHp(double hp) {
 		if(hp <= 0){
 			this.hp = 0;
-		}else{
+		}else if(hp>this.getMaxHP()){
+			this.hp = this.getMaxHP();
+		}else {
 			this.hp = hp;
 		}
 		
