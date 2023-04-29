@@ -3,9 +3,13 @@ package entity;
 import data.DataEntity;
 import data.Point;
 import javafx.scene.canvas.GraphicsContext;
+import logic.Cooldownable;
+import logic.Hitbox;
 
-public class Monster extends Entity{
+public class Monster extends Entity implements Cooldownable {
 
+	private double cooldownTime = 1000;
+	private double lastClickTime = 0;
 	public Monster(String name, double width, double height, DataEntity data) {
 		super(name, width, height, data);
 		// TODO Auto-generated constructor stub
@@ -14,14 +18,32 @@ public class Monster extends Entity{
 	@Override
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	public boolean isIntersectPlayer() {
+		// check 2 rectangle
+
+		return true;
 	}
 
 	@Override
 	public void attack() {
 		// TODO Auto-generated method stub
+		// check if player intersect with monster attack box
+
+		// decrease player's hp
+		if(!onCooldown()) {
+			Player.getPlayer().getData().setHp(Player.getPlayer().getData().getHp() - 1);
+		}
 		
 	}
+
+//	public boolean hit(Entity entity){
+//		Hitbox A = new Hitbox(this.getPosition(), this.getWidth(), this.getHeight());
+//		Hitbox B = new Hitbox(entity.getPosition(), entity.getWidth(), entity.getHeight());
+//		return A.isIntersect(B);
+//	}
 
 	public void follow() {
 		// TODO Auto-generated method stub
@@ -41,4 +63,14 @@ public class Monster extends Entity{
 
 	}
 
+	@Override
+	public boolean onCooldown() {
+		long currentTime = System.currentTimeMillis();
+		if(currentTime - lastClickTime > cooldownTime) {
+			lastClickTime = currentTime;
+			return false;
+		}else {
+			return true;
+		}
+	}
 }

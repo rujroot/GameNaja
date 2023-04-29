@@ -4,6 +4,7 @@ import data.DataEntity;
 import data.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import logic.Cooldownable;
 
 public class Goblin extends Monster {
 	private int swiftness;
@@ -17,7 +18,7 @@ public class Goblin extends Monster {
 	@Override
 	public void attack() {
 		//Enemy.setHp(Enemy.getHp()-this.getAtk());
-		//Enemy.setPoisonStatus(Enemy.getPoisonStatus()+this.getPoisonDamage());
+		super.attack();
 	}
 	
 	@Override

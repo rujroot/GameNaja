@@ -15,7 +15,7 @@ public class Slime extends Monster{
 	@Override
 	public void attack() {
 		//Enemy.setHp(Enemy.getHp()-this.getAtk());
-		//Enemy.setPoisonStatus(Enemy.getPoisonStatus()+this.getPoisonDamage());
+		super.attack();
 	}
 	
 	@Override
