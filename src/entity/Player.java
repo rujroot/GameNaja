@@ -1,19 +1,12 @@
 package entity;
 
+import data.BaseObject;
 import data.DataEntity;
 import data.Point;
 import drawing.Description;
 import drawing.GameScreen;
-import equipment.Axe;
 import equipment.BaseWeapon;
-import equipment.Bow;
-import equipment.Knife;
 import equipment.Pickaxe;
-import equipment.Punch;
-import equipment.Shield;
-import equipment.Spear; 
-import equipment.Sword;
-import equipment.Wand;
 import input.InputUtility;
 import inventory.Inventory;
 import javafx.scene.canvas.GraphicsContext;
@@ -38,7 +31,6 @@ public class Player extends Entity implements Cooldownable{
 	private Point resolutionPosition;
 	private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 960, 944, 59, 79);
 	private int mutliply = 1;
-	private boolean interaction = false;
 	private Description description, descriptionMoney;
 
 	public Player(String name, double Height, double Width, DataEntity data) {
@@ -46,10 +38,6 @@ public class Player extends Entity implements Cooldownable{
 		this.setWidth(image.getWidth() * mutliply);
 		this.setHeight(image.getHeight() * mutliply);
 		player = this;
-		//this.setEquipment(new Pickaxe(30.0, 10.0));
-		//this.setEquipment(new Bow(30.0, 10.0, 2));
-		
-		//this.setEquipment(new Knife(30.0, 10.0,10.0,500,60));
 	}
 
 	public double getMouseAngle(){
@@ -68,7 +56,7 @@ public class Player extends Entity implements Cooldownable{
         return 360 - Math.toDegrees(startAt);
 	}
 
-	public void update() throws CloneNotSupportedException {
+	public void update() {
 		//Move Section
 		DataEntity data = this.getData();
 		
@@ -81,34 +69,32 @@ public class Player extends Entity implements Cooldownable{
 		} if (InputUtility.getKeyPressed(KeyCode.S) && isLegalMove(0, 1) ) {
 			this.move(0, data.getSpd());
 		} if (InputUtility.getKeyPressed(KeyCode.DIGIT1)) {
-			//this.setEquipment(new Bow(30.0, 10.0, 2));
 			inventory.selectIndex(0);
+			this.setEquipment(inventory.getObject(0));
 		} if (InputUtility.getKeyPressed(KeyCode.DIGIT2)) {
-			//this.setEquipment(new Knife(30.0, 10.0,10.0,500,60));
 			inventory.selectIndex(1);
+			this.setEquipment(inventory.getObject(1));
 		} if (InputUtility.getKeyPressed(KeyCode.DIGIT3)) {
-			//this.setEquipment(new Sword(30.0, 10.0,10.0,500,60));
+			this.setEquipment(inventory.getObject(2));
 			inventory.selectIndex(2);
 		} if (InputUtility.getKeyPressed(KeyCode.DIGIT4)) {
-			//this.setEquipment(new Wand(30.0, 10.0, 2,10));
+			this.setEquipment(inventory.getObject(3));
 			inventory.selectIndex(3);
 		} if (InputUtility.getKeyPressed(KeyCode.DIGIT5)) {
-
-			//Pickaxe pickaxe = new Pickaxe(30.0, 10.0);
-			//BaseWeapon pickaxe2 = (BaseWeapon) pickaxe.clone();
-
-			//this.setEquipment(pickaxe2);
 			inventory.selectIndex(4);
-
-		} if (InputUtility.getKeyPressed(KeyCode.DIGIT6)&&!onCooldown()) {
-			
+			this.setEquipment(inventory.getObject(4));
+		} if (InputUtility.getKeyPressed(KeyCode.DIGIT6)) {
 			inventory.selectIndex(5);
+			this.setEquipment(inventory.getObject(5));
 		}if (InputUtility.getKeyPressed(KeyCode.DIGIT7)) {
 			inventory.selectIndex(6);
+			this.setEquipment(inventory.getObject(6));
 		}if (InputUtility.getKeyPressed(KeyCode.DIGIT8)) {
 			inventory.selectIndex(7);
+			this.setEquipment(inventory.getObject(7));
 		}if (InputUtility.getKeyPressed(KeyCode.DIGIT9)) {
 			inventory.selectIndex(8);
+			this.setEquipment(inventory.getObject(8));
 		}if (InputUtility.getKeyPressed(KeyCode.F)) {
 			this.getData().setHp(this.getData().getHp()+10);
 		}
@@ -139,7 +125,9 @@ public class Player extends Entity implements Cooldownable{
 		inventory = new Inventory();
 		Main.getLogic().addObject(inventory);
 
+		inventory.addItem(new Pickaxe(30.0, 10.0));
 		inventory.selectIndex(0);
+		this.setEquipment(inventory.getObject(0));
 
 		// create description above inventory
 		Point resolution = GameScreen.getResolution();
@@ -147,6 +135,7 @@ public class Player extends Entity implements Cooldownable{
 		description = new Description(basePoint, 400, 100, this);
 
 		descriptionMoney = new Description(new Point(-resolution.getX() / 4 + 600, resolution.getY() / 3 - 25), 100.0, 100.0, this);
+	
 	}
 
 	@Override
@@ -181,8 +170,12 @@ public class Player extends Entity implements Cooldownable{
 		return equipment;
 	}
 
-	public void setEquipment(BaseWeapon equipment) {
-		this.equipment = equipment;
+	public void setEquipment(BaseObject equipment) {
+		if(equipment instanceof BaseWeapon){
+			this.equipment = (BaseWeapon) equipment;
+		}else{
+			this.equipment = null;
+		}
 	}
 
 	public Point getResolutionPosition() {

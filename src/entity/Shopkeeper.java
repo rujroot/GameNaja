@@ -1,11 +1,10 @@
 package entity;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import data.BaseObject;
 import data.DataEntity;
 import data.Point;
-import drawing.GameScreen;
 import equipment.BaseWeapon;
 import equipment.Knife;
 import input.InputUtility;
@@ -19,7 +18,6 @@ import item.IronIngot;
 import item.Item;
 import item.Stone;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
@@ -42,7 +40,6 @@ public class Shopkeeper extends Entity implements Cooldownable{
 
     private Item[] sellItem = new Item[5];
     private BaseWeapon[] buyWeapon = new BaseWeapon[4];
-    
 
     public Shopkeeper(String name, double width, double height, DataEntity data) throws CloneNotSupportedException {
         super(name, width, height, data);
@@ -115,6 +112,8 @@ public class Shopkeeper extends Entity implements Cooldownable{
             boolean found = false;
 
             for(int j = 0; j < slotInventory.length; ++j){
+                if(!(slotInventory[j].getObject() instanceof Item)) continue;
+
                 Item itemInv = (Item) slotInventory[j].getObject();
 
                 if(itemInv != null && itemSell.equals(itemInv)){
@@ -137,8 +136,6 @@ public class Shopkeeper extends Entity implements Cooldownable{
 
         allBuyItem.add(new Knife(100, 100, 1, 100, 100));
         
-        int maxIndex = allBuyItem.size() - 1;
-        
         for(int i = 0; i < 4; ++i){
             int randNum = 0;//(int)(Math.random() * maxIndex);
             // while(choose.indexOf(randNum) != -1){
@@ -146,16 +143,21 @@ public class Shopkeeper extends Entity implements Cooldownable{
             // }
 
             BaseWeapon weapon = allBuyItem.get(randNum);
+            weapon.setValue(Math.floor(Math.random() * 1000 * 0));
+
             buyWeapon[i] = weapon;
             buyUI.addItem(weapon);
+            buyUI.getPosIndex()[i].setDescription(Double.toString(weapon.getValue()) + "$");
             //System.out.println("added");
         }
-
 
     }
 
     public void shopBuy(int Index){
-        
+        double money = Player.player.getMoney();
+
+        BaseObject object = buyWeapon[Index];
+
     }
 
     @Override

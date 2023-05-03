@@ -22,14 +22,14 @@ public class Inventory extends BaseObject{
         UI.setVisible(true);
     }
 
-    public void addItem(ArrayList<Item> items){
-        for(Item item : items){
-            UI.addItem(item);
+    public void addItem(ArrayList<BaseObject> objects){
+        for(BaseObject object : objects){
+            UI.addItem(object);
         }
     }
 
-    public void addItem(Item items){
-        UI.addItem(items);
+    public void addItem(BaseObject object){
+        UI.addItem(object);
     }
 
     public void selectIndex(int index){
@@ -38,6 +38,11 @@ public class Inventory extends BaseObject{
 
     public void removeItem(Item item){
         UI.removeItem(item);
+    }
+
+    public BaseObject getObject(int index){
+        BaseObject object = UI.getPosIndex()[index].getObject();
+        return object;
     }
 
     @Override

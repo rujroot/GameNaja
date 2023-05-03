@@ -1,16 +1,6 @@
 package logic;
 
-import animation.AnimationController;
-import data.DataEntity;
-import data.Point;
 import drawing.GameScreen;
-import dungeon.GenerateDungeon;
-import dungeon.Room;
-import entity.Player;
-import entity.Shopkeeper;
-import input.InputUtility;
-import inventory.Inventory;
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

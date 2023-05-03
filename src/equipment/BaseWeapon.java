@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 import logic.Hitbox;
 
 public abstract class BaseWeapon extends BaseObject implements Cloneable{
-	private double attackDamage, attackSpeed;
+	private double attackDamage, attackSpeed, value;
 	private Point offsetPosition = new Point(30.0, 20.0);
 
 	private Image image;
@@ -105,5 +105,13 @@ public abstract class BaseWeapon extends BaseObject implements Cloneable{
         BaseWeapon clone = (BaseWeapon) super.clone();
         return clone;
     }
+
+	public double getValue() {
+		return value;
+	}
+
+	public void setValue(double value) {
+		this.value = value;
+	}
 
 }
