@@ -1,10 +1,15 @@
 package scene;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import drawing.GameScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -29,8 +34,11 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
-public class SceneController {
+public class SceneController{
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
@@ -39,6 +47,15 @@ public class SceneController {
 	public ImageView myImageView;
 	public Image dungeon = new Image(getClass().getResourceAsStream("Dungeon.jpg"));
 	public Image gameOver = new Image(getClass().getResourceAsStream("GameOverImage.jpg"));
+	private File directory;
+	private File[] files;
+	
+	private ArrayList<File> songs;
+	private int songNumber;
+	
+	private Media media;
+	private MediaPlayer mediaPlayer; 
+	
 	
 	public void switchToStartGameScene(ActionEvent event) throws IOException {
 		
@@ -114,6 +131,7 @@ public class SceneController {
 				InputUtility.updateInputState();
 			}
 		};
+		RenderableHolder.sound.play();
 		animation.start();	
 	}
 
@@ -125,6 +143,8 @@ public class SceneController {
 	public static GameScreen getGameScreen() {
 		return gameScreen;
 	}
+
+	
 
 }
 

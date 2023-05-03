@@ -8,6 +8,7 @@ import java.util.List;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
+import javafx.scene.media.AudioClip;
 
 public class RenderableHolder {
 	private static final RenderableHolder instance = new RenderableHolder();
@@ -17,6 +18,7 @@ public class RenderableHolder {
 
 	public static Image Tileset, baseFloor, ores, character, atlas, sideWall, mainWall;
 	public static Image backUI, upUI, selectUI;
+	public static AudioClip sound;
 
 
 	static {
@@ -55,6 +57,8 @@ public class RenderableHolder {
 
 		sideWall = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 304 * 4, 12 * 4, 4 * 4, 32 * 4);
 		mainWall = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 1236, 176, 87, 79);
+		
+		sound = new AudioClip(ClassLoader.getSystemResource("res/audio/01OpeningCinematic.wav").toString());
 	}
 	
 	// Update when entity remove
