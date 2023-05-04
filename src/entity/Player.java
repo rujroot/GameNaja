@@ -21,7 +21,6 @@ import logic.RenderableHolder;
 
 public class Player extends Entity implements Cooldownable{
 	
-
 	public static Player player; 
 	private double cooldownTime = 2000;
 	private double lastClickTime = 0;
@@ -32,13 +31,12 @@ public class Player extends Entity implements Cooldownable{
 	private BaseWeapon equipment;
 	private Point resolutionPosition;
 	private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 960, 944, 59, 79);
-	private int mutliply = 1;
 	private Description description, descriptionMoney;
 
 	public Player(String name, double Height, double Width, DataEntity data) {
 		super(name, Height, Width, data);
-		this.setWidth(image.getWidth() * mutliply);
-		this.setHeight(image.getHeight() * mutliply);
+		this.setWidth(image.getWidth());
+		this.setHeight(image.getHeight());
 		player = this;
 	}
 
@@ -149,7 +147,7 @@ public class Player extends Entity implements Cooldownable{
 	@Override
 	public void draw(GraphicsContext gc) {
 		Point pos = this.getPosition();
-		gc.drawImage(image, pos.getX(), pos.getY(), image.getWidth() * mutliply, image.getHeight() * mutliply);
+		gc.drawImage(image, pos.getX(), pos.getY(), image.getWidth(), image.getHeight());
 		this.drawHP(gc);
 		description.draw(gc);
 		displayMoney(gc);
