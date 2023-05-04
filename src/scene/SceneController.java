@@ -25,6 +25,7 @@ import data.DataEntity;
 import data.Point;
 import dungeon.GenerateDungeon;
 import dungeon.Room;
+import entity.Npc;
 import entity.Player;
 import entity.Shopkeeper;
 import input.InputUtility;
@@ -102,6 +103,12 @@ public class SceneController{
 		Shopkeeper shopkeeper = new Shopkeeper("Shopkeeper", 50, 50, new DataEntity(999999, 1, 1, 0));
 		shopkeeper.setPosition(new Point(firstRoom.getPosition().getX() + 20, firstRoom.getPosition().getY() + 20 ));
 		logic.addObject(shopkeeper);
+		
+		Npc npc = new Npc("NPC", 10, 10, new DataEntity(100, 1, 1, 0));
+		npc.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
+		logic.addObject(npc);
+
+		
 		player.setPosition(new Point(firstRoom.getPosition().getX() + 100, firstRoom.getPosition().getY() + 100 ));
 		player.initInventory();
 		

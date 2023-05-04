@@ -11,6 +11,7 @@ import dungeon.GenerateDungeon;
 import dungeon.Room;
 import entity.Entity;
 import entity.Monster;
+import entity.Npc;
 import entity.Player;
 import entity.Shopkeeper;
 import equipment.projectile.Arrow;
@@ -69,6 +70,11 @@ public class GameLogic {
 					if(object instanceof Shopkeeper){
 						Shopkeeper shopkeeper = (Shopkeeper) object;
 						shopkeeper.updateInput();
+					}
+				
+					if(object instanceof Npc){
+						Npc npc = (Npc) object;
+						npc.doBehavior();
 					}
 				}
 			
