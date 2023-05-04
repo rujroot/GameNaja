@@ -4,15 +4,22 @@ import data.Point;
 import equipment.projectile.Arrow;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import logic.Cooldownable;
 import logic.Main;
+import logic.RenderableHolder;
 
 public class Bow extends BaseWeapon implements Cooldownable {
-	
+	private WritableImage image = new WritableImage(RenderableHolder.equipment1.getPixelReader(), 129, 0, 159-129, 32-0);
 	private int amount;
 	private double cooldownTime = 500;
 	private double lastClickTime = 0;
+	
+	public Bow(double width, double height) {
+		super(width, height,100);
+		this.setImage(image);
+	}
 
 	public Bow(double width, double height, int attackDamage) {
 		super(width, height, attackDamage);
@@ -53,6 +60,7 @@ public class Bow extends BaseWeapon implements Cooldownable {
 		
 		Point pos = this.getPosition();
 		gc.fillRect(pos.getX(), pos.getY(), this.getWidth(), this.getHeight());
+		super.draw(gc);
 	}
 
 	public int getAmount() {

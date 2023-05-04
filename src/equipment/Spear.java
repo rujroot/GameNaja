@@ -5,12 +5,23 @@ import java.util.ArrayList;
 import data.BaseObject;
 import data.DataEntity;
 import entity.Monster;
+import javafx.scene.image.WritableImage;
+import logic.RenderableHolder;
 
 public class Spear extends Melee {
-
+	private WritableImage image = new WritableImage(RenderableHolder.equipment1.getPixelReader(), 159, 95, 191-159, 127-95);
+	
+	public Spear(double width, double height) {
+		super(width, height);
+		this.setImage(image);
+		this.setAttackDamage(100);
+		this.setAttackRange(100);
+		this.setAttackDegree(100);
+	}
+	
 	public Spear(double width, double height, double attackDamage, double attackRange, double attackDegree) {
 		super(width, height);
-
+		this.setImage(image);
 		this.setAttackDamage(attackDamage);
 		this.setAttackRange(attackRange);
 		this.setAttackDegree(attackDegree);

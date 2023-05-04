@@ -4,16 +4,23 @@ import data.Point;
 import equipment.projectile.Arrow;
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import logic.Cooldownable;
 import logic.Main;
+import logic.RenderableHolder;
 
 public class Wand extends BaseWeapon implements Cooldownable{
-	
+	private WritableImage image = new WritableImage(RenderableHolder.equipment1.getPixelReader(), 162, 66, 191-162, 94-66);
 	private int amount;
 	private double cooldownTime = 100;
 	private double lastClickTime = 0;
 
+	public Wand(double width, double height) {
+		super(width, height,100);
+		this.setImage(image);
+	}
+	
 	public Wand(double width, double height, double attackDamage, double attackSpeed) {
 		super(width, height, attackDamage, attackSpeed);
 		
@@ -45,6 +52,7 @@ public class Wand extends BaseWeapon implements Cooldownable{
 
 		Point pos = this.getPosition();
 		gc.fillRect(pos.getX(), pos.getY(), this.getWidth(), this.getHeight());
+		super.draw(gc);
 	}
 
 	@Override
