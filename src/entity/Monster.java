@@ -3,7 +3,9 @@ package entity;
 import data.DataEntity;
 import data.Point;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
 import logic.Cooldownable;
 import logic.Hitbox;
 
@@ -11,16 +13,23 @@ public class Monster extends Entity implements Cooldownable {
 
 	private double cooldownTime = 1000;
 	private double lastClickTime = 0;
-	private WritableImage image;
+	private Image image;
 	
 	public Monster(String name, double width, double height, DataEntity data) {
 		super(name, width, height, data);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void draw(GraphicsContext gc) {
-		// TODO Auto-generated method stub
+		Point pos = this.getPosition();
+
+		if(image != null){
+			gc.drawImage(image, pos.getX(), pos.getY(), image.getWidth(), image.getHeight());
+		}else{
+			gc.setFill(Color.FIREBRICK);
+			gc.fillRect(this.getPosition().getX(), this.getPosition().getY(), this.getWidth(), this.getHeight());
+		}
+		this.drawHP(gc);
 
 	}
 
@@ -49,9 +58,8 @@ public class Monster extends Entity implements Cooldownable {
 //		Hitbox B = new Hitbox(entity.getPosition(), entity.getWidth(), entity.getHeight());
 //		return A.isIntersect(B);
 //	}
-
+	
 	public void follow() {
-		// TODO Auto-generated method stub
 		Point pp = Player.getPlayer().getPosition();
 
 		double px = pp.getX(), py = pp.getY();
@@ -81,5 +89,12 @@ public class Monster extends Entity implements Cooldownable {
 	
 	public void setImage(WritableImage image) {
         this.image = image;
+		this.setWidth(image.getWidth());
+		this.setHeight(image.getHeight());
+    }
+	public void setImage(Image image) {
+        this.image = image;
+		this.setWidth(image.getWidth());
+		this.setHeight(image.getHeight());
     }
 }
