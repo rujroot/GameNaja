@@ -11,7 +11,7 @@ import logic.RenderableHolder;
 import ore.BaseOre;
 
 public class Pickaxe extends Melee{
-    private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 607, 390, 637-607, 444-390);
+    private WritableImage image = new WritableImage(RenderableHolder.equipment1.getPixelReader(), 191, 32, 223-191, 61-32);
 
     public Pickaxe(double width, double height) {
         super(width, height);

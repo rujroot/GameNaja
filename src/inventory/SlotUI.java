@@ -45,7 +45,7 @@ public class SlotUI extends BaseObject {
             }
             else if(object instanceof BaseWeapon){  
                 Image image = ((BaseWeapon) object).getImage();
-                if(image != null) gc.drawImage(image, posItem.getX(), posItem.getY(), image.getWidth(), image.getHeight());
+                if(image != null) gc.drawImage(image, posItem.getX(), posItem.getY(), image.getWidth()*2, image.getHeight()*2);
             }
             
         }

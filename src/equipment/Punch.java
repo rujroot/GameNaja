@@ -9,10 +9,19 @@ import javafx.scene.image.WritableImage;
 import logic.RenderableHolder;
 
 public class Punch extends Melee {
-	private WritableImage image = new WritableImage(RenderableHolder.equipment1.getPixelReader(), 293, 0, 314-293, 31-0);
+	private WritableImage image = new WritableImage(RenderableHolder.equipment1.getPixelReader(), 261, 5, 285-261, 26-5);
+	
+	public Punch(double width, double height) {
+		super(width, height);
+		this.setImage(image);
+		this.setAttackDamage(100);
+		this.setAttackRange(100);
+		this.setAttackDegree(100);
+	}
+	
 	public Punch(double width, double height, double attackDamage, double attackRange, double attackDegree) {
 		super(width, height);
-
+		this.setImage(image);
 		this.setAttackDamage(attackDamage);
 		this.setAttackRange(attackRange);
 		this.setAttackDegree(attackDegree);
