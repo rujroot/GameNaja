@@ -95,6 +95,10 @@ public class GameLogic {
 				}
 			}
 			
+			else if(object instanceof Shopkeeper){
+				Shopkeeper shopkeeper = (Shopkeeper) object;
+				shopkeeper.updateInput();
+			}
 		}
 	}
 

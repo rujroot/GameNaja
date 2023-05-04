@@ -2,6 +2,8 @@ package entity;
 
 import java.util.ArrayList;
 
+import javax.management.BadStringOperationException;
+
 import data.BaseObject;
 import data.DataEntity;
 import data.Point;
@@ -158,6 +160,18 @@ public class Shopkeeper extends Entity implements Cooldownable{
 
         BaseObject object = buyWeapon[Index];
 
+        if(object instanceof BaseWeapon){
+
+            BaseWeapon item = (BaseWeapon) object;
+            double value = item.getValue();
+
+            if(value <= money){
+               // BaseWeapon weapon =  item.clone();
+            }
+
+        }else{
+
+        }
     }
 
     @Override
@@ -167,7 +181,6 @@ public class Shopkeeper extends Entity implements Cooldownable{
         Point pos = this.getPosition();
 		gc.drawImage(image, pos.getX(), pos.getY(), image.getWidth() , image.getHeight());
 
-        updateInput();
         if(inDistant() && currentUI == null){
             gc.setFont(new Font("Arial", 24));
             gc.setFill(Color.BLACK);
