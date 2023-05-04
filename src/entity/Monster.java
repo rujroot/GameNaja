@@ -3,6 +3,7 @@ package entity;
 import data.DataEntity;
 import data.Point;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.WritableImage;
 import logic.Cooldownable;
 import logic.Hitbox;
 
@@ -10,6 +11,8 @@ public class Monster extends Entity implements Cooldownable {
 
 	private double cooldownTime = 1000;
 	private double lastClickTime = 0;
+	private WritableImage image;
+	
 	public Monster(String name, double width, double height, DataEntity data) {
 		super(name, width, height, data);
 		// TODO Auto-generated constructor stub
@@ -75,4 +78,8 @@ public class Monster extends Entity implements Cooldownable {
 			return true;
 		}
 	}
+	
+	public void setImage(WritableImage image) {
+        this.image = image;
+    }
 }

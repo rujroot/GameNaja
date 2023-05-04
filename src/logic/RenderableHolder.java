@@ -16,7 +16,7 @@ public class RenderableHolder {
 	private List<IRenderable> objects;
 	private Comparator<IRenderable> comparator;
 
-	public static Image Tileset, baseFloor, ores, character, atlas, sideWall, mainWall;
+	public static Image Tileset, baseFloor, ores, character, atlas, sideWall, mainWall, demon;
 	public static Image backUI, upUI, selectUI;
 	public static AudioClip sound;
 
@@ -59,6 +59,8 @@ public class RenderableHolder {
 		mainWall = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 1236, 176, 87, 79);
 		
 		sound = new AudioClip(ClassLoader.getSystemResource("res/audio/01OpeningCinematic.wav").toString());
+		
+		demon = new Image(ClassLoader.getSystemResource("res/image/0_Golem_Throwing_001.png").toString());
 	}
 	
 	// Update when entity remove

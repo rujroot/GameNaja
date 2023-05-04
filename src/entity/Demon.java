@@ -3,7 +3,9 @@ package entity;
 import data.DataEntity;
 import data.Point;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
+import logic.RenderableHolder;
 
 public class Demon extends Monster {
 	private int magicAttack;
@@ -11,6 +13,7 @@ public class Demon extends Monster {
 	public Demon(String name, double width, double height, DataEntity data) {
 		super(name, width, height, data);
 		this.setMagicAttack(magicAttack);
+		this.setImage(new WritableImage(RenderableHolder.demon.getPixelReader(), 32 * 12, 32 * 3, 32, 32));
 		// TODO Auto-generated constructor stub
 	}
 
@@ -23,6 +26,7 @@ public class Demon extends Monster {
 	
 	@Override
 	public void draw(GraphicsContext gc) {
+		
 		gc.setFill(Color.FIREBRICK);
 		gc.fillRect(this.getPosition().getX(), this.getPosition().getY(), this.getWidth(), this.getHeight());
 		this.drawHP(gc);
