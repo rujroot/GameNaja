@@ -42,7 +42,7 @@ public class Npc extends Entity {
 
 		double px = pp.getX(), py = pp.getY();
 
-		Point p = new Point(this.getPosition().getX() - px, this.getPosition().getY() - py);
+		Point p = new Point(this.getPosition().getX() - px - 10, this.getPosition().getY() - py - 10);
 		double distance = Math.sqrt(p.getX() * p.getX() + p.getY() * p.getY());
 
 		DataEntity data = this.getData();
