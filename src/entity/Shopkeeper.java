@@ -151,7 +151,6 @@ public class Shopkeeper extends Entity implements Cooldownable{
             buyWeapon[i] = weapon;
             buyUI.addItem(weapon);
             buyUI.getPosIndex()[i].setDescription(Double.toString(weapon.getValue()) + "$");
-            //System.out.println("added");
         }
 
     }
