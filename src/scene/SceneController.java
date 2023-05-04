@@ -126,7 +126,8 @@ public class SceneController{
 				InputUtility.updateInputState();
 			}
 		};
-		//RenderableHolder.sound.play();
+		RenderableHolder.sound.setVolume(0.2);// 0.0 to 1.0 (min to man volume)
+		RenderableHolder.sound.play();
 		animation.start();	
 	}
 
