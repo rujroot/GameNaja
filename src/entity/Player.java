@@ -7,6 +7,7 @@ import drawing.Description;
 import drawing.GameScreen;
 import equipment.BaseWeapon;
 import equipment.Pickaxe;
+import equipment.Shield;
 import input.InputUtility;
 import inventory.Inventory;
 import javafx.scene.canvas.GraphicsContext;
@@ -126,6 +127,7 @@ public class Player extends Entity implements Cooldownable{
 		Main.getLogic().addObject(inventory);
 
 		inventory.addItem(new Pickaxe(30.0, 10.0));
+		inventory.addItem(new Shield(30.0, 10.0));
 		inventory.selectIndex(0);
 		this.setEquipment(inventory.getObject(0));
 

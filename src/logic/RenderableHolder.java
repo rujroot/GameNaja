@@ -16,7 +16,7 @@ public class RenderableHolder {
 	private List<IRenderable> objects;
 	private Comparator<IRenderable> comparator;
 
-	public static Image Tileset, baseFloor, ores, character, atlas, sideWall, mainWall, demon;
+	public static Image Tileset, baseFloor, ores, character, atlas, sideWall, mainWall, demon, equipment1;
 	public static Image backUI, upUI, selectUI;
 	public static AudioClip sound;
 
@@ -61,6 +61,8 @@ public class RenderableHolder {
 		sound = new AudioClip(ClassLoader.getSystemResource("res/audio/01OpeningCinematic.wav").toString());
 		
 		demon = new Image(ClassLoader.getSystemResource("res/image/0_Golem_Throwing_001.png").toString());
+		equipment1 = new Image(ClassLoader.getSystemResource("res/image/fantasy_weapons_pack1_noglow.png").toString());
+		
 	}
 	
 	// Update when entity remove
