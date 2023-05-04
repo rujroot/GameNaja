@@ -23,18 +23,13 @@ import logic.RenderableHolder;
 import animation.AnimationController;
 import data.DataEntity;
 import data.Point;
-import drawing.GameScreen;
 import dungeon.GenerateDungeon;
 import dungeon.Room;
 import entity.Player;
 import entity.Shopkeeper;
 import input.InputUtility;
-import inventory.Inventory;
 import javafx.animation.AnimationTimer;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -131,7 +126,7 @@ public class SceneController{
 				InputUtility.updateInputState();
 			}
 		};
-		RenderableHolder.sound.play();
+		//RenderableHolder.sound.play();
 		animation.start();	
 	}
 

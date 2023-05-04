@@ -1,5 +1,6 @@
 package entity;
 
+import java.io.Console;
 import java.util.ArrayList;
 
 import javax.management.BadStringOperationException;
@@ -144,8 +145,8 @@ public class Shopkeeper extends Entity implements Cooldownable{
             //     randNum = (int)(Math.random() * maxIndex);
             // }
 
-            BaseWeapon weapon = allBuyItem.get(randNum);
-            weapon.setValue(Math.floor(Math.random() * 1000 * 0));
+            BaseWeapon weapon = (BaseWeapon) allBuyItem.get(randNum).clone();
+            weapon.setValue(Math.floor(Math.random() * 10));
 
             buyWeapon[i] = weapon;
             buyUI.addItem(weapon);
@@ -156,7 +157,8 @@ public class Shopkeeper extends Entity implements Cooldownable{
     }
 
     public void shopBuy(int Index){
-        double money = Player.player.getMoney();
+        Player player = Player.player;
+        double money = player.getMoney();
 
         BaseObject object = buyWeapon[Index];
 
@@ -166,7 +168,15 @@ public class Shopkeeper extends Entity implements Cooldownable{
             double value = item.getValue();
 
             if(value <= money){
-               // BaseWeapon weapon =  item.clone();
+                try {
+                    BaseWeapon weapon =  (BaseWeapon) item.clone();
+                    player.setMoney(money - value);
+                    player.getInventory().addItem(weapon);
+
+                } catch (CloneNotSupportedException e) {
+                    System.out.println("item can't clone()");
+                    e.printStackTrace();
+                }
             }
 
         }else{

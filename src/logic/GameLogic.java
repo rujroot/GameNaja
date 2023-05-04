@@ -13,14 +13,9 @@ import entity.Entity;
 import entity.Monster;
 import entity.Player;
 import entity.Shopkeeper;
-import entity.Zombie;
 import equipment.projectile.Arrow;
 import inventory.Inventory;
 import item.Item;
-import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import ore.BaseOre;
 import scene.SceneController;
 
@@ -70,6 +65,11 @@ public class GameLogic {
 							}
 						}
 					}
+					
+					if(object instanceof Shopkeeper){
+						Shopkeeper shopkeeper = (Shopkeeper) object;
+						shopkeeper.updateInput();
+					}
 				}
 			
 			else if(object instanceof Arrow){
@@ -94,11 +94,7 @@ public class GameLogic {
 					gameObjectContainer.remove(ore);
 				}
 			}
-			
-			else if(object instanceof Shopkeeper){
-				Shopkeeper shopkeeper = (Shopkeeper) object;
-				shopkeeper.updateInput();
-			}
+	
 		}
 	}
 

@@ -206,6 +206,10 @@ public class Player extends Entity implements Cooldownable{
 		this.money += money;
 	}
 
+	public Inventory getInventory() {
+		return inventory;
+	}
+
 	@Override
 	public boolean onCooldown() {
 		long currentTime = System.currentTimeMillis();
