@@ -5,6 +5,7 @@ import data.DataEntity;
 import data.Point;
 import drawing.Description;
 import drawing.GameScreen;
+import dungeon.GenerateDungeon;
 import equipment.BaseWeapon;
 import equipment.Pickaxe;
 import equipment.Shield;
@@ -31,7 +32,7 @@ public class Player extends Entity implements Cooldownable {
 	private BaseWeapon equipment;
 	private Point resolutionPosition;
 	private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 960, 944, 59, 79);
-	private Description description, descriptionMoney;
+	private Description description, descriptionMoney, descriptionFloor;
 
 	public Player(String name, double Height, double Width, DataEntity data) {
 		super(name, Height, Width, data);
@@ -158,6 +159,8 @@ public class Player extends Entity implements Cooldownable {
 
 		descriptionMoney = new Description(new Point(-resolution.getX() / 4 + 600, resolution.getY() / 3 - 25), 100.0,
 				100.0, this);
+		descriptionFloor = new Description(new Point(-resolution.getX() / 4 + 600, resolution.getY() / 3 - 65), 100.0,
+				100.0, this);
 
 	}
 
@@ -168,6 +171,7 @@ public class Player extends Entity implements Cooldownable {
 		this.drawHP(gc);
 		description.draw(gc);
 		displayMoney(gc);
+		displayFloor(gc);
 
 		if (equipment != null) {
 			equipment.draw(gc);
@@ -184,6 +188,11 @@ public class Player extends Entity implements Cooldownable {
 	public void displayMoney(GraphicsContext gc) {
 		descriptionMoney.setText(Double.toString(money) + "$");
 		descriptionMoney.draw(gc);
+	}
+	
+	public void displayFloor(GraphicsContext gc) {
+		descriptionFloor.setText("Floor " + Integer.toString(GenerateDungeon.getCurrLevel()));
+		descriptionFloor.draw(gc);
 	}
 
 	public static Player getPlayer() {

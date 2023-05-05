@@ -16,7 +16,7 @@ public class RenderableHolder {
 	private List<IRenderable> objects;
 	private Comparator<IRenderable> comparator;
 
-	public static Image Tileset, baseFloor, ores, character, atlas, sideWall, mainWall, demon, equipment1, enemy;
+	public static Image Tileset, baseFloor, ores, character, atlas, sideWall, mainWall, demon, equipment1, enemy, slime;
 	public static Image backUI, upUI, selectUI;
 	public static AudioClip sound;
 
@@ -62,6 +62,7 @@ public class RenderableHolder {
 		
 		demon = new Image(ClassLoader.getSystemResource("res/image/0_Golem_Throwing_001.png").toString());
 		enemy = new Image(ClassLoader.getSystemResource("res/image/Enemy.png").toString());
+		slime = new Image(ClassLoader.getSystemResource("res/image/slime_frames_all.png").toString());
 		equipment1 = new Image(ClassLoader.getSystemResource("res/image/fantasy_weapons_pack1_noglow.png").toString());
 		
 	}
