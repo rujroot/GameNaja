@@ -1,5 +1,8 @@
 package entity;
 
+import java.util.ArrayList;
+
+import data.BaseObject;
 import data.DataEntity;
 import data.Point;
 import equipment.BaseWeapon;
@@ -10,7 +13,8 @@ import logic.RenderableHolder;
 public class Npc extends Entity {
 
     private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 644, 964, 59, 59);
-    private String stage = "Follow";
+    private Entity followEntity;
+    private double maxDistance = 200 ;
     private BaseWeapon equipment;
 
     public Npc(String name, double width, double height, DataEntity data) {
@@ -32,13 +36,13 @@ public class Npc extends Entity {
     }
 
     public void doBehavior(){
-        if(stage.equals("Follow")){
-            followPlayer();
+        if(followEntity != null){
+            follow(followEntity);
         }
     }
 
-    public void followPlayer() {
-		Point pp = Player.getPlayer().getPosition();
+    public void follow(Entity entity) {
+		Point pp = entity.getPosition();
 
 		double px = pp.getX(), py = pp.getY();
 
@@ -54,8 +58,22 @@ public class Npc extends Entity {
 
 	}
 
-    public void findNearestMonster(){
+    public double onDistant(Point pos1){
+        Point pos2 = this.getPosition();
+        return Math.sqrt(Math.pow(pos1.getX() - pos2.getX(), 2) + Math.pow(pos1.getY() - pos2.getY(), 2));
+    }
 
+    public void findNearestMonster(ArrayList<BaseObject> gameObjectContainer){
+        Entity nearestMonster;
+
+        for (int i = gameObjectContainer.size() - 1; i >= 0; i--) {
+			BaseObject object = gameObjectContainer.get(i);
+			if(object instanceof Monster && onDistant(object.getPosition())){
+                if(nearestMonster == null){
+
+                }
+            }
+        }
     }
     
 }
