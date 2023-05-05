@@ -23,6 +23,7 @@ import scene.SceneController;
 public class GameLogic {
 	public static GameScreen gameScreen;
 	private static ArrayList<BaseObject> gameObjectContainer;
+	private int currentLevel;
 	
 	public GameLogic() {
 		// create new ObjectContainer
@@ -119,15 +120,15 @@ public class GameLogic {
 	public void nextFloor(){
 		
 		//Get next dungeon
-		int Currlevel = GenerateDungeon.getCurrLevel();
-		if(Currlevel >= GenerateDungeon.getLevel() - 1) return;
-		GenerateDungeon.setCurrLevel(Currlevel + 1);
+		int currentLevel = GenerateDungeon.getCurrLevel();
+		if(currentLevel >= GenerateDungeon.getLevel() - 1) return;
+		GenerateDungeon.setCurrLevel(currentLevel+ 1);
 		this.clearObject();
 
 		//Get first room
-		ArrayList<Room> nextLevel = GenerateDungeon.getContainer().get(Currlevel + 1);
+		ArrayList<Room> nextLevel = GenerateDungeon.getContainer().get(currentLevel + 1);
 		Room firstRoom = nextLevel.get(0);
-		System.out.println("Go to " + (Currlevel + 1));
+		System.out.println("Go to " + (currentLevel + 1));
 
 		for(int i = 1; i < nextLevel.size(); ++i){
 			for(BaseOre ore : nextLevel.get(i).getOres()){
