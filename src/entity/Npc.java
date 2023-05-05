@@ -70,7 +70,6 @@ public class Npc extends Entity {
         return Math.sqrt(Math.pow(pos1.getX() - pos2.getX(), 2) + Math.pow(pos1.getY() - pos2.getY(), 2));
     }
 
-
     public void findNearestMonster(ArrayList<BaseObject> gameObjectContainer){
         Entity nearestMonster = Player.getPlayer();
         double minDistance = 1e9;
@@ -88,6 +87,21 @@ public class Npc extends Entity {
         followEntity = nearestMonster;
     }
 
+    public double getEntityAngle(){
+
+        Point pos = this.getPosition();
+
+		double posX = followEntity.getPosition().getX();
+		double posY = followEntity.getPosition().getY();;
+
+		double startAt = Math.atan2(posY - (pos.getY() + this.getHeight() / 2),
+				                    posX - (pos.getX() + this.getWidth() / 2));
+		if (startAt < 0) {
+			startAt += 2 * Math.PI;
+		}
+		return 360 - Math.toDegrees(startAt);
+    }
+    
     public Entity getFollowEntity() {
         return followEntity;
     }

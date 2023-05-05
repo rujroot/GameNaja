@@ -6,6 +6,7 @@ import animation.AnimationController;
 import data.BaseObject;
 import data.Point;
 import entity.Entity;
+import entity.Npc;
 import entity.Player;
 import logic.Main;
 public abstract class Melee extends BaseWeapon{
@@ -82,10 +83,11 @@ public abstract class Melee extends BaseWeapon{
         if(entity instanceof Player){
             Player player = (Player) entity;
             startAt = player.getMouseAngle();
-        }else{
-
+        }else if(entity instanceof Npc){
+            Npc npc = (Npc) entity;
+            startAt = npc.getEntityAngle();
         }
-
+ 
         Point entityPosition = this.getPosition();
         Point attackPosition = new Point(entityPosition.getX() - (getAttackRange() / 2) + (entity.getWidth() / 2), entityPosition.getY() - (getAttackRange() / 2) + (entity.getHeight() / 2));
 
