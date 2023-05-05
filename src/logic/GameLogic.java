@@ -2,7 +2,7 @@ package logic;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
+import javafx.scene.layout.StackPane;
 import data.BaseObject;
 import data.DataOre;
 import data.Point;
@@ -58,6 +58,7 @@ public class GameLogic {
 					
 					if(entity instanceof Player) {
 						if(entity.getData().getHp()<=0) {
+							RenderableHolder.sound.stop();
 							SceneController sceneController = new SceneController();
 							resetGame();
 							try {
@@ -166,6 +167,14 @@ public class GameLogic {
 			BaseObject object = gameObjectContainer.get(i);
 			object.setDestroyed(true);
 			gameObjectContainer.remove(object);
+		}
+		
+		if (gameScreen != null) {
+		    StackPane parent = (StackPane) gameScreen.getParent();
+		    if (parent != null) {
+		        parent.getChildren().remove(gameScreen);
+		    }
+		    gameScreen = null;
 		}
 
 	}
