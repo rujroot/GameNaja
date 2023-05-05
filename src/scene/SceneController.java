@@ -40,8 +40,9 @@ public class SceneController{
 	private Parent root;
 	public static GameLogic logic;
 	public static GameScreen gameScreen;
+	public static GenerateDungeon dungeon; 
 	public ImageView myImageView;
-	public Image dungeon = new Image(getClass().getResourceAsStream("Dungeon.jpg"));
+	public Image dungeonImage = new Image(getClass().getResourceAsStream("Dungeon.jpg"));
 	public Image gameOver = new Image(getClass().getResourceAsStream("GameOverImage.jpg"));
 	private File directory;
 	private File[] files;
@@ -60,7 +61,7 @@ public class SceneController{
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setTitle("Game Naja eiei");
-		myImageView.setImage(dungeon);
+		myImageView.setImage(dungeonImage);
 		stage.show();
 	}
 	
@@ -88,7 +89,8 @@ public class SceneController{
 
 		Player player = new Player("Player", 50, 50, new DataEntity(25, 10000, 10000, 10));
 		logic = new GameLogic();
-		GenerateDungeon dungeon = new GenerateDungeon(10);
+		dungeon = new GenerateDungeon(2);
+		//dungeon.increaseFloor(3);
 		
 		stage = Main.stage;
 		gameScreen = new GameScreen(1400,800);

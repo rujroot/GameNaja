@@ -63,6 +63,49 @@ public class GenerateDungeon {
 			}
 		}
 	}
+	
+	public void increaseFloor(int increase) {
+		for(int i = 0; i < increase; ++i) {
+			ArrayList<Room> toPush = new ArrayList<Room>();
+			
+			int amountRoom = 100;//(int)(Math.random()*5 + 5 + i);
+			
+			// create first room
+			Room rootRoom = new Room();
+			toPush.add(rootRoom);
+			
+			for(int j = 1; j < amountRoom; ++j) {
+				
+				//Generate Room
+				Pair<Room, Direction> toConnectRoom = findRoom(rootRoom);
+				Room room = new Room(toConnectRoom.getKey(), toConnectRoom.getValue());
+				
+				while(!isLegalCreate(room, toPush)) {
+					toConnectRoom = findRoom(rootRoom);
+					room = new Room(toConnectRoom.getKey(), toConnectRoom.getValue());
+				}
+				
+				
+				Direction direction = toConnectRoom.getValue();
+				Room connectRoom = toConnectRoom.getKey();
+
+				//visible path
+				connectRoom.getConnectPath().get(direction).setVisible(true);
+
+				//generate ore
+				room.generateOre(10);
+
+				// set connect room
+				room.getConnectRoom().put(direction.getOpposite(), connectRoom);
+				connectRoom.getConnectRoom().put(direction, room);
+				toPush.add(room);
+			}
+			
+			// Push the generate level to container
+			container.add(toPush);
+		}
+		this.setLevel(this.getLevel()+increase);
+	}
 
 	public Pair<Room, Direction> findRoom(Room currRoom) {
 		Direction[] d = {Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT};
