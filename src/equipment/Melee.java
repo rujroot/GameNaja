@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import animation.AnimationController;
 import data.BaseObject;
 import data.Point;
+import entity.Entity;
 import entity.Player;
 import logic.Main;
 public abstract class Melee extends BaseWeapon{
@@ -32,10 +33,11 @@ public abstract class Melee extends BaseWeapon{
         return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
     }
 
-    public boolean intersectsCirclePart(BaseObject object) {
+    public boolean intersectsCirclePart(BaseObject object, double angle) {
         
         boolean intersectDistant = false, intersectDegree = false;
         Point pos = object.getPosition();
+        Entity entity = this.getEntity();
 
         // Check Distant <= attackRange
         double rectX1 = pos.getX();
@@ -43,8 +45,8 @@ public abstract class Melee extends BaseWeapon{
         double rectX2 = pos.getX() + object.getWidth();
         double rectY2 = pos.getY() + object.getHeight();
 
-        double centerX = getPlayerPosition().getX() + Player.getPlayer().getWidth() / 2;
-        double centerY = getPlayerPosition().getY() + Player.getPlayer().getHeight() / 2;
+        double centerX = entity.getPosition().getX() + entity.getWidth() / 2;
+        double centerY = entity.getPosition().getY() + entity.getHeight() / 2;
 
         intersectDistant = intersectDistant || distant(rectX1, rectY1, centerX , centerY) <= this.getAttackRange() / 2;
         intersectDistant = intersectDistant || distant(rectX2, rectY1, centerX , centerY) <= this.getAttackRange() / 2;
@@ -52,10 +54,9 @@ public abstract class Melee extends BaseWeapon{
         intersectDistant = intersectDistant || distant(rectX2, rectY2, centerX , centerY) <= this.getAttackRange() / 2;
 
         // Check angle <= attackDegree
-        Point posPlayer = this.getPlayerPosition();
+        Point posEntity = this.getEntity().getPosition();
 
-        double angle = Player.getPlayer().getMouseAngle();
-        double angleObject = Math.atan2(pos.getY() - posPlayer.getY(), pos.getX() - posPlayer.getX());
+        double angleObject = Math.atan2(pos.getY() - posEntity.getY(), pos.getX() - posEntity.getX());
 
         if (angleObject < 0) {
             angleObject += 2 * Math.PI;
@@ -76,26 +77,33 @@ public abstract class Melee extends BaseWeapon{
     @Override
     public void attack(){
 
-        Player player = Player.getPlayer();
-        double startAt = player.getMouseAngle();
+        Entity entity = this.getEntity();
+        double startAt = 0;
+        if(entity instanceof Player){
+            Player player = (Player) entity;
+            startAt = player.getMouseAngle();
+        }else{
 
-        Point playerPosition = this.getPlayerPosition();
-        Point attackPosition = new Point(playerPosition.getX() - (getAttackRange() / 2) + (player.getWidth() / 2), playerPosition.getY() - (getAttackRange() / 2) + (player.getHeight() / 2));
+        }
+
+        Point entityPosition = this.getPosition();
+        Point attackPosition = new Point(entityPosition.getX() - (getAttackRange() / 2) + (entity.getWidth() / 2), entityPosition.getY() - (getAttackRange() / 2) + (entity.getHeight() / 2));
 
         AttackObject attackObject = new AttackObject(attackPosition, getAttackRange(), getAttackRange(), startAt - getAttackDegree() / 2, getAttackDegree());
         Main.getLogic().addObject(attackObject);
         AnimationController.animations.add(attackObject);
 
-        this.attackAbility(this.getIntersectObject());
+        this.attackAbility(this.getIntersectObject(startAt));
     }
+    
 
-    public ArrayList<BaseObject> getIntersectObject(){
+    public ArrayList<BaseObject> getIntersectObject(double startAt){
 
         ArrayList<BaseObject> gameObjectContainer = Main.getLogic().getGameObjectContainer();
         ArrayList<BaseObject> instersectObject = new ArrayList<BaseObject>();
 
         for(BaseObject object : gameObjectContainer){
-            if(object.isVisible() && this.intersectsCirclePart(object)){
+            if(object.isVisible() && this.intersectsCirclePart(object, startAt)){
                 instersectObject.add(object);
             }
         }
