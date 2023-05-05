@@ -9,9 +9,13 @@ import equipment.BaseWeapon;
 import equipment.Knife;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
+import logic.Cooldownable;
 import logic.RenderableHolder;
 
-public class Npc extends Entity {
+public class Npc extends Entity implements Cooldownable {
+
+    private double cooldownTime = 1000;
+	private double lastClickTime = 0;
 
     private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 644, 964, 59, 59);
     private Entity followEntity;
@@ -39,7 +43,7 @@ public class Npc extends Entity {
 
     @Override
     public void attack() {
-        if(followEntity.equals(Player.getPlayer())) return;
+        if(followEntity.equals(Player.getPlayer()) || onCooldown()) return;
         equipment.attack();
     }
 
@@ -125,6 +129,17 @@ public class Npc extends Entity {
     public void setEquipment(BaseWeapon equipment) {
         this.equipment = equipment;
         equipment.setEntity(this);
+    }
+
+    @Override
+    public boolean onCooldown() {
+        long currentTime = System.currentTimeMillis();
+		if (currentTime - lastClickTime > cooldownTime) {
+			lastClickTime = currentTime;
+			return false;
+		} else {
+			return true;
+		}
     }
 
     
