@@ -59,6 +59,7 @@ public class GameLogic {
 					if(entity instanceof Player) {
 						if(entity.getData().getHp()<=0) {
 							SceneController sceneController = new SceneController();
+							resetGame();
 							try {
 								sceneController.switchToGameOverScene2();
 							} catch (IOException e) {
@@ -154,6 +155,15 @@ public class GameLogic {
 			if(object instanceof Inventory) continue;
 			if(object instanceof Item) continue;
 
+			object.setDestroyed(true);
+			gameObjectContainer.remove(object);
+		}
+
+	}
+	
+	public void resetGame(){
+		for (int i = gameObjectContainer.size() - 1; i >= 0; i--) {
+			BaseObject object = gameObjectContainer.get(i);
 			object.setDestroyed(true);
 			gameObjectContainer.remove(object);
 		}
