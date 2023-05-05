@@ -19,6 +19,7 @@ import logic.Cooldownable;
 import logic.GameLogic;
 import logic.Main;
 import logic.RenderableHolder;
+import scene.SceneController;
 
 public class Player extends Entity implements Cooldownable {
 
@@ -135,6 +136,7 @@ public class Player extends Entity implements Cooldownable {
 			logic.addObject(slime);
 		}
 		if (InputUtility.getKeyPressed(KeyCode.Z) && !onCooldown()) {
+			SceneController.dungeon.increaseFloor(1);
 			Main.getLogic().nextFloor();
 		}
 	}
