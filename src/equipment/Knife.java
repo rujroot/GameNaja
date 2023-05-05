@@ -21,6 +21,14 @@ public class Knife extends Melee{
 
 	}
 
+    public Knife(double width, double height) {
+		super(width, height);
+		this.setImage(image);
+		this.setAttackDamage(100);
+		this.setAttackRange(100);
+		this.setAttackDegree(100);
+	}
+
     @Override
     public void attackAbility(ArrayList<BaseObject> intersectObjects) {
         for(BaseObject object : intersectObjects){

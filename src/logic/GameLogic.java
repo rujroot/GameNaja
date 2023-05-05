@@ -75,6 +75,7 @@ public class GameLogic {
 				
 					if(object instanceof Npc){
 						Npc npc = (Npc) object;
+						npc.findNearestMonster(gameObjectContainer);
 						npc.doBehavior();
 					}
 				}

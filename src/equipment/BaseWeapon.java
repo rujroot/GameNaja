@@ -2,6 +2,7 @@ package equipment;
 
 import data.BaseObject;
 import data.Point;
+import entity.Entity;
 import entity.Player;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -11,13 +12,14 @@ import logic.Hitbox;
 public abstract class BaseWeapon extends BaseObject implements Cloneable{
 	private double attackDamage, attackSpeed, value;
 	private Point offsetPosition = new Point(30.0, 20.0);
+	private Entity entity;
 
 	private Image image;
 	
 	@Override
 	public Point getPosition() {
 		//Point Player
-		Point pp = Player.getPlayer().getPosition();
+		Point pp = entity.getPosition();
 		double px = pp.getX(), py = pp.getY();
 		
 		Point p = new Point(px + offsetPosition.getX(), py + offsetPosition.getY());
@@ -43,7 +45,7 @@ public abstract class BaseWeapon extends BaseObject implements Cloneable{
 	public void draw(GraphicsContext gc){
 		Point pos = this.getPosition();
 		if(image != null){
-			gc.drawImage(image, pos.getX()-40, pos.getY(), image.getWidth()*2, image.getHeight()*2);
+			gc.drawImage(image, pos.getX()-40, pos.getY(), image.getWidth(), image.getHeight());
 		}else{
         	gc.setFill(Color.LIMEGREEN);
 			gc.fillRect(pos.getX(), pos.getY(), this.getWidth(), this.getHeight());
@@ -54,12 +56,16 @@ public abstract class BaseWeapon extends BaseObject implements Cloneable{
 		super(new Point(0, 0), width, height);
 		this.setAttackDamage(attackDamage);
 		this.setAttackSpeed(attackSpeed);
+
+		this.setEntity(Player.getPlayer());
 	}
 	
 	public BaseWeapon(double width, double height, double attackDamage) {
 		super(new Point(0, 0), width, height);
 		this.setAttackDamage(attackDamage);
 		this.setAttackSpeed(1);
+
+		this.setEntity(Player.getPlayer());
 	}
 
 	public double getAttackDamage() {
@@ -113,5 +119,15 @@ public abstract class BaseWeapon extends BaseObject implements Cloneable{
 	public void setValue(double value) {
 		this.value = value;
 	}
+
+	public Entity getEntity() {
+		return entity;
+	}
+
+	public void setEntity(Entity entity) {
+		this.entity = entity;
+	}
+
+	
 
 }

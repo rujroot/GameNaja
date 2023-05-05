@@ -89,8 +89,14 @@ public class SceneController{
 
 		Player player = new Player("Player", 50, 50, new DataEntity(25, 10000, 10000, 10));
 		logic = new GameLogic();
+<<<<<<< HEAD
 		dungeon = new GenerateDungeon(2);
 		//dungeon.increaseFloor(3);
+||||||| c33f00d
+		GenerateDungeon dungeon = new GenerateDungeon(10);
+=======
+		GenerateDungeon dungeon = new GenerateDungeon(2);
+>>>>>>> cab557437287863c55d11c8a8cd20517408e89f3
 		
 		stage = Main.stage;
 		gameScreen = new GameScreen(1400,800);
