@@ -170,5 +170,7 @@ public abstract class Entity extends BaseObject {
 		this.data = data;
 	}
 
-	
+	public boolean equals(Entity entity){
+		return name.equals(entity.getName());
+	}
 }
