@@ -63,8 +63,17 @@ public class Npc extends Entity implements Cooldownable {
 		DataEntity data = this.getData();
 
 		if (distance > 0) {
-			this.move(-p.getX() / distance * data.getSpd(), 0);
-			this.move(0, -p.getY() / distance * data.getSpd());
+            double mx = -p.getX() / distance * data.getSpd();
+            double my = -p.getY() / distance * data.getSpd();
+        
+            if(this.isLegalMove( mx, my)){
+                this.move(mx, 0);
+			    this.move(0, my);
+            }else{
+                this.move(mx, 0);
+			    this.move(0, -my);
+            }
+			
 		}
 
 	}
