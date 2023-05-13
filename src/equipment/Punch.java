@@ -9,7 +9,7 @@ import javafx.scene.image.WritableImage;
 import logic.RenderableHolder;
 
 public class Punch extends Melee {
-	private WritableImage image = new WritableImage(RenderableHolder.equipment1.getPixelReader(), 261, 5, 285-261, 26-5);
+	private WritableImage image = new WritableImage(RenderableHolder.equipment1.getPixelReader(), 261*2, 5*2, (285-261)*2, (26-5)*2);
 	
 	public Punch(double width, double height) {
 		super(width, height);

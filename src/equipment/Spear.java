@@ -9,7 +9,7 @@ import javafx.scene.image.WritableImage;
 import logic.RenderableHolder;
 
 public class Spear extends Melee {
-	private WritableImage image = new WritableImage(RenderableHolder.equipment1.getPixelReader(), 159, 95, 191-159, 127-95);
+	private WritableImage image = new WritableImage(RenderableHolder.equipment1.getPixelReader(), 159*2, 95*2, (191-159)*2, (127-95)*2);
 	
 	public Spear(double width, double height) {
 		super(width, height);

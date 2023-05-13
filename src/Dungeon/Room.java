@@ -34,6 +34,7 @@ public class Room implements IRenderable {
 	private HashMap<Direction, Room> connectRoom;
 	private HashMap<Direction, Path> connectPath;
 	private ArrayList<BaseOre> ores;
+	private ArrayList<Monster> monsters; 
 	private Size roomSize;
 
 	private Image image = RenderableHolder.baseFloor;
@@ -76,6 +77,7 @@ public class Room implements IRenderable {
 		connectRoom = new HashMap<>();
 		connectPath = new HashMap<>();
 		ores = new ArrayList<BaseOre>();
+		monsters = new ArrayList<Monster>();
 		generatePath();
 	}
 
@@ -133,7 +135,13 @@ public class Room implements IRenderable {
 				return;
 			}
 		}
+		for(Monster thatMonster : monsters){
+			if(!isLegal(thatMonster, monster)) {
+				return;
+			}
+		}
 		// Can create ore
+		monsters.add(monster);
 		Main.getLogic().addObject(monster);
 	}
 

@@ -11,7 +11,7 @@ import logic.Main;
 import logic.RenderableHolder;
 
 public class Bow extends BaseWeapon implements Cooldownable {
-	private WritableImage image = new WritableImage(RenderableHolder.equipment1.getPixelReader(), 129, 0, 159-129, 32-0);
+	private WritableImage image = new WritableImage(RenderableHolder.equipment1.getPixelReader(), 129*2, 0, (159-129)*2, (32-0)*2);
 	private int amount;
 	private double cooldownTime = 500;
 	private double lastClickTime = 0;

@@ -11,7 +11,7 @@ import logic.Main;
 import logic.RenderableHolder;
 
 public class Wand extends BaseWeapon implements Cooldownable{
-	private WritableImage image = new WritableImage(RenderableHolder.equipment1.getPixelReader(), 162, 66, 191-162, 94-66);
+	private WritableImage image = new WritableImage(RenderableHolder.equipment1.getPixelReader(), 162*2, 66*2, (191-162)*2, (94-66)*2);
 	private int amount;
 	private double cooldownTime = 100;
 	private double lastClickTime = 0;
