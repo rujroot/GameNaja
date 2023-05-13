@@ -43,7 +43,6 @@ public class GameLogic {
 			if(object instanceof Entity){
 					Entity entity = (Entity) object;
 					
-					
 					if(entity.getData().getHp() <= 0) {
 						entity.setDestroyed(true);
 						gameObjectContainer.remove(entity);

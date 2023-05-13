@@ -91,9 +91,11 @@ public abstract class BaseWeapon extends BaseObject implements Cloneable{
 	public void setAttackHitBox(Hitbox attackHitBox) {
 		this.attackHitBox = attackHitBox;
 	}
+	
 	public Point getOffsetPosition() {
 		return offsetPosition;
 	}
+	
 	public void setOffsetPosition(Point offsetPosition) {
 		this.offsetPosition = offsetPosition;
 	}

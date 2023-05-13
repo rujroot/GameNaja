@@ -14,48 +14,7 @@ public class GenerateDungeon {
 	
 	public GenerateDungeon(int level){
 		this.setLevel(level);
-		
-		// Generate state
-		for(int i = 0; i < level; ++i) {
-			ArrayList<Room> toPush = new ArrayList<Room>();
-			
-			int amountRoom = 100;//(int)(Math.random()*5 + 5 + i);
-			
-			// create first room
-			Room rootRoom = new Room();
-			toPush.add(rootRoom);
-			
-			for(int j = 1; j < amountRoom; ++j) {
-				
-				//Generate Room
-				Pair<Room, Direction> toConnectRoom = findRoom(rootRoom);
-				Room room = new Room(toConnectRoom.getKey(), toConnectRoom.getValue());
-				
-				while(!isLegalCreate(room, toPush)) {
-					toConnectRoom = findRoom(rootRoom);
-					room = new Room(toConnectRoom.getKey(), toConnectRoom.getValue());
-				}
-				
-				
-				Direction direction = toConnectRoom.getValue();
-				Room connectRoom = toConnectRoom.getKey();
-
-				//visible path
-				connectRoom.getConnectPath().get(direction).setVisible(true);
-
-				//generate ore
-				room.generateOre(10);
-
-				// set connect room
-				room.getConnectRoom().put(direction.getOpposite(), connectRoom);
-				connectRoom.getConnectRoom().put(direction, room);
-				toPush.add(room);
-			}
-			
-			// Push the generate level to container
-			container.add(toPush);
-		}
-		
+		increaseFloor(level);
 		// generate ore first level
 		for(Room room : container.get(0)){
 			for(BaseOre ore : room.getOres()){
@@ -68,7 +27,7 @@ public class GenerateDungeon {
 		for(int i = 0; i < increase; ++i) {
 			ArrayList<Room> toPush = new ArrayList<Room>();
 			
-			int amountRoom = 100;//(int)(Math.random()*5 + 5 + i);
+			int amountRoom = (int)(Math.random()*10 + 5);
 			
 			// create first room
 			Room rootRoom = new Room();
@@ -84,7 +43,6 @@ public class GenerateDungeon {
 					toConnectRoom = findRoom(rootRoom);
 					room = new Room(toConnectRoom.getKey(), toConnectRoom.getValue());
 				}
-				
 				
 				Direction direction = toConnectRoom.getValue();
 				Room connectRoom = toConnectRoom.getKey();

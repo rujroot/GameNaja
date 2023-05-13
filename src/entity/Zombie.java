@@ -33,24 +33,6 @@ public class Zombie extends Monster {
 	}
 
 
-	@Override
-	public void follow() {
-		Point pp = Player.getPlayer().getPosition();
-		
-		double px = pp.getX(), py = pp.getY();
-		
-		Point p = new Point(this.getPosition().getX() - px, this.getPosition().getY() - py);
-		double distance = Math.sqrt(p.getX() * p.getX() + p.getY() * p.getY());
-		
-		DataEntity data = this.getData();
-		
-		if(distance > 0) {
-			this.move(-p.getX()/distance * data.getSpd(), 0);
-			this.move(0, -p.getY()/distance * data.getSpd());
-		}
-		
-	}
-
 
 	
 

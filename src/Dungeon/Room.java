@@ -90,6 +90,10 @@ public class Room implements IRenderable {
 		connectPath.put(Direction.DOWN, new Path(this, Direction.DOWN));
 	}
 
+	public void generateMonster(int amountMonster){
+
+	}
+
 	public void generateOre(int amountOre){
 
 		for(int i = 0; i < amountOre; ++i){
