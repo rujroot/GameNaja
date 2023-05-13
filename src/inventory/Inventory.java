@@ -40,6 +40,10 @@ public class Inventory extends BaseObject{
         UI.removeItem(baseObject);
     }
 
+    public void removeItem(int index){
+        UI.removeItem(index);
+    }
+
     public BaseObject getObject(int index){
         BaseObject object = UI.getPosIndex()[index].getObject();
         return object;

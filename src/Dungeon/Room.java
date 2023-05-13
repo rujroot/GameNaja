@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import data.DataOre;
 import data.Point;
+import entity.MonsterType;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import logic.Hitbox;
@@ -91,7 +92,10 @@ public class Room implements IRenderable {
 	}
 
 	public void generateMonster(int amountMonster){
-
+		ArrayList<MonsterType> types = MonsterType.getAllType();
+		for(int i = 0; i < amountMonster; ++i){
+			
+		}
 	}
 
 	public void generateOre(int amountOre){
