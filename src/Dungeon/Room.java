@@ -3,9 +3,17 @@ package dungeon;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import data.BaseObject;
+import data.DataEntity;
 import data.DataOre;
 import data.Point;
+import entity.Demon;
+import entity.Goblin;
+import entity.Monster;
 import entity.MonsterType;
+import entity.Skeleton;
+import entity.Slime;
+import entity.Zombie;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import logic.Hitbox;
@@ -93,9 +101,40 @@ public class Room implements IRenderable {
 
 	public void generateMonster(int amountMonster){
 		ArrayList<MonsterType> types = MonsterType.getAllType();
+
 		for(int i = 0; i < amountMonster; ++i){
-			
+			int chooseType = (int)(Math.random() * types.size());
+			MonsterType type = types.get(chooseType);
+
+			Monster monster;
+			if(type.equals(MonsterType.DEMON)){
+				monster = new Demon("Demon", 0, 0, new DataEntity(20, 5, 5, 10));
+			}else if(type.equals(MonsterType.GOBLIN)){
+				monster = new Goblin("Goblin", 0, 0, new DataEntity(20, 5, 5, 10));
+			}else if(type.equals(MonsterType.SKELETON)){
+				monster = new Skeleton("Skeleton", 0, 0, new DataEntity(20, 5, 5, 10));
+			}else if(type.equals(MonsterType.SLIME)){
+				monster = new Slime("Slime", 0, 0, new DataEntity(20, 5, 5, 10));
+			}else{
+				monster = new Zombie("Zombie", 0, 0, new DataEntity(20, 5, 5, 10));
+			}
+
+			Point newPos = new Point(position.getX() + (Math.random() * (width - monster.getWidth()) ), 
+									position.getY() + (Math.random() * (height - monster.getHeight()) ) );
+			monster.setPosition(newPos);
+			createMonster(monster);
 		}
+	}
+
+	public void createMonster(Monster monster){
+		// can't spawn ore due to intersection with other ore
+		for(BaseOre thatOre : ores){
+			if(!isLegal(thatOre, monster)) {
+				return;
+			}
+		}
+		// Can create ore
+		Main.getLogic().addObject(monster);
 	}
 
 	public void generateOre(int amountOre){
@@ -138,7 +177,7 @@ public class Room implements IRenderable {
 		Main.getLogic().addObject(ore);
 	}
 
-	private boolean isLegal(BaseOre oreA, BaseOre oreB){
+	private boolean isLegal(BaseObject oreA, BaseObject oreB){
 		Hitbox A = new Hitbox(oreA.getPosition(), oreA.getWidth(), oreA.getHeight());
 		Hitbox B = new Hitbox(oreB.getPosition(), oreB.getWidth(), oreB.getHeight());
 
