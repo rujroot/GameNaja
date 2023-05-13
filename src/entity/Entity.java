@@ -40,7 +40,7 @@ public abstract class Entity extends BaseObject {
 
 	public void move(double moveX, double moveY){
 		Point pos = this.getPosition();
-		//System.out.println(moveX+" "+moveY);
+		
 		for(double x = moveX; x > 0; --x){
 			if(isLegalMove(x, 0)){
 				pos.setX(pos.getX() + x);

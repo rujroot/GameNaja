@@ -20,8 +20,11 @@ public class Point {
 	}
 	public String toString() {
 		return "X = " + this.getX() + " " + "Y = " + this.getY() ;
-		
 	}
+	public boolean equals(Point P){
+		return this.getX() == P.getX() && this.getY() == P.getY();
+	}
+
 	public void unit(){
 		double dis = Math.sqrt((this.X * this.X) + (this.Y * this.Y));
 		this.setX(X / dis);
@@ -30,6 +33,11 @@ public class Point {
 	public void multiply(double value){
 		this.setX(X * value);
 		this.setY(Y * value);
+	}
+	public double distant(Point P){
+		double X = (this.X - P.getX());
+		double Y = (this.Y - P.getY());
+		return Math.sqrt((X * X) + (Y * Y));
 	}
 
 }
