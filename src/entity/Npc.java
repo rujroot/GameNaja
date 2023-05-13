@@ -10,6 +10,7 @@ import equipment.Knife;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
 import logic.Cooldownable;
+import logic.Hitbox;
 import logic.RenderableHolder;
 
 public class Npc extends Entity implements Cooldownable {
@@ -67,7 +68,7 @@ public class Npc extends Entity implements Cooldownable {
 			double mx = -p.getX() / distance * data.getSpd();
 			double my = -p.getY() / distance * data.getSpd();
 			// Check for obstacles
-			if (!this.isLegalMove(mx, my)) {
+			if (!this.isLegalMove(mx, my) && !this.isIntersectPlayer()) {
 				// Turn 90 degrees
 				double newX = -p.getY();
 				double newY = p.getX();
@@ -84,6 +85,14 @@ public class Npc extends Entity implements Cooldownable {
 		}
 
 	}// this.isLegalMove( mx, my)
+	
+	public boolean isIntersectPlayer() {
+		// check 2 rectangle
+		Point MonBox = new Point(this.getPosition().getX()-10,this.getPosition().getY()-10);
+		Hitbox A = new Hitbox(MonBox, this.getWidth()+20, this.getHeight()+20);
+		Hitbox B = new Hitbox(Player.getPlayer().getPosition(), Player.getPlayer().getWidth(), Player.getPlayer().getHeight());
+ 		return A.isIntersect(B);
+	}
 
 	public double distance(Point pos1) {
 		Point pos2 = this.getPosition();
