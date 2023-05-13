@@ -36,8 +36,8 @@ public class Inventory extends BaseObject{
         UI.setSelectIndex(index);
     }
 
-    public void removeItem(Item item){
-        UI.removeItem(item);
+    public void removeItem(BaseObject baseObject){
+        UI.removeItem(baseObject);
     }
 
     public BaseObject getObject(int index){
