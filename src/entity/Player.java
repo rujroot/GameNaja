@@ -119,7 +119,6 @@ public class Player extends Entity implements Cooldownable {
 			inventory.removeItem(inventory.getUI().getSelectIndex());
 			this.setEquipment(inventory.getObject(inventory.getUI().getSelectIndex()));
 		}
-
 		// Action Section
 		if ((InputUtility.getKeyPressed(KeyCode.SPACE) || InputUtility.isLeftClickTriggered())) {
 			attack();

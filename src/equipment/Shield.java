@@ -9,7 +9,7 @@ import javafx.scene.image.WritableImage;
 import logic.RenderableHolder;
 public class Shield extends Melee {
 	//topleft -- bottomright
-	private WritableImage image = new WritableImage(RenderableHolder.equipment1.getPixelReader(), 293, 0, 314-293, 31-0);
+	private WritableImage image = new WritableImage(RenderableHolder.equipment1.getPixelReader(), 293*2, 0, (314-293)*2, (31-0)*2);
 	
 	public Shield(double width, double height) {
 		super(width, height);
