@@ -12,6 +12,8 @@ import javafx.scene.image.WritableImage;
 import logic.Cooldownable;
 import logic.Hitbox;
 import logic.RenderableHolder;
+import logic.pathfinding.Node;
+import logic.pathfinding.PathFinding;
 
 public class Npc extends Entity implements Cooldownable {
 
@@ -22,6 +24,7 @@ public class Npc extends Entity implements Cooldownable {
 	private Entity followEntity;
 	private double maxDistance = 200;
 	private BaseWeapon equipment;
+	private PathFinding pathFinding;
 
 	public Npc(String name, double width, double height, DataEntity data) {
 		super(name, width, height, data);
@@ -29,6 +32,7 @@ public class Npc extends Entity implements Cooldownable {
 		this.setHeight(image.getHeight());
 
 		this.setEquipment(new Knife(10, 10));
+		pathFinding = new PathFinding(this);
 	}
 
 	@Override
@@ -55,6 +59,8 @@ public class Npc extends Entity implements Cooldownable {
 	}
 
 	public void follow(Entity entity) {
+		//Node finalNode = pathFinding.walkTo(entity.getPosition());
+		//System.out.println(finalNode);
 		Point pp = entity.getPosition();
 
 		double px = pp.getX(), py = pp.getY();
@@ -64,7 +70,7 @@ public class Npc extends Entity implements Cooldownable {
 
 		DataEntity data = this.getData();
 
-		if (distance > 0) {
+		if (distance < 500) {
 			double mx = -p.getX() / distance * data.getSpd();
 			double my = -p.getY() / distance * data.getSpd();
 			// Check for obstacles
@@ -75,13 +81,14 @@ public class Npc extends Entity implements Cooldownable {
 				double newDistance = Math.sqrt(newX * newX + newY * newY);
 				this.move(newX / newDistance * data.getSpd(), 0);
                 this.move(0, newY / newDistance * data.getSpd());
-				//this.move(newX / newDistance * data.getSpd(), newY / newDistance * data.getSpd());
 			} else {
 				// Move towards target
 				this.move(-p.getX() / distance * data.getSpd(), 0);
                 this.move(0, -p.getY() / distance * data.getSpd());
-				//this.move(-p.getX() / distance * data.getSpd(), -p.getY() / distance * data.getSpd());
 			}
+		}else{
+			this.getPosition().setX(entity.getPosition().getX() + 100);
+			this.getPosition().setY(entity.getPosition().getY() + 100);
 		}
 
 	}// this.isLegalMove( mx, my)
