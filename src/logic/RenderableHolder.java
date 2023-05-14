@@ -1,8 +1,10 @@
 package logic;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 import javafx.scene.image.Image;
@@ -18,7 +20,7 @@ public class RenderableHolder {
 	public static Image Tileset, baseFloor, ores, character, atlas, sideWall, mainWall, demon, equipment1, enemy, slime;
 	public static Image backUI, upUI, selectUI;
 	public static AudioClip sound;
-
+	public static HashMap<String, Image[][]> imageAnimation;
 
 	static {
 		//Load Resource first time
@@ -42,6 +44,20 @@ public class RenderableHolder {
 		objects.add(object);
 		Collections.sort(objects, comparator);
 	}
+
+	public static Image[] loadAnimation(File[] files, int n){
+        int i = 0;
+		Image[] image = new Image[n];
+		System.out.println("in");
+        for (File file : files) {
+			System.out.println(file.getPath());
+            if (!file.isFile()) continue;
+			
+            image[i] = new Image(ClassLoader.getSystemResource(file.getPath()).toString());
+            i++;
+        }
+		return image;
+    }
 	
 	public static void loadResource() {
 		Tileset = new Image(ClassLoader.getSystemResource("res/image/DungeonTileset2.png").toString());
@@ -64,6 +80,15 @@ public class RenderableHolder {
 		slime = new Image(ClassLoader.getSystemResource("res/image/slime_frames_all.png").toString());
 		equipment1 = new Image(ClassLoader.getSystemResource("res/image/fantasy_weapons_pack1_noglow.png").toString());
 		
+		// Load animation
+		Image[][] demonSlime = new Image[20][20];
+		demonSlime[0] = loadAnimation(new File(ClassLoader.getSystemClassLoader()).listFiles(), 20);
+		//demonSlime[1] = loadAnimation(new File("res/image/DemonSlime/02_demon_walk").listFiles(), 20);
+		//demonSlime[2] = loadAnimation(new File("res/image/DemonSlime/03_demon_cleave").listFiles(), 20);
+		//demonSlime[3] = loadAnimation(new File("res/image/DemonSlime/04_demon_take_hit").listFiles(), 20);
+		//demonSlime[4] = loadAnimation(new File("res/image/DemonSlime/05_demon_death").listFiles(), 20);
+
+
 	}
 	
 	// Update when entity remove

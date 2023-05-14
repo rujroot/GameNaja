@@ -106,7 +106,6 @@ public class SceneController{
 				try {
 					gameScreen.updatePlayer();
 				} catch (CloneNotSupportedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				gameScreen.paintLevel();
