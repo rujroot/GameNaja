@@ -9,7 +9,7 @@ import javafx.scene.shape.ArcType;
 public class AttackEffect extends Thread {
 
     private Point position;
-    double start, end;
+    private double start, end;
 
     public AttackEffect(Point position, double start, double end) {
         this.setPosition(position);
