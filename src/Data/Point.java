@@ -42,5 +42,8 @@ public class Point {
 	public Point plus(Point P){
 		return new Point(this.getX() + P.getX(), this.getY() + P.getY());
 	}
+	public Point minus(Point P) {
+		return new Point(this.getX() - P.getX(), this.getY() - P.getY());
+	}
 
 }

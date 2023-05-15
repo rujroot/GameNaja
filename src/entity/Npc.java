@@ -12,8 +12,6 @@ import javafx.scene.image.WritableImage;
 import logic.Cooldownable;
 import logic.Hitbox;
 import logic.RenderableHolder;
-import logic.pathfinding.Node;
-import logic.pathfinding.PathFinding;
 
 public class Npc extends Entity implements Cooldownable {
 
@@ -24,7 +22,6 @@ public class Npc extends Entity implements Cooldownable {
 	private Entity followEntity;
 	private double maxDistance = 200;
 	private BaseWeapon equipment;
-	private PathFinding pathFinding;
 
 	public Npc(String name, double width, double height, DataEntity data) {
 		super(name, width, height, data);
@@ -32,7 +29,6 @@ public class Npc extends Entity implements Cooldownable {
 		this.setHeight(image.getHeight());
 
 		this.setEquipment(new Knife(10, 10));
-		pathFinding = new PathFinding(this);
 	}
 
 	@Override

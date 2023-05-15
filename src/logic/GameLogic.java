@@ -14,6 +14,7 @@ import entity.Monster;
 import entity.Npc;
 import entity.Player;
 import entity.Shopkeeper;
+import entity.boss.BossEntity;
 import equipment.projectile.Arrow;
 import inventory.Inventory;
 import item.Item;
@@ -51,7 +52,7 @@ public class GameLogic {
 					if(entity instanceof Monster) {
 						((Monster) entity).follow();
 						if(((Monster) entity).isIntersectPlayer()) {
-							((Monster) entity).attack();
+							//((Monster) entity).attack();
 						}
 					}
 					
@@ -78,6 +79,11 @@ public class GameLogic {
 						Npc npc = (Npc) object;
 						npc.findNearestMonster(gameObjectContainer);
 						npc.doBehavior();
+					}
+				
+					if(object instanceof BossEntity){
+						BossEntity bossEntity = (BossEntity) object;
+						bossEntity.attack();
 					}
 				}
 			

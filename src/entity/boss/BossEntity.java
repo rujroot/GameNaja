@@ -1,6 +1,7 @@
 package entity.boss;
 
 import data.DataEntity;
+import data.Point;
 import entity.Entity;
 import logic.Hitbox;
 

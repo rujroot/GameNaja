@@ -4,7 +4,7 @@ import logic.IRenderable;
 
 public abstract class BaseObject implements IRenderable{
     private double width, height;
-    private Point position;
+    protected Point position;
     private int z;
 	private boolean visible = true, destroyed = false, canCollide = false;
 
