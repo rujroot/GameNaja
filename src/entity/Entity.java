@@ -10,6 +10,7 @@ import dungeon.Direction;
 import dungeon.GenerateDungeon;
 import dungeon.Path;
 import dungeon.Room;
+import entity.boss.BossEntity;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import logic.Hitbox;
@@ -78,9 +79,15 @@ public abstract class Entity extends BaseObject {
 		Point newPosPlayer = new Point(posPlayer.getX() + moveX, posPlayer.getY() + moveY);
 		
 		ArrayList<BaseObject> allObject = Main.getLogic().getGameObjectContainer();
+		Hitbox A = new Hitbox(newPosPlayer, this.getWidth(), this.getHeight());
 		for(BaseObject object : allObject){
-			if((object instanceof BaseOre && object.isVisible()) || (!object.equals(this) && object instanceof Entity)){
-				Hitbox A = new Hitbox(newPosPlayer, this.getWidth(), this.getHeight());
+
+			if(object instanceof BossEntity){
+				Hitbox bossHitbox = ((BossEntity) object).getBossHitbox();
+				Point posBoss = object.getPosition();
+				Hitbox B = new Hitbox(object.getPosition().plus(bossHitbox.getPosition()), bossHitbox.getWidth(), bossHitbox.getLength());
+				if(A.isIntersect(B)) return false;
+			}else if((object instanceof BaseOre && object.isVisible()) || (!object.equals(this) && object instanceof Entity)){
 				Hitbox B = new Hitbox(object.getPosition(), object.getWidth(), object.getHeight());
 				if(A.isIntersect(B)) return false;
 			}

@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import logic.GameLogic;
+import logic.Hitbox;
 import logic.Main;
 import logic.RenderableHolder;
 import animation.AnimationController;
@@ -21,6 +22,7 @@ import dungeon.Room;
 import entity.Npc;
 import entity.Player;
 import entity.Shopkeeper;
+import entity.boss.PheuFire;
 import input.InputUtility;
 import javafx.animation.AnimationTimer;
 import javafx.scene.layout.StackPane;
@@ -66,7 +68,6 @@ public class SceneController{
 		stage.show();
 	}
 	
-	
 	public void switchToBodyGameScene() throws CloneNotSupportedException {
 
 		Player player = new Player("Player", 50, 50, new DataEntity(25, 10000, 10000, 10));
@@ -88,16 +89,20 @@ public class SceneController{
 		shopkeeper.setPosition(new Point(firstRoom.getPosition().getX() + 20, firstRoom.getPosition().getY() + 20 ));
 		logic.addObject(shopkeeper);
 		
-		Npc npc = new Npc("NPC", 10, 10, new DataEntity(100, 1, 1, 10));
-		npc.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
-		logic.addObject(npc);
-		npc.follow(player);
+		// Npc npc = new Npc("NPC", 10, 10, new DataEntity(100, 1, 1, 10));
+		// npc.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
+		// logic.addObject(npc);
+		// npc.follow(player);
 		
 		player.setPosition(new Point(firstRoom.getPosition().getX() + 100, firstRoom.getPosition().getY() + 100 ));
 		player.initInventory();
 		
 		logic.addObject(player);
-		
+
+		PheuFire demonslime = new PheuFire("PheuFire", new DataEntity(100, 1, 1, 10));
+		demonslime.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
+		logic.addObject(demonslime);
+
 		//stage.show();
 		AnimationController animationController = new AnimationController();
 		

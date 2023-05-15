@@ -39,5 +39,8 @@ public class Point {
 		double Y = (this.Y - P.getY());
 		return Math.sqrt((X * X) + (Y * Y));
 	}
+	public Point plus(Point P){
+		return new Point(this.getX() + P.getX(), this.getY() + P.getY());
+	}
 
 }

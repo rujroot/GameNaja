@@ -1,32 +1,20 @@
 package animation;
 
-import java.io.File;
-
 import data.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.WritableImage;
 
 public class ImageAnimation extends AnimationObject {
 
-    private Point offSet;
-    private Image[][] image;
-    private int n = 0;
+    private Image[] image;
+    private int rate, currIndex = 1, maxIndex;
+    private boolean stop = true;
 
-    public ImageAnimation(Point position, double width, double height, Point size) {
+    public ImageAnimation(Point position, double width, double height, Image[] image, int rate, int maxIndex) {
         super(position, width, height);
-        this.setOffSet(offSet);
-        this.image = new WritableImage[(int)(size.getY())][(int)(size.getX())];
-    }  
-
-    public void loadAnimation(File[] files){
-        int i = 0;
-        for (File file : files) {
-            if (!file.isFile()) continue;
-            System.out.println(file.getPath());
-            this.image[n][i] = new Image(ClassLoader.getSystemResource(file.getPath()).toString());;
-            i++;
-        }
+        this.image = image;
+        this.maxIndex = maxIndex;
+        this.rate = rate;
     }
 
     @Override
@@ -34,12 +22,33 @@ public class ImageAnimation extends AnimationObject {
         
     }
 
-    public Point getOffSet() {
-        return offSet;
+    @Override
+    public void nextAnim(){
+        this.currTime = this.currTime + speedAnim;
+        runIndex();
     }
 
-    public void setOffSet(Point offSet) {
-        this.offSet = offSet;
+    public Image getCurrImage(){
+        return image[currIndex];
     }
+
+    public void runIndex(){
+        if(this.getCurrTime() >= rate){
+            this.setCurrTime(0);
+            currIndex++;
+            if(currIndex >= maxIndex){
+                currIndex = 1;
+            }
+        }
+    }
+
+    public boolean isStop() {
+        return stop;
+    }
+
+    public void setStop(boolean stop) {
+        this.stop = stop;
+    }
+    
 
 }
