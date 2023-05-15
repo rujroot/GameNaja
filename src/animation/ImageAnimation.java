@@ -24,7 +24,8 @@ public class ImageAnimation extends AnimationObject {
 
     @Override
     public void nextAnim(){
-        this.currTime = this.currTime + speedAnim;
+    	this.setCurrTime(this.getCurrTime()+this.getSpeedAnim());
+        //this.currTime = this.currTime + speedAnim;
         runIndex();
     }
 

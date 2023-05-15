@@ -7,9 +7,11 @@ public abstract class AnimationObject extends BaseObject {
     
     double startTime = 0, currTime = 0, endTime, speedAnim = 1;
 
+
     public AnimationObject(Point position, double width, double height) {
         super(position, width, height);
     }
+    
     public double getStartTime() {
         return startTime;
     }
