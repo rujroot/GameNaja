@@ -5,7 +5,9 @@ import data.Point;
 
 public abstract class AnimationObject extends BaseObject {
     
-    private double startTime, currTime, endTime, speedAnim;
+
+    private double startTime, currTime, endTime, speedAnim = 1;
+
 
     public AnimationObject(Point position, double width, double height) {
         super(position, width, height);

@@ -114,8 +114,8 @@ public class Player extends Entity implements Cooldownable {
 		if (InputUtility.getKeyPressed(KeyCode.F)) {
 			this.getData().setHp(this.getData().getHp() + 10);
 		}
-		if (InputUtility.getKeyPressed(KeyCode.R)) {
-			System.out.println(inventory.getUI().getSelectIndex());
+
+		if (InputUtility.getKeyPressed(KeyCode.R) && !onCooldown()) {
 			inventory.removeItem(inventory.getUI().getSelectIndex());
 			this.setEquipment(inventory.getObject(inventory.getUI().getSelectIndex()));
 		}

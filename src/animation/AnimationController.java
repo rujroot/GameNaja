@@ -12,13 +12,23 @@ public class AnimationController {
         try {
             for(int i = animations.size() - 1; i >= 0; --i){
                 AnimationObject animation = animations.get(i);
-                if(animation.getCurrTime() > animation.getEndTime()) {
-                    animation.setDestroyed(true);
-                    GameLogic.removeObj(animation);
-                    animations.remove(animation);
-                    continue;
+
+                if(animation instanceof ImageAnimation){
+                    ImageAnimation imageAnimation = (ImageAnimation) animation;
+                    if(!imageAnimation.isStop()) animation.nextAnim();
                 }
-                animation.nextAnim();
+                else{
+
+                   if(animation.getCurrTime() > animation.getEndTime()) {
+                        animation.setDestroyed(true);
+                        GameLogic.removeObj(animation);
+                        animations.remove(animation);
+                        continue;
+                    }
+                    animation.nextAnim(); 
+
+                }
+                
                 
             }
 		} catch (Exception e) {

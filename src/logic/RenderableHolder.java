@@ -3,6 +3,7 @@ package logic;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 import javafx.scene.image.Image;
@@ -18,7 +19,7 @@ public class RenderableHolder {
 	public static Image Tileset, baseFloor, ores, character, atlas, sideWall, mainWall, demon, equipment1, enemy, slime;
 	public static Image backUI, upUI, selectUI;
 	public static AudioClip sound;
-
+	public static HashMap<String, Image[][]> imageAnimation = new HashMap<>();
 
 	static {
 		//Load Resource first time
@@ -42,6 +43,14 @@ public class RenderableHolder {
 		objects.add(object);
 		Collections.sort(objects, comparator);
 	}
+
+	public static Image[] loadAnimation(String path, int n){
+		Image[] image = new Image[n + 5];
+        for (int i = 1; i <= n; ++i) {
+            image[i] = new Image(ClassLoader.getSystemResource(path + Integer.toString(i) + ".png").toString());
+        }
+		return image;
+    }
 	
 	public static void loadResource() {
 		Tileset = new Image(ClassLoader.getSystemResource("res/image/DungeonTileset2.png").toString());
@@ -64,6 +73,16 @@ public class RenderableHolder {
 		slime = new Image(ClassLoader.getSystemResource("res/image/slime_frames_all.png").toString());
 		equipment1 = new Image(ClassLoader.getSystemResource("res/image/fantasy_weapons_pack1_noglow.png").toString());
 		
+		// Load animation
+		Image[][] demonSlime = new Image[20][20];
+		demonSlime[0] = loadAnimation("res/image/DemonSlime/idel/", 6);
+		demonSlime[1] = loadAnimation("res/image/DemonSlime/cleave/", 15);
+		//demonSlime[2] = loadAnimation(new File("res/image/DemonSlime/03_demon_cleave").listFiles(), 20);
+		//demonSlime[3] = loadAnimation(new File("res/image/DemonSlime/04_demon_take_hit").listFiles(), 20);
+		//demonSlime[4] = loadAnimation(new File("res/image/DemonSlime/05_demon_death").listFiles(), 20);
+		imageAnimation.put("DemonSlime", demonSlime);
+
+
 	}
 	
 	// Update when entity remove
