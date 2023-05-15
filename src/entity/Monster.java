@@ -69,7 +69,7 @@ public class Monster extends Entity implements Cooldownable {
 
 		DataEntity data = this.getData();
 
-		if (distance > 0 && distance < 500) {
+		if (distance > 60 && distance < 500) {
 			this.move(-p.getX() / distance * data.getSpd(), 0);
 			this.move(0, -p.getY() / distance * data.getSpd());
 		}

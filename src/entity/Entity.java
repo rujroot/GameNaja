@@ -22,7 +22,7 @@ public abstract class Entity extends BaseObject {
 	private DataEntity data;
 	
 	public Entity(String name, double width, double height, DataEntity data){
-		super(new Point(Math.random() * 640 , Math.random() * 480), width, height);
+		super(new Point(0 , 0), width, height);
 		this.setName(name);
 		this.setData(data);
 	}
@@ -75,19 +75,20 @@ public abstract class Entity extends BaseObject {
 		int currLevel = GenerateDungeon.getCurrLevel();
 		ArrayList<Room> level = GenerateDungeon.getContainer().get(currLevel);
 		
-		Point posPlayer = this.getPosition();
-		Point newPosPlayer = new Point(posPlayer.getX() + moveX, posPlayer.getY() + moveY);
+		Point pos = this.getPosition();
+		Point newPos = new Point(pos.getX() + moveX, pos.getY() + moveY);
 		
 		ArrayList<BaseObject> allObject = Main.getLogic().getGameObjectContainer();
-		Hitbox A = new Hitbox(newPosPlayer, this.getWidth(), this.getHeight());
+		Hitbox A = new Hitbox(newPos, this.getWidth(), this.getHeight());
+		
 		for(BaseObject object : allObject){
 
-			if(object instanceof BossEntity){
-				Hitbox bossHitbox = ((BossEntity) object).getBossHitbox();
-				Point posBoss = object.getPosition();
-				Hitbox B = new Hitbox(object.getPosition().plus(bossHitbox.getPosition()), bossHitbox.getWidth(), bossHitbox.getLength());
-				if(A.isIntersect(B)) return false;
-			}else if((object instanceof BaseOre && object.isVisible()) || (!object.equals(this) && object instanceof Entity)){
+			// if(object instanceof BossEntity){
+			// 	Hitbox bossHitbox = ((BossEntity) object).getBossHitbox();
+			// 	Hitbox B = new Hitbox(object.getPosition(), bossHitbox.getWidth(), bossHitbox.getLength());
+			// 	if(A.isIntersect(B)) return false;
+			// }else 
+			if((object instanceof BaseOre && object.isVisible()) ){
 				Hitbox B = new Hitbox(object.getPosition(), object.getWidth(), object.getHeight());
 				if(A.isIntersect(B)) return false;
 			}
@@ -104,10 +105,10 @@ public abstract class Entity extends BaseObject {
 		    double rect1X2 = posRoom.getX() + room.getWidth();
 		    double rect1Y2 = posRoom.getY() + room.getHeight();
 		    
-		    double X1 = newPosPlayer.getX();
-		    double Y1 = newPosPlayer.getY();
-		    double X2 = newPosPlayer.getX() + this.getWidth();
-		    double Y2 = newPosPlayer.getY() + this.getHeight();
+		    double X1 = newPos.getX();
+		    double Y1 = newPos.getY();
+		    double X2 = newPos.getX() + this.getWidth();
+		    double Y2 = newPos.getY() + this.getHeight();
 
 			// calculate the coordinates of the intersection rectangle
 			double xLeft = Math.max(rect1X1, X1);
@@ -122,10 +123,10 @@ public abstract class Entity extends BaseObject {
 			}
 
 			HashMap<Direction, Path> connectPath = room.getConnectPath();
-			sum +=  getSumPath(connectPath.get(Direction.UP), newPosPlayer);
-			sum +=  getSumPath(connectPath.get(Direction.DOWN), newPosPlayer);
-			sum +=  getSumPath(connectPath.get(Direction.LEFT), newPosPlayer);
-			sum +=  getSumPath(connectPath.get(Direction.RIGHT), newPosPlayer);
+			sum +=  getSumPath(connectPath.get(Direction.UP), newPos);
+			sum +=  getSumPath(connectPath.get(Direction.DOWN), newPos);
+			sum +=  getSumPath(connectPath.get(Direction.LEFT), newPos);
+			sum +=  getSumPath(connectPath.get(Direction.RIGHT), newPos);
 			sum += intersectionArea;
 		}
 

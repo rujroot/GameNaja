@@ -8,7 +8,7 @@ public class ImageAnimation extends AnimationObject {
 
     private Image[] image;
     private int rate, currIndex = 1, maxIndex;
-    private boolean stop = true;
+    private boolean stop = true, loop = false;
 
     public ImageAnimation(Point position, double width, double height, Image[] image, int rate, int maxIndex) {
         super(position, width, height);
@@ -50,6 +50,15 @@ public class ImageAnimation extends AnimationObject {
     public void setStop(boolean stop) {
         this.stop = stop;
     }
+
+    public boolean isLoop() {
+        return loop;
+    }
+
+    public void setLoop(boolean loop) {
+        this.loop = loop;
+    }
+    
     
 
 }

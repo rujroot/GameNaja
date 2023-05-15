@@ -21,7 +21,6 @@ public class AttackObject extends AnimationObject{
         this.setStartAngle(startAngle);
         this.setEndAngle(endAngle);
 
-        this.setStartTime(0);
         this.setEndTime(endAngle);
         this.setSpeedAnim(12);
     }
