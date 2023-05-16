@@ -1,22 +1,22 @@
 package data;
 
 public class Point {
-	private double X, Y;
-	public Point(double X, double Y) {
-		this.setX(X);
-		this.setY(Y);
+	private double x, y;
+	public Point(double x, double y) {
+		this.setX(x);
+		this.setY(y);
 	}
 	public double getX() {
-		return X;
+		return this.x;
 	}
 	public void setX(double x) {
-		X = x;
+		this.x = x;
 	}
 	public double getY() {
-		return Y;
+		return this.y;
 	}
 	public void setY(double y) {
-		Y = y;
+		this.y = y;
 	}
 	public String toString() {
 		return "X = " + this.getX() + " " + "Y = " + this.getY() ;
@@ -26,17 +26,17 @@ public class Point {
 	}
 
 	public void unit(){
-		double dis = Math.sqrt((this.X * this.X) + (this.Y * this.Y));
-		this.setX(X / dis);
-		this.setY(Y / dis);
+		double dis = Math.sqrt((this.x * this.x) + (this.y * this.y));
+		this.setX(x / dis);
+		this.setY(y / dis);
 	}
 	public void multiply(double value){
-		this.setX(X * value);
-		this.setY(Y * value);
+		this.setX(x * value);
+		this.setY(y * value);
 	}
 	public double distant(Point P){
-		double X = (this.X - P.getX());
-		double Y = (this.Y - P.getY());
+		double X = (this.x - P.getX());
+		double Y = (this.y - P.getY());
 		return Math.sqrt((X * X) + (Y * Y));
 	}
 	public Point plus(Point P){
