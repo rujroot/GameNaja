@@ -74,14 +74,15 @@ public class RenderableHolder {
 		equipment1 = new Image(ClassLoader.getSystemResource("res/image/fantasy_weapons_pack1_noglow.png").toString());
 		
 		// Load animation
-		Image[][] demonSlime = new Image[20][20];
+		Image[][] demonSlime = new Image[5][20];
 		demonSlime[0] = loadAnimation("res/image/DemonSlime/idel/", 6);
 		demonSlime[1] = loadAnimation("res/image/DemonSlime/cleave/", 15);
-		//demonSlime[2] = loadAnimation(new File("res/image/DemonSlime/03_demon_cleave").listFiles(), 20);
-		//demonSlime[3] = loadAnimation(new File("res/image/DemonSlime/04_demon_take_hit").listFiles(), 20);
-		//demonSlime[4] = loadAnimation(new File("res/image/DemonSlime/05_demon_death").listFiles(), 20);
 		imageAnimation.put("DemonSlime", demonSlime);
 
+		Image[][] FrostGuardain = new Image[5][20];
+		FrostGuardain[0] = loadAnimation("res/image/FrostGuardian/idle/", 6);
+		FrostGuardain[1] = loadAnimation("res/image/FrostGuardian/atk/", 14);
+		imageAnimation.put("FrostGuardain", FrostGuardain);
 
 	}
 	

@@ -185,7 +185,7 @@ public class PheuFire extends BossEntity{
         Point pp = Player.getPlayer().getPosition();
         double px = pp.getX() , py = pp.getY();
 
-		Point p = new Point(this.getPosition().getX() - px - 100, this.getPosition().getY() - py + 100);
+		Point p = new Point(this.getPosition().getX() - px - 50, this.getPosition().getY() - py + 100);
 		double distance = Math.sqrt(p.getX() * p.getX() + p.getY() * p.getY());
 
         return distance;

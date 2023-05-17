@@ -22,6 +22,7 @@ import dungeon.Room;
 import entity.Npc;
 import entity.Player;
 import entity.Shopkeeper;
+import entity.boss.FrostGuardain;
 import entity.boss.PheuFire;
 import input.InputUtility;
 import javafx.animation.AnimationTimer;
@@ -89,19 +90,22 @@ public class SceneController{
 		shopkeeper.setPosition(new Point(firstRoom.getPosition().getX() + 20, firstRoom.getPosition().getY() + 20 ));
 		logic.addObject(shopkeeper);
 		
-		Npc npc = new Npc("NPC", 10, 10, new DataEntity(100, 1, 1, 10));
-		npc.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
-		logic.addObject(npc);
+		// Npc npc = new Npc("NPC", 10, 10, new DataEntity(100, 1, 1, 10));
+		// npc.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
+		// logic.addObject(npc);
 		
 		player.setPosition(new Point(firstRoom.getPosition().getX() + 100, firstRoom.getPosition().getY() + 100 ));
 		player.initInventory();
 		
 		logic.addObject(player);
 
-		PheuFire demonslime = new PheuFire("PheuFire", new DataEntity(100, 1, 1, 12));
-		demonslime.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
-		logic.addObject(demonslime);
+		// PheuFire demonslime = new PheuFire("PheuFire", new DataEntity(100, 1, 1, 12));
+		// demonslime.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
+		// logic.addObject(demonslime);
 
+		FrostGuardain frostGuardain = new FrostGuardain("FrostGuardain", new DataEntity(100, 1, 1, 12));
+		frostGuardain.setPosition(new Point(firstRoom.getPosition().getX() + 300, firstRoom.getPosition().getY() + 300 ));
+		logic.addObject(frostGuardain);
 		//stage.show();
 		AnimationController animationController = new AnimationController();
 		
