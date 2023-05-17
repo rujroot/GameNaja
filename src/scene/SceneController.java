@@ -89,17 +89,16 @@ public class SceneController{
 		shopkeeper.setPosition(new Point(firstRoom.getPosition().getX() + 20, firstRoom.getPosition().getY() + 20 ));
 		logic.addObject(shopkeeper);
 		
-		// Npc npc = new Npc("NPC", 10, 10, new DataEntity(100, 1, 1, 10));
-		// npc.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
-		// logic.addObject(npc);
-		// npc.follow(player);
+		Npc npc = new Npc("NPC", 10, 10, new DataEntity(100, 1, 1, 10));
+		npc.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
+		logic.addObject(npc);
 		
 		player.setPosition(new Point(firstRoom.getPosition().getX() + 100, firstRoom.getPosition().getY() + 100 ));
 		player.initInventory();
 		
 		logic.addObject(player);
 
-		PheuFire demonslime = new PheuFire("PheuFire", new DataEntity(100, 1, 1, 10));
+		PheuFire demonslime = new PheuFire("PheuFire", new DataEntity(100, 1, 1, 12));
 		demonslime.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
 		logic.addObject(demonslime);
 

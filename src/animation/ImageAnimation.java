@@ -8,7 +8,7 @@ public class ImageAnimation extends AnimationObject {
 
     private Image[] image;
     private int rate, currIndex = 1, maxIndex;
-    private boolean stop = true, loop = false;
+    private boolean stop = false, loop = false;
 
     public ImageAnimation(Point position, double width, double height, Image[] image, int rate, int maxIndex) {
         super(position, width, height);
@@ -25,7 +25,6 @@ public class ImageAnimation extends AnimationObject {
     @Override
     public void nextAnim(){
     	this.setCurrTime(this.getCurrTime()+this.getSpeedAnim());
-        //this.currTime = this.currTime + speedAnim;
         runIndex();
     }
 
@@ -34,11 +33,16 @@ public class ImageAnimation extends AnimationObject {
     }
 
     public void runIndex(){
+        if(stop == true) return;
+
         if(this.getCurrTime() >= rate){
             this.setCurrTime(0);
             currIndex++;
-            if(currIndex >= maxIndex){
+            if(currIndex >= maxIndex && loop == true){
                 currIndex = 1;
+            }else if(currIndex >= maxIndex){
+                currIndex = 1;
+                stop = true;
             }
         }
     }

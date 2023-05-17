@@ -61,12 +61,12 @@ public class Npc extends Entity implements Cooldownable {
 
 		double px = pp.getX(), py = pp.getY();
 
-		Point p = new Point(this.getPosition().getX() - px - 0, this.getPosition().getY() - py - 0);
+		Point p = new Point(this.getPosition().getX() - px - 50, this.getPosition().getY() - py );
 		double distance = Math.sqrt(p.getX() * p.getX() + p.getY() * p.getY());
 
 		DataEntity data = this.getData();
 
-		if (distance < 500) {
+		if (distance > 50 && distance < 500) {
 			double mx = -p.getX() / distance * data.getSpd();
 			double my = -p.getY() / distance * data.getSpd();
 			// Check for obstacles
@@ -82,7 +82,7 @@ public class Npc extends Entity implements Cooldownable {
 				this.move(-p.getX() / distance * data.getSpd(), 0);
                 this.move(0, -p.getY() / distance * data.getSpd());
 			}
-		}else{
+		}else if(distance > 500){
 			this.getPosition().setX(entity.getPosition().getX() + 100);
 			this.getPosition().setY(entity.getPosition().getY() + 100);
 		}

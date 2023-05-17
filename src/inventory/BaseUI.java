@@ -100,7 +100,7 @@ public class BaseUI extends BaseObject{
             BaseObject obj = posIndex[i].getObject();
             if(obj == null) continue;
 
-            if(obj instanceof Item){
+            if(obj instanceof Item && object instanceof Item){
 
                 Item itemA = (Item) obj;
                 Item itemB = (Item) object;
@@ -108,7 +108,7 @@ public class BaseUI extends BaseObject{
 
                 posIndex[i].setObject(null);
                 return;
-            }else if(obj instanceof BaseWeapon){
+            }else if(obj instanceof BaseWeapon && object instanceof BaseWeapon){
 
                 BaseWeapon itemA = (BaseWeapon) obj;
                 BaseWeapon itemB = (BaseWeapon) object;

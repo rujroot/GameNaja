@@ -16,8 +16,9 @@ public class AnimationController {
                 if(animation instanceof ImageAnimation){
                     ImageAnimation imageAnimation = (ImageAnimation) animation;
                     if(!imageAnimation.isStop()) animation.nextAnim();
-                }
-                else{
+                }else if(animation instanceof AnimationManager){
+                    animation.nextAnim();
+                } else{
 
                    if(animation.getCurrTime() > animation.getEndTime()) {
                         animation.setDestroyed(true);

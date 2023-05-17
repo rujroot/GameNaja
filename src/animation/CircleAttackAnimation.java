@@ -6,11 +6,11 @@ import javafx.scene.paint.Color;
 
 public class CircleAttackAnimation extends AnimationObject {
 
-    public CircleAttackAnimation(Point position, double width, double height) {
-        super(position, width, height);
+    public CircleAttackAnimation(Point position, double endTime, double speed) {
+        super(position, 0, 0);
 
-        this.setEndTime(100);
-        this.setSpeedAnim(6);
+        this.setEndTime(endTime);
+        this.setSpeedAnim(speed);
     }
 
     @Override
