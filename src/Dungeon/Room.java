@@ -31,18 +31,18 @@ import ore.StoneOre;
 public class Room implements IRenderable {
 	private double width, height;
 	private Point position;
-	private HashMap<Direction, Room> connectRoom;
-	private HashMap<Direction, Path> connectPath;
-	private ArrayList<BaseOre> ores;
-	private ArrayList<Monster> monsters; 
+	private HashMap<Direction, Room> connectRoom = new HashMap<>();
+	private HashMap<Direction, Path> connectPath = new HashMap<>();
+	private ArrayList<BaseOre> ores = new ArrayList<BaseOre>();
+	private ArrayList<Monster> monsters = new ArrayList<Monster>(); 
 	private Size roomSize;
 
 	private Image image = RenderableHolder.baseFloor;
 	private Image sideWall = RenderableHolder.sideWall;
 	private Image mainWall = RenderableHolder.mainWall;
 
-	private double widthRoom = mainWall.getWidth();
-	private double heightRoom = sideWall.getHeight();
+	protected double widthRoom = mainWall.getWidth();
+	protected double heightRoom = sideWall.getHeight();
 
 	Size[] allSize = {Size.SMALL, Size.MEDUIM, Size.LARGE};
 	OreType[] allType = {OreType.STONE, OreType.COAL, OreType.DIAMOND, OreType.GOLD, OreType.IRON};
@@ -74,10 +74,6 @@ public class Room implements IRenderable {
 		}
 		
 		this.setRoomSize(sizeRoom);
-		connectRoom = new HashMap<>();
-		connectPath = new HashMap<>();
-		ores = new ArrayList<BaseOre>();
-		monsters = new ArrayList<Monster>();
 		generatePath();
 	}
 
@@ -88,9 +84,6 @@ public class Room implements IRenderable {
 		this.setPosition(new Point(0,0));
 
 		this.setRoomSize(Size.SPAWN);
-		connectPath = new HashMap<>();
-		connectRoom = new HashMap<>();
-		ores = new ArrayList<BaseOre>();
 		generatePath();
 	}
 
@@ -267,6 +260,7 @@ public class Room implements IRenderable {
 						mainWall.getHeight());
 	}
 
+	// getter setter
 
 	public double getWidthWall() {
 		return sideWall.getWidth();

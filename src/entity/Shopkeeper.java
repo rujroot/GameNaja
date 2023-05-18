@@ -1,9 +1,6 @@
 package entity;
 
-import java.io.Console;
 import java.util.ArrayList;
-
-import javax.management.BadStringOperationException;
 
 import data.BaseObject;
 import data.DataEntity;

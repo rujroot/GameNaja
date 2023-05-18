@@ -64,6 +64,7 @@ public class FrostGuardain extends BossEntity {
         Point pos = this.getPosition();
         Hitbox hitbox = this.getBossHitbox();
         gc.drawImage(image, pos.getX() - hitbox.getPosition().getX(), pos.getY() - hitbox.getPosition().getY(), image.getWidth(), image.getHeight());
+        this.drawHP(gc);
     }
 
     @Override

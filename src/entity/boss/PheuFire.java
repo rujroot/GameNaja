@@ -64,6 +64,7 @@ public class PheuFire extends BossEntity{
         Point pos = this.getPosition();
         Hitbox hitbox = this.getBossHitbox();
         gc.drawImage(image, pos.getX() - hitbox.getPosition().getX(), pos.getY() - hitbox.getPosition().getY(), image.getWidth(), image.getHeight());
+        this.drawHP(gc);
     }
 
     @Override
@@ -89,7 +90,6 @@ public class PheuFire extends BossEntity{
         }else if(status.equals("Attacking13") || status.equals("Attacking23") || status.equals("Attacking33") ){
             cooldownTime = 3000;
             long currentTime = System.currentTimeMillis();
-            System.out.println(currentTime - lastClickTime);
             if (currentTime - lastClickTime > cooldownTime) {
                 this.setStatus("waitDone");
             }
@@ -101,7 +101,7 @@ public class PheuFire extends BossEntity{
     }
     
     public void playAttackP1(){
-        if(this.getDistant() > 50 && !status.equals("wait1")){
+        if(this.getDistant() > 200 && !status.equals("wait1")){
             follow();
         }else if(status.equals("wait1")){
             cooldownTime = 1000;
@@ -115,8 +115,8 @@ public class PheuFire extends BossEntity{
             imageAnimation[1].setStop(false);
             animationManager.addAnimation(imageAnimation[1]);
             
-            Point pos = this.getPosition();
-            CircleAttackAnimation circle = new CircleAttackAnimation(new Point(pos.getX() - 120, pos.getY() + 250), 150, 3);
+            Point pos = Player.getPlayer().getPosition();
+            CircleAttackAnimation circle = new CircleAttackAnimation(new Point(pos.getX(), pos.getY()), 150, 3);
             AnimationController.animations.add(circle);
             Main.getLogic().addObject(circle);
 
@@ -184,7 +184,7 @@ public class PheuFire extends BossEntity{
         Point pp = Player.getPlayer().getPosition();
         double px = pp.getX() , py = pp.getY();
 
-		Point p = new Point(this.getPosition().getX() - px, this.getPosition().getY() - py + 100);
+		Point p = new Point(this.getPosition().getX() - px, this.getPosition().getY() - py);
 		double distance = Math.sqrt(p.getX() * p.getX() + p.getY() * p.getY());
 
         return distance;
@@ -197,7 +197,7 @@ public class PheuFire extends BossEntity{
 
 		double px = pp.getX() , py = pp.getY();
 
-		Point p = new Point(this.getPosition().getX() - px - 100, this.getPosition().getY() - py + 100);
+		Point p = new Point(this.getPosition().getX() - px, this.getPosition().getY() - py);
 		double distance = Math.sqrt(p.getX() * p.getX() + p.getY() * p.getY());
 
 		DataEntity data = this.getData();

@@ -1,11 +1,15 @@
 package entity;
 
+import java.util.ArrayList;
+
 import data.BaseObject;
 import data.DataEntity;
 import data.Point;
 import drawing.Description;
 import drawing.GameScreen;
+import dungeon.BossRoom;
 import dungeon.GenerateDungeon;
+import dungeon.Room;
 import equipment.BaseWeapon;
 import equipment.Pickaxe;
 import equipment.Shield;
@@ -17,6 +21,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import logic.Cooldownable;
 import logic.GameLogic;
+import logic.Hitbox;
 import logic.Main;
 import logic.RenderableHolder;
 import scene.SceneController;
@@ -140,7 +145,6 @@ public class Player extends Entity implements Cooldownable {
 			logic.addObject(slime);
 		}
 		if (InputUtility.getKeyPressed(KeyCode.Z) && !onCooldown()) {
-			SceneController.dungeon.increaseFloor(1);
 			Main.getLogic().nextFloor();
 		}
 	}
@@ -197,9 +201,46 @@ public class Player extends Entity implements Cooldownable {
 	}
 	
 	public void displayFloor(GraphicsContext gc) {
-		descriptionFloor.setText("Floor " + Integer.toString(GenerateDungeon.getCurrLevel()));
+		descriptionFloor.setText("Floor " + Integer.toString(GenerateDungeon.getCurrLevel() + 1));
 		descriptionFloor.draw(gc);
 	}
+
+	public void checkPlayerInBossRoom(){
+
+		int currLevel = GenerateDungeon.getCurrLevel();
+		ArrayList<Room> level = GenerateDungeon.getContainer().get(currLevel);
+
+		BossRoom bossRoom = (BossRoom) level.get(level.size() - 1);
+		if(bossRoom.isVisited()) return;
+		
+		double rect1X1 = bossRoom.getPosition().getX();
+		double rect1Y1 = bossRoom.getPosition().getY();
+		double rect1X2 = bossRoom.getPosition().getX() + bossRoom.getWidth();
+		double rect1Y2 = bossRoom.getPosition().getY() + bossRoom.getHeight();
+		
+		double X1 = this.getPosition().getX();
+		double Y1 = this.getPosition().getY();
+		double X2 = this.getPosition().getX() + this.getWidth();
+		double Y2 = this.getPosition().getY() + this.getHeight();
+
+		// calculate the coordinates of the intersection rectangle
+		double xLeft = Math.max(rect1X1, X1);
+		double yTop = Math.max(rect1Y1, Y1);
+		double xRight = Math.min(rect1X2, X2);
+		double yBottom = Math.min(rect1Y2, Y2);
+
+		double intersectionArea = 0.0;
+		if (xRight > xLeft && yBottom > yTop) {
+			intersectionArea = (xRight - xLeft) * (yBottom - yTop);
+		}
+
+		if(intersectionArea >= this.getWidth() * this.getHeight()){
+			bossRoom.playerEntry();
+		}
+
+	}
+
+	//Getter setter
 
 	public static Player getPlayer() {
 		return player;

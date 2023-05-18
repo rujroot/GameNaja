@@ -8,6 +8,7 @@ import data.DataEntity;
 import data.Point;
 import dungeon.Direction;
 import dungeon.GenerateDungeon;
+import dungeon.Ladder;
 import dungeon.Path;
 import dungeon.Room;
 import entity.boss.BossEntity;
@@ -83,12 +84,7 @@ public abstract class Entity extends BaseObject {
 		
 		for(BaseObject object : allObject){
 
-			// if(object instanceof BossEntity){
-			// 	Hitbox bossHitbox = ((BossEntity) object).getBossHitbox();
-			// 	Hitbox B = new Hitbox(object.getPosition(), bossHitbox.getWidth(), bossHitbox.getLength());
-			// 	if(A.isIntersect(B)) return false;
-			// }else 
-			if((object instanceof BaseOre && object.isVisible()) ){
+			if((object instanceof BaseOre && object.isVisible())){
 				Hitbox B = new Hitbox(object.getPosition(), object.getWidth(), object.getHeight());
 				if(A.isIntersect(B)) return false;
 			}

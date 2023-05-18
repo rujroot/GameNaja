@@ -13,8 +13,8 @@ public class GenerateDungeon {
 	private static ArrayList<ArrayList<Room>> container = new ArrayList<ArrayList<Room>>();
 	
 	public GenerateDungeon(int level){
-		this.setLevel(level);
-		increaseFloor(level);
+		GenerateDungeon.level = level;
+		increaseFloor(1);
 		// generate ore first level
 		for(Room room : container.get(0)){
 			for(BaseOre ore : room.getOres()){
@@ -27,7 +27,7 @@ public class GenerateDungeon {
 		for(int i = 0; i < increase; ++i) {
 			ArrayList<Room> toPush = new ArrayList<Room>();
 			
-			int amountRoom = (int)(Math.random()*10 + 5);
+			int amountRoom = 2;//(int)(Math.random()*10 + 2);
 			
 			// create first room
 			Room rootRoom = new Room();
@@ -59,11 +59,37 @@ public class GenerateDungeon {
 				connectRoom.getConnectRoom().put(direction, room);
 				toPush.add(room);
 			}
+			generateBossRoom(rootRoom, toPush);
 			
 			// Push the generate level to container
 			container.add(toPush);
 		}
-		this.setLevel(this.getLevel()+increase);
+		level = level + increase;
+	}
+
+	public void generateBossRoom(Room rootRoom, ArrayList<Room> toPush){
+
+		Pair<Room, Direction> toConnectRoom = findRoom(rootRoom);
+		BossRoom room = new BossRoom(toConnectRoom.getKey(), toConnectRoom.getValue());
+		
+		while(!isLegalCreate(room, toPush)) {
+			room = new BossRoom(toConnectRoom.getKey(), toConnectRoom.getValue());
+			toConnectRoom = findRoom(rootRoom);
+		}
+		
+		Direction direction = toConnectRoom.getValue();
+		Room connectRoom = toConnectRoom.getKey();
+
+		//visible path
+		connectRoom.getConnectPath().get(direction).setVisible(true);
+
+		// generate Boss
+
+		// set connect room
+		room.getConnectRoom().put(direction.getOpposite(), connectRoom);
+		connectRoom.getConnectRoom().put(direction, room);
+		toPush.add(room);
+
 	}
 
 	public Pair<Room, Direction> findRoom(Room currRoom) {
@@ -137,10 +163,6 @@ public class GenerateDungeon {
 		return level;
 	}
 
-	public void setLevel(int level) {
-		this.level = level;
-	}
-	
 	public static int getCurrLevel() {
 		return currLevel;
 	}

@@ -8,6 +8,7 @@ import data.DataOre;
 import data.Point;
 import drawing.GameScreen;
 import dungeon.GenerateDungeon;
+import dungeon.Ladder;
 import dungeon.Room;
 import entity.Entity;
 import entity.Monster;
@@ -15,6 +16,7 @@ import entity.Npc;
 import entity.Player;
 import entity.Shopkeeper;
 import entity.boss.BossEntity;
+import entity.miniBoss.MiniBossEntity;
 import equipment.projectile.Arrow;
 import inventory.Inventory;
 import item.Item;
@@ -45,6 +47,10 @@ public class GameLogic {
 					Entity entity = (Entity) object;
 					
 					if(entity.getData().getHp() <= 0) {
+						if(entity instanceof MiniBossEntity || entity instanceof BossEntity){
+							Ladder ladder = new Ladder(entity.getPosition());
+							this.addObject(ladder);
+						}
 						entity.setDestroyed(true);
 						gameObjectContainer.remove(entity);
 					}
@@ -57,6 +63,8 @@ public class GameLogic {
 					}
 					
 					if(entity instanceof Player) {
+						Player player = (Player) entity;
+						player.checkPlayerInBossRoom();
 						if(entity.getData().getHp()<=0) {
 							RenderableHolder.sound.stop();
 							SceneController sceneController = new SceneController();
@@ -110,6 +118,10 @@ public class GameLogic {
 				}
 			}
 	
+			else if(object instanceof Ladder){
+				Ladder ladder = (Ladder) object;
+				ladder.updateInput();
+			}
 		}
 	}
 
@@ -126,6 +138,7 @@ public class GameLogic {
 	}
 
 	public void nextFloor(){
+		SceneController.dungeon.increaseFloor(1);
 		
 		//Get next dungeon
 		int currentLevel = GenerateDungeon.getCurrLevel();

@@ -18,6 +18,7 @@ import animation.AnimationController;
 import data.DataEntity;
 import data.Point;
 import dungeon.GenerateDungeon;
+import dungeon.Ladder;
 import dungeon.Room;
 import entity.Npc;
 import entity.Player;
@@ -115,6 +116,10 @@ public class SceneController{
 		// FrostGuardain frostGuardain = new FrostGuardain("FrostGuardain", new DataEntity(100, 1, 1, 12));
 		// frostGuardain.setPosition(new Point(firstRoom.getPosition().getX() + 300, firstRoom.getPosition().getY() + 300 ));
 		// logic.addObject(frostGuardain);
+
+		// Ladder ladder = new Ladder(null);
+		// ladder.setPosition(new Point(firstRoom.getPosition().getX() + 300, firstRoom.getPosition().getY() + 300 ));
+		// logic.addObject(ladder);
 
 		AnimationController animationController = new AnimationController();
 		
