@@ -24,6 +24,8 @@ import entity.Player;
 import entity.Shopkeeper;
 import entity.boss.FrostGuardain;
 import entity.boss.PheuFire;
+import entity.miniBoss.DarkSpirit;
+import entity.miniBoss.GiantGoblin;
 import input.InputUtility;
 import javafx.animation.AnimationTimer;
 import javafx.scene.layout.StackPane;
@@ -74,7 +76,6 @@ public class SceneController{
 		Player player = new Player("Player", 50, 50, new DataEntity(25, 10000, 10000, 10));
 		logic = new GameLogic();
 		dungeon = new GenerateDungeon(1);
-
 		
 		stage = Main.stage;
 		gameScreen = new GameScreen(1400,800);
@@ -103,10 +104,18 @@ public class SceneController{
 		// demonslime.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
 		// logic.addObject(demonslime);
 
-		FrostGuardain frostGuardain = new FrostGuardain("FrostGuardain", new DataEntity(100, 1, 1, 12));
-		frostGuardain.setPosition(new Point(firstRoom.getPosition().getX() + 300, firstRoom.getPosition().getY() + 300 ));
-		logic.addObject(frostGuardain);
-		//stage.show();
+		// GiantGoblin goblin = new GiantGoblin("GiantGoblin", 0, 0, new DataEntity(100, 1, 1, 12));
+		// goblin.setPosition(new Point(firstRoom.getPosition().getX() + 300, firstRoom.getPosition().getY() + 300 ));
+		// logic.addObject(goblin);
+
+		// DarkSpirit darkSpirit = new DarkSpirit("DarkSpirit", 0, 0, new DataEntity(100, 1, 1, 12));
+		// darkSpirit.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
+		// logic.addObject(darkSpirit);
+
+		// FrostGuardain frostGuardain = new FrostGuardain("FrostGuardain", new DataEntity(100, 1, 1, 12));
+		// frostGuardain.setPosition(new Point(firstRoom.getPosition().getX() + 300, firstRoom.getPosition().getY() + 300 ));
+		// logic.addObject(frostGuardain);
+
 		AnimationController animationController = new AnimationController();
 		
 		AnimationTimer animation = new AnimationTimer() {
