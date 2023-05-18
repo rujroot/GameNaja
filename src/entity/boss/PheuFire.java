@@ -80,7 +80,6 @@ public class PheuFire extends BossEntity{
     }
 
     private void playAction(String status) {
-        System.out.println(status);
         if(status.equals("Attacking10") || status.equals("Attacking11") || status.equals("Attacking12") || status.equals("wait1")){
             playAttackP1();
         }else if(status.equals("Attacking20") || status.equals("Attacking21") || status.equals("Attacking22") || status.equals("wait2")){
@@ -99,6 +98,31 @@ public class PheuFire extends BossEntity{
             actionDone = true;
         }
 
+    }
+    
+    public void playAttackP1(){
+        if(this.getDistant() > 50 && !status.equals("wait1")){
+            follow();
+        }else if(status.equals("wait1")){
+            cooldownTime = 1000;
+            long currentTime = System.currentTimeMillis();
+            if (currentTime - lastClickTime > cooldownTime) {
+                count++;
+                status = "Attacking1" + Integer.valueOf(count);
+            }
+        }else{
+            status = "wait1";
+            imageAnimation[1].setStop(false);
+            animationManager.addAnimation(imageAnimation[1]);
+            
+            Point pos = this.getPosition();
+            CircleAttackAnimation circle = new CircleAttackAnimation(new Point(pos.getX() - 120, pos.getY() + 250), 150, 3);
+            AnimationController.animations.add(circle);
+            Main.getLogic().addObject(circle);
+
+            long currentTime = System.currentTimeMillis();
+            lastClickTime = currentTime;
+        }
     }
 
     public void playAttackP2(){
@@ -155,37 +179,12 @@ public class PheuFire extends BossEntity{
         }
     }
 
-    public void playAttackP1(){
-        if(this.getDistant() > 50 && !status.equals("wait1")){
-            follow();
-        }else if(status.equals("wait1")){
-            cooldownTime = 1000;
-            long currentTime = System.currentTimeMillis();
-            if (currentTime - lastClickTime > cooldownTime) {
-                count++;
-                status = "Attacking1" + Integer.valueOf(count);
-            }
-        }else{
-            status = "wait1";
-            imageAnimation[1].setStop(false);
-            animationManager.addAnimation(imageAnimation[1]);
-            
-            Point pos = this.getPosition();
-            CircleAttackAnimation circle = new CircleAttackAnimation(new Point(pos.getX() - 120, pos.getY() + 250), 150, 3);
-            AnimationController.animations.add(circle);
-            Main.getLogic().addObject(circle);
-
-            long currentTime = System.currentTimeMillis();
-            lastClickTime = currentTime;
-        }
-    }
-
     public double getDistant(){
 
         Point pp = Player.getPlayer().getPosition();
         double px = pp.getX() , py = pp.getY();
 
-		Point p = new Point(this.getPosition().getX() - px - 50, this.getPosition().getY() - py + 100);
+		Point p = new Point(this.getPosition().getX() - px, this.getPosition().getY() - py + 100);
 		double distance = Math.sqrt(p.getX() * p.getX() + p.getY() * p.getY());
 
         return distance;

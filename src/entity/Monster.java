@@ -5,7 +5,6 @@ import data.Point;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
-import javafx.scene.paint.Color;
 import logic.Cooldownable;
 import logic.Hitbox;
 
@@ -22,13 +21,7 @@ public class Monster extends Entity implements Cooldownable {
 	@Override
 	public void draw(GraphicsContext gc) {
 		Point pos = this.getPosition();
-
-		if(image != null){
-			gc.drawImage(image, pos.getX(), pos.getY(), image.getWidth(), image.getHeight());
-		}else{
-			gc.setFill(Color.FIREBRICK);
-			gc.fillRect(this.getPosition().getX(), this.getPosition().getY(), this.getWidth(), this.getHeight());
-		}
+		gc.drawImage(image, pos.getX(), pos.getY(), image.getWidth(), image.getHeight());
 		this.drawHP(gc);
 
 	}
