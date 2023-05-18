@@ -1,13 +1,13 @@
 package dungeon;
 
 public class Wall {
-    private double Up, Down, Left, Right;
+    private double up, down, left, right;
 
     public Wall(){
-        Up = 0;
-        Down = 0;
-        Left = 0;
-        Right = 0;
+        up = 0;
+        down = 0;
+        left = 0;
+        right = 0;
     }
 
     public void add(Direction direction, double width, double height){
@@ -23,35 +23,35 @@ public class Wall {
     }
 
     public double getUp() {
-        return Up;
+        return up;
     }
 
     public void setUp(double up) {
-        Up = up;
+        this.up = up;
     }
 
     public double getDown() {
-        return Down;
+        return down;
     }
 
     public void setDown(double down) {
-        Down = down;
+        this.down = down;
     }
 
     public double getLeft() {
-        return Left;
+        return left;
     }
 
     public void setLeft(double left) {
-        Left = left;
+        this.left = left;
     }
 
     public double getRight() {
-        return Right;
+        return right;
     }
 
     public void setRight(double right) {
-        Right = right;
+        this.right = right;
     }
 
     
