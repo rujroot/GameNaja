@@ -157,8 +157,8 @@ public class Player extends Entity implements Cooldownable {
 		inventory.addItem(new Pickaxe());
 		inventory.addItem(new Shield());
 		inventory.addItem(new Punch());
-		inventory.addItem(new Bow(30.0, 10.0));
-		inventory.addItem(new Wand(30.0, 10.0));
+		inventory.addItem(new Bow());
+		inventory.addItem(new Wand());
 		inventory.selectIndex(0);
 		this.setEquipment(inventory.getObject(0));
 

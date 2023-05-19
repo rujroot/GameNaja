@@ -7,12 +7,14 @@ import data.DataEntity;
 import entity.Player;
 import javafx.scene.canvas.GraphicsContext;
 
-public class PunchMonster extends Melee {
-    public PunchMonster() {
+public class DarkSpiritAttack extends Melee {
+    
+    public DarkSpiritAttack() {
 		super();
-		this.setAttackDamage(1);
+		this.setAttackDamage(0.5);
 		this.setAttackRange(200);
 		this.setAttackDegree(100);
+        this.setCooldownTime(1000);
 	}
 
     @Override
@@ -30,5 +32,4 @@ public class PunchMonster extends Melee {
 			}
 		}
 	}
-
 }

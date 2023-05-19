@@ -6,8 +6,8 @@ import logic.RenderableHolder;
 public class Wand extends Gun {
 	private WritableImage image = new WritableImage(RenderableHolder.equipment1.getPixelReader(), 162*2, 66*2, (191-162)*2, (94-66)*2);
 
-	public Wand(double width, double height) {
-		super(width, height,100);
+	public Wand() {
+		super();
 		this.setImage(image);
 
 		this.setCooldownTime(200);

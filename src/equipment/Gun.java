@@ -4,9 +4,11 @@ import data.Point;
 import entity.Entity;
 import entity.Npc;
 import entity.Player;
+import entity.Skeleton;
 import entity.Team;
 import equipment.projectile.Arrow;
 import input.InputUtility;
+import javafx.scene.paint.Color;
 import logic.Cooldownable;
 import logic.Main;
 
@@ -16,8 +18,8 @@ public abstract class Gun extends BaseWeapon implements Cooldownable{
 	private double lastClickTime;
     private Arrow arrow;
 
-    public Gun(double width, double height, double attackDamage) {
-        super(width, height, attackDamage);
+    public Gun() {
+        super(0, 0, 1);
     }
 
     public void attack() {
@@ -29,18 +31,26 @@ public abstract class Gun extends BaseWeapon implements Cooldownable{
                 double mouseX = InputUtility.mouseX, mouseY = InputUtility.mouseY;
                 Point vector = new Point(mouseX - pos.getX(), mouseY - pos.getY());
                 vector.unit();
-                vector.multiply(10);
+                vector.multiply(30);
 
                 // damge, speed, pos
-                Arrow arrow = new Arrow(10.0 , 10.0 ,1, vector, this.getPosition(), Team.Player);
+                Arrow arrow = new Arrow(10.0 , 10.0 , this.getAttackDamage(), vector, this.getPosition(), Team.Player);
                 Main.getLogic().addObject(arrow);
-            }else{
+            }else if(entity instanceof Npc){
                 // find direction to shoot
                 Point vector = ((Npc) entity).getEntityVector();
                 vector.multiply(30);
 
                 // damge, speed, pos
                 Arrow arrow = new Arrow(10.0 , 10.0 ,1, vector, this.getPosition(), Team.Player);
+                Main.getLogic().addObject(arrow);
+            }else if(entity instanceof Skeleton){
+                Point vector = ((Skeleton) entity).getEntityVector();
+                vector.multiply(30);
+
+                // damge, speed, pos
+                Arrow arrow = new Arrow(15.0 ,15.0 ,5, vector, this.getPosition(), Team.Monster);
+                arrow.setColor(Color.WHITE);
                 Main.getLogic().addObject(arrow);
             }
 		}

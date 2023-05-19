@@ -103,15 +103,15 @@ public class Room implements IRenderable {
 
 			Monster monster;
 			if(type.equals(MonsterType.DEMON)){
-				monster = new Demon("Demon", 0, 0, new DataEntity(20, 5, 5, 10));
+				monster = new Demon("Demon", 0, 0, new DataEntity(10, 5, 5, 10));
 			}else if(type.equals(MonsterType.GOBLIN)){
-				monster = new Goblin("Goblin", 0, 0, new DataEntity(20, 5, 5, 10));
+				monster = new Goblin("Goblin", 0, 0, new DataEntity(10, 5, 5, 15));
 			}else if(type.equals(MonsterType.SKELETON)){
-				monster = new Skeleton("Skeleton", 0, 0, new DataEntity(20, 5, 5, 10));
+				monster = new Skeleton("Skeleton", 0, 0, new DataEntity(20, 5, 5, 5));
 			}else if(type.equals(MonsterType.SLIME)){
 				monster = new Slime("Slime", 0, 0, new DataEntity(20, 5, 5, 10));
 			}else{
-				monster = new Zombie("Zombie", 0, 0, new DataEntity(20, 5, 5, 10));
+				monster = new Zombie("Zombie", 0, 0, new DataEntity(20, 5, 5, 7));
 			}
 
 			Point newPos = new Point(position.getX() + (Math.random() * (width - monster.getWidth()) ), 

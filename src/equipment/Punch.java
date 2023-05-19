@@ -18,14 +18,6 @@ public class Punch extends Melee {
 		this.setAttackRange(100);
 		this.setAttackDegree(100);
 	}
-	
-	public Punch(double attackDamage, double attackRange, double attackDegree) {
-		super();
-		this.setImage(image);
-		this.setAttackDamage(attackDamage);
-		this.setAttackRange(attackRange);
-		this.setAttackDegree(attackDegree);
-	}
 
 	@Override
 	public void attackAbility(ArrayList<BaseObject> intersectObjects) {

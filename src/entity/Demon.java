@@ -1,10 +1,14 @@
 package entity;
 
+import animation.AnimationController;
+import animation.ElementAttackAnimation;
 import data.DataEntity;
 import data.Point;
+import javafx.scene.paint.Color;
+import logic.Main;
 import logic.RenderableHolder;
 
-public class Demon extends Monster {
+public class Demon extends Monster{
 	private int magicAttack;
 	
 	public Demon(String name, double width, double height, DataEntity data) {
@@ -15,8 +19,33 @@ public class Demon extends Monster {
 
 	@Override
 	public void attack() {
-		//Enemy.setHp(Enemy.getHp()-this.getAtk());
-		super.attack();
+		
+		if(this.getTargetEntity() == null) return;
+
+		Entity targetEntity = this.getTargetEntity();
+
+		double findingRange = 300;
+		double attackRange = 400;
+		
+		if(distance(targetEntity.getPosition()) <= findingRange){
+			follow(targetEntity);
+		}
+		if(distance(targetEntity.getPosition()) <= attackRange){
+			this.setCooldownTime(1000);
+			if(!onCooldown()) summonMagicArrow();
+		}
+	}
+
+	public void summonMagicArrow(){
+		ElementAttackAnimation element = new ElementAttackAnimation(this.getPosition(), 
+											1000, 
+											4, 
+											100, 
+											new Point(this.getWidth()/3, this.getHeight()/3));
+		element.setColor(Color.BLACK);
+		element.setDamage(10);
+		AnimationController.animations.add(element);
+		Main.getLogic().addObject(element);
 	}
 
 	public int getMagicAttack() {

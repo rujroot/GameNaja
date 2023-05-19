@@ -19,16 +19,6 @@ public class Shield extends Melee {
 		this.setAttackDegree(80);
 	}
 
-	
-	
-	public Shield( double attackDamage, double attackRange, double attackDegree) {
-		super();
-		this.setImage(image);
-		this.setAttackDamage(attackDamage);
-		this.setAttackRange(attackRange);
-		this.setAttackDegree(attackDegree);
-	}
-
 	@Override
 	public void attackAbility(ArrayList<BaseObject> intersectObjects) {
 		for (BaseObject object : intersectObjects) {

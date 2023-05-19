@@ -3,16 +3,18 @@ package equipment;
 import java.util.ArrayList;
 
 import data.BaseObject;
-import data.DataEntity;
 import entity.Player;
 import javafx.scene.canvas.GraphicsContext;
+import data.DataEntity;
 
-public class PunchMonster extends Melee {
-    public PunchMonster() {
+public class GaintGoblinAttack extends Melee {
+
+    public GaintGoblinAttack() {
 		super();
-		this.setAttackDamage(1);
-		this.setAttackRange(200);
-		this.setAttackDegree(100);
+		this.setAttackDamage(2);
+		this.setAttackRange(300);
+		this.setAttackDegree(180);
+        this.setCooldownTime(1000);
 	}
 
     @Override
@@ -30,5 +32,5 @@ public class PunchMonster extends Melee {
 			}
 		}
 	}
-
+    
 }

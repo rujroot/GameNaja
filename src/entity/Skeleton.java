@@ -1,6 +1,8 @@
 package entity;
 
 import data.DataEntity;
+import data.Point;
+import equipment.SkeletionBow;
 import javafx.scene.image.WritableImage;
 import logic.RenderableHolder;
 
@@ -12,6 +14,7 @@ public class Skeleton extends Monster {
 		super(name, Height, Width, data);
 		this.setProtection(protection);
 		this.setImage(image);
+		this.setEquipment(new SkeletionBow());
 	}
 
 	public int getProtection() {
@@ -22,11 +25,34 @@ public class Skeleton extends Monster {
 		this.protection = protection;
 	}
 
+	public Point getEntityVector(){
+		Point pos = this.getPosition();
+		Entity targetEntity = this.getTargetEntity();
+
+		double posX = targetEntity.getPosition().getX();
+		double posY = targetEntity.getPosition().getY();
+		Point vector = new Point(posX - pos.getX(), posY - pos.getY());
+		vector.unit();
+
+		return vector;
+	}
+
 
 	@Override
 	public void attack() {
-		// TODO Auto-generated method stub
-		super.attack();
+		if(this.getTargetEntity() == null) return;
+
+		Entity targetEntity = this.getTargetEntity();
+
+		double findingRange = 400;
+		double attackRange = 400;
+		
+		if(distance(targetEntity.getPosition()) <= findingRange){
+			follow(targetEntity);
+		}
+		if(distance(targetEntity.getPosition()) <= attackRange){
+			this.getEquipment().attack();
+		}
 	}
 
 

@@ -60,7 +60,15 @@ public class GameLogic {
 							BossEntity bossEntity = (BossEntity) object;
 							bossEntity.attack();
 							continue;
-						} 
+						}
+
+						if(entity instanceof MiniBossEntity){
+							MiniBossEntity miniBossEntity = (MiniBossEntity) object;
+							miniBossEntity.findNearestEntity(gameObjectContainer);
+							miniBossEntity.attack();
+							miniBossEntity.specialAttack();
+							continue;
+						}
 						
 						Monster monster = (Monster) entity;
 						monster.findNearestEntity(gameObjectContainer);

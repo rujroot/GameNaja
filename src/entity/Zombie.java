@@ -19,7 +19,19 @@ public class Zombie extends Monster {
 
 	@Override
 	public void attack() {
-		super.attack();
+		if(this.getTargetEntity() == null) return;
+
+		Entity targetEntity = this.getTargetEntity();
+
+		double findingRange = 600;
+		double attackRange = 100;
+		
+		if(distance(targetEntity.getPosition()) <= findingRange){
+			follow(targetEntity);
+		}
+		if(distance(targetEntity.getPosition()) <= attackRange){
+			this.getEquipment().attack();
+		}
 	}
 	
 	public double getPoisonDamage() {
@@ -29,9 +41,5 @@ public class Zombie extends Monster {
 	public void setPoisonDamage(double poisonDamage) {
 		this.poisonDamage = poisonDamage;
 	}
-
-
-
-	
 
 }
