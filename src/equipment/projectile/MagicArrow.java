@@ -1,7 +1,6 @@
 package equipment.projectile;
 
 import data.Point;
-import entity.Entity;
 import entity.Team;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

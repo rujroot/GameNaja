@@ -39,4 +39,8 @@ public class AnimationController {
 		}
     }
 
+    public void reset() {
+        animations = new ArrayList<>();
+    }
+
 }

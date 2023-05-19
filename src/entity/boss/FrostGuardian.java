@@ -75,8 +75,8 @@ public class FrostGuardian extends BossEntity {
         }
         actionDone = false;
         // Random Action to play
-        String[] action =  {"Attacking10", "Attacking20", "Attacking30"};
-        status = "Attacking20";//action[(int)(Math.random() * 3)];
+        String[] action = {"Attacking10", "Attacking20", "Attacking30"};
+        status = action[(int)(Math.random() * 3)];
         
     }
 

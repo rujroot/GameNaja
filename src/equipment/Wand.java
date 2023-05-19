@@ -1,6 +1,5 @@
 package equipment;
 
-import equipment.projectile.Arrow;
 import javafx.scene.image.WritableImage;
 import logic.RenderableHolder;
 

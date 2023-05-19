@@ -42,7 +42,6 @@ public class SceneController{
 	private Image dungeonImage = new Image(getClass().getResourceAsStream("Dungeon.jpg"));
 	private Image gameOver = new Image(getClass().getResourceAsStream("GameOverImage.jpg"));
 	
-	
 	public void switchToStartGameScene(ActionEvent event) throws IOException {
 		
 		Parent root = (Parent) FXMLLoader.load(getClass().getResource("/scene/Start.fxml"));
@@ -136,9 +135,9 @@ public class SceneController{
 		// darkSpirit.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
 		// logic.addObject(darkSpirit);
 
-		FrostGuardian frostGuardain = new FrostGuardian("FrostGuardain", new DataEntity(100, 1, 1, 12));
-		frostGuardain.setPosition(new Point(firstRoom.getPosition().getX() + 300, firstRoom.getPosition().getY() + 300 ));
-		logic.addObject(frostGuardain);
+		// FrostGuardian frostGuardain = new FrostGuardian("FrostGuardain", new DataEntity(100, 1, 1, 12));
+		// frostGuardain.setPosition(new Point(firstRoom.getPosition().getX() + 300, firstRoom.getPosition().getY() + 300 ));
+		// logic.addObject(frostGuardain);
 
 		// Ladder ladder = new Ladder(null);
 		// ladder.setPosition(new Point(firstRoom.getPosition().getX() + 300, firstRoom.getPosition().getY() + 300 ));
@@ -148,7 +147,10 @@ public class SceneController{
 		
 		AnimationTimer animation = new AnimationTimer() {
 			public void handle(long now) {
-				if(SceneController.gameStop) return;
+				if(SceneController.gameStop){
+					animationController.reset();
+					return;
+				} 
 
 				try {
 					gameScreen.updatePlayer();

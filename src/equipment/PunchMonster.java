@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import data.BaseObject;
 import data.DataEntity;
-import entity.Monster;
 import entity.Player;
 import javafx.scene.canvas.GraphicsContext;
 

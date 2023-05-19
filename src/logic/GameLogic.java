@@ -17,7 +17,6 @@ import entity.Shopkeeper;
 import entity.Team;
 import entity.boss.BossEntity;
 import entity.miniBoss.MiniBossEntity;
-import equipment.projectile.Arrow;
 import equipment.projectile.BaseProjectile;
 import inventory.Inventory;
 import item.Item;
