@@ -57,10 +57,6 @@ public abstract class Melee extends BaseWeapon implements Cooldownable{
         double cy = Math.max(rectY1, Math.min(centerY, rectY2));
 
         intersectDistant = Math.sqrt(Math.pow(centerX - cx, 2) + Math.pow(centerY - cy, 2)) <= this.getAttackRange() / 2;
-        // intersectDistant = intersectDistant || distant(rectX1, rectY1, centerX , centerY) <= this.getAttackRange() / 2;
-        // intersectDistant = intersectDistant || distant(rectX2, rectY1, centerX , centerY) <= this.getAttackRange() / 2;
-        // intersectDistant = intersectDistant || distant(rectX1, rectY2, centerX , centerY) <= this.getAttackRange() / 2;
-        // intersectDistant = intersectDistant || distant(rectX2, rectY2, centerX , centerY) <= this.getAttackRange() / 2;
 
         // Check angle <= attackDegree
         Point posEntity = this.getEntity().getPosition();
@@ -87,7 +83,6 @@ public abstract class Melee extends BaseWeapon implements Cooldownable{
     public void attack(){
 
         if(onCooldown()) return;
-        
 
         Entity entity = this.getEntity();
         double startAt = 0;

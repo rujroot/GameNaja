@@ -56,10 +56,13 @@ public class GameLogic {
 					}
 
 					if(entity instanceof Monster) {
+						if(entity instanceof BossEntity){
+							BossEntity bossEntity = (BossEntity) object;
+							bossEntity.attack();
+							continue;
+						} 
+						
 						((Monster) entity).follow();
-						if(((Monster) entity).isIntersectPlayer()) {
-							//((Monster) entity).attack();
-						}
 					}
 					
 					if(entity instanceof Player) {
@@ -88,11 +91,7 @@ public class GameLogic {
 						npc.findNearestMonster(gameObjectContainer);
 						npc.doBehavior();
 					}
-				
-					if(object instanceof BossEntity){
-						BossEntity bossEntity = (BossEntity) object;
-						bossEntity.attack();
-					}
+			
 				}
 			
 			else if(object instanceof Arrow){

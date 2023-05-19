@@ -74,5 +74,9 @@ public abstract class BaseObject implements IRenderable{
     public void setCanCollide(boolean canCollide) {
         this.canCollide = canCollide;
     }
+
+    public DataEntity getData() {
+        return null;
+    }
     
 }

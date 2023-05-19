@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import data.BaseObject;
 import data.DataEntity;
 import entity.Monster;
+import entity.boss.BossEntity;
 import javafx.scene.image.WritableImage;
 import logic.RenderableHolder;
 
