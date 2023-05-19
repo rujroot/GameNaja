@@ -13,7 +13,7 @@ public abstract class Gun extends BaseWeapon implements Cooldownable{
 
     private double cooldownTime;
 	private double lastClickTime;
-    Arrow arrow;
+    private Arrow arrow;
 
     public Gun(double width, double height, double attackDamage) {
         super(width, height, attackDamage);
