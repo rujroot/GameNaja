@@ -134,7 +134,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
 
     public void initShopBuy() throws CloneNotSupportedException{
 
-        allBuyItem.add(new Knife(100, 100, 1, 100, 100));
+        allBuyItem.add(new Knife(1, 100, 100));
         
         for(int i = 0; i < 4; ++i){
             int randNum = 0;//(int)(Math.random() * maxIndex);

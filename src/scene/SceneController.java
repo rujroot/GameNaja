@@ -32,53 +32,77 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.layout.StackPane;
 
 public class SceneController{
-	private Stage stage;
-	private Scene scene;
-	private Parent root;
+
 	public static GameLogic logic;
 	public static GameScreen gameScreen;
 	public static GenerateDungeon dungeon; 
-	public ImageView myImageView;
-	public Image dungeonImage = new Image(getClass().getResourceAsStream("Dungeon.jpg"));
-	public Image gameOver = new Image(getClass().getResourceAsStream("GameOverImage.jpg"));
+	public static boolean gameStop = false;
+
+	private ImageView myImageView;
+	private Image dungeonImage = new Image(getClass().getResourceAsStream("Dungeon.jpg"));
+	private Image gameOver = new Image(getClass().getResourceAsStream("GameOverImage.jpg"));
+	
 	
 	public void switchToStartGameScene(ActionEvent event) throws IOException {
 		
-		root = (Parent) FXMLLoader.load(getClass().getResource("/scene/Start.fxml"));
-		stage = Main.stage;
-		scene = new Scene(root);
+		Parent root = (Parent) FXMLLoader.load(getClass().getResource("/scene/Start.fxml"));
+		Scene scene = new Scene(root);
+		Stage stage = Main.stage;
+
 		stage.setScene(scene);
 		stage.setTitle("Game Naja eiei");
 		myImageView.setImage(dungeonImage);
 		stage.show();
 	}
 	
-	public void switchToGameOverScene(ActionEvent event) throws IOException {
-		root = (Parent) FXMLLoader.load(getClass().getResource("/scene/GameOver.fxml"));
-		stage = Main.stage;
-		scene = new Scene(root);
+	public void switchToGameOverScene() throws IOException {
+
+		gameStop = true;
+		
+		Parent root = (Parent) FXMLLoader.load(getClass().getResource("/scene/GameOver.fxml"));
+		Scene scene = new Scene(root);
+		Stage stage = Main.stage;
+
 		stage.setScene(scene);
 		stage.setTitle("Game Naja eiei");
 		stage.show();
+
 	}
-	
-	public void switchToGameOverScene2() throws IOException {
-		root = (Parent) FXMLLoader.load(getClass().getResource("/scene/GameOver.fxml"));
-		stage = Main.stage;
-		scene = new Scene(root);
+
+	public void restartGame() throws CloneNotSupportedException{
+		dungeon = new GenerateDungeon(1);
+
+		Room firstRoom = GenerateDungeon.getContainer().get(0).get(0);
+		Shopkeeper shopkeeper = new Shopkeeper("Shopkeeper", 50, 50, new DataEntity(999999, 1, 1, 0));
+		shopkeeper.setPosition(new Point(firstRoom.getPosition().getX() + 20, firstRoom.getPosition().getY() + 20 ));
+		logic.addObject(shopkeeper);
+
+		Player player = new Player("Player", 50, 50, new DataEntity(25, 10000, 10000, 10));
+		player.setPosition(new Point(firstRoom.getPosition().getX() + 100, firstRoom.getPosition().getY() + 100 ));
+		player.initInventory();
+		logic.addObject(player);
+
+		Stage stage = Main.stage;
+		StackPane root = new StackPane();
+		root.getChildren().add(gameScreen);
+		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setTitle("Game Naja eiei");
-		myImageView.setImage(gameOver);
-		stage.show();
+		gameScreen.requestFocus();
+
+		InputUtility.reset();
+		gameStop = false;
+
 	}
 	
 	public void switchToBodyGameScene() throws CloneNotSupportedException {
 
 		Player player = new Player("Player", 50, 50, new DataEntity(25, 10000, 10000, 10));
+
 		logic = new GameLogic();
 		dungeon = new GenerateDungeon(1);
-		
-		stage = Main.stage;
+
+		Stage stage = Main.stage;
 		gameScreen = new GameScreen(1400,800);
 		StackPane root = new StackPane();
 		root.getChildren().add(gameScreen);
@@ -98,7 +122,6 @@ public class SceneController{
 		
 		player.setPosition(new Point(firstRoom.getPosition().getX() + 100, firstRoom.getPosition().getY() + 100 ));
 		player.initInventory();
-		
 		logic.addObject(player);
 
 		// PheuFire demonslime = new PheuFire("PheuFire", new DataEntity(100, 1, 1, 12));
@@ -125,6 +148,8 @@ public class SceneController{
 		
 		AnimationTimer animation = new AnimationTimer() {
 			public void handle(long now) {
+				if(SceneController.gameStop) return;
+
 				try {
 					gameScreen.updatePlayer();
 				} catch (CloneNotSupportedException e) {
@@ -140,9 +165,9 @@ public class SceneController{
 		};
 		RenderableHolder.sound.setVolume(0.1);// 0.0 to 1.0 (min to man volume)
 		RenderableHolder.sound.play();
-		animation.start();	
+		animation.start();
+		
 	}
-
 
 	public static GameLogic getLogic() {
 		return logic;

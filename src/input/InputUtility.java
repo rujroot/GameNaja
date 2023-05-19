@@ -11,6 +11,12 @@ public class InputUtility {
 	private static boolean isLeftDown = false;
 	private static boolean isLeftClickedLastTick = false;
 	private static ArrayList<KeyCode> keyPressed = new ArrayList<>(); 
+
+	public static void reset(){
+		isLeftDown = false;
+		isLeftClickedLastTick = false;
+		keyPressed = new ArrayList<>(); 
+	}
 	
 	public static boolean getKeyPressed(KeyCode keycode) {
 		return keyPressed.contains(keycode);
@@ -23,7 +29,6 @@ public class InputUtility {
 		}else{
 			keyPressed.remove(keycode);
 		}
-		//System.out.println(keyPressed);
 	}
 	
 	public static void mouseLeftDown(){

@@ -12,16 +12,16 @@ import logic.RenderableHolder;
 public class Axe extends Melee{
 	private WritableImage image = new WritableImage(RenderableHolder.equipment1.getPixelReader(), 66, 4, (64-33)*2, (30-2)*2);
 
-	public Axe(double width, double height) {
-		super(width, height);
+	public Axe() {
+		super();
 		this.setImage(image);
 		this.setAttackDamage(100);
 		this.setAttackRange(100);
 		this.setAttackDegree(100);
 	}
 	
-	public Axe(double width, double height, double attackDamage, double attackRange, double attackDegree) {
-		super(width, height);
+	public Axe(double attackDamage, double attackRange, double attackDegree) {
+		super();
 		this.setImage(image);
 		this.setAttackDamage(attackDamage);
 		this.setAttackRange(attackRange);
