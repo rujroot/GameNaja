@@ -78,8 +78,8 @@ public class Shopkeeper extends Entity implements Cooldownable{
         slot[4].setDescription("0$");
     }
 
-    public void shopSell(int Index){
-        Item itemToSell = sellItem[Index];
+    public void shopSell(int index){
+        Item itemToSell = sellItem[index];
         if(itemToSell.getAmount() <= 0) return;
 
         Player player = Player.player;
@@ -152,11 +152,11 @@ public class Shopkeeper extends Entity implements Cooldownable{
 
     }
 
-    public void shopBuy(int Index){
+    public void shopBuy(int index){
         Player player = Player.player;
         double money = player.getMoney();
 
-        BaseObject object = buyWeapon[Index];
+        BaseObject object = buyWeapon[index];
 
         if(object instanceof BaseWeapon){
 
@@ -187,7 +187,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
         Point pos = this.getPosition();
 		gc.drawImage(image, pos.getX(), pos.getY(), image.getWidth() , image.getHeight());
 
-        if(inDistant() && currentUI == null){
+        if(inRange() && currentUI == null){
             gc.setFont(new Font("Arial", 24));
             gc.setFill(Color.BLACK);
             gc.setStroke(Color.WHITE);
@@ -197,7 +197,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
             gc.fillText("E", pos.getX() + 20, pos.getY() - 20, 24);
         }
 
-        if(!inDistant()){
+        if(!inRange()){
             currentUI = null;
             choose = "None";
             Player.player.setDescription("");
@@ -209,7 +209,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
         }
     }
 
-    public boolean inDistant(){
+    public boolean inRange(){
         Point playerPos = Player.player.getPosition();
         Point pos = this.getPosition();
 
@@ -218,7 +218,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
 
     public void updateInput(){
         // Player interact with this entity
-        if (InputUtility.getKeyPressed(KeyCode.E) && inDistant() && !onCooldown()){
+        if (InputUtility.getKeyPressed(KeyCode.E) && inRange() && !onCooldown()){
             if(choose.equals("None")){
                 choose = "Choose";
                 this.setCurrentUI(chooseUI);
@@ -245,7 +245,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
             }
 		}
 
-        if (InputUtility.getKeyPressed(KeyCode.Q) && inDistant() && !onCooldown()){
+        if (InputUtility.getKeyPressed(KeyCode.Q) && inRange() && !onCooldown()){
             if(choose.equals("Choose")){
                 currentUI = null;
                 choose = "None";
