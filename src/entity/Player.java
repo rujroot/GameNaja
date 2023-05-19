@@ -10,9 +10,6 @@ import drawing.GameScreen;
 import dungeon.BossRoom;
 import dungeon.GenerateDungeon;
 import dungeon.Room;
-import equipment.BaseWeapon;
-import equipment.Pickaxe;
-import equipment.Shield;
 import equipment.*;
 import input.InputUtility;
 import inventory.Inventory;
@@ -64,7 +61,7 @@ public class Player extends Entity implements Cooldownable {
 		return 360 - Math.toDegrees(startAt);
 	}
 
-	public void update() {
+	public void update() throws CloneNotSupportedException {
 		// Move Section
 		DataEntity data = this.getData();
 
@@ -121,6 +118,7 @@ public class Player extends Entity implements Cooldownable {
 		}
 
 		if (InputUtility.getKeyPressed(KeyCode.R) && !onCooldown()) {
+			if(this.getEquipment() instanceof Pickaxe) return;
 			inventory.removeItem(inventory.getUI().getSelectIndex());
 			this.setEquipment(inventory.getObject(inventory.getUI().getSelectIndex()));
 		}
@@ -155,10 +153,6 @@ public class Player extends Entity implements Cooldownable {
 		Main.getLogic().addObject(inventory);
 
 		inventory.addItem(new Pickaxe());
-		inventory.addItem(new Shield());
-		inventory.addItem(new Punch());
-		inventory.addItem(new Bow());
-		inventory.addItem(new Wand());
 		inventory.selectIndex(0);
 		this.setEquipment(inventory.getObject(0));
 

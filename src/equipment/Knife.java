@@ -14,9 +14,11 @@ public class Knife extends Melee{
     public Knife() {
 		super();
 		this.setImage(image);
-		this.setAttackDamage(100);
-		this.setAttackRange(100);
-		this.setAttackDegree(100);
+		this.setAttackDamage(2);
+		this.setAttackRange(150);
+		this.setAttackDegree(70);
+        this.setCooldownTime(100);
+        this.setValue(30);
 	}
 
     @Override

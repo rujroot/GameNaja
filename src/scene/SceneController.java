@@ -151,15 +151,16 @@ public class SceneController{
 
 				try {
 					gameScreen.updatePlayer();
+					gameScreen.paintLevel();
+					gameScreen.paintComponent();
+					animationController.run();
+					logic.logicUpdate();
+					RenderableHolder.getInstance().update();
+					InputUtility.updateInputState();
 				} catch (CloneNotSupportedException e) {
 					e.printStackTrace();
 				}
-				gameScreen.paintLevel();
-				gameScreen.paintComponent();
-				animationController.run();
-				logic.logicUpdate();
-				RenderableHolder.getInstance().update();
-				InputUtility.updateInputState();
+				
 			}
 		};
 		RenderableHolder.sound.setVolume(0.1);// 0.0 to 1.0 (min to man volume)

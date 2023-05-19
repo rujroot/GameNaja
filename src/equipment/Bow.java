@@ -11,7 +11,9 @@ public class Bow extends Gun {
 		super();
 		this.setImage(image);
 
+		this.setDamage(5);
 		this.setCooldownTime(500);
+		this.setValue(60);
 	}
 
 	@Override

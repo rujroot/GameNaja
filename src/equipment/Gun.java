@@ -2,6 +2,7 @@ package equipment;
 
 import data.Point;
 import entity.Entity;
+import entity.Monster;
 import entity.Npc;
 import entity.Player;
 import entity.Skeleton;
@@ -16,7 +17,8 @@ public abstract class Gun extends BaseWeapon implements Cooldownable{
 
     private double cooldownTime;
 	private double lastClickTime;
-    private Arrow arrow;
+    private double arrowWidth = 10, arrowHight = 10, damage = 1, speed = 30;
+    private Color color = Color.YELLOW;
 
     public Gun() {
         super(0, 0, 1);
@@ -31,26 +33,31 @@ public abstract class Gun extends BaseWeapon implements Cooldownable{
                 double mouseX = InputUtility.mouseX, mouseY = InputUtility.mouseY;
                 Point vector = new Point(mouseX - pos.getX(), mouseY - pos.getY());
                 vector.unit();
-                vector.multiply(30);
+                vector.multiply(this.getSpeed());
 
                 // damge, speed, pos
-                Arrow arrow = new Arrow(10.0 , 10.0 , this.getAttackDamage(), vector, this.getPosition(), Team.Player);
+                Arrow arrow = new Arrow(this.getArrowWidth() , this.getArrowHight() , this.getAttackDamage(), vector, this.getPosition(), Team.Player);
+                arrow.setDamage(this.getDamage());
+                arrow.setColor(this.getColor());
                 Main.getLogic().addObject(arrow);
             }else if(entity instanceof Npc){
                 // find direction to shoot
                 Point vector = ((Npc) entity).getEntityVector();
-                vector.multiply(30);
+                vector.multiply(this.getSpeed());
 
                 // damge, speed, pos
-                Arrow arrow = new Arrow(10.0 , 10.0 ,1, vector, this.getPosition(), Team.Player);
+                Arrow arrow = new Arrow(this.getArrowWidth() , this.getArrowHight() , this.getAttackDamage(), vector, this.getPosition(), Team.Player);
+                arrow.setDamage(this.getDamage());
+                arrow.setColor(this.getColor());
                 Main.getLogic().addObject(arrow);
-            }else if(entity instanceof Skeleton){
+            }else if(entity instanceof Monster){
                 Point vector = ((Skeleton) entity).getEntityVector();
-                vector.multiply(30);
+                vector.multiply(this.getSpeed());
 
                 // damge, speed, pos
-                Arrow arrow = new Arrow(15.0 ,15.0 ,5, vector, this.getPosition(), Team.Monster);
-                arrow.setColor(Color.WHITE);
+                Arrow arrow = new Arrow(this.getArrowWidth() , this.getArrowHight() , this.getAttackDamage(), vector, this.getPosition(), Team.Monster);
+                arrow.setDamage(this.getDamage());
+                arrow.setColor(this.getColor());
                 Main.getLogic().addObject(arrow);
             }
 		}
@@ -77,16 +84,44 @@ public abstract class Gun extends BaseWeapon implements Cooldownable{
         this.cooldownTime = cooldownTime;
     }
 
-    public Arrow getArrow() {
-        return arrow;
+    public double getArrowWidth() {
+        return arrowWidth;
     }
 
-    public void setArrow(Arrow arrow) {
-        this.arrow = arrow;
+    public void setArrowWidth(double arrowWidth) {
+        this.arrowWidth = arrowWidth;
     }
 
-    
+    public double getArrowHight() {
+        return arrowHight;
+    }
 
-    
-    
+    public void setArrowHight(double arrowHight) {
+        this.arrowHight = arrowHight;
+    }
+
+    public double getDamage() {
+        return damage;
+    }
+
+    public void setDamage(double damage) {
+        this.damage = damage;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+
 }

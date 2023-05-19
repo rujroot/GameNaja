@@ -3,6 +3,7 @@ package logic;
 import java.io.IOException;
 import java.util.ArrayList;
 import data.BaseObject;
+import data.DataEntity;
 import data.DataOre;
 import data.Point;
 import drawing.GameScreen;
@@ -40,7 +41,7 @@ public class GameLogic {
 	}
 	
 	//This method should run every sec
-	public void logicUpdate(){
+	public void logicUpdate() throws CloneNotSupportedException{
 		for (int i = gameObjectContainer.size() - 1; i >= 0; i--) {
 			BaseObject object = gameObjectContainer.get(i);
 			if(object instanceof Entity){
@@ -146,15 +147,15 @@ public class GameLogic {
 		}
 	}
 
-	public void nextFloor(){
+	public void nextFloor() throws CloneNotSupportedException{
+		this.clearObject();
 		SceneController.dungeon.increaseFloor(1);
 		
 		//Get next dungeon
 		int currentLevel = GenerateDungeon.getCurrLevel();
 		if(currentLevel >= GenerateDungeon.getLevel() - 1) return;
 		GenerateDungeon.setCurrLevel(currentLevel+ 1);
-		this.clearObject();
-
+		
 		//Get first room
 		ArrayList<Room> nextLevel = GenerateDungeon.getContainer().get(currentLevel + 1);
 		Room firstRoom = nextLevel.get(0);
@@ -165,6 +166,10 @@ public class GameLogic {
 				ore.setVisible(true);
 			}
 		}
+
+		Shopkeeper shopkeeper = new Shopkeeper("Shopkeeper", 50, 50, new DataEntity(999999, 1, 1, 0));
+		shopkeeper.setPosition(new Point(firstRoom.getPosition().getX() + 20, firstRoom.getPosition().getY() + 20 ));
+		Main.getLogic().addObject(shopkeeper);
 		
 		Player player = Player.getPlayer();
 		// Get postion to spawn

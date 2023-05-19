@@ -14,9 +14,11 @@ public class Punch extends Melee {
 	public Punch() {
 		super();
 		this.setImage(image);
-		this.setAttackDamage(100);
-		this.setAttackRange(100);
-		this.setAttackDegree(100);
+		this.setAttackDamage(10);
+		this.setAttackRange(150);
+		this.setAttackDegree(30);
+		this.setCooldownTime(700);
+		this.setValue(40);
 	}
 
 	@Override

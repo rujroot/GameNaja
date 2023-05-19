@@ -1,6 +1,7 @@
 package entity;
 
 import data.DataEntity;
+import equipment.BaseWeapon;
 import equipment.SlimeAttack;
 import javafx.scene.image.WritableImage;
 import logic.RenderableHolder;
@@ -13,6 +14,8 @@ public class Slime extends Monster{
 		this.setImage(image);
 
 		this.setEquipment(new SlimeAttack());
+		BaseWeapon weapon = this.getEquipment();
+		weapon.setAttackDamage(data.getAtk());
 	}
 	
 	@Override

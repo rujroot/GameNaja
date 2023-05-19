@@ -86,16 +86,16 @@ public class BossRoom extends Room{
 
     public void generateBoss(){
         int currLevel = GenerateDungeon.getCurrLevel() + 1;
-        System.out.println(currLevel);
+
         if(currLevel % 5 == 0){
             String[] type = {"Fire", "Frost"};
             String choose = type[(int) (Math.random() * 2)];
 
             BossEntity boss;
             if(choose.equals("First")){
-                boss = new PheuFire("PheuFire", new DataEntity(100, 1, 1, 12));
+                boss = new PheuFire("PheuFire", new DataEntity(currLevel * 20, 1, 1, 12));
             }else{
-                boss = new FrostGuardian("FrostGuardain", new DataEntity(100, 1, 1, 12));
+                boss = new FrostGuardian("FrostGuardain", new DataEntity(currLevel * 20, 1, 1, 12));
             }
 
             Point pos = this.getPosition();
@@ -107,9 +107,9 @@ public class BossRoom extends Room{
 
             MiniBossEntity miniBoss;
             if(choose.equals("Gaint")){
-                miniBoss = new GiantGoblin("GiantGoblin", 0, 0, new DataEntity(100, 1, 1, 12));
+                miniBoss = new GiantGoblin("GiantGoblin", 0, 0, new DataEntity(currLevel * 10, 1, 1, 12));
             }else{
-                miniBoss = new DarkSpirit("DarkSpirit", 0, 0, new DataEntity(100, 1, 1, 12));
+                miniBoss = new DarkSpirit("DarkSpirit", 0, 0, new DataEntity(currLevel * 10, 1, 1, 12));
             }
 
             Point pos = this.getPosition();

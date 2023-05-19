@@ -1,6 +1,7 @@
 package equipment;
 
 import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
 import logic.RenderableHolder;
 
 public class Wand extends Gun {
@@ -10,8 +11,11 @@ public class Wand extends Gun {
 		super();
 		this.setImage(image);
 
+		this.setDamage(1);
+		this.setColor(Color.WHITE);
+		this.setSpeed(15);
 		this.setCooldownTime(200);
-		//this.setArrow(new Arrow(width, height, height, position, position));
+		this.setValue(45);
 	}
 
 	@Override

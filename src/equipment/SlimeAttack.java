@@ -13,6 +13,7 @@ public class SlimeAttack extends Melee {
 		this.setAttackDamage(1);
 		this.setAttackRange(100);
 		this.setAttackDegree(50);
+		this.setCooldownTime(1000);
 	}
 
     @Override

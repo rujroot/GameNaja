@@ -4,6 +4,7 @@ import animation.AnimationController;
 import animation.ElementAttackAnimation;
 import data.DataEntity;
 import data.Point;
+import equipment.BaseWeapon;
 import javafx.scene.paint.Color;
 import logic.Main;
 import logic.RenderableHolder;
@@ -15,6 +16,8 @@ public class Demon extends Monster{
 		super(name, width, height, data);
 		this.setMagicAttack(magicAttack);
 		this.setImage(RenderableHolder.demon);
+		BaseWeapon weapon = this.getEquipment();
+		weapon.setAttackDamage(data.getAtk());
 	}
 
 	@Override
@@ -43,7 +46,7 @@ public class Demon extends Monster{
 											100, 
 											new Point(this.getWidth()/3, this.getHeight()/3));
 		element.setColor(Color.BLACK);
-		element.setDamage(10);
+		element.setDamage(this.getData().getAtk());
 		AnimationController.animations.add(element);
 		Main.getLogic().addObject(element);
 	}

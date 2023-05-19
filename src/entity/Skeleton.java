@@ -2,6 +2,7 @@ package entity;
 
 import data.DataEntity;
 import data.Point;
+import equipment.BaseWeapon;
 import equipment.SkeletionBow;
 import javafx.scene.image.WritableImage;
 import logic.RenderableHolder;
@@ -15,6 +16,8 @@ public class Skeleton extends Monster {
 		this.setProtection(protection);
 		this.setImage(image);
 		this.setEquipment(new SkeletionBow());
+		BaseWeapon weapon = this.getEquipment();
+		weapon.setAttackDamage(data.getAtk());
 	}
 
 	public int getProtection() {

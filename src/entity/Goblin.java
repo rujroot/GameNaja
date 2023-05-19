@@ -1,6 +1,7 @@
 package entity;
 
 import data.DataEntity;
+import equipment.BaseWeapon;
 import equipment.GoblinAttack;
 import javafx.scene.image.WritableImage;
 import logic.RenderableHolder;
@@ -12,6 +13,8 @@ public class Goblin extends Monster {
 		super(name, width, height, data);
 		this.setImage(image);
 		this.setEquipment(new GoblinAttack());
+		BaseWeapon weapon = this.getEquipment();
+		weapon.setAttackDamage(data.getAtk());
 	}
 	
 	@Override
