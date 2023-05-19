@@ -1,10 +1,10 @@
 package entity.boss;
 
 import data.DataEntity;
-import entity.Entity;
+import entity.Monster;
 import logic.Hitbox;
 
-public abstract class BossEntity extends Entity{
+public abstract class BossEntity extends Monster{
 
     private Hitbox bossHitbox;
 

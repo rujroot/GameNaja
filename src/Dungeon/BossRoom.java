@@ -1,15 +1,21 @@
 package dungeon;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import data.BaseObject;
 import data.DataEntity;
 import data.Point;
+import entity.Npc;
+import entity.Player;
 import entity.boss.BossEntity;
 import entity.boss.FrostGuardain;
 import entity.boss.PheuFire;
 import entity.miniBoss.DarkSpirit;
 import entity.miniBoss.GiantGoblin;
 import entity.miniBoss.MiniBossEntity;
+import inventory.Inventory;
+import item.Item;
 import logic.Main;
 
 public class BossRoom extends Room{
@@ -56,8 +62,26 @@ public class BossRoom extends Room{
 
         this.setVisited(true);
 
+        clearObj();
         generateBoss();
+    }
 
+    public void clearObj(){
+        ArrayList<BaseObject> gameObjectContainer = Main.getLogic().getGameObjectContainer();
+
+        for (int i = gameObjectContainer.size() - 1; i >= 0; i--) {
+            BaseObject object = gameObjectContainer.get(i);
+			if(object instanceof Player) continue;
+			if(object instanceof Inventory) continue;
+			if(object instanceof Item) continue;
+			if(object instanceof Npc) {
+                ((Npc) object).warpToEntity(Player.getPlayer());
+                continue;
+            }
+
+			object.setDestroyed(true);
+			gameObjectContainer.remove(object);
+        }
     }
 
     public void generateBoss(){

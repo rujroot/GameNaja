@@ -8,10 +8,14 @@ import data.Point;
 import entity.Entity;
 import entity.Npc;
 import entity.Player;
+import logic.Cooldownable;
 import logic.Main;
-public abstract class Melee extends BaseWeapon{
+
+public abstract class Melee extends BaseWeapon implements Cooldownable{
 
     private double attackRange, attackDegree;
+    private double cooldownTime = 300;
+	private double lastClickTime;
 
     public abstract void attackAbility(ArrayList<BaseObject> intersectObjects);
 
@@ -49,10 +53,10 @@ public abstract class Melee extends BaseWeapon{
         double centerX = entity.getPosition().getX() + entity.getWidth() / 2;
         double centerY = entity.getPosition().getY() + entity.getHeight() / 2;
 
-        intersectDistant = intersectDistant || distant(rectX1, rectY1, centerX , centerY) <= this.getAttackRange() / 2;
-        intersectDistant = intersectDistant || distant(rectX2, rectY1, centerX , centerY) <= this.getAttackRange() / 2;
-        intersectDistant = intersectDistant || distant(rectX1, rectY2, centerX , centerY) <= this.getAttackRange() / 2;
-        intersectDistant = intersectDistant || distant(rectX2, rectY2, centerX , centerY) <= this.getAttackRange() / 2;
+        double cx = Math.max(rectX1, Math.min(centerX, rectX2));
+        double cy = Math.max(rectY1, Math.min(centerY, rectY2));
+
+        intersectDistant = Math.sqrt(Math.pow(centerX - cx, 2) + Math.pow(centerY - cy, 2)) <= this.getAttackRange() / 2;
 
         // Check angle <= attackDegree
         Point posEntity = this.getEntity().getPosition();
@@ -78,6 +82,8 @@ public abstract class Melee extends BaseWeapon{
     @Override
     public void attack(){
 
+        if(onCooldown()) return;
+
         Entity entity = this.getEntity();
         double startAt = 0;
         if(entity instanceof Player){
@@ -96,8 +102,7 @@ public abstract class Melee extends BaseWeapon{
         AnimationController.animations.add(attackObject);
 
         this.attackAbility(this.getIntersectObject(startAt));
-    }
-    
+    }    
 
     public ArrayList<BaseObject> getIntersectObject(double startAt){
 
@@ -113,6 +118,19 @@ public abstract class Melee extends BaseWeapon{
         return instersectObject;
     }
     
+    @Override
+	public boolean onCooldown() {
+		long currentTime = System.currentTimeMillis();
+		if(currentTime - lastClickTime > cooldownTime) {
+			lastClickTime = currentTime;
+			return false;
+		}else {
+			return true;
+		}
+	}
+
+    // getter setter
+
     public double getAttackRange() {
         return attackRange;
     }
@@ -128,5 +146,15 @@ public abstract class Melee extends BaseWeapon{
     public void setAttackDegree(double attackDegree) {
         this.attackDegree = attackDegree;
     }
+
+    public double getCooldownTime() {
+        return cooldownTime;
+    }
+
+    public void setCooldownTime(double cooldownTime) {
+        this.cooldownTime = cooldownTime;
+    }
+   
     
+
 }

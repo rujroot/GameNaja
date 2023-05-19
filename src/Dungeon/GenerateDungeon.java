@@ -73,8 +73,8 @@ public class GenerateDungeon {
 		BossRoom room = new BossRoom(toConnectRoom.getKey(), toConnectRoom.getValue());
 		
 		while(!isLegalCreate(room, toPush)) {
-			room = new BossRoom(toConnectRoom.getKey(), toConnectRoom.getValue());
 			toConnectRoom = findRoom(rootRoom);
+			room = new BossRoom(toConnectRoom.getKey(), toConnectRoom.getValue());
 		}
 		
 		Direction direction = toConnectRoom.getValue();
@@ -82,8 +82,6 @@ public class GenerateDungeon {
 
 		//visible path
 		connectRoom.getConnectPath().get(direction).setVisible(true);
-
-		// generate Boss
 
 		// set connect room
 		room.getConnectRoom().put(direction.getOpposite(), connectRoom);
