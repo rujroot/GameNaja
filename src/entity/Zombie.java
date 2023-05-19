@@ -1,6 +1,7 @@
 package entity;
 
 import data.DataEntity;
+import equipment.PunchMonster;
 import javafx.scene.image.WritableImage;
 import logic.RenderableHolder;
 
@@ -12,6 +13,8 @@ public class Zombie extends Monster {
 		super(name, Height, Width, data);
 		this.setPoisonDamage(poisonDamage);
 		this.setImage(image);
+
+		this.setEquipment(new PunchMonster());
 	}
 
 	@Override

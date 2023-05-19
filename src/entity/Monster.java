@@ -1,7 +1,13 @@
 package entity;
 
+import java.util.ArrayList;
+
+import data.BaseObject;
 import data.DataEntity;
 import data.Point;
+import equipment.BaseWeapon;
+import equipment.Melee;
+import equipment.PunchMonster;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
@@ -13,6 +19,8 @@ public class Monster extends Entity implements Cooldownable {
 	private double cooldownTime = 1000;
 	private double lastClickTime = 0;
 	private Image image;
+	private BaseWeapon equipment;
+	private Entity targetEntity;
 	
 	public Monster(String name, double width, double height, DataEntity data) {
 		super(name, width, height, data);
@@ -36,24 +44,31 @@ public class Monster extends Entity implements Cooldownable {
 
 	@Override
 	public void attack() {
-		// TODO Auto-generated method stub
-		// check if player intersect with monster attack box
-
+		if(equipment == null) this.setEquipment(new PunchMonster());
 		// decrease player's hp
-		if(!onCooldown()) {
-			Player.getPlayer().getData().setHp(Player.getPlayer().getData().getHp() - 1);
+
+		if(targetEntity == null) return;
+
+		double findingRange = 500;
+		double attackRange = 150;
+
+		if(distance(targetEntity.getPosition()) >= findingRange){
+			follow(targetEntity);
+		}
+		if(equipment instanceof Melee){
+			if(distance(targetEntity.getPosition()) <= attackRange){
+				equipment.attack();
+			}
+			follow(targetEntity);
+			
 		}
 		
 	}
 
-//	public boolean hit(Entity entity){
-//		Hitbox A = new Hitbox(this.getPosition(), this.getWidth(), this.getHeight());
-//		Hitbox B = new Hitbox(entity.getPosition(), entity.getWidth(), entity.getHeight());
-//		return A.isIntersect(B);
-//	}
-	
-	public void follow() {
-		Point pp = Player.getPlayer().getPosition();
+	public void follow(Entity entity) {
+		if(entity == null) return;
+
+		Point pp = entity.getPosition();
 
 		double px = pp.getX(), py = pp.getY();
 
@@ -69,6 +84,44 @@ public class Monster extends Entity implements Cooldownable {
 
 	}
 
+	public void findNearestEntity(ArrayList<BaseObject> gameObjectContainer) {
+		Entity nearestEntity = Player.getPlayer();
+		double minDistance = 1e9;
+		double maxDistance = 500;
+
+		for (int i = gameObjectContainer.size() - 1; i >= 0; i--) {
+			BaseObject object = gameObjectContainer.get(i);
+			if ((object instanceof Npc) && distance(object.getPosition()) <= maxDistance) {
+				if (distance(object.getPosition()) <= minDistance) {
+					nearestEntity = (Entity) object;
+					minDistance = distance(object.getPosition());
+				}
+			}
+		}
+
+		targetEntity = nearestEntity;
+	}
+
+	public double distance(Point pos1) {
+		Point pos2 = this.getPosition();
+		return Math.sqrt(Math.pow(pos1.getX() - pos2.getX(), 2) + Math.pow(pos1.getY() - pos2.getY(), 2));
+	}
+
+	public double getEntityAngle() {
+
+		Point pos = this.getPosition();
+
+		double posX = targetEntity.getPosition().getX();
+		double posY = targetEntity.getPosition().getY();
+
+		double startAt = Math.atan2(posY - (pos.getY() + this.getHeight() / 2),
+				posX - (pos.getX() + this.getWidth() / 2));
+		if (startAt < 0) {
+			startAt += 2 * Math.PI;
+		}
+		return 360 - Math.toDegrees(startAt);
+	}
+
 	@Override
 	public boolean onCooldown() {
 		long currentTime = System.currentTimeMillis();
@@ -80,6 +133,15 @@ public class Monster extends Entity implements Cooldownable {
 		}
 	}
 	
+	public BaseWeapon getEquipment() {
+		return equipment;
+	}
+
+	public void setEquipment(BaseWeapon equipment) {
+		this.equipment = equipment;
+		equipment.setEntity(this);
+	}
+
 	public void setImage(WritableImage image) {
         this.image = image;
 		this.setWidth(image.getWidth());

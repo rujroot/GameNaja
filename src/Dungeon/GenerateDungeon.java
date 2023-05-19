@@ -9,11 +9,13 @@ import ore.BaseOre;
 
 public class GenerateDungeon {
 	private static int level;
-	private static int currLevel = 0;
-	private static ArrayList<ArrayList<Room>> container = new ArrayList<ArrayList<Room>>();
+	private static int currLevel;
+	private static ArrayList<ArrayList<Room>> container;
 	
 	public GenerateDungeon(int level){
 		GenerateDungeon.level = level;
+		currLevel = 0;
+		container = new ArrayList<ArrayList<Room>>();
 		increaseFloor(1);
 		// generate ore first level
 		for(Room room : container.get(0)){

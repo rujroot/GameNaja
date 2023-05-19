@@ -6,6 +6,7 @@ import animation.AnimationController;
 import data.BaseObject;
 import data.Point;
 import entity.Entity;
+import entity.Monster;
 import entity.Npc;
 import entity.Player;
 import logic.Cooldownable;
@@ -19,8 +20,8 @@ public abstract class Melee extends BaseWeapon implements Cooldownable{
 
     public abstract void attackAbility(ArrayList<BaseObject> intersectObjects);
 
-    public Melee(double width, double height) {
-        super(width, height, 1);
+    public Melee() {
+        super(0, 0, 1);
 
         this.setAttackRange(150);
         this.setAttackDegree(60);
@@ -92,9 +93,12 @@ public abstract class Melee extends BaseWeapon implements Cooldownable{
         }else if(entity instanceof Npc){
             Npc npc = (Npc) entity;
             startAt = npc.getEntityAngle();
+        }else if(entity instanceof Monster){
+            Monster monster = (Monster) entity;
+            startAt = monster.getEntityAngle();
         }
  
-        Point entityPosition = this.getPosition();
+        Point entityPosition = this.getEntity().getPosition();
         Point attackPosition = new Point(entityPosition.getX() - (getAttackRange() / 2) + (entity.getWidth() / 2), entityPosition.getY() - (getAttackRange() / 2) + (entity.getHeight() / 2));
 
         AttackObject attackObject = new AttackObject(attackPosition, getAttackRange(), getAttackRange(), startAt - getAttackDegree() / 2, getAttackDegree());

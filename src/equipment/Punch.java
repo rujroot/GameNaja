@@ -11,16 +11,16 @@ import logic.RenderableHolder;
 public class Punch extends Melee {
 	private WritableImage image = new WritableImage(RenderableHolder.equipment1.getPixelReader(), 261*2, 5*2, (285-261)*2, (26-5)*2);
 	
-	public Punch(double width, double height) {
-		super(width, height);
+	public Punch() {
+		super();
 		this.setImage(image);
 		this.setAttackDamage(100);
 		this.setAttackRange(100);
 		this.setAttackDegree(100);
 	}
 	
-	public Punch(double width, double height, double attackDamage, double attackRange, double attackDegree) {
-		super(width, height);
+	public Punch(double attackDamage, double attackRange, double attackDegree) {
+		super();
 		this.setImage(image);
 		this.setAttackDamage(attackDamage);
 		this.setAttackRange(attackRange);

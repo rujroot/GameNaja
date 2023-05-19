@@ -42,10 +42,7 @@ public abstract class Gun extends BaseWeapon implements Cooldownable{
                 Arrow arrow = new Arrow(10.0 , 10.0 ,1, vector, this.getPosition());
                 Main.getLogic().addObject(arrow);
             }
-			
 		}
-		
-
 	}
 
     @Override

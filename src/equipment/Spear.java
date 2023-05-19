@@ -11,16 +11,16 @@ import logic.RenderableHolder;
 public class Spear extends Melee {
 	private WritableImage image = new WritableImage(RenderableHolder.equipment1.getPixelReader(), 159*2, 95*2, (191-159)*2, (127-95)*2);
 	
-	public Spear(double width, double height) {
-		super(width, height);
+	public Spear() {
+		super();
 		this.setImage(image);
 		this.setAttackDamage(100);
 		this.setAttackRange(100);
 		this.setAttackDegree(100);
 	}
 	
-	public Spear(double width, double height, double attackDamage, double attackRange, double attackDegree) {
-		super(width, height);
+	public Spear( double attackDamage, double attackRange, double attackDegree) {
+		super();
 		this.setImage(image);
 		this.setAttackDamage(attackDamage);
 		this.setAttackRange(attackRange);

@@ -11,8 +11,8 @@ import logic.RenderableHolder;
 public class Knife extends Melee{
 	private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 607, 390, 637-607, 444-390);
 
-	public Knife(double width, double height, double attackDamage, double attackRange,double attackDegree) {
-		super(width, height);
+	public Knife(double attackDamage, double attackRange,double attackDegree) {
+		super();
 
         this.setImage(image);
         this.setAttackDamage(attackDamage);
@@ -21,8 +21,8 @@ public class Knife extends Melee{
 
 	}
 
-    public Knife(double width, double height) {
-		super(width, height);
+    public Knife() {
+		super();
 		this.setImage(image);
 		this.setAttackDamage(100);
 		this.setAttackRange(100);

@@ -2,7 +2,6 @@ package logic;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import javafx.scene.layout.StackPane;
 import data.BaseObject;
 import data.DataOre;
 import data.Point;
@@ -62,7 +61,9 @@ public class GameLogic {
 							continue;
 						} 
 						
-						((Monster) entity).follow();
+						Monster monster = (Monster) entity;
+						monster.findNearestEntity(gameObjectContainer);
+						monster.attack();
 					}
 					
 					if(entity instanceof Player) {
@@ -73,7 +74,7 @@ public class GameLogic {
 							SceneController sceneController = new SceneController();
 							resetGame();
 							try {
-								sceneController.switchToGameOverScene2();
+								sceneController.switchToGameOverScene();
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -179,14 +180,6 @@ public class GameLogic {
 			BaseObject object = gameObjectContainer.get(i);
 			object.setDestroyed(true);
 			gameObjectContainer.remove(object);
-		}
-		
-		if (gameScreen != null) {
-		    StackPane parent = (StackPane) gameScreen.getParent();
-		    if (parent != null) {
-		        parent.getChildren().remove(gameScreen);
-		    }
-		    gameScreen = null;
 		}
 
 	}

@@ -12,8 +12,18 @@ public class Sword extends Melee {
 
 	private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 462, 164, 497-462, 252-164);
 
-	public Sword(double width, double height, double attackDamage, double attackRange, double attackDegree) {
-		super(width, height);
+	public Sword() {
+		super();
+
+		this.setImage(image);
+		this.setAttackDamage(100);
+		this.setAttackRange(100);
+		this.setAttackDegree(100);
+
+	}
+
+	public Sword(double attackDamage, double attackRange, double attackDegree) {
+		super();
 
 		this.setImage(image);
 		this.setAttackDamage(attackDamage);
