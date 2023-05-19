@@ -98,9 +98,15 @@ public class GameLogic {
 			else if(object instanceof Arrow){
 				Arrow arrow = (Arrow) object;
 				arrow.update();
+				if(!arrow.inRoom()){
+					arrow.setDestroyed(true);
+					gameObjectContainer.remove(arrow);
+					continue;
+				}
+
 				for (int j = gameObjectContainer.size() - 1; j >= 0; j--) {
 					BaseObject thatObject = gameObjectContainer.get(j);
-					if(!(thatObject instanceof Player) && (thatObject instanceof Entity) && arrow.hit((Entity)thatObject)){
+					if(!(thatObject instanceof Player) && !(thatObject instanceof Npc) && (thatObject instanceof Entity) && arrow.hit((Entity)thatObject)){
 						arrow.makeDamge((Entity)thatObject);
 						arrow.setDestroyed(true);
 						gameObjectContainer.remove(arrow);
@@ -122,18 +128,6 @@ public class GameLogic {
 				Ladder ladder = (Ladder) object;
 				ladder.updateInput();
 			}
-		}
-	}
-
-	public void playerinteraction(){
-		Player player = Player.player;
-		for (int i = gameObjectContainer.size() - 1; i >= 0; i--) {
-			BaseObject object = gameObjectContainer.get(i);
-			if(object instanceof Shopkeeper){
-				Shopkeeper shopkeeper = (Shopkeeper) object;
-			}
-			
-
 		}
 	}
 
@@ -173,6 +167,7 @@ public class GameLogic {
 			if(object instanceof BaseOre && !object.isVisible()) continue;
 			if(object instanceof Inventory) continue;
 			if(object instanceof Item) continue;
+			if(object instanceof Npc) continue;
 
 			object.setDestroyed(true);
 			gameObjectContainer.remove(object);

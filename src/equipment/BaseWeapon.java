@@ -6,7 +6,6 @@ import entity.Entity;
 import entity.Player;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import logic.Hitbox;
 
 public abstract class BaseWeapon extends BaseObject implements Cloneable{
@@ -44,12 +43,7 @@ public abstract class BaseWeapon extends BaseObject implements Cloneable{
 
 	public void draw(GraphicsContext gc){
 		Point pos = this.getPosition();
-		if(image != null){
-			gc.drawImage(image, pos.getX()-40, pos.getY(), image.getWidth(), image.getHeight());
-		}else{
-        	gc.setFill(Color.LIMEGREEN);
-			gc.fillRect(pos.getX(), pos.getY(), this.getWidth(), this.getHeight());
-		}
+		gc.drawImage(image, pos.getX()-40, pos.getY(), image.getWidth(), image.getHeight());
 	}
 	
 	public BaseWeapon(double width, double height, double attackDamage, double attackSpeed) {
