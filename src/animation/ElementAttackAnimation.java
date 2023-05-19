@@ -2,10 +2,13 @@ package animation;
 
 import data.Point;
 import entity.Player;
+import entity.Team;
+import equipment.projectile.MagicArrow;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import logic.Main;
 
-public class ElementAttackAnimation extends AnimationObject {
+public class ElementAttackAnimation extends AnimationObject implements Attackable {
 
     private double radius, cooldown;
     private Point center, offset = new Point(0, 0), targetPoint;
@@ -13,22 +16,31 @@ public class ElementAttackAnimation extends AnimationObject {
     public ElementAttackAnimation(Point position, double endTime, double speed, double radius, Point offset) {
         super(position, 0, 0);
 
-        this.setEndTime(1000000);
+        this.setEndTime(endTime);
         this.setSpeedAnim(speed);
         this.setRadius(radius);
         this.setCenter(position);
         this.setOffset(offset);
-        this.setCooldown(endTime);
+
     }
 
     public ElementAttackAnimation(Point position, double endTime, double speed, double radius) {
         super(position, 0, 0);
 
-        this.setEndTime(100000);
+        this.setEndTime(endTime);
         this.setSpeedAnim(speed);
         this.setRadius(radius);
         this.setCenter(position);
-        this.setCooldown(endTime);
+
+    }
+
+    @Override
+    public void attack() {
+        Point target = this.getTargetPoint();
+        target.setX(target.getX() * 30);
+        target.setY(target.getY() * 30);
+        MagicArrow magicArrow = new MagicArrow(30 , 30, 30, this.getTargetPoint(), this.getPosition(), Team.Monster);
+        Main.getLogic().addObject(magicArrow);
     }
 
     @Override
@@ -36,37 +48,22 @@ public class ElementAttackAnimation extends AnimationObject {
         double currTime = this.getCurrTime();
         double r = this.getRadius();
 
-        if(this.getCurrTime() <= this.getCooldown()){
+        double x = Math.sin(Math.toRadians(currTime)) * r;
+        double y = Math.cos(Math.toRadians(currTime)) * r;
 
-            double x = Math.sin(Math.toRadians(currTime)) * r;
-            double y = Math.cos(Math.toRadians(currTime)) * r;
+        Point pos = this.getCenter();
+        this.setPosition(new Point(pos.getX() + x + offset.getX(), pos.getY() + y + offset.getY()));
+        
+        gc.setFill(Color.BLUE);
+        gc.fillOval(this.getPosition().getX() , this.getPosition().getY(), 30 , 30);
+        
+        Point pp = Player.getPlayer().getPosition();
 
-            Point pos = this.getCenter();
-            this.setPosition(new Point(pos.getX() + x + offset.getX(), pos.getY() + y + offset.getY()));
-            
-            gc.setFill(Color.BLUE);
-            gc.fillOval(this.getPosition().getX() , this.getPosition().getY(), 30 , 30);
-           
-            Point pp = Player.getPlayer().getPosition();
+        Point p = new Point(this.getPosition().getX() - pp.getX() , this.getPosition().getY() - pp.getY());
+        double distance = Math.sqrt(p.getX() * p.getX() + p.getY() * p.getY());
 
-            Point p = new Point(this.getPosition().getX() - pp.getX() , this.getPosition().getY() - pp.getY());
-		    double distance = Math.sqrt(p.getX() * p.getX() + p.getY() * p.getY());
-
-            this.setTargetVector(new Point(-p.getX() / distance, -p.getY() / distance));
-        }else if(this.getCurrTime() <= this.getCooldown() * 2){
-
-            Point target = this.getTargetPoint();
-
-            Point pos = this.getPosition();
-            pos.setX(this.getPosition().getX() + target.getX() * 30);
-            pos.setY(this.getPosition().getY() + target.getY() * 30);
-
-            gc.setFill(Color.RED);
-            gc.fillOval(this.getPosition().getX() , this.getPosition().getY(), 30 , 30);
-
-        }else{
-            this.setCurrTime(10000000);
-        }
+        this.setTargetVector(new Point(-p.getX() / distance, -p.getY() / distance));
+        
     }
 
     public double getRadius() {
@@ -109,8 +106,4 @@ public class ElementAttackAnimation extends AnimationObject {
         this.cooldown = cooldown;
     }
 
-    
-
-    
-    
 }

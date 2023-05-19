@@ -14,9 +14,10 @@ import entity.Monster;
 import entity.Npc;
 import entity.Player;
 import entity.Shopkeeper;
+import entity.Team;
 import entity.boss.BossEntity;
 import entity.miniBoss.MiniBossEntity;
-import equipment.projectile.Arrow;
+import equipment.projectile.BaseProjectile;
 import inventory.Inventory;
 import item.Item;
 import ore.BaseOre;
@@ -95,8 +96,8 @@ public class GameLogic {
 			
 				}
 			
-			else if(object instanceof Arrow){
-				Arrow arrow = (Arrow) object;
+			else if(object instanceof BaseProjectile){
+				BaseProjectile arrow = (BaseProjectile) object;
 				arrow.update();
 				if(!arrow.inRoom()){
 					arrow.setDestroyed(true);
@@ -104,13 +105,19 @@ public class GameLogic {
 					continue;
 				}
 
+				Team team = arrow.getTeam();
 				for (int j = gameObjectContainer.size() - 1; j >= 0; j--) {
 					BaseObject thatObject = gameObjectContainer.get(j);
-					if(!(thatObject instanceof Player) && !(thatObject instanceof Npc) && (thatObject instanceof Entity) && arrow.hit((Entity)thatObject)){
+					if(team.equals(Team.Player) && (thatObject instanceof Monster) && arrow.hit((Entity)thatObject)){
+						arrow.makeDamge((Entity)thatObject);
+						arrow.setDestroyed(true);
+						gameObjectContainer.remove(arrow);
+					}else if(team.equals(Team.Monster) && ((thatObject instanceof Player) || (thatObject instanceof Npc)) && arrow.hit((Entity)thatObject)){
 						arrow.makeDamge((Entity)thatObject);
 						arrow.setDestroyed(true);
 						gameObjectContainer.remove(arrow);
 					}
+					
 				}
 			}
 

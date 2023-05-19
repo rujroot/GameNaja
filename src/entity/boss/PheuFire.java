@@ -6,7 +6,6 @@ import animation.CircleAttackAnimation;
 import animation.ImageAnimation;
 import data.DataEntity;
 import data.Point;
-import dungeon.GenerateDungeon;
 import entity.Monster;
 import entity.MonsterType;
 import entity.Player;
@@ -116,9 +115,10 @@ public class PheuFire extends BossEntity{
             animationManager.addAnimation(imageAnimation[1]);
             
             Point pos = Player.getPlayer().getPosition();
-            CircleAttackAnimation circle = new CircleAttackAnimation(new Point(pos.getX(), pos.getY()), 150, 3);
+            CircleAttackAnimation circle = new CircleAttackAnimation(new Point(pos.getX(), pos.getY()), 150, 3, 10);
             AnimationController.animations.add(circle);
             Main.getLogic().addObject(circle);
+            
 
             long currentTime = System.currentTimeMillis();
             lastClickTime = currentTime;
@@ -143,7 +143,7 @@ public class PheuFire extends BossEntity{
                 Point pos = Player.getPlayer().getPosition();
                 double randomX = Math.random() * 600 - 300;
                 double randomY = Math.random() * 600 - 300;
-                CircleAttackAnimation circle = new CircleAttackAnimation(new Point(pos.getX() + randomX, pos.getY() + randomY), 50, 1);
+                CircleAttackAnimation circle = new CircleAttackAnimation(new Point(pos.getX() + randomX, pos.getY() + randomY), 50, 1, 10);
                 AnimationController.animations.add(circle);
                 Main.getLogic().addObject(circle);
             

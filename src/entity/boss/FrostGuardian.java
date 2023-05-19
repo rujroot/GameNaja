@@ -75,7 +75,7 @@ public class FrostGuardian extends BossEntity {
         }
         actionDone = false;
         // Random Action to play
-        String[] action =  {"Attacking10", "Attacking20", "Attacking30"};
+        String[] action = {"Attacking10", "Attacking20", "Attacking30"};
         status = action[(int)(Math.random() * 3)];
         
     }
@@ -115,7 +115,7 @@ public class FrostGuardian extends BossEntity {
             animationManager.addAnimation(imageAnimation[1]);
             
             Point pos = Player.getPlayer().getPosition();
-            RectAttackAnimation rect = new RectAttackAnimation(new Point(pos.getX(), pos.getY()), 100, 3);
+            RectAttackAnimation rect = new RectAttackAnimation(new Point(pos.getX(), pos.getY()), 100, 3, 40);
             AnimationController.animations.add(rect);
             Main.getLogic().addObject(rect);
 

@@ -1,7 +1,6 @@
 package logic;
 
 import drawing.GameScreen;
-import dungeon.GenerateDungeon;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

@@ -42,7 +42,6 @@ public class SceneController{
 	private Image dungeonImage = new Image(getClass().getResourceAsStream("Dungeon.jpg"));
 	private Image gameOver = new Image(getClass().getResourceAsStream("GameOverImage.jpg"));
 	
-	
 	public void switchToStartGameScene(ActionEvent event) throws IOException {
 		
 		Parent root = (Parent) FXMLLoader.load(getClass().getResource("/scene/Start.fxml"));
@@ -77,7 +76,7 @@ public class SceneController{
 		shopkeeper.setPosition(new Point(firstRoom.getPosition().getX() + 20, firstRoom.getPosition().getY() + 20 ));
 		logic.addObject(shopkeeper);
 
-		Player player = new Player("Player", 50, 50, new DataEntity(25, 10000, 10000, 10));
+		Player player = new Player("Player", new DataEntity(100, 10000, 10000, 10));
 		player.setPosition(new Point(firstRoom.getPosition().getX() + 100, firstRoom.getPosition().getY() + 100 ));
 		player.initInventory();
 		logic.addObject(player);
@@ -97,7 +96,7 @@ public class SceneController{
 	
 	public void switchToBodyGameScene() throws CloneNotSupportedException {
 
-		Player player = new Player("Player", 50, 50, new DataEntity(25, 10000, 10000, 10));
+		Player player = new Player("Player", new DataEntity(100, 10000, 10000, 10));
 
 		logic = new GameLogic();
 		dungeon = new GenerateDungeon(1);
@@ -136,7 +135,7 @@ public class SceneController{
 		// darkSpirit.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
 		// logic.addObject(darkSpirit);
 
-		// FrostGuardain frostGuardain = new FrostGuardain("FrostGuardain", new DataEntity(100, 1, 1, 12));
+		// FrostGuardian frostGuardain = new FrostGuardian("FrostGuardain", new DataEntity(100, 1, 1, 12));
 		// frostGuardain.setPosition(new Point(firstRoom.getPosition().getX() + 300, firstRoom.getPosition().getY() + 300 ));
 		// logic.addObject(frostGuardain);
 
@@ -148,7 +147,10 @@ public class SceneController{
 		
 		AnimationTimer animation = new AnimationTimer() {
 			public void handle(long now) {
-				if(SceneController.gameStop) return;
+				if(SceneController.gameStop){
+					animationController.reset();
+					return;
+				} 
 
 				try {
 					gameScreen.updatePlayer();

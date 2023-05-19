@@ -40,8 +40,8 @@ public class Player extends Entity implements Cooldownable {
 	private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 960, 944, 59, 79);
 	private Description description, descriptionMoney, descriptionFloor;
 
-	public Player(String name, double Height, double Width, DataEntity data) {
-		super(name, Height, Width, data);
+	public Player(String name, DataEntity data) {
+		super(name, 0, 0, data);
 		this.setWidth(image.getWidth());
 		this.setHeight(image.getHeight());
 		player = this;

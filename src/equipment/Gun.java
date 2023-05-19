@@ -4,6 +4,7 @@ import data.Point;
 import entity.Entity;
 import entity.Npc;
 import entity.Player;
+import entity.Team;
 import equipment.projectile.Arrow;
 import input.InputUtility;
 import logic.Cooldownable;
@@ -31,7 +32,7 @@ public abstract class Gun extends BaseWeapon implements Cooldownable{
                 vector.multiply(10);
 
                 // damge, speed, pos
-                Arrow arrow = new Arrow(10.0 , 10.0 ,1, vector, this.getPosition());
+                Arrow arrow = new Arrow(10.0 , 10.0 ,1, vector, this.getPosition(), Team.Player);
                 Main.getLogic().addObject(arrow);
             }else{
                 // find direction to shoot
@@ -39,7 +40,7 @@ public abstract class Gun extends BaseWeapon implements Cooldownable{
                 vector.multiply(30);
 
                 // damge, speed, pos
-                Arrow arrow = new Arrow(10.0 , 10.0 ,1, vector, this.getPosition());
+                Arrow arrow = new Arrow(10.0 , 10.0 ,1, vector, this.getPosition(), Team.Player);
                 Main.getLogic().addObject(arrow);
             }
 		}
