@@ -9,7 +9,7 @@ import data.Point;
 import entity.Npc;
 import entity.Player;
 import entity.boss.BossEntity;
-import entity.boss.FrostGuardain;
+import entity.boss.FrostGuardian;
 import entity.boss.PheuFire;
 import entity.miniBoss.DarkSpirit;
 import entity.miniBoss.GiantGoblin;
@@ -95,7 +95,7 @@ public class BossRoom extends Room{
             if(choose.equals("First")){
                 boss = new PheuFire("PheuFire", new DataEntity(100, 1, 1, 12));
             }else{
-                boss = new FrostGuardain("FrostGuardain", new DataEntity(100, 1, 1, 12));
+                boss = new FrostGuardian("FrostGuardain", new DataEntity(100, 1, 1, 12));
             }
 
             Point pos = this.getPosition();
