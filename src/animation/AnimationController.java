@@ -21,6 +21,8 @@ public class AnimationController {
                 } else{
 
                    if(animation.getCurrTime() > animation.getEndTime()) {
+                        if(animation instanceof Attackable)
+                            ((Attackable) animation).attack();
                         animation.setDestroyed(true);
                         GameLogic.removeObj(animation);
                         animations.remove(animation);
@@ -29,7 +31,6 @@ public class AnimationController {
                     animation.nextAnim(); 
 
                 }
-                
                 
             }
 		} catch (Exception e) {
