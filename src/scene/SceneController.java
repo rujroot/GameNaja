@@ -23,7 +23,7 @@ import dungeon.Room;
 import entity.Npc;
 import entity.Player;
 import entity.Shopkeeper;
-import entity.boss.FrostGuardain;
+import entity.boss.FrostGuardian;
 import entity.boss.PheuFire;
 import entity.miniBoss.DarkSpirit;
 import entity.miniBoss.GiantGoblin;

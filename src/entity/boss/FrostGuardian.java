@@ -16,7 +16,7 @@ import logic.Hitbox;
 import logic.Main;
 import logic.RenderableHolder;
 
-public class FrostGuardain extends BossEntity {
+public class FrostGuardian extends BossEntity {
     
     private ImageAnimation[] imageAnimation = new ImageAnimation[10];
     private AnimationManager animationManager;
@@ -29,7 +29,7 @@ public class FrostGuardain extends BossEntity {
     private double cooldownTime = 2000;
 	private double lastClickTime = 0;
 
-    public FrostGuardain(String name, DataEntity data) {
+    public FrostGuardian(String name, DataEntity data) {
         super(name, data, new Hitbox(new Point(150, 60), 250, 270));
         this.setWidth(260);
         this.setHeight(310);
