@@ -49,9 +49,13 @@ public class GameLogic {
 					
 					if(entity.getData().getHp() <= 0) {
 						if(entity instanceof MiniBossEntity || entity instanceof BossEntity){
+							if(entity instanceof MiniBossEntity) Player.getPlayer().addMoney(1 * ((int)(Math.random() * 5) + 5));
+							else Player.getPlayer().addMoney(5 * ((int)(Math.random() * 5) + 1));
+
 							Ladder ladder = new Ladder(entity.getPosition());
 							this.addObject(ladder);
 						}
+						Player.getPlayer().addMoney(0.01 * (int)(Math.random() * 10));
 						entity.setDestroyed(true);
 						gameObjectContainer.remove(entity);
 					}
@@ -99,6 +103,7 @@ public class GameLogic {
 				
 					if(object instanceof Npc){
 						Npc npc = (Npc) object;
+						npc.updateInput();
 						npc.findNearestMonster(gameObjectContainer);
 						npc.doBehavior();
 					}
@@ -159,7 +164,6 @@ public class GameLogic {
 		//Get first room
 		ArrayList<Room> nextLevel = GenerateDungeon.getContainer().get(currentLevel + 1);
 		Room firstRoom = nextLevel.get(0);
-		System.out.println("Go to " + (currentLevel + 1));
 
 		for(int i = 1; i < nextLevel.size(); ++i){
 			for(BaseOre ore : nextLevel.get(i).getOres()){
@@ -170,10 +174,18 @@ public class GameLogic {
 		Shopkeeper shopkeeper = new Shopkeeper("Shopkeeper", 50, 50, new DataEntity(999999, 1, 1, 0));
 		shopkeeper.setPosition(new Point(firstRoom.getPosition().getX() + 20, firstRoom.getPosition().getY() + 20 ));
 		Main.getLogic().addObject(shopkeeper);
+
+		System.out.println(currentLevel );
+		if((currentLevel + 1) % 5 == 0){
+			Npc npc = new Npc("NPC", 10, 10, new DataEntity(100, 1, 1, 10));
+			npc.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
+			npc.setValue(Math.max(currentLevel * 5 + (int)(Math.random() * 10) - 20, 5));
+			Main.getLogic().addObject(npc);
+		}
 		
 		Player player = Player.getPlayer();
 		// Get postion to spawn
-		Point spawnPoint = new Point(firstRoom.getPosition().getX() + 10, firstRoom.getPosition().getY() + 10 );
+		Point spawnPoint = new Point(firstRoom.getPosition().getX() + 500, firstRoom.getPosition().getY() + 500 );
 
 		// Warp player
 		player.setPosition(spawnPoint);

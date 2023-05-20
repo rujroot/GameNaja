@@ -1,5 +1,7 @@
 package entity;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 import data.BaseObject;
@@ -13,6 +15,7 @@ import dungeon.Room;
 import equipment.*;
 import input.InputUtility;
 import inventory.Inventory;
+import item.HealPotion;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
@@ -113,37 +116,25 @@ public class Player extends Entity implements Cooldownable {
 			inventory.selectIndex(8);
 			this.setEquipment(inventory.getObject(8));
 		}
-		if (InputUtility.getKeyPressed(KeyCode.F)) {
-			this.getData().setHp(this.getData().getHp() + 10);
-		}
-
-		if (InputUtility.getKeyPressed(KeyCode.R) && !onCooldown()) {
-			if(this.getEquipment() instanceof Pickaxe) return;
-			inventory.removeItem(inventory.getUI().getSelectIndex());
-			this.setEquipment(inventory.getObject(inventory.getUI().getSelectIndex()));
-		}
 		// Action Section
 		if ((InputUtility.getKeyPressed(KeyCode.SPACE) || InputUtility.isLeftClickTriggered())) {
 			attack();
-		}
-		if (InputUtility.getKeyPressed(KeyCode.J) && !onCooldown()) {
-			GameLogic logic = Main.getLogic();
-			// Data : hp atk def spd
-			Demon demon = new Demon("Demon", 70, 70, new DataEntity(100, 10, 10, 6.5));
-			logic.addObject(demon);
-			Zombie zombie = new Zombie("Zombie", 50, 50, new DataEntity(100, 1, 1, 4.5));
-			Skeleton skeleton = new Skeleton("Skeleton", 50, 50, new DataEntity(100, 1, 1, 4.5));
-			Goblin goblin = new Goblin("Goblin", 40, 40, new DataEntity(100, 10, 10, 6.5));
-			Demon demon2 = new Demon("Demon", 70, 70, new DataEntity(100, 10, 10, 6.5));
-			Slime slime = new Slime("Slime", 30, 30, new DataEntity(100, 10, 10, 6.5));
-			logic.addObject(zombie);
-			logic.addObject(skeleton);
-			logic.addObject(goblin);
-			logic.addObject(demon2);
-			logic.addObject(slime);
+
+			int index = inventory.getUI().getSelectIndex();
+			BaseObject object = inventory.getObject(index);
+			if(object instanceof HealPotion) {
+				HealPotion potion = (HealPotion) object;
+				potion.use();
+				if(potion.getAmount() <= 0){
+					inventory.removeItem(index);
+					this.setEquipment(inventory.getObject(index));
+				}
+			}
 		}
 		if (InputUtility.getKeyPressed(KeyCode.Z) && !onCooldown()) {
-			Main.getLogic().nextFloor();
+			if(this.getEquipment() instanceof Pickaxe) return;
+			inventory.removeItem(inventory.getUI().getSelectIndex());
+			this.setEquipment(inventory.getObject(inventory.getUI().getSelectIndex()));
 		}
 	}
 
@@ -153,6 +144,7 @@ public class Player extends Entity implements Cooldownable {
 		Main.getLogic().addObject(inventory);
 
 		inventory.addItem(new Pickaxe());
+		inventory.addItem(new HealPotion(3, 10));
 		inventory.selectIndex(0);
 		this.setEquipment(inventory.getObject(0));
 
@@ -190,7 +182,12 @@ public class Player extends Entity implements Cooldownable {
 	}
 
 	public void displayMoney(GraphicsContext gc) {
-		descriptionMoney.setText(Double.toString(money) + "$");
+		BigDecimal bd = new BigDecimal(money);
+        bd = bd.setScale(2, RoundingMode.HALF_DOWN);
+
+        double roundedNumber = bd.doubleValue();
+
+		descriptionMoney.setText(Double.toString(roundedNumber) + "$");
 		descriptionMoney.draw(gc);
 	}
 	
@@ -246,6 +243,7 @@ public class Player extends Entity implements Cooldownable {
 
 	public void setEquipment(BaseObject equipment) {
 		if (equipment instanceof BaseWeapon) {
+			((BaseWeapon) equipment).setEntity(this);
 			this.equipment = (BaseWeapon) equipment;
 		} else {
 			this.equipment = null;

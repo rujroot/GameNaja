@@ -9,9 +9,15 @@ import entity.boss.BossEntity;
 import equipment.BaseWeapon;
 import equipment.Knife;
 import equipment.Melee;
+import equipment.Pickaxe;
 import equipment.Wand;
+import input.InputUtility;
+import inventory.Inventory;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import logic.Cooldownable;
 import logic.RenderableHolder;
 
@@ -21,19 +27,60 @@ public class Npc extends Entity implements Cooldownable {
 	private double lastClickTime = 0;
 
 	private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 644, 964, 59, 59);
-	private Entity followEntity , targetEntity;
+	private Entity followEntity, targetEntity;
 	private double maxDistance = 500;
 	private BaseWeapon equipment;
+	private String state = "Idel";
+	private double value = 50;
 
 	public Npc(String name, double width, double height, DataEntity data) {
 		super(name, width, height, data);
 		this.setWidth(image.getWidth());
 		this.setHeight(image.getHeight());
+	}
 
-		//this.setEquipment(new Knife(10, 10));
-		//this.setEquipment(new Wand(10, 10));
+	public boolean inRange(double range){
+        Point playerPos = Player.player.getPosition();
+        Point pos = this.getPosition();
 
-		followEntity = Player.getPlayer();
+        return Math.sqrt( Math.pow(playerPos.getX() - pos.getX() , 2) + Math.pow( playerPos.getY() - pos.getY(), 2) ) <= range;
+    }
+
+	public void updateInput(){
+		cooldownTime = 500;
+		if(inRange(100)){
+
+			if(this.getState().equals("Idel")){
+				Player player = Player.player;
+        		double money = player.getMoney();
+				if (InputUtility.getKeyPressed(KeyCode.R) && money >= value && !onCooldown()){
+					this.setState("Follow");
+					player.setMoney(player.getMoney() - value);
+					this.setFollowEntity(player);
+				}
+
+			}else{
+
+				Player player = Player.player;
+				if (InputUtility.getKeyPressed(KeyCode.R) && !onCooldown()){
+					Inventory inventory = player.getInventory();
+					int currIndex = inventory.getUI().getSelectIndex();
+					BaseObject obj = inventory.getObject(currIndex);
+					
+					if(obj != null && obj instanceof BaseWeapon && !(obj instanceof Pickaxe)){
+						BaseWeapon weapon =  (BaseWeapon) obj;
+						inventory.removeItem(inventory.getUI().getSelectIndex());
+						inventory.addItem(this.getEquipment());
+						this.setEquipment(weapon);
+						player.setEquipment(inventory.getObject(inventory.getUI().getSelectIndex()));
+					}
+
+				}
+
+			}
+		}else{
+
+		}
 	}
 
 	@Override
@@ -44,6 +91,26 @@ public class Npc extends Entity implements Cooldownable {
 
 		if (equipment != null) {
 			equipment.draw(gc);
+		}
+
+		if(inRange(100)){
+			gc.setFont(new Font("Arial", 24));
+            gc.setFill(Color.BLACK);
+            gc.setStroke(Color.WHITE);
+            gc.setLineWidth(5);
+
+            gc.strokeText("R", pos.getX() + 20, pos.getY() - 40, 24);
+            gc.fillText("R", pos.getX() + 20, pos.getY() - 40, 24);
+
+			if(this.getState().equals("Idel")){
+				gc.setFont(new Font("Arial", 24));
+				gc.setFill(Color.BLACK);
+				gc.setStroke(Color.WHITE);
+				gc.setLineWidth(5);
+
+				gc.strokeText(Double.toString(value)+"$", pos.getX(), pos.getY() + 100, 100);
+				gc.fillText(Double.toString(value)+"$", pos.getX(), pos.getY() + 100, 100);
+			}
 		}
 	}
 
@@ -64,6 +131,7 @@ public class Npc extends Entity implements Cooldownable {
 	}
 
 	public void doBehavior() {
+		if(this.getState().equals("Idel")) return;
 		attack();
 	}
 
@@ -79,22 +147,22 @@ public class Npc extends Entity implements Cooldownable {
 
 		DataEntity data = this.getData();
 
-		if (distance > 50 && distance < 500) {
+		if (distance > 150 && distance < 500) {
 			double mx = -p.getX() / distance * data.getSpd();
 			double my = -p.getY() / distance * data.getSpd();
 			// Check for obstacles
-			if (!this.isLegalMove(mx, my)) {
-				// Turn 90 degrees
-				double newX = -p.getY();
-				double newY = p.getX();
-				double newDistance = Math.sqrt(newX * newX + newY * newY);
-				this.move(newX / newDistance * data.getSpd(), 0);
-                this.move(0, newY / newDistance * data.getSpd());
-			} else {
+			// if (!this.isLegalMove(mx, my)) {
+			// 	// Turn 90 degrees
+			// 	double newX = -p.getY();
+			// 	double newY = p.getX();
+			// 	double newDistance = Math.sqrt(newX * newX + newY * newY);
+			// 	this.move(newX / newDistance * data.getSpd(), 0);
+            //     this.move(0, newY / newDistance * data.getSpd());
+			// } else {
 				// Move towards target
 				this.move(-p.getX() / distance * data.getSpd(), 0);
                 this.move(0, -p.getY() / distance * data.getSpd());
-			}
+			//}
 		}else if(distance > 1000){
 			warpToEntity(entity);
 		}
@@ -187,6 +255,22 @@ public class Npc extends Entity implements Cooldownable {
 
 	public void setTargetEntity(Entity targetEntity) {
 		this.targetEntity = targetEntity;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public double getValue() {
+		return value;
+	}
+
+	public void setValue(double value) {
+		this.value = value;
 	}
 
 	@Override

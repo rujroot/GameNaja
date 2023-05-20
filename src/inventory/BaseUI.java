@@ -68,6 +68,7 @@ public class BaseUI extends BaseObject{
     }
 
     public void addItem(BaseObject object){
+        if(object == null) return;
 
         for(int i = 0; i < maxIndex; ++i){
             if(object instanceof BaseWeapon) break;

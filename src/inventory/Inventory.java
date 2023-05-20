@@ -6,7 +6,6 @@ import data.BaseObject;
 import data.Point;
 import drawing.GameScreen;
 import entity.Player;
-import item.Item;
 import javafx.scene.canvas.GraphicsContext;
 
 public class Inventory extends BaseObject{

@@ -74,7 +74,7 @@ public class BossRoom extends Room{
 			if(object instanceof Player) continue;
 			if(object instanceof Inventory) continue;
 			if(object instanceof Item) continue;
-			if(object instanceof Npc) {
+			if(object instanceof Npc && !((Npc) object).getState().equals("Idel")) {
                 ((Npc) object).warpToEntity(Player.getPlayer());
                 continue;
             }

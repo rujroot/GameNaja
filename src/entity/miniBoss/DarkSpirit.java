@@ -29,7 +29,7 @@ public class DarkSpirit extends MiniBossEntity {
             ElementAttackAnimation element = new ElementAttackAnimation(
                                             newPos, 
 											1000, 
-											3, 
+											Math.random()*5+1, 
 											Math.random() * 100 + 50, 
 											new Point(0, 0));
             element.setColor(Color.BLACK);

@@ -43,7 +43,7 @@ public abstract class BaseWeapon extends BaseObject implements Cloneable{
 
 	public void draw(GraphicsContext gc){
 		Point pos = this.getPosition();
-		gc.drawImage(image, pos.getX()-40, pos.getY(), image.getWidth(), image.getHeight());
+		gc.drawImage(image, pos.getX()-30, pos.getY(), image.getWidth(), image.getHeight());
 	}
 	
 	public BaseWeapon(double width, double height, double attackDamage, double attackSpeed) {
