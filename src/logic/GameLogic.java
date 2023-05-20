@@ -80,17 +80,6 @@ public class GameLogic {
 						monster.attack();
 					}
 					
-					if(>=31) {
-						SceneController sceneController = new SceneController();
-						resetGame();
-						try {
-							sceneController.switchToGameClearScene();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-					
 					if(entity instanceof Player) {
 						Player player = (Player) entity;
 						player.checkPlayerInBossRoom();
@@ -170,7 +159,20 @@ public class GameLogic {
 		//Get next dungeon
 		int currentLevel = GenerateDungeon.getCurrLevel();
 		if(currentLevel >= GenerateDungeon.getLevel() - 1) return;
+
 		GenerateDungeon.setCurrLevel(currentLevel + 20);
+
+        if(GenerateDungeon.getCurrLevel() + 1 >= 31) {
+        	RenderableHolder.sound.stop();
+            SceneController sceneController = new SceneController();
+            resetGame();
+            try {
+                sceneController.switchToGameClearScene();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+		
 
 		if(GenerateDungeon.getCurrLevel() + 1 >= 31) {
 			SceneController sceneController = new SceneController();
