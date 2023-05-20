@@ -188,7 +188,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
         if(object instanceof BaseWeapon){
 
             BaseWeapon item = (BaseWeapon) object;
-            double value = item.getValue();
+            double value = 0;//item.getValue();
 
             if(value <= money){
                 try {

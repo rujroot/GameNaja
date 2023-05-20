@@ -238,7 +238,6 @@ public class Player extends Entity implements Cooldownable {
 	}
 
 	public void setEquipment(BaseObject equipment) {
-		System.out.println(equipment);
 		if (equipment instanceof BaseWeapon) {
 			((BaseWeapon) equipment).setEntity(this);
 			this.equipment = (BaseWeapon) equipment;

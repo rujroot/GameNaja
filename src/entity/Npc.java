@@ -8,10 +8,8 @@ import data.Point;
 import entity.boss.BossEntity;
 import equipment.BaseWeapon;
 import equipment.Gun;
-import equipment.Knife;
 import equipment.Melee;
 import equipment.Pickaxe;
-import equipment.Wand;
 import input.InputUtility;
 import inventory.Inventory;
 import item.HealPotion;
@@ -25,7 +23,7 @@ import logic.RenderableHolder;
 
 public class Npc extends Entity implements Cooldownable {
 
-	private double cooldownTime = 1000;
+	private double cooldownTime = 1000, backTime = 5000;
 	private double lastClickTime = 0;
 
 	private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 644, 964, 59, 59);
@@ -35,10 +33,15 @@ public class Npc extends Entity implements Cooldownable {
 	private String state = "Idel";
 	private double value = 25;
 
+	private Point offSet;
+
+	private boolean runBack = false;
+
 	public Npc(String name, double width, double height, DataEntity data) {
 		super(name, width, height, data);
 		this.setWidth(image.getWidth());
 		this.setHeight(image.getHeight());
+		offSet = new Point(Math.random() * 200 - 100, Math.random() * 200 - 100);
 	}
 
 	public boolean inRange(double range){
@@ -89,6 +92,10 @@ public class Npc extends Entity implements Cooldownable {
 				}
 
 			}
+		}
+		
+		if (InputUtility.getKeyPressed(KeyCode.Q) && !onCooldown()){
+			this.setRunBack(true);
 		}
 	}
 
@@ -147,13 +154,19 @@ public class Npc extends Entity implements Cooldownable {
 
 	public void doBehavior() {
 		if(this.getState().equals("Idel")) return;
-		attack();
+		
+		if(this.isRunBack()){
+			onBack();
+			follow(followEntity);
+		}
+		else attack();
 	}
 
 	public void follow(Entity entity) {
 		if(entity == null) return;
 
 		Point pp = entity.getPosition();
+		pp = new Point(pp.getX() + offSet.getX(), pp.getY() + offSet.getY());
 
 		double px = pp.getX(), py = pp.getY();
 
@@ -293,10 +306,29 @@ public class Npc extends Entity implements Cooldownable {
 		this.value = value;
 	}
 
+	public boolean isRunBack() {
+		return runBack;
+	}
+
+	public void setRunBack(boolean runBack) {
+		this.runBack = runBack;
+	}
+
 	@Override
 	public boolean onCooldown() {
 		long currentTime = System.currentTimeMillis();
 		if (currentTime - lastClickTime > cooldownTime) {
+			lastClickTime = currentTime;
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public boolean onBack() {
+		long currentTime = System.currentTimeMillis();
+		if (currentTime - lastClickTime > backTime) {
+			this.setRunBack(false);
 			lastClickTime = currentTime;
 			return false;
 		} else {
