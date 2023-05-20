@@ -154,13 +154,13 @@ public class GameLogic {
 
 	public void nextFloor() throws CloneNotSupportedException{
 		this.clearObject();
-		SceneController.dungeon.increaseFloor(20);
+		SceneController.dungeon.increaseFloor(1);
 		
 		//Get next dungeon
 		int currentLevel = GenerateDungeon.getCurrLevel();
 		if(currentLevel >= GenerateDungeon.getLevel() - 1) return;
 
-		GenerateDungeon.setCurrLevel(currentLevel + 20);
+		GenerateDungeon.setCurrLevel(currentLevel + 1);
 
         if(GenerateDungeon.getCurrLevel() + 1 >= 31) {
         	RenderableHolder.sound.stop();
@@ -172,17 +172,6 @@ public class GameLogic {
                 e.printStackTrace();
             }
         }
-		
-
-		if(GenerateDungeon.getCurrLevel() + 1 >= 31) {
-			SceneController sceneController = new SceneController();
-			resetGame();
-			try {
-				sceneController.switchToGameClearScene();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
 		
 		//Get first room
 		ArrayList<Room> nextLevel = GenerateDungeon.getContainer().get(currentLevel + 1);
