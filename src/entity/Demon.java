@@ -6,7 +6,6 @@ import data.DataEntity;
 import data.Point;
 import equipment.BaseWeapon;
 import equipment.DarkSpiritAttack;
-import equipment.GoblinAttack;
 import javafx.scene.paint.Color;
 import logic.Main;
 import logic.RenderableHolder;

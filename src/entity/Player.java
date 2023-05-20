@@ -20,12 +20,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import logic.Cooldownable;
-import logic.GameLogic;
-import logic.Hitbox;
 import logic.Main;
 import logic.RenderableHolder;
-import scene.SceneController;
-
 public class Player extends Entity implements Cooldownable {
 
 	public static Player player;

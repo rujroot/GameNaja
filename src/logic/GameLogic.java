@@ -187,12 +187,10 @@ public class GameLogic {
 		shopkeeper.setPosition(new Point(firstRoom.getPosition().getX() + 20, firstRoom.getPosition().getY() + 20 ));
 		Main.getLogic().addObject(shopkeeper);
 
-		System.out.println(currentLevel );
-		if((currentLevel + 1) % 5 >= 0){
+		if((currentLevel + 1) % 5 == 0){
 			Npc npc = new Npc("NPC", 10, 10, new DataEntity(100, 1, 1, 10));
 			npc.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
 			npc.setValue(Math.max(currentLevel * 5 + (int)(Math.random() * 10) - 20, 5));
-			npc.setValue(0);
 			Main.getLogic().addObject(npc);
 		}
 		

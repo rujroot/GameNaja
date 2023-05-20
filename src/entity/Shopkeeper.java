@@ -16,7 +16,6 @@ import equipment.LightBow;
 import equipment.Punch;
 import equipment.Shield;
 import equipment.Spear;
-import equipment.Sword;
 import equipment.Wand;
 import input.InputUtility;
 import inventory.BaseUI;
@@ -188,7 +187,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
         if(object instanceof BaseWeapon){
 
             BaseWeapon item = (BaseWeapon) object;
-            double value = 0;//item.getValue();
+            double value = item.getValue();
 
             if(value <= money){
                 try {

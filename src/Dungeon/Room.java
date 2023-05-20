@@ -74,7 +74,7 @@ public class Room implements IRenderable {
 	//create spawn room
 	public Room() {
 		this.setWidth(widthRoom * 10);
-		this.setHeight(heightRoom * 10);
+		this.setHeight(heightRoom * 5);
 		this.setPosition(new Point(0,0));
 
 		this.setRoomSize(Size.SPAWN);

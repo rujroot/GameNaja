@@ -188,8 +188,8 @@ public class Npc extends Entity implements Cooldownable {
 		DataEntity data = this.getData();
 
 		if (distance > 150 && distance < 600) {
-			double mx = -p.getX() / distance * data.getSpd();
-			double my = -p.getY() / distance * data.getSpd();
+			// double mx = -p.getX() / distance * data.getSpd();
+			// double my = -p.getY() / distance * data.getSpd();
 			// Check for obstacles
 			// if (!this.isLegalMove(mx, my)) {
 			// 	// Turn 90 degrees
