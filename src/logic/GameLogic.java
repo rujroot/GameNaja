@@ -187,8 +187,17 @@ public class GameLogic {
 		// Get postion to spawn
 		Point spawnPoint = new Point(firstRoom.getPosition().getX() + 500, firstRoom.getPosition().getY() + 500 );
 
-		// Warp player
+		// Warp player and npc
 		player.setPosition(spawnPoint);
+		for (int i = gameObjectContainer.size() - 1; i >= 0; i--) {
+			BaseObject object = gameObjectContainer.get(i);
+			if(object instanceof Npc){
+				Npc npc = (Npc) object;
+				Point pos = player.getPosition();
+				npc.setPosition(new Point(pos.getX(), pos.getY()));
+			}
+		}
+
 
 	}
 

@@ -143,6 +143,7 @@ public class SceneController{
 		
 		// Npc npc = new Npc("NPC", 10, 10, new DataEntity(100, 1, 1, 10));
 		// npc.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
+		// npc.setValue(0);
 		// logic.addObject(npc);
 		
 		player.setPosition(new Point(firstRoom.getPosition().getX() + 100, firstRoom.getPosition().getY() + 100 ));

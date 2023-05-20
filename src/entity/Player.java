@@ -124,11 +124,7 @@ public class Player extends Entity implements Cooldownable {
 			BaseObject object = inventory.getObject(index);
 			if(object instanceof HealPotion) {
 				HealPotion potion = (HealPotion) object;
-				potion.use();
-				if(potion.getAmount() <= 0){
-					inventory.removeItem(index);
-					this.setEquipment(inventory.getObject(index));
-				}
+				potion.use(this);
 			}
 		}
 		if (InputUtility.getKeyPressed(KeyCode.Z) && !onCooldown()) {
@@ -242,6 +238,7 @@ public class Player extends Entity implements Cooldownable {
 	}
 
 	public void setEquipment(BaseObject equipment) {
+		System.out.println(equipment);
 		if (equipment instanceof BaseWeapon) {
 			((BaseWeapon) equipment).setEntity(this);
 			this.equipment = (BaseWeapon) equipment;

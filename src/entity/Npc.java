@@ -7,12 +7,14 @@ import data.DataEntity;
 import data.Point;
 import entity.boss.BossEntity;
 import equipment.BaseWeapon;
+import equipment.Gun;
 import equipment.Knife;
 import equipment.Melee;
 import equipment.Pickaxe;
 import equipment.Wand;
 import input.InputUtility;
 import inventory.Inventory;
+import item.HealPotion;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
@@ -28,7 +30,7 @@ public class Npc extends Entity implements Cooldownable {
 
 	private WritableImage image = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 644, 964, 59, 59);
 	private Entity followEntity, targetEntity;
-	private double maxDistance = 500;
+	private double maxDistance = 700;
 	private BaseWeapon equipment;
 	private String state = "Idel";
 	private double value = 25;
@@ -72,6 +74,15 @@ public class Npc extends Entity implements Cooldownable {
 						inventory.removeItem(inventory.getUI().getSelectIndex());
 						inventory.addItem(this.getEquipment());
 						this.setEquipment(weapon);
+						player.setEquipment(inventory.getObject(inventory.getUI().getSelectIndex()));
+					}
+					else if(obj != null && obj instanceof HealPotion){
+						HealPotion potion =  (HealPotion) obj;
+						potion.use(this);
+					}
+					else if(this.getEquipment() != null){
+						inventory.addItem(this.getEquipment());
+						this.setEquipment(null);
 						player.setEquipment(inventory.getObject(inventory.getUI().getSelectIndex()));
 					}
 
@@ -120,17 +131,22 @@ public class Npc extends Entity implements Cooldownable {
 		}
 
 		if(targetEntity != null && !(targetEntity instanceof Player)){
-			if(equipment instanceof Melee)
+			if(equipment instanceof Melee){
 				follow(targetEntity);
-			equipment.attack(); 
-			
+				if(distance(targetEntity.getPosition()) <= 100)
+				equipment.attack();
+			}else if(equipment instanceof Gun){
+				if(equipment instanceof Gun && distance(followEntity.getPosition()) >= 300)
+					follow(followEntity);
+				equipment.attack(); 	
+			}
+
 		} 
 		else follow(followEntity);
 	}
 
 	public void doBehavior() {
 		if(this.getState().equals("Idel")) return;
-		if(!onCooldown()) this.getData().setHp(this.getData().getHp() + 1);
 		attack();
 	}
 
@@ -146,7 +162,7 @@ public class Npc extends Entity implements Cooldownable {
 
 		DataEntity data = this.getData();
 
-		if (distance > 150 && distance < 500) {
+		if (distance > 150 && distance < 600) {
 			double mx = -p.getX() / distance * data.getSpd();
 			double my = -p.getY() / distance * data.getSpd();
 			// Check for obstacles
@@ -162,7 +178,7 @@ public class Npc extends Entity implements Cooldownable {
 				this.move(-p.getX() / distance * data.getSpd(), 0);
                 this.move(0, -p.getY() / distance * data.getSpd());
 			//}
-		}else if(distance > 1000){
+		}else if(distance >= 600 && entity instanceof Player){
 			warpToEntity(entity);
 		}
 
@@ -244,6 +260,11 @@ public class Npc extends Entity implements Cooldownable {
 	}
 
 	public void setEquipment(BaseWeapon equipment) {
+		if(equipment == null) {
+			this.equipment = null;
+			return;
+		}
+
 		this.equipment = equipment;
 		equipment.setEntity(this);
 	}

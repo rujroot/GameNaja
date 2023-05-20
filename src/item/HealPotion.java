@@ -1,6 +1,8 @@
 package item;
 
+import entity.Entity;
 import entity.Player;
+import inventory.Inventory;
 import javafx.scene.image.WritableImage;
 import logic.Cooldownable;
 import logic.RenderableHolder;
@@ -16,11 +18,18 @@ public class HealPotion extends Item implements Cooldownable {
         this.setImage(new WritableImage(RenderableHolder.Tileset.getPixelReader(), 784, 720, 819 - 784, 763 - 720));
     }
 
-    public void use(){
+    public void use(Entity entity){
         if(onCooldown()) return;
-        Player player = Player.getPlayer();
-        player.getData().setHp(player.getData().getHp() + 50);
+
+        entity.getData().setHp(entity.getData().getHp() + 50);
         this.setAmount(this.getAmount() - 1);
+
+        Inventory inventory = Player.getPlayer().getInventory();
+        if(this.getAmount() <= 0){
+            int index = inventory.getUI().getSelectIndex();;
+            inventory.removeItem(index);
+            Player.getPlayer().setEquipment(inventory.getObject(index));
+        }
     }
 
     @Override
