@@ -69,7 +69,7 @@ public class SceneController{
 		stage.setTitle("Game Naja eiei");
 		stage.show();
 		
-		RenderableHolder.gameOverSound.setVolume(0.1);// 0.0 to 1.0 (min to man volume)
+		RenderableHolder.gameOverSound.setVolume(0.2);// 0.0 to 1.0 (min to man volume)
 		RenderableHolder.gameOverSound.play();
 
 	}
@@ -99,6 +99,9 @@ public class SceneController{
 
 		InputUtility.reset();
 		gameStop = false;
+		
+		RenderableHolder.sound.setVolume(0.1);// 0.0 to 1.0 (min to man volume)
+		RenderableHolder.sound.play();
 
 	}
 	
