@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scene.SceneController">
+   <children>
+      <Label layoutX="90.0" layoutY="55.0" prefHeight="74.0" prefWidth="273.0" text="How to play" textAlignment="CENTER">
+         <font>
+            <Font size="50.0" />
+         </font>
+      </Label>
+      <Button layoutX="1139.0" layoutY="640.0" mnemonicParsing="false" onAction="#switchToStartGameScene" prefHeight="61.0" prefWidth="99.0" text="Back">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Button>
+      <Label layoutX="122.0" layoutY="166.0" text="W, A, S, D : control movement of the player.">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="122.0" layoutY="239.0" text="Left click or space bar : attack to mouse direction.">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="122.0" layoutY="315.0" text="1-9 : select inventory at index 1-9.">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="122.0" layoutY="391.0" text="E, Q : interact with a shopkeeper.">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

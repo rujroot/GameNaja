@@ -43,18 +43,33 @@ public class SceneController{
 	private Image gameOver = new Image(getClass().getResourceAsStream("GameOverImage.jpg"));
 	
 	public void switchToStartGameScene(ActionEvent event) throws IOException {
-		
+		//dungeonImage = new Image(getClass().getResourceAsStream("Dungeon.jpg"));
 		Parent root = (Parent) FXMLLoader.load(getClass().getResource("/scene/Start.fxml"));
 		Scene scene = new Scene(root);
 		Stage stage = Main.stage;
 
 		stage.setScene(scene);
-		stage.setTitle("Game Naja eiei");
-		myImageView.setImage(dungeonImage);
+		stage.setTitle("Game Naja");
+		//myImageView.setImage(dungeonImage);
 		stage.show();
-		RenderableHolder.gameOverSound.stop();
-		RenderableHolder.openSound.setVolume(0.1);// 0.0 to 1.0 (min to man volume)
-		RenderableHolder.openSound.play();
+		//RenderableHolder.gameOverSound.stop();
+		//RenderableHolder.openSound.setVolume(0.1);// 0.0 to 1.0 (min to man volume)
+		//RenderableHolder.openSound.play();
+	}
+	
+	public void switchToHowToPlayScene() throws IOException {
+
+		
+		
+		Parent root = (Parent) FXMLLoader.load(getClass().getResource("/scene/HowToPlay.fxml"));
+		Scene scene = new Scene(root);
+		Stage stage = Main.stage;
+
+		stage.setScene(scene);
+		stage.setTitle("Game Naja");
+		stage.show();
+		
+
 	}
 	
 	public void switchToGameOverScene() throws IOException {
@@ -66,7 +81,7 @@ public class SceneController{
 		Stage stage = Main.stage;
 
 		stage.setScene(scene);
-		stage.setTitle("Game Naja eiei");
+		stage.setTitle("Game Naja");
 		stage.show();
 		
 		RenderableHolder.gameOverSound.setVolume(0.2);// 0.0 to 1.0 (min to man volume)
@@ -94,7 +109,7 @@ public class SceneController{
 		root.getChildren().add(gameScreen);
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
-		stage.setTitle("Game Naja eiei");
+		stage.setTitle("Game Naja");
 		gameScreen.requestFocus();
 
 		InputUtility.reset();
@@ -118,7 +133,7 @@ public class SceneController{
 		root.getChildren().add(gameScreen);
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
-		stage.setTitle("Game Naja eiei");
+		stage.setTitle("Game Naja");
 		gameScreen.requestFocus();
 
 		Room firstRoom = GenerateDungeon.getContainer().get(0).get(0);
