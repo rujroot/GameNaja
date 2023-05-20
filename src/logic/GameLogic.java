@@ -80,17 +80,6 @@ public class GameLogic {
 						monster.attack();
 					}
 					
-					if(>=31) {
-						SceneController sceneController = new SceneController();
-						resetGame();
-						try {
-							sceneController.switchToGameClearScene();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-					
 					if(entity instanceof Player) {
 						Player player = (Player) entity;
 						player.checkPlayerInBossRoom();
@@ -165,12 +154,22 @@ public class GameLogic {
 
 	public void nextFloor() throws CloneNotSupportedException{
 		this.clearObject();
-		SceneController.dungeon.increaseFloor(1);
+		SceneController.dungeon.increaseFloor(20);
 		
 		//Get next dungeon
 		int currentLevel = GenerateDungeon.getCurrLevel();
 		if(currentLevel >= GenerateDungeon.getLevel() - 1) return;
-		GenerateDungeon.setCurrLevel(currentLevel+ 1);
+		GenerateDungeon.setCurrLevel(currentLevel + 20);
+
+		if(GenerateDungeon.getCurrLevel() + 1 >= 31) {
+			SceneController sceneController = new SceneController();
+			resetGame();
+			try {
+				sceneController.switchToGameClearScene();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		//Get first room
 		ArrayList<Room> nextLevel = GenerateDungeon.getContainer().get(currentLevel + 1);
