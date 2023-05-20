@@ -23,7 +23,7 @@ public class Main extends Application {
 
 			Scene startGame = new Scene(root);
 			stage.setScene(startGame);
-			stage.setTitle("Game Naja eiei");
+			stage.setTitle("Game Naja");
 			stage.show();
 			Main.stage = stage;
 			

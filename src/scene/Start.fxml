@@ -59,5 +59,26 @@
             </LinearGradient>
          </textFill>
       </Button>
+      <Button layoutX="544.0" layoutY="548.0" mnemonicParsing="false" onAction="#switchToHowToPlayScene" text="How to Play">
+         <font>
+            <Font name="Baskerville Old Face" size="41.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.9684210419654846" green="0.0645614042878151" blue="0.0645614042878151" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
    </children>
 </AnchorPane>
