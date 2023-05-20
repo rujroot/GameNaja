@@ -67,6 +67,7 @@ public class RenderableHolder {
 		mainWall = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 1236, 176, 87, 79);
 		
 		sound = new AudioClip(ClassLoader.getSystemResource("res/audio/01OpeningCinematic.wav").toString());
+		sound.setCycleCount(100);
 		openSound = new AudioClip(ClassLoader.getSystemResource("res/audio/OpenTheme.wav").toString());
 		gameOverSound = new AudioClip(ClassLoader.getSystemResource("res/audio/GameOverTheme.wav").toString());
 		
