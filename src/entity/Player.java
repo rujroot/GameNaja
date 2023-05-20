@@ -137,6 +137,7 @@ public class Player extends Entity implements Cooldownable {
 
 		inventory.addItem(new Pickaxe());
 		inventory.addItem(new HealPotion(3, 10));
+
 		inventory.selectIndex(0);
 		this.setEquipment(inventory.getObject(0));
 

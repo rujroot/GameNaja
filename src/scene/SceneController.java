@@ -139,7 +139,7 @@ public class SceneController{
 	
 	public void switchToBodyGameScene() throws CloneNotSupportedException {
 		RenderableHolder.openSound.stop();
-		Player player = new Player("Player", new DataEntity(100, 10000, 10000, 10));
+		Player player = new Player("Player", new DataEntity(10000, 10000, 10000, 10));
 
 		logic = new GameLogic();
 		dungeon = new GenerateDungeon(1);
@@ -160,12 +160,12 @@ public class SceneController{
 		
 		// Npc npc = new Npc("NPC", 10, 10, new DataEntity(100, 1, 1, 10));
 		// npc.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
-		// npc.setValue(0);
 		// logic.addObject(npc);
 		
 		player.setPosition(new Point(firstRoom.getPosition().getX() + 100, firstRoom.getPosition().getY() + 100 ));
 		player.initInventory();
 		logic.addObject(player);
+		player.addMoney(100);
 
 		// PheuFire demonslime = new PheuFire("PheuFire", new DataEntity(100, 1, 1, 12));
 		// demonslime.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));

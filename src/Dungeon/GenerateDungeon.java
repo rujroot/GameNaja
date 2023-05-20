@@ -29,7 +29,7 @@ public class GenerateDungeon {
 		for(int i = 0; i < increase; ++i) {
 			ArrayList<Room> toPush = new ArrayList<Room>();
 			
-			int amountRoom = (int)(Math.random()*5 + 2);
+			int amountRoom = 2;//(int)(Math.random()*5 + 2);
 			
 			// create first room
 			Room rootRoom = new Room();

@@ -221,6 +221,7 @@ public class GameLogic {
 			if(object instanceof Item) continue;
 			if(object instanceof Npc) continue;
 
+			object.setVisible(false);
 			object.setDestroyed(true);
 			gameObjectContainer.remove(object);
 		}

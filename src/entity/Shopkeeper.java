@@ -59,7 +59,9 @@ public class Shopkeeper extends Entity implements Cooldownable{
 
         chooseUI = new BaseUI(new Point(-100, -150), 0, 0, 2, 20, this);
         chooseUI.setSelectIndex(0);
-        
+        SlotUI[] slotChoose = chooseUI.getPosIndex();
+        slotChoose[0].setDescription("BUY");
+        slotChoose[1].setDescription("SELL");
 
         buyUI = new BaseUI(new Point(-150, -150), 0, 0, 4, 10, this);
         buyUI.setSelectIndex(0);
