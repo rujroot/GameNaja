@@ -52,6 +52,9 @@ public class SceneController{
 		stage.setTitle("Game Naja eiei");
 		myImageView.setImage(dungeonImage);
 		stage.show();
+		RenderableHolder.gameOverSound.stop();
+		RenderableHolder.openSound.setVolume(0.1);// 0.0 to 1.0 (min to man volume)
+		RenderableHolder.openSound.play();
 	}
 	
 	public void switchToGameOverScene() throws IOException {
@@ -65,10 +68,14 @@ public class SceneController{
 		stage.setScene(scene);
 		stage.setTitle("Game Naja eiei");
 		stage.show();
+		
+		RenderableHolder.gameOverSound.setVolume(0.1);// 0.0 to 1.0 (min to man volume)
+		RenderableHolder.gameOverSound.play();
 
 	}
 
 	public void restartGame() throws CloneNotSupportedException{
+		RenderableHolder.gameOverSound.stop();
 		dungeon = new GenerateDungeon(1);
 
 		Room firstRoom = GenerateDungeon.getContainer().get(0).get(0);
@@ -96,7 +103,7 @@ public class SceneController{
 	}
 	
 	public void switchToBodyGameScene() throws CloneNotSupportedException {
-
+		RenderableHolder.openSound.stop();
 		Player player = new Player("Player", new DataEntity(100, 10000, 10000, 10));
 
 		logic = new GameLogic();

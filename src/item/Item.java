@@ -10,7 +10,7 @@ public abstract class Item extends BaseObject {
 
     private int amount = 0, index;
     private double value = 0;
-    private String Name;
+    private String name;
     private WritableImage image;
 
     public Item(int amount, double value) {
@@ -67,11 +67,11 @@ public abstract class Item extends BaseObject {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public WritableImage getImage() {

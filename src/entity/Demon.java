@@ -5,6 +5,8 @@ import animation.ElementAttackAnimation;
 import data.DataEntity;
 import data.Point;
 import equipment.BaseWeapon;
+import equipment.DarkSpiritAttack;
+import equipment.GoblinAttack;
 import javafx.scene.paint.Color;
 import logic.Main;
 import logic.RenderableHolder;
@@ -16,6 +18,7 @@ public class Demon extends Monster{
 		super(name, width, height, data);
 		this.setMagicAttack(magicAttack);
 		this.setImage(RenderableHolder.demon);
+		this.setEquipment(new DarkSpiritAttack());
 		BaseWeapon weapon = this.getEquipment();
 		weapon.setAttackDamage(data.getAtk());
 	}

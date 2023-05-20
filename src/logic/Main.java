@@ -27,6 +27,9 @@ public class Main extends Application {
 			stage.show();
 			Main.stage = stage;
 			
+			RenderableHolder.openSound.setVolume(0.1);// 0.0 to 1.0 (min to man volume)
+			RenderableHolder.openSound.play();
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
