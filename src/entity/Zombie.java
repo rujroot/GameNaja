@@ -1,6 +1,7 @@
 package entity;
 
 import data.DataEntity;
+import equipment.BaseWeapon;
 import equipment.PunchMonster;
 import javafx.scene.image.WritableImage;
 import logic.RenderableHolder;
@@ -15,11 +16,25 @@ public class Zombie extends Monster {
 		this.setImage(image);
 
 		this.setEquipment(new PunchMonster());
+		BaseWeapon weapon = this.getEquipment();
+		weapon.setAttackDamage(data.getAtk());
 	}
 
 	@Override
 	public void attack() {
-		super.attack();
+		if(this.getTargetEntity() == null) return;
+
+		Entity targetEntity = this.getTargetEntity();
+
+		double findingRange = 600;
+		double attackRange = 100;
+		
+		if(distance(targetEntity.getPosition()) <= findingRange){
+			follow(targetEntity);
+		}
+		if(distance(targetEntity.getPosition()) <= attackRange){
+			this.getEquipment().attack();
+		}
 	}
 	
 	public double getPoisonDamage() {
@@ -29,9 +44,5 @@ public class Zombie extends Monster {
 	public void setPoisonDamage(double poisonDamage) {
 		this.poisonDamage = poisonDamage;
 	}
-
-
-
-	
 
 }

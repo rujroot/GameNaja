@@ -67,7 +67,7 @@ public class Monster extends Entity implements Cooldownable {
 
 	public void follow(Entity entity) {
 		if(entity == null) return;
-
+		
 		Point pp = entity.getPosition();
 
 		double px = pp.getX(), py = pp.getY();
@@ -77,7 +77,7 @@ public class Monster extends Entity implements Cooldownable {
 
 		DataEntity data = this.getData();
 
-		if (distance > 60 && distance < 500) {
+		if (distance > 60 && distance <= 700) {
 			this.move(-p.getX() / distance * data.getSpd(), 0);
 			this.move(0, -p.getY() / distance * data.getSpd());
 		}
@@ -152,4 +152,24 @@ public class Monster extends Entity implements Cooldownable {
 		this.setWidth(image.getWidth());
 		this.setHeight(image.getHeight());
     }
+
+	public Entity getTargetEntity() {
+		return targetEntity;
+	}
+
+	public void setTargetEntity(Entity targetEntity) {
+		this.targetEntity = targetEntity;
+	}
+
+	public double getCooldownTime() {
+		return cooldownTime;
+	}
+
+	public void setCooldownTime(double cooldownTime) {
+		this.cooldownTime = cooldownTime;
+	}
+
+	
+
+	
 }

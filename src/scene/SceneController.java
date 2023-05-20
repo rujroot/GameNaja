@@ -79,6 +79,7 @@ public class SceneController{
 		Player player = new Player("Player", new DataEntity(100, 10000, 10000, 10));
 		player.setPosition(new Point(firstRoom.getPosition().getX() + 100, firstRoom.getPosition().getY() + 100 ));
 		player.initInventory();
+		player.setResolutionPosition(new Point(1400 / 2, 800 / 2));
 		logic.addObject(player);
 
 		Stage stage = Main.stage;
@@ -139,10 +140,6 @@ public class SceneController{
 		// frostGuardain.setPosition(new Point(firstRoom.getPosition().getX() + 300, firstRoom.getPosition().getY() + 300 ));
 		// logic.addObject(frostGuardain);
 
-		// Ladder ladder = new Ladder(null);
-		// ladder.setPosition(new Point(firstRoom.getPosition().getX() + 300, firstRoom.getPosition().getY() + 300 ));
-		// logic.addObject(ladder);
-
 		AnimationController animationController = new AnimationController();
 		
 		AnimationTimer animation = new AnimationTimer() {
@@ -154,15 +151,16 @@ public class SceneController{
 
 				try {
 					gameScreen.updatePlayer();
+					gameScreen.paintLevel();
+					gameScreen.paintComponent();
+					animationController.run();
+					logic.logicUpdate();
+					RenderableHolder.getInstance().update();
+					InputUtility.updateInputState();
 				} catch (CloneNotSupportedException e) {
 					e.printStackTrace();
 				}
-				gameScreen.paintLevel();
-				gameScreen.paintComponent();
-				animationController.run();
-				logic.logicUpdate();
-				RenderableHolder.getInstance().update();
-				InputUtility.updateInputState();
+				
 			}
 		};
 		RenderableHolder.sound.setVolume(0.1);// 0.0 to 1.0 (min to man volume)

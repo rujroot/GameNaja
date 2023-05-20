@@ -14,19 +14,11 @@ public class Shield extends Melee {
 	public Shield() {
 		super();
 		this.setImage(image);
-		this.setAttackDamage(100);
-		this.setAttackRange(100);
-		this.setAttackDegree(80);
-	}
-
-	
-	
-	public Shield( double attackDamage, double attackRange, double attackDegree) {
-		super();
-		this.setImage(image);
-		this.setAttackDamage(attackDamage);
-		this.setAttackRange(attackRange);
-		this.setAttackDegree(attackDegree);
+		this.setAttackDamage(3);
+		this.setAttackRange(150);
+		this.setAttackDegree(360);
+		this.setCooldownTime(500);
+		this.setValue(70);
 	}
 
 	@Override

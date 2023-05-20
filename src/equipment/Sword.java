@@ -22,16 +22,6 @@ public class Sword extends Melee {
 
 	}
 
-	public Sword(double attackDamage, double attackRange, double attackDegree) {
-		super();
-
-		this.setImage(image);
-		this.setAttackDamage(attackDamage);
-		this.setAttackRange(attackRange);
-		this.setAttackDegree(attackDegree);
-
-	}
-
 	@Override
 	public void attackAbility(ArrayList<BaseObject> intersectObjects) {
 		for(BaseObject object : intersectObjects){			

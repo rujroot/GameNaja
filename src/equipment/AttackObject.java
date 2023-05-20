@@ -22,7 +22,7 @@ public class AttackObject extends AnimationObject{
         this.setEndAngle(endAngle);
 
         this.setEndTime(endAngle);
-        this.setSpeedAnim(20);
+        this.setSpeedAnim(this.getEndTime() / 5);
     }
 
     @Override

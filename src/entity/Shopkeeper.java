@@ -5,8 +5,17 @@ import java.util.ArrayList;
 import data.BaseObject;
 import data.DataEntity;
 import data.Point;
+import equipment.Axe;
 import equipment.BaseWeapon;
+import equipment.Bow;
+import equipment.IceBow;
 import equipment.Knife;
+import equipment.LightBow;
+import equipment.Punch;
+import equipment.Shield;
+import equipment.Spear;
+import equipment.Sword;
+import equipment.Wand;
 import input.InputUtility;
 import inventory.BaseUI;
 import inventory.Inventory;
@@ -134,16 +143,21 @@ public class Shopkeeper extends Entity implements Cooldownable{
 
     public void initShopBuy() throws CloneNotSupportedException{
 
-        allBuyItem.add(new Knife(1, 100, 100));
+        allBuyItem.add(new Knife());
+        allBuyItem.add(new Axe());
+        allBuyItem.add(new IceBow());
+        allBuyItem.add(new LightBow());
+        allBuyItem.add(new Punch());
+        allBuyItem.add(new Shield());
+        allBuyItem.add(new Spear());
+        allBuyItem.add(new Wand());
+        allBuyItem.add(new Bow());
         
         for(int i = 0; i < 4; ++i){
-            int randNum = 0;//(int)(Math.random() * maxIndex);
-            // while(choose.indexOf(randNum) != -1){
-            //     randNum = (int)(Math.random() * maxIndex);
-            // }
+            int randNum = (int)(Math.random() * allBuyItem.size());
 
             BaseWeapon weapon = (BaseWeapon) allBuyItem.get(randNum).clone();
-            weapon.setValue(Math.floor(Math.random() * 10));
+            weapon.setValue(weapon.getValue() + (int)(Math.random() * 20) - 20);
 
             buyWeapon[i] = weapon;
             buyUI.addItem(weapon);

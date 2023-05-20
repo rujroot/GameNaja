@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 import logic.Hitbox;
 
 public abstract class BaseWeapon extends BaseObject implements Cloneable{
-	private double attackDamage, attackSpeed, value;
+	private double attackDamage, attackSpeed, value = 50;
 	private Point offsetPosition = new Point(30.0, 20.0);
 	private Entity entity;
 
@@ -123,7 +123,5 @@ public abstract class BaseWeapon extends BaseObject implements Cloneable{
 	public void setEntity(Entity entity) {
 		this.entity = entity;
 	}
-
-	
 
 }

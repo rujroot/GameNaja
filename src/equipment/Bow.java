@@ -7,16 +7,13 @@ public class Bow extends Gun {
 
 	private WritableImage image = new WritableImage(RenderableHolder.equipment1.getPixelReader(), 129*2, 0, (159-129)*2, (32-0)*2);
 	
-	public Bow(double width, double height) {
-		super(width, height,100);
+	public Bow() {
+		super();
 		this.setImage(image);
 
+		this.setDamage(5);
 		this.setCooldownTime(500);
-	}
-
-	public Bow(double width, double height, int attackDamage) {
-		super(width, height, attackDamage);
-
+		this.setValue(60);
 	}
 
 	@Override

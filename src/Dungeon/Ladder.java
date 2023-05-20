@@ -51,7 +51,7 @@ public class Ladder extends BaseObject implements Cooldownable {
         return Math.sqrt( Math.pow(playerPos.getX() - pos.getX() , 2) + Math.pow( playerPos.getY() - pos.getY(), 2) ) <= 250;
     }
     
-    public void updateInput(){
+    public void updateInput() throws CloneNotSupportedException{
         // Player interact with this entity
         if (InputUtility.getKeyPressed(KeyCode.E) && inDistant() && !onCooldown()){
 			Main.getLogic().nextFloor();

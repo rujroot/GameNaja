@@ -14,17 +14,10 @@ public class Spear extends Melee {
 	public Spear() {
 		super();
 		this.setImage(image);
-		this.setAttackDamage(100);
-		this.setAttackRange(100);
-		this.setAttackDegree(100);
-	}
-	
-	public Spear( double attackDamage, double attackRange, double attackDegree) {
-		super();
-		this.setImage(image);
-		this.setAttackDamage(attackDamage);
-		this.setAttackRange(attackRange);
-		this.setAttackDegree(attackDegree);
+		this.setAttackDamage(2);
+		this.setAttackRange(500);
+		this.setAttackDegree(20);
+		this.setValue(50);
 	}
 
 	@Override

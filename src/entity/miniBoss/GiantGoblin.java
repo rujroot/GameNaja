@@ -1,6 +1,7 @@
 package entity.miniBoss;
 
 import data.DataEntity;
+import equipment.GaintGoblinAttack;
 import javafx.scene.image.WritableImage;
 import logic.RenderableHolder;
 
@@ -11,6 +12,13 @@ public class GiantGoblin extends MiniBossEntity {
     public GiantGoblin(String name, double width, double height, DataEntity data) {
         super(name, width, height, data);
         this.setImage(image);
+
+        this.setEquipment(new GaintGoblinAttack());
+    }
+
+    @Override
+    public void specialAttack() {
+       
     }
     
     

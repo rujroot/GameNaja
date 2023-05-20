@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import data.BaseObject;
 import data.DataEntity;
 import entity.Monster;
-import entity.boss.BossEntity;
 import javafx.scene.image.WritableImage;
 import logic.RenderableHolder;
 
@@ -15,17 +14,10 @@ public class Axe extends Melee{
 	public Axe() {
 		super();
 		this.setImage(image);
-		this.setAttackDamage(100);
-		this.setAttackRange(100);
+		this.setAttackDamage(5);
+		this.setAttackRange(200);
 		this.setAttackDegree(100);
-	}
-	
-	public Axe(double attackDamage, double attackRange, double attackDegree) {
-		super();
-		this.setImage(image);
-		this.setAttackDamage(attackDamage);
-		this.setAttackRange(attackRange);
-		this.setAttackDegree(attackDegree);
+		this.setValue(50);
 	}
 
 	@Override

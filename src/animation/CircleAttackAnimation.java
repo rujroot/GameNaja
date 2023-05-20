@@ -1,7 +1,5 @@
 package animation;
 
-import java.util.ArrayList;
-
 import data.BaseObject;
 import data.DataEntity;
 import data.Point;
