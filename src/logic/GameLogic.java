@@ -80,6 +80,17 @@ public class GameLogic {
 						monster.attack();
 					}
 					
+					if(>=31) {
+						SceneController sceneController = new SceneController();
+						resetGame();
+						try {
+							sceneController.switchToGameClearScene();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
 					if(entity instanceof Player) {
 						Player player = (Player) entity;
 						player.checkPlayerInBossRoom();

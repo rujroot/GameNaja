@@ -88,6 +88,23 @@ public class SceneController{
 		RenderableHolder.gameOverSound.play();
 
 	}
+	
+	public void switchToGameClearScene() throws IOException {
+
+		gameStop = true;
+		
+		Parent root = (Parent) FXMLLoader.load(getClass().getResource("/scene/GameClear.fxml"));
+		Scene scene = new Scene(root);
+		Stage stage = Main.stage;
+
+		stage.setScene(scene);
+		stage.setTitle("Game Naja");
+		stage.show();
+		
+		RenderableHolder.gameOverSound.setVolume(0.2);// 0.0 to 1.0 (min to man volume)
+		RenderableHolder.gameOverSound.play();
+
+	}
 
 	public void restartGame() throws CloneNotSupportedException{
 		RenderableHolder.gameOverSound.stop();

@@ -12,31 +12,15 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scene.SceneController">
    <children>
-      <ImageView fx:id="myImageView" fitHeight="819.0" fitWidth="1482.0" layoutX="-56.0" layoutY="-19.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="myImageView" fitHeight="1113.0" fitWidth="1521.0" layoutX="-50.0" layoutY="-277.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Dungeon.jpg" />
+            <Image url="@PathToDungeon.png" />
          </image>
       </ImageView>
-      <Label layoutX="468.0" layoutY="188.0" text="GameNaja">
+      <Label layoutX="475.0" layoutY="133.0" prefHeight="234.0" prefWidth="394.0" text="GameNaja" textFill="#fafafa">
          <font>
-            <Font size="89.0" />
+            <Font name="Gigi" size="96.0" />
          </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="0.18000000715255737" green="0.2507614195346832" blue="1.0" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </textFill>
       </Label>
       <Button layoutX="608.0" layoutY="449.0" mnemonicParsing="false" onAction="#switchToBodyGameScene" text="Start">
          <font>
