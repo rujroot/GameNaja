@@ -18,7 +18,7 @@ public class RenderableHolder {
 
 	public static Image Tileset, baseFloor, ores, character, atlas, sideWall, mainWall, demon, equipment1, enemy, slime;
 	public static Image backUI, upUI, selectUI;
-	public static AudioClip sound;
+	public static AudioClip sound, openSound, gameOverSound;
 	public static HashMap<String, Image[][]> imageAnimation = new HashMap<>();
 
 	static {
@@ -67,6 +67,8 @@ public class RenderableHolder {
 		mainWall = new WritableImage(RenderableHolder.Tileset.getPixelReader(), 1236, 176, 87, 79);
 		
 		sound = new AudioClip(ClassLoader.getSystemResource("res/audio/01OpeningCinematic.wav").toString());
+		openSound = new AudioClip(ClassLoader.getSystemResource("res/audio/OpenTheme.wav").toString());
+		gameOverSound = new AudioClip(ClassLoader.getSystemResource("res/audio/GameOverTheme.wav").toString());
 		
 		demon = new Image(ClassLoader.getSystemResource("res/image/0_Golem_Throwing_001.png").toString());
 		enemy = new Image(ClassLoader.getSystemResource("res/image/Enemy.png").toString());

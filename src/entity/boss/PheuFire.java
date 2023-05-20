@@ -100,7 +100,7 @@ public class PheuFire extends BossEntity{
     }
     
     public void playAttackP1(){
-        if(this.getDistant() > 200 && !status.equals("wait1")){
+        if(this.getDistance() > 200 && !status.equals("wait1")){
             follow();
         }else if(status.equals("wait1")){
             cooldownTime = 1000;
@@ -179,7 +179,7 @@ public class PheuFire extends BossEntity{
         }
     }
 
-    public double getDistant(){
+    public double getDistance(){
 
         Point pp = Player.getPlayer().getPosition();
         double px = pp.getX() , py = pp.getY();
