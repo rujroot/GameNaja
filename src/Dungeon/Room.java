@@ -148,7 +148,7 @@ public class Room implements IRenderable {
 
 			BaseOre baseOre;
 			if(type.equals(OreType.STONE)){
-				baseOre = new StoneOre(position, new DataOre(10, 0.01));
+				baseOre = new StoneOre(position, new DataOre(10, 0.05));
 			}else if(type.equals(OreType.COAL)){
 				baseOre = new CoalOre(position, new DataOre(10, 0.1));
 			}else if(type.equals(OreType.IRON)){
