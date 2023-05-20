@@ -94,7 +94,7 @@ public class BossRoom extends Room{
             String choose = type[(int) (Math.random() * 2)];
 
             BossEntity boss;
-            if(choose.equals("First")){
+            if(choose.equals("Fire")){
                 boss = new PheuFire("PheuFire", new DataEntity(currLevel * 20, 1, 1, 12));
             }else{
                 boss = new FrostGuardian("FrostGuardain", new DataEntity(currLevel * 20, 1, 1, 12));
