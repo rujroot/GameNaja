@@ -78,8 +78,6 @@ public class Npc extends Entity implements Cooldownable {
 				}
 
 			}
-		}else{
-
 		}
 	}
 
@@ -132,6 +130,7 @@ public class Npc extends Entity implements Cooldownable {
 
 	public void doBehavior() {
 		if(this.getState().equals("Idel")) return;
+		if(!onCooldown()) this.getData().setHp(this.getData().getHp() + 1);
 		attack();
 	}
 
