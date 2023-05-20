@@ -31,7 +31,7 @@ public class Npc extends Entity implements Cooldownable {
 	private double maxDistance = 500;
 	private BaseWeapon equipment;
 	private String state = "Idel";
-	private double value = 50;
+	private double value = 25;
 
 	public Npc(String name, double width, double height, DataEntity data) {
 		super(name, width, height, data);
@@ -78,8 +78,6 @@ public class Npc extends Entity implements Cooldownable {
 				}
 
 			}
-		}else{
-
 		}
 	}
 
@@ -132,6 +130,7 @@ public class Npc extends Entity implements Cooldownable {
 
 	public void doBehavior() {
 		if(this.getState().equals("Idel")) return;
+		if(!onCooldown()) this.getData().setHp(this.getData().getHp() + 1);
 		attack();
 	}
 
