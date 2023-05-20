@@ -53,8 +53,8 @@ public class GenerateDungeon {
 				connectRoom.getConnectPath().get(direction).setVisible(true);
 
 				//generate ore and monster
-				room.generateOre((int)(Math.random()*10 + 5));
-				room.generateMonster((int)(Math.random()*10 + 5));
+				room.generateOre(Math.min(20, (int)(Math.random()*(currLevel + 5) + 5)) );
+				room.generateMonster(Math.min(20, (int)(Math.random()*(currLevel + 5) + 5)));
 
 				// set connect room
 				room.getConnectRoom().put(direction.getOpposite(), connectRoom);

@@ -16,7 +16,7 @@ public class RenderableHolder {
 	private List<IRenderable> objects;
 	private Comparator<IRenderable> comparator;
 
-	public static Image Tileset, baseFloor, ores, character, atlas, sideWall, mainWall, demon, equipment1, enemy, slime;
+	public static Image Tileset, baseFloor, ores, character, atlas, sideWall, mainWall, demon, equipment1, enemy, slime, baseBossFloor;
 	public static Image backUI, upUI, selectUI;
 	public static AudioClip sound, openSound, gameOverSound;
 	public static HashMap<String, Image[][]> imageAnimation = new HashMap<>();
@@ -55,6 +55,7 @@ public class RenderableHolder {
 	public static void loadResource() {
 		Tileset = new Image(ClassLoader.getSystemResource("res/image/DungeonTileset2.png").toString());
 		baseFloor = new Image(ClassLoader.getSystemResource("res/image/floor_light.png").toString());
+		baseBossFloor = new Image(ClassLoader.getSystemResource("res/image/floor_plain.png").toString());
 		//baseFloor = new Image(ClassLoader.getSystemResource("res/image/baseFloor.png").toString());
 		ores = new Image(ClassLoader.getSystemResource("res/image/ores.png").toString());
 		character = new Image(ClassLoader.getSystemResource("res/image/character2.png").toString());

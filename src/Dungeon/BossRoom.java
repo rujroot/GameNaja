@@ -17,6 +17,7 @@ import entity.miniBoss.MiniBossEntity;
 import inventory.Inventory;
 import item.Item;
 import logic.Main;
+import logic.RenderableHolder;
 
 public class BossRoom extends Room{
 
@@ -39,6 +40,7 @@ public class BossRoom extends Room{
 		}
 		
 		this.setRoomSize(Size.BOSS);
+        this.setImage(RenderableHolder.baseBossFloor);
 		generatePath();
 	}
 
