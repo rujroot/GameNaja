@@ -1,5 +1,7 @@
 package entity;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 import data.BaseObject;
@@ -127,8 +129,13 @@ public class Shopkeeper extends Entity implements Cooldownable{
                 Item itemInv = (Item) slotInventory[j].getObject();
 
                 if(itemInv != null && itemSell.equals(itemInv)){
+                    BigDecimal bd = new BigDecimal(itemInv.getValue());
+                    bd = bd.setScale(2, RoundingMode.HALF_DOWN);
+
+                    double roundedNumber = bd.doubleValue();
+
                     itemSell.setAmount(itemInv.getAmount());
-                    slotSell[i].setDescription(Double.toString(itemInv.getValue()) + "$");
+                    slotSell[i].setDescription(Double.toString(roundedNumber) + "$");
                     found = true;
                     break;
                 }
@@ -181,7 +188,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
         if(object instanceof BaseWeapon){
 
             BaseWeapon item = (BaseWeapon) object;
-            double value = 0;//item.getValue();
+            double value = item.getValue();
 
             if(value <= money){
                 try {
@@ -197,7 +204,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
 
         }else{
             Item item = (Item) object;
-            double value = 0;//item.getValue();
+            double value = item.getValue();
 
             if(value <= money){
                 try {
