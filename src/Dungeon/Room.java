@@ -39,7 +39,7 @@ public class Room implements IRenderable {
 	protected double heightRoom = sideWall.getHeight();
 
 	Size[] allSize = {Size.SMALL, Size.MEDUIM, Size.LARGE};
-	OreType[] allType = {OreType.STONE, OreType.COAL, OreType.DIAMOND, OreType.GOLD, OreType.IRON};
+	OreType[] allType = {OreType.STONE, OreType.COAL, OreType.IRON, OreType.GOLD, OreType.DIAMOND};
 	
 	//create connect room
 	public Room(Room parentRoom, Direction direction) {
