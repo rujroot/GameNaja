@@ -158,10 +158,10 @@ public class SceneController{
 		shopkeeper.setPosition(new Point(firstRoom.getPosition().getX() + 20, firstRoom.getPosition().getY() + 20 ));
 		logic.addObject(shopkeeper);
 		
-		// Npc npc = new Npc("NPC", 10, 10, new DataEntity(100, 1, 1, 10));
-		// npc.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
-		// npc.setValue(0);
-		// logic.addObject(npc);
+		Npc npc = new Npc("NPC", 10, 10, new DataEntity(100, 1, 1, 10));
+		npc.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
+		npc.setValue(0);
+		logic.addObject(npc);
 		
 		player.setPosition(new Point(firstRoom.getPosition().getX() + 100, firstRoom.getPosition().getY() + 100 ));
 		player.initInventory();

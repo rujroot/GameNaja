@@ -109,6 +109,18 @@ public class Npc extends Entity implements Cooldownable {
 			equipment.draw(gc);
 		}
 
+		if(this.getState().equals("Idel")){
+			gc.setFill(Color.GREY);
+			double x = pos.getX();
+			double y = pos.getY();
+			gc.fillRect(x - 5, y - 5, 8, 70);
+			gc.fillRect(x + 15, y - 5, 8, 70);
+			gc.fillRect(x + 35, y - 5, 8, 70);
+			gc.fillRect(x + 55, y - 5, 8, 70);
+			gc.fillRect(x - 5, y - 15, 68, 10);
+			gc.fillRect(x - 5, y + 65, 68, 10);
+		}
+
 		if(inRange(100)){
 			gc.setFont(new Font("Arial", 24));
             gc.setFill(Color.BLACK);
