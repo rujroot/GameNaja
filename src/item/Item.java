@@ -6,7 +6,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-public abstract class Item extends BaseObject {
+public abstract class Item extends BaseObject implements Cloneable {
 
     private int amount = 0, index;
     private double value = 0;
@@ -26,10 +26,16 @@ public abstract class Item extends BaseObject {
     @Override
     public void draw(GraphicsContext gc) {
     	Point pos = this.getPosition();
-		gc.drawImage(image, pos.getX() + 5, pos.getY() + 5, image.getWidth()*1.5 , image.getHeight()*1.5);
-
-        this.setWidth(image.getWidth() * 1.5);
-        this.setHeight(image.getHeight() * 1.5);
+		
+        if(this.getName().equals("HealPotion")){
+            gc.drawImage(image, pos.getX() + 10, pos.getY() + 10, image.getWidth()  , image.getHeight());
+            this.setWidth(image.getWidth() * 1.3);
+            this.setHeight(image.getHeight() * 1.15);
+        }else {
+            gc.drawImage(image, pos.getX() + 5, pos.getY() + 5, image.getWidth()*1.5 , image.getHeight()*1.5);
+            this.setWidth(image.getWidth() * 1.5);
+            this.setHeight(image.getHeight() * 1.5);
+        }
 
         gc.setFont(new Font("Arial", 24));
         gc.setFill(Color.BLACK);
@@ -38,8 +44,13 @@ public abstract class Item extends BaseObject {
 
         String itemAmount = Integer.toString(getAmount());
 
-        gc.strokeText(itemAmount, pos.getX() + this.getWidth() - itemAmount.length() * 10 , pos.getY() + this.getHeight(), 100);
-        gc.fillText(itemAmount, pos.getX() + this.getWidth() - itemAmount.length() * 10, pos.getY() + this.getHeight(), 100);
+        if(this.getName().equals("HealPotion")){
+            gc.strokeText(itemAmount, pos.getX() + this.getWidth() - itemAmount.length() * 10 , pos.getY() + this.getHeight(), 100);
+            gc.fillText(itemAmount, pos.getX() + this.getWidth() - itemAmount.length() * 10, pos.getY() + this.getHeight(), 100);
+        }else{
+            gc.strokeText(itemAmount, pos.getX() + this.getWidth() - itemAmount.length() * 10 , pos.getY() + this.getHeight(), 100);
+            gc.fillText(itemAmount, pos.getX() + this.getWidth() - itemAmount.length() * 10, pos.getY() + this.getHeight(), 100);
+        }
     }
 
     public boolean equals(Item item){
@@ -92,5 +103,11 @@ public abstract class Item extends BaseObject {
 
     public void addValue(double value){
         this.value += value;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Item clone = (Item) super.clone();
+        return clone;
     }
 }

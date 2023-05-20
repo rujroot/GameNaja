@@ -23,6 +23,7 @@ import inventory.SlotUI;
 import item.Coal;
 import item.Diamond;
 import item.GoldIngot;
+import item.HealPotion;
 import item.IronIngot;
 import item.Item;
 import item.Stone;
@@ -48,7 +49,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
     private int select = 0;
 
     private Item[] sellItem = new Item[5];
-    private BaseWeapon[] buyWeapon = new BaseWeapon[4];
+    private BaseObject[] buyWeapon = new BaseObject[4];
 
     public Shopkeeper(String name, double width, double height, DataEntity data) throws CloneNotSupportedException {
         super(name, width, height, data);
@@ -153,7 +154,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
         allBuyItem.add(new Wand());
         allBuyItem.add(new Bow());
         
-        for(int i = 0; i < 4; ++i){
+        for(int i = 0; i < 3; ++i){
             int randNum = (int)(Math.random() * allBuyItem.size());
 
             BaseWeapon weapon = (BaseWeapon) allBuyItem.get(randNum).clone();
@@ -163,6 +164,11 @@ public class Shopkeeper extends Entity implements Cooldownable{
             buyUI.addItem(weapon);
             buyUI.getPosIndex()[i].setDescription(Double.toString(weapon.getValue()) + "$");
         }
+
+        HealPotion Potion = new HealPotion(1, 3);
+        buyWeapon[3] = Potion;
+        buyUI.addItem(Potion);
+        buyUI.getPosIndex()[3].setDescription(Double.toString(Potion.getValue()) + "$");
 
     }
 
@@ -175,7 +181,7 @@ public class Shopkeeper extends Entity implements Cooldownable{
         if(object instanceof BaseWeapon){
 
             BaseWeapon item = (BaseWeapon) object;
-            double value = item.getValue();
+            double value = 0;//item.getValue();
 
             if(value <= money){
                 try {
@@ -190,7 +196,20 @@ public class Shopkeeper extends Entity implements Cooldownable{
             }
 
         }else{
+            Item item = (Item) object;
+            double value = 0;//item.getValue();
 
+            if(value <= money){
+                try {
+                    Item newItem =  (Item) item.clone();
+                    player.setMoney(money - value);
+                    player.getInventory().addItem(newItem);
+
+                } catch (CloneNotSupportedException e) {
+                    System.out.println("item can't clone()");
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

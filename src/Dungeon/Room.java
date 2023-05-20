@@ -148,15 +148,15 @@ public class Room implements IRenderable {
 
 			BaseOre baseOre;
 			if(type.equals(OreType.STONE)){
-				baseOre = new StoneOre(position, new DataOre(10, 1));
+				baseOre = new StoneOre(position, new DataOre(10, 0.01));
 			}else if(type.equals(OreType.COAL)){
-				baseOre = new CoalOre(position, new DataOre(10, 2));
+				baseOre = new CoalOre(position, new DataOre(10, 0.1));
 			}else if(type.equals(OreType.IRON)){
-				baseOre = new IronOre(position, new DataOre(10, 3));
+				baseOre = new IronOre(position, new DataOre(10, 0.25));
 			}else if(type.equals(OreType.GOLD)){
-				baseOre = new GoldOre(position, new DataOre(10, 4));
+				baseOre = new GoldOre(position, new DataOre(10, 0.5));
 			}else{
-				baseOre = new DiamondOre(position, new DataOre(10, 5));
+				baseOre = new DiamondOre(position, new DataOre(10, 1));
 			}
 
 			Point newPos = new Point(position.getX() + (Math.random() * (width - baseOre.getWidth()) ), 
