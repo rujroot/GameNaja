@@ -31,7 +31,7 @@ public class Ladder extends BaseObject implements Cooldownable {
         Point pos = this.getPosition();
 		gc.drawImage(image, pos.getX(), pos.getY(), image.getWidth() , image.getHeight());
 
-        if(inDistant()){
+        if(inDistance()){
             gc.setFont(new Font("Arial", 24));
             gc.setFill(Color.BLACK);
             gc.setStroke(Color.WHITE);
@@ -44,7 +44,7 @@ public class Ladder extends BaseObject implements Cooldownable {
 
     }
 
-    public boolean inDistant(){
+    public boolean inDistance(){
         Point playerPos = Player.player.getPosition();
         Point pos = this.getPosition();
 
@@ -53,7 +53,7 @@ public class Ladder extends BaseObject implements Cooldownable {
     
     public void updateInput() throws CloneNotSupportedException{
         // Player interact with this entity
-        if (InputUtility.getKeyPressed(KeyCode.E) && inDistant() && !onCooldown()){
+        if (InputUtility.getKeyPressed(KeyCode.E) && inDistance() && !onCooldown()){
 			Main.getLogic().nextFloor();
         }
     }

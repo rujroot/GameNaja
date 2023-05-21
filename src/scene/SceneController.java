@@ -20,7 +20,7 @@ import data.Point;
 import dungeon.GenerateDungeon;
 import dungeon.Ladder;
 import dungeon.Room;
-import entity.Npc;
+import entity.NPC;
 import entity.Player;
 import entity.Shopkeeper;
 import entity.boss.FrostGuardian;

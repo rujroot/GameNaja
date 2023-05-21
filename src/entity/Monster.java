@@ -92,7 +92,7 @@ public class Monster extends Entity implements Cooldownable {
 
 		for (int i = gameObjectContainer.size() - 1; i >= 0; i--) {
 			BaseObject object = gameObjectContainer.get(i);
-			if (((object instanceof Npc) || (object instanceof Player)) && distance(object.getPosition()) <= maxDistance) {
+			if (((object instanceof NPC) || (object instanceof Player)) && distance(object.getPosition()) <= maxDistance) {
 				if (distance(object.getPosition()) <= minDistance) {
 					nearestEntity = (Entity) object;
 					minDistance = distance(object.getPosition());

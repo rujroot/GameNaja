@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import data.BaseObject;
 import data.DataEntity;
-import entity.Npc;
+import entity.NPC;
 import entity.Player;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -30,8 +30,8 @@ public class DarkSpiritAttack extends Melee {
 				Player player = (Player) object;
 				DataEntity data = player.getData();
 				data.setHp(data.getHp() - this.getAttackDamage());
-			}else if (object instanceof Npc) {
-				Npc npc = (Npc) object;
+			}else if (object instanceof NPC) {
+				NPC npc = (NPC) object;
 				DataEntity data = npc.getData();
 				data.setHp(data.getHp() - this.getAttackDamage());
 			}

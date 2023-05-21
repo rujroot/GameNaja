@@ -6,7 +6,7 @@ import java.util.HashMap;
 import data.BaseObject;
 import data.DataEntity;
 import data.Point;
-import entity.Npc;
+import entity.NPC;
 import entity.Player;
 import entity.boss.BossEntity;
 import entity.boss.FrostGuardian;
@@ -76,8 +76,8 @@ public class BossRoom extends Room{
 			if(object instanceof Player) continue;
 			if(object instanceof Inventory) continue;
 			if(object instanceof Item) continue;
-			if(object instanceof Npc && !((Npc) object).getState().equals("Idel")) {
-                ((Npc) object).warpToEntity(Player.getPlayer());
+			if(object instanceof NPC && !((NPC) object).getState().equals("Idel")) {
+                ((NPC) object).warpToEntity(Player.getPlayer());
                 continue;
             }
 
@@ -104,11 +104,11 @@ public class BossRoom extends Room{
             boss.setPosition(new Point(pos.getX() + this.getWidth() / 2, pos.getY() + this.getHeight() / 2));
             Main.getLogic().addObject(boss);
         }else{
-            String[] type = {"Gaint", "Dark"};
+            String[] type = {"Giant", "Dark"};
             String choose = type[(int) (Math.random() * 2)];
 
             MiniBossEntity miniBoss;
-            if(choose.equals("Gaint")){
+            if(choose.equals("Giant")){
                 miniBoss = new GiantGoblin("GiantGoblin", 0, 0, new DataEntity(currLevel * 10, 1, 1, 12));
             }else{
                 miniBoss = new DarkSpirit("DarkSpirit", 0, 0, new DataEntity(currLevel * 10, 1, 1, 12));

@@ -12,7 +12,7 @@ import dungeon.Ladder;
 import dungeon.Room;
 import entity.Entity;
 import entity.Monster;
-import entity.Npc;
+import entity.NPC;
 import entity.Player;
 import entity.Shopkeeper;
 import entity.Team;
@@ -101,8 +101,8 @@ public class GameLogic {
 						shopkeeper.updateInput();
 					}
 				
-					if(object instanceof Npc){
-						Npc npc = (Npc) object;
+					if(object instanceof NPC){
+						NPC npc = (NPC) object;
 						npc.updateInput();
 						npc.findNearestMonster(gameObjectContainer);
 						npc.doBehavior();
@@ -126,7 +126,7 @@ public class GameLogic {
 						arrow.makeDamge((Entity)thatObject);
 						arrow.setDestroyed(true);
 						gameObjectContainer.remove(arrow);
-					}else if(team.equals(Team.Monster) && ((thatObject instanceof Player) || (thatObject instanceof Npc)) && arrow.hit((Entity)thatObject)){
+					}else if(team.equals(Team.Monster) && ((thatObject instanceof Player) || (thatObject instanceof NPC)) && arrow.hit((Entity)thatObject)){
 						arrow.makeDamge((Entity)thatObject);
 						arrow.setDestroyed(true);
 						gameObjectContainer.remove(arrow);
@@ -188,7 +188,7 @@ public class GameLogic {
 		Main.getLogic().addObject(shopkeeper);
 
 		if((currentLevel + 1) % 5 == 0){
-			Npc npc = new Npc("NPC", 10, 10, new DataEntity(100, 1, 1, 10));
+			NPC npc = new NPC("NPC", 10, 10, new DataEntity(100, 1, 1, 10));
 			npc.setPosition(new Point(firstRoom.getPosition().getX() + 200, firstRoom.getPosition().getY() + 200 ));
 			npc.setValue(Math.max(currentLevel * 5 + (int)(Math.random() * 10) - 20, 5));
 			Main.getLogic().addObject(npc);
@@ -202,8 +202,8 @@ public class GameLogic {
 		player.setPosition(spawnPoint);
 		for (int i = gameObjectContainer.size() - 1; i >= 0; i--) {
 			BaseObject object = gameObjectContainer.get(i);
-			if(object instanceof Npc){
-				Npc npc = (Npc) object;
+			if(object instanceof NPC){
+				NPC npc = (NPC) object;
 				Point pos = player.getPosition();
 				npc.setPosition(new Point(pos.getX(), pos.getY()));
 			}
@@ -219,7 +219,7 @@ public class GameLogic {
 			if(object instanceof BaseOre && !object.isVisible()) continue;
 			if(object instanceof Inventory) continue;
 			if(object instanceof Item) continue;
-			if(object instanceof Npc) continue;
+			if(object instanceof NPC) continue;
 
 			object.setVisible(false);
 			object.setDestroyed(true);

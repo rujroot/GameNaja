@@ -21,7 +21,7 @@ import javafx.scene.text.Font;
 import logic.Cooldownable;
 import logic.RenderableHolder;
 
-public class Npc extends Entity implements Cooldownable {
+public class NPC extends Entity implements Cooldownable {
 
 	private double cooldownTime = 1000, backTime = 5000;
 	private double lastClickTime = 0;
@@ -37,7 +37,7 @@ public class Npc extends Entity implements Cooldownable {
 
 	private boolean runBack = false;
 
-	public Npc(String name, double width, double height, DataEntity data) {
+	public NPC(String name, double width, double height, DataEntity data) {
 		super(name, width, height, data);
 		this.setWidth(image.getWidth());
 		this.setHeight(image.getHeight());

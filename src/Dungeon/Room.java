@@ -38,7 +38,7 @@ public class Room implements IRenderable {
 	protected double widthRoom = mainWall.getWidth();
 	protected double heightRoom = sideWall.getHeight();
 
-	Size[] allSize = {Size.SMALL, Size.MEDUIM, Size.LARGE};
+	Size[] allSize = {Size.SMALL, Size.MEDIUM, Size.LARGE};
 	OreType[] allType = {OreType.STONE, OreType.COAL, OreType.IRON, OreType.GOLD, OreType.DIAMOND};
 	
 	//create connect room
@@ -47,7 +47,7 @@ public class Room implements IRenderable {
 		if(sizeRoom.equals(Size.SMALL)) {
 			this.setWidth(widthRoom * 10);
 			this.setHeight(heightRoom * 5);
-		}else if(sizeRoom.equals(Size.MEDUIM)) {
+		}else if(sizeRoom.equals(Size.MEDIUM)) {
 			this.setWidth(widthRoom * 13);
 			this.setHeight(heightRoom * 8);
 		}else {
