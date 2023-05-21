@@ -7,7 +7,7 @@ import data.BaseObject;
 import data.Point;
 import entity.Entity;
 import entity.Monster;
-import entity.Npc;
+import entity.NPC;
 import entity.Player;
 import logic.Cooldownable;
 import logic.Main;
@@ -90,8 +90,8 @@ public abstract class Melee extends BaseWeapon implements Cooldownable{
         if(entity instanceof Player){
             Player player = (Player) entity;
             startAt = player.getMouseAngle();
-        }else if(entity instanceof Npc){
-            Npc npc = (Npc) entity;
+        }else if(entity instanceof NPC){
+            NPC npc = (NPC) entity;
             startAt = npc.getEntityAngle();
         }else if(entity instanceof Monster){
             Monster monster = (Monster) entity;

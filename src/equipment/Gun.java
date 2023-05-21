@@ -3,7 +3,7 @@ package equipment;
 import data.Point;
 import entity.Entity;
 import entity.Monster;
-import entity.Npc;
+import entity.NPC;
 import entity.Player;
 import entity.Skeleton;
 import entity.Team;
@@ -40,9 +40,9 @@ public abstract class Gun extends BaseWeapon implements Cooldownable{
                 arrow.setDamage(this.getDamage());
                 arrow.setColor(this.getColor());
                 Main.getLogic().addObject(arrow);
-            }else if(entity instanceof Npc){
+            }else if(entity instanceof NPC){
                 // find direction to shoot
-                Point vector = ((Npc) entity).getEntityVector();
+                Point vector = ((NPC) entity).getEntityVector();
                 vector.multiply(this.getSpeed());
 
                 // damge, speed, pos

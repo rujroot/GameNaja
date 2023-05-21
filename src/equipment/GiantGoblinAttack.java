@@ -3,14 +3,14 @@ package equipment;
 import java.util.ArrayList;
 
 import data.BaseObject;
-import entity.Npc;
+import entity.NPC;
 import entity.Player;
 import javafx.scene.canvas.GraphicsContext;
 import data.DataEntity;
 
-public class GaintGoblinAttack extends Melee {
+public class GiantGoblinAttack extends Melee {
 
-    public GaintGoblinAttack() {
+    public GiantGoblinAttack() {
 		super();
 		this.setAttackDamage(2);
 		this.setAttackRange(300);
@@ -30,8 +30,8 @@ public class GaintGoblinAttack extends Melee {
 				Player player = (Player) object;
 				DataEntity data = player.getData();
 				data.setHp(data.getHp() - this.getAttackDamage());
-			}else if (object instanceof Npc) {
-				Npc npc = (Npc) object;
+			}else if (object instanceof NPC) {
+				NPC npc = (NPC) object;
 				DataEntity data = npc.getData();
 				data.setHp(data.getHp() - this.getAttackDamage());
 			}

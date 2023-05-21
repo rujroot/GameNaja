@@ -2,7 +2,7 @@ package dungeon;
 
 public enum Size {
 	SMALL, 
-	MEDUIM, 
+	MEDIUM, 
 	LARGE,
 	SPAWN,
 	BOSS

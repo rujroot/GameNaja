@@ -16,6 +16,9 @@ import data.DataEntity;
 import data.Point;
 import dungeon.GenerateDungeon;
 import dungeon.Room;
+
+import entity.NPC;
+
 import entity.Player;
 import entity.Shopkeeper;
 import input.InputUtility;

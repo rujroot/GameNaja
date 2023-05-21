@@ -12,7 +12,7 @@ public abstract class BaseWeapon extends BaseObject implements Cloneable{
 	private double attackDamage, attackSpeed, value = 50;
 	private Point offsetPosition = new Point(30.0, 20.0);
 	private Entity entity;
-
+	private Hitbox attackHitBox;
 	private Image image;
 	
 	@Override
@@ -37,7 +37,7 @@ public abstract class BaseWeapon extends BaseObject implements Cloneable{
 		return p;
 	}
 
-	private Hitbox attackHitBox;
+	
 	
 	public abstract void attack();
 
