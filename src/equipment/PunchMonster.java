@@ -14,7 +14,7 @@ public class PunchMonster extends Melee {
 		this.setAttackDamage(1);
 		this.setAttackRange(200);
 		this.setAttackDegree(100);
-		this.setCooldownTime(500);
+		this.setCooldownTime(500l);
 	}
 
     @Override
