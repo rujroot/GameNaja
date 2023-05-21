@@ -6,7 +6,6 @@ import data.BaseObject;
 import data.DataEntity;
 import data.DataOre;
 import data.Point;
-import drawing.GameScreen;
 import dungeon.GenerateDungeon;
 import dungeon.Ladder;
 import dungeon.Room;
@@ -25,13 +24,12 @@ import ore.BaseOre;
 import scene.SceneController;
 
 public class GameLogic {
-	public static GameScreen gameScreen;
-	private static ArrayList<BaseObject> gameObjectContainer;
-	private static int currentLevel;
+
+	private static ArrayList<BaseObject> gameObjectContainer ;
 	
 	public GameLogic() {
 		// create new ObjectContainer
-		this.gameObjectContainer = new ArrayList<BaseObject>();
+		GameLogic.gameObjectContainer = new ArrayList<BaseObject>();
 	}
 	
 	// Add object to gameObject and Renderable
