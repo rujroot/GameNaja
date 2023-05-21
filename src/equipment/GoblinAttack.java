@@ -11,9 +11,10 @@ import javafx.scene.canvas.GraphicsContext;
 public class GoblinAttack extends Melee {
     public GoblinAttack() {
 		super();
+		this.setAttackDamage(0.5);
 		this.setAttackRange(100);
 		this.setAttackDegree(100);
-        this.setCooldownTime(100);
+        this.setCooldownTime(200);
 	}
 
     @Override
