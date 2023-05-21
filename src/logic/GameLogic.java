@@ -42,6 +42,7 @@ public class GameLogic {
 	public void logicUpdate() throws CloneNotSupportedException{
 		for (int i = gameObjectContainer.size() - 1; i >= 0; i--) {
 			BaseObject object = gameObjectContainer.get(i);
+			if(object.isDestroyed()) gameObjectContainer.remove(object);
 			if(object instanceof Entity){
 					Entity entity = (Entity) object;
 					

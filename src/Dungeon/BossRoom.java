@@ -82,7 +82,6 @@ public class BossRoom extends Room{
             }
 
 			object.setDestroyed(true);
-			gameObjectContainer.remove(object);
         }
     }
 
