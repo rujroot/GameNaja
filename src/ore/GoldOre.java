@@ -5,7 +5,6 @@ import data.Point;
 import entity.Player;
 import item.GoldIngot;
 import javafx.scene.image.WritableImage;
-import logic.Main;
 import logic.RenderableHolder;
 
 public class GoldOre extends BaseOre{

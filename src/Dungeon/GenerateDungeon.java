@@ -14,8 +14,8 @@ public class GenerateDungeon {
 	
 	public GenerateDungeon(int level){
 		GenerateDungeon.level = level;
-		currLevel = 0;
-		container = new ArrayList<ArrayList<Room>>();
+		GenerateDungeon.currLevel = 0;
+		GenerateDungeon.container = new ArrayList<ArrayList<Room>>();
 		increaseFloor(1);
 		// generate ore first level
 		for(Room room : container.get(0)){
@@ -29,7 +29,7 @@ public class GenerateDungeon {
 		for(int i = 0; i < increase; ++i) {
 			ArrayList<Room> toPush = new ArrayList<Room>();
 			
-			int amountRoom = 2;//(int)(Math.random()*5 + 2);
+			int amountRoom = (int)(Math.random()*5 + 2);
 			
 			// create first room
 			Room rootRoom = new Room();
@@ -54,7 +54,7 @@ public class GenerateDungeon {
 
 				//generate ore and monster
 				room.generateOre(Math.min(20, (int)(Math.random()*(currLevel + 5) + 5)) );
-				room.generateMonster(Math.min(20, (int)(Math.random()*(currLevel + 5) + 5)));
+				room.generateMonster(Math.min(10, (int)(Math.random()*(currLevel) + 2)));
 
 				// set connect room
 				room.getConnectRoom().put(direction.getOpposite(), connectRoom);

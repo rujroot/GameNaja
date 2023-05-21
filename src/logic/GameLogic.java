@@ -27,7 +27,7 @@ import scene.SceneController;
 public class GameLogic {
 	public static GameScreen gameScreen;
 	private static ArrayList<BaseObject> gameObjectContainer;
-	private int currentLevel;
+	private static int currentLevel;
 	
 	public GameLogic() {
 		// create new ObjectContainer

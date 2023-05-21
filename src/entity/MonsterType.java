@@ -27,15 +27,15 @@ public enum MonsterType {
 
         Monster monster;
         if(type.equals(MonsterType.SLIME)){
-            monster = new Slime("Slime", 0, 0, new DataEntity(Math.min(40, level * 2), Math.min(5, level * 0.8), 5, 10));
+            monster = new Slime("Slime", 0, 0, new DataEntity(Math.min(40, level * 2), Math.min(3, level * 0.8), 5, 10));
         }else if(type.equals(MonsterType.ZOMBIE)){
-            monster = new Zombie("Zombie", 0, 0, new DataEntity(Math.min(40, level * 2), Math.min(5, level * 0.8), 5, 7));
+            monster = new Zombie("Zombie", 0, 0, new DataEntity(Math.min(40, level * 2), Math.min(3, level * 0.8), 5, 7));
         }else if(type.equals(MonsterType.GOBLIN)){
-            monster = new Goblin("Goblin", 0, 0, new DataEntity(Math.min(20, level * 1.5), Math.min(5, level), 5, 15));
+            monster = new Goblin("Goblin", 0, 0, new DataEntity(Math.min(20, level * 1.5), Math.min(3, level), 5, 15));
         }else if(type.equals(MonsterType.SKELETON)){
-            monster = new Skeleton("Skeleton", 0, 0, new DataEntity(Math.min(30, level * 2), Math.min(5, level), 5, 5));
+            monster = new Skeleton("Skeleton", 0, 0, new DataEntity(Math.min(30, level * 2), Math.min(3, level), 5, 5));
         }else{
-            monster = new Demon("Demon", 0, 0, new DataEntity(Math.min(20, level * 1.5), Math.min(5, level * 0.8), 5, 10));
+            monster = new Demon("Demon", 0, 0, new DataEntity(Math.min(20, level * 1.5), Math.min(3, level * 0.8), 5, 10));
         }
 
         return monster;

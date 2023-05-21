@@ -5,7 +5,6 @@ import data.Point;
 import entity.Player;
 import item.Diamond;
 import javafx.scene.image.WritableImage;
-import logic.Main;
 import logic.RenderableHolder;
 
 public class DiamondOre extends BaseOre {
