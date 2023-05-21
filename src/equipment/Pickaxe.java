@@ -17,7 +17,7 @@ public class Pickaxe extends Melee{
         super();
 
         this.setImage(image);
-        this.setAttackDamage(500);
+        this.setAttackDamage(1);
 		this.setAttackRange(225);
 		this.setAttackDegree(60);
     }

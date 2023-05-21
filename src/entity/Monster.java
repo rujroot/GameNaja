@@ -44,7 +44,6 @@ public class Monster extends Entity implements Cooldownable {
 
 	@Override
 	public void attack() {
-		
 		if(equipment == null) this.setEquipment(new PunchMonster());
 		// decrease player's hp
 

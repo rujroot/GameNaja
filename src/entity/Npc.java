@@ -153,7 +153,7 @@ public class Npc extends Entity implements Cooldownable {
 			if(equipment instanceof Melee){
 				follow(targetEntity);
 				if(distance(targetEntity.getPosition()) <= 100)
-				equipment.attack();
+					equipment.attack();
 			}else if(equipment instanceof Gun){
 				if(equipment instanceof Gun && distance(followEntity.getPosition()) >= 300)
 					follow(followEntity);
@@ -178,16 +178,17 @@ public class Npc extends Entity implements Cooldownable {
 		if(entity == null) return;
 
 		Point pp = entity.getPosition();
-		pp = new Point(pp.getX() + offSet.getX(), pp.getY() + offSet.getY());
+		if(entity instanceof Player) pp = new Point(pp.getX() + offSet.getX(), pp.getY() + offSet.getY());
 
 		double px = pp.getX(), py = pp.getY();
 
-		Point p = new Point(this.getPosition().getX() - px - 50, this.getPosition().getY() - py );
+		Point p = new Point(this.getPosition().getX() - px, this.getPosition().getY() - py );
 		double distance = Math.sqrt(p.getX() * p.getX() + p.getY() * p.getY());
 
 		DataEntity data = this.getData();
 
-		if (distance > 150 && distance < 600) {
+		if (distance < 600) {
+			if(entity instanceof Player && distance < 150) return;
 			// double mx = -p.getX() / distance * data.getSpd();
 			// double my = -p.getY() / distance * data.getSpd();
 			// Check for obstacles
