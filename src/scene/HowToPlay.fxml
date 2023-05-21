@@ -49,5 +49,10 @@
             <Font name="Baskerville Old Face" size="30.0" />
          </font>
       </Label>
+      <Label layoutX="184.0" layoutY="653.0" text="Q : Call back NPC.">
+         <font>
+            <Font name="Baskerville Old Face" size="30.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
